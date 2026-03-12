@@ -1,0 +1,10 @@
+id: surprice
+name: Surprice
+enabled: true
+protocol: rest_json
+auth_type: api_key
+supports_one_way: false
+default_currency: EUR
+timeout: 30
+countries: ["GR", "CY", "HR", "PT", "IT", "ES"]
+notes: "REST JSON API. API key auth. Greece and Mediterranean region."

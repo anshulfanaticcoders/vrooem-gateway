@@ -1,0 +1,10 @@
+id: green_motion
+name: GreenMotion
+enabled: true
+protocol: xml
+auth_type: xml_header
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["global"]
+notes: "Custom XML (SOAP-like). 80+ countries. 'or similar' vehicle qualifiers."

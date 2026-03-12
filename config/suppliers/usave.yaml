@@ -1,0 +1,10 @@
+id: usave
+name: USave
+enabled: true
+protocol: xml
+auth_type: xml_header
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["global"]
+notes: "Same API as GreenMotion with separate credentials and endpoint."

@@ -1,0 +1,10 @@
+id: adobe_car
+name: AdobeCar
+enabled: true
+protocol: rest_json
+auth_type: bearer_token
+supports_one_way: false
+default_currency: USD
+timeout: 30
+countries: ["CR"]
+notes: "REST JSON API. Bearer token with 55s TTL (short-lived, must refresh frequently). Costa Rica only."

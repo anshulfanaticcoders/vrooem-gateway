@@ -1,0 +1,10 @@
+id: favrica
+name: Favrica
+enabled: true
+protocol: rest_json
+auth_type: query_params
+supports_one_way: false
+default_currency: TRY
+timeout: 30
+countries: ["TR", "ME", "MK"]
+notes: "REST JSON (GET). Turev platform. Query params auth. Turkey, Montenegro, North Macedonia."

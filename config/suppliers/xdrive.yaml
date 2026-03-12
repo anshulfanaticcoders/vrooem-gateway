@@ -1,0 +1,10 @@
+id: xdrive
+name: XDrive
+enabled: true
+protocol: rest_json
+auth_type: query_params
+supports_one_way: false
+default_currency: TRY
+timeout: 30
+countries: ["TR"]
+notes: "REST JSON (GET). Turev platform (same as Favrica). Query params auth. Turkey only."

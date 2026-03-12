@@ -1,0 +1,10 @@
+id: internal
+name: Internal
+enabled: true
+protocol: rest_json
+auth_type: token
+supports_one_way: false
+default_currency: EUR
+timeout: 30
+countries: ["global"]
+notes: "Internal fleet. Laravel API with token auth. All countries supported."

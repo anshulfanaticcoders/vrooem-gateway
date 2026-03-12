@@ -1,0 +1,10 @@
+id: recordgo
+name: RecordGo
+enabled: true
+protocol: rest_json
+auth_type: api_key_secret
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["ES", "PT"]
+notes: "REST JSON API. API key + secret auth. Spain and Portugal. Supports one-way rentals."

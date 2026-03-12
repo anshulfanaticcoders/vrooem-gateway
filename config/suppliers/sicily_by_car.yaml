@@ -1,0 +1,10 @@
+id: sicily_by_car
+name: SicilyByCar
+enabled: true
+protocol: rest_json
+auth_type: basic_auth
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["IT"]
+notes: "REST JSON API. Basic Auth. Italy and Sicily. Supports one-way rentals."

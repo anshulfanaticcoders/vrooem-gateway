@@ -1,0 +1,10 @@
+id: locauto_rent
+name: LocautoRent
+enabled: true
+protocol: ota_xml
+auth_type: basic_auth
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["IT"]
+notes: "OTA XML standard. Basic Auth. Italy. Supports one-way rentals."

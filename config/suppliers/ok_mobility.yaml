@@ -1,0 +1,10 @@
+id: ok_mobility
+name: OKMobility
+enabled: true
+protocol: soap_xml
+auth_type: soap_credentials
+supports_one_way: false
+default_currency: EUR
+timeout: 30
+countries: ["ES"]
+notes: "SOAP XML API. SOAP credentials auth. Spain."

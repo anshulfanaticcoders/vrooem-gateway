@@ -1,0 +1,10 @@
+id: renteon
+name: Renteon
+enabled: true
+protocol: rest_json
+auth_type: basic_auth
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["global"]
+notes: "REST JSON API. Basic Auth. 50+ countries."
