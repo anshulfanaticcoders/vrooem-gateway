@@ -1,12 +1,12 @@
 """Database session management for async SQLAlchemy + PostgreSQL."""
 
 import logging
-import ssl
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from app.core.config import get_settings
+from app.db.database_url import build_connect_args, clean_database_url
 
 logger = logging.getLogger(__name__)
 
@@ -14,31 +14,13 @@ _engine = None
 _session_factory = None
 
 
-def _build_connect_args(database_url: str) -> dict:
-    """Build connect_args with SSL context if the URL targets a remote host."""
-    if "localhost" in database_url or "127.0.0.1" in database_url:
-        return {}
-    # asyncpg doesn't understand ?ssl=require — pass ssl context explicitly
-    ssl_ctx = ssl.create_default_context()
-    ssl_ctx.check_hostname = False
-    ssl_ctx.verify_mode = ssl.CERT_NONE
-    return {"ssl": ssl_ctx}
-
-
-def _clean_database_url(url: str) -> str:
-    """Strip ?ssl=require from URL since asyncpg handles SSL via connect_args."""
-    for suffix in ["?ssl=require", "&ssl=require"]:
-        url = url.replace(suffix, "")
-    return url
-
-
 def get_engine():
     """Get or create the async database engine."""
     global _engine
     if _engine is None:
         settings = get_settings()
-        db_url = _clean_database_url(settings.database_url)
-        connect_args = _build_connect_args(settings.database_url)
+        db_url = clean_database_url(settings.database_url)
+        connect_args = build_connect_args(settings.database_url)
         _engine = create_async_engine(
             db_url,
             echo=settings.gateway_debug,

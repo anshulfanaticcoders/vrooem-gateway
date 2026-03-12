@@ -1,7 +1,6 @@
 """Alembic env.py — async migration runner for vrooem-gateway."""
 
 import asyncio
-import ssl
 from logging.config import fileConfig
 
 from alembic import context
@@ -9,6 +8,7 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.core.config import get_settings
+from app.db.database_url import build_connect_args, clean_database_url
 from app.db.models import Base
 
 config = context.config
@@ -39,25 +39,10 @@ def do_run_migrations(connection):
     context.configure(connection=connection, target_metadata=target_metadata)
     with context.begin_transaction():
         context.run_migrations()
-
-
-def _build_connect_args(database_url: str) -> dict:
-    """Build connect_args with SSL context if the URL targets a remote host."""
-    if "localhost" in database_url or "127.0.0.1" in database_url:
-        return {}
-    ssl_ctx = ssl.create_default_context()
-    ssl_ctx.check_hostname = False
-    ssl_ctx.verify_mode = ssl.CERT_NONE
-    return {"ssl": ssl_ctx}
-
-
 async def run_async_migrations() -> None:
-    url = get_url()
-    # Strip ?ssl=require — asyncpg handles SSL via connect_args
-    for suffix in ["?ssl=require", "&ssl=require"]:
-        url = url.replace(suffix, "")
+    url = clean_database_url(get_url())
     configuration = {"sqlalchemy.url": url}
-    connect_args = _build_connect_args(get_url())
+    connect_args = build_connect_args(get_url())
     connectable = async_engine_from_config(
         configuration,
         prefix="sqlalchemy.",
