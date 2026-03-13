@@ -12,6 +12,24 @@ logger = logging.getLogger(__name__)
 
 _DATA_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json"
 
+# Map non-standard location_type values to valid LocationType enum values
+_TYPE_NORMALIZE = {
+    "airport": "airport",
+    "downtown": "downtown",
+    "port": "port",
+    "train_station": "train_station",
+    "train": "train_station",
+    "railway station": "train_station",
+    "hotel": "hotel",
+    "bus station": "other",
+    "bus stop": "other",
+    "city": "downtown",
+    "industrial": "other",
+    "office": "other",
+    "resort": "hotel",
+    "unknown": "other",
+}
+
 
 class JsonLocationRepository:
     def __init__(self) -> None:
@@ -43,13 +61,15 @@ class JsonLocationRepository:
             if uid is None:
                 continue
 
-            # Add id and provider_count if missing (match Location schema)
+            # Normalize to match Location schema
             if "id" not in entry:
                 entry["id"] = f"loc_{uid}"
             if "provider_count" not in entry:
                 entry["provider_count"] = len(entry.get("providers") or [])
             if "country_code" not in entry:
                 entry["country_code"] = ""
+            raw_type = (entry.get("location_type") or "other").lower().strip()
+            entry["location_type"] = _TYPE_NORMALIZE.get(raw_type, "other")
 
             self._locations.append(entry)
             self._by_unified_id[uid] = entry
