@@ -1,5 +1,6 @@
 """Record Go adapter — REST JSON with Azure APIM subscription key."""
 
+import copy
 import logging
 import time
 import uuid
@@ -297,7 +298,7 @@ class RecordGoAdapter(BaseAdapter):
                 sd["product_data"]["complements_associated"] = raw_complement_data.get("associated", [])
                 sd["product_data"]["complements_automatic"] = raw_complement_data.get("automatic", [])
 
-        return vehicles
+        return self._group_product_variants(vehicles)
 
     def _parse_acriss_vehicles(
         self,
@@ -515,6 +516,67 @@ class RecordGoAdapter(BaseAdapter):
             )
 
         return vehicles
+
+    def _group_product_variants(self, vehicles: list[Vehicle]) -> list[Vehicle]:
+        groups: dict[str, list[Vehicle]] = {}
+        passthrough: list[Vehicle] = []
+
+        for vehicle in vehicles:
+            if vehicle.supplier_id != self.supplier_id:
+                passthrough.append(vehicle)
+                continue
+
+            supplier_data = vehicle.supplier_data or {}
+            acriss_code = supplier_data.get("acriss_code") or vehicle.sipp_code or vehicle.supplier_vehicle_id
+            pickup_branch = supplier_data.get("pickup_branch") or vehicle.pickup_location.supplier_location_id
+            dropoff_branch = supplier_data.get("dropoff_branch") or pickup_branch
+            group_key = f"{pickup_branch}|{dropoff_branch}|{acriss_code}"
+            groups.setdefault(group_key, []).append(vehicle)
+
+        for grouped in groups.values():
+            if len(grouped) == 1:
+                vehicle = grouped[0]
+                supplier_data = dict(vehicle.supplier_data or {})
+                product_data = supplier_data.get("product_data")
+                if product_data and not supplier_data.get("products"):
+                    supplier_data["products"] = [product_data]
+                    vehicle.supplier_data = supplier_data
+                passthrough.append(vehicle)
+                continue
+
+            grouped.sort(
+                key=lambda vehicle: (
+                    vehicle.pricing.total_price,
+                    vehicle.pricing.daily_rate,
+                )
+            )
+            base_vehicle = copy.deepcopy(grouped[0])
+            supplier_data = dict(base_vehicle.supplier_data or {})
+            products = []
+
+            for vehicle in grouped:
+                product_data = dict((vehicle.supplier_data or {}).get("product_data") or {})
+                if product_data:
+                    products.append(product_data)
+
+            if products:
+                products.sort(key=lambda product: (product.get("total", float("inf")), product.get("price_per_day", float("inf"))))
+                supplier_data["products"] = products
+                supplier_data["product_data"] = products[0]
+
+            acriss_code = supplier_data.get("acriss_code") or base_vehicle.sipp_code or base_vehicle.supplier_vehicle_id
+            if acriss_code:
+                base_vehicle.supplier_vehicle_id = str(acriss_code)
+
+            if " - " in base_vehicle.name:
+                base_vehicle.name = base_vehicle.name.split(" - ", 1)[0]
+
+            base_vehicle.supplier_data = supplier_data
+            base_vehicle.pricing.total_price = grouped[0].pricing.total_price
+            base_vehicle.pricing.daily_rate = grouped[0].pricing.daily_rate
+            passthrough.append(base_vehicle)
+
+        return passthrough
 
     # ─── Associated Complements (purchasable extras) ───
 
