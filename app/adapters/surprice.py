@@ -240,6 +240,10 @@ class SurpriceAdapter(BaseAdapter):
 
         total_amount = _safe_float(total_charge.get("estimatedTotalAmount"))
         currency = total_charge.get("currencyCode") or "EUR"
+
+        if total_amount <= 0:
+            return None
+
         daily_rate = round(total_amount / rental_days, 2) if rental_days > 0 else total_amount
 
         vendor_rate_id = qualifier.get("vendorRateID") or ""
@@ -599,10 +603,15 @@ class SurpriceAdapter(BaseAdapter):
         )
 
         data = response.json()
-        if not isinstance(data, dict):
+
+        # API may return a flat array or a dict with a "results" key.
+        if isinstance(data, list):
+            results = data
+        elif isinstance(data, dict):
+            results = data.get("results") or []
+        else:
             return []
 
-        results = data.get("results") or []
         if not isinstance(results, list):
             return []
 

@@ -6,6 +6,7 @@ import hashlib
 import json
 import logging
 from datetime import datetime
+from pathlib import Path
 
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -234,6 +235,39 @@ class LocationSyncService:
                 )
 
         await db.flush()
+
+        self._export_unified_json(unified_locations)
+
+    def _export_unified_json(self, unified_locations: list[dict]) -> None:
+        """Write unified locations to the JSON file used by the gateway at runtime."""
+        json_path = Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json"
+        exportable = []
+        for loc in unified_locations:
+            exportable.append({
+                "unified_location_id": loc["unified_location_id"],
+                "name": loc["name"],
+                "aliases": loc["aliases"],
+                "city": loc["city"],
+                "country": loc["country"],
+                "latitude": loc["latitude"],
+                "longitude": loc["longitude"],
+                "location_type": loc["location_type"],
+                "iata": loc.get("iata"),
+                "providers": [
+                    {
+                        "provider": p["provider"],
+                        "pickup_id": p["pickup_id"],
+                        "original_name": p.get("original_name", ""),
+                        "dropoffs": p.get("dropoffs", []),
+                        "latitude": p.get("latitude"),
+                        "longitude": p.get("longitude"),
+                    }
+                    for p in loc["providers"]
+                ],
+                "our_location_id": loc.get("our_location_id"),
+            })
+        json_path.write_text(json.dumps(exportable, indent=4, ensure_ascii=False), encoding="utf-8")
+        logger.info("Exported %d unified locations to %s", len(exportable), json_path)
 
     def _dedupe_provider_locations(self, provider: str, raw_locations: list[dict]) -> dict[str, dict]:
         normalized_locations: dict[str, dict] = {}
