@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from app.schemas.common import (
     CoverageType,
@@ -13,6 +13,7 @@ from app.schemas.common import (
     VehicleCategory,
 )
 from app.schemas.pricing import Pricing
+from app.schemas.sipp import apply_sipp_specs
 
 
 class InsuranceOption(BaseModel):
@@ -111,3 +112,29 @@ class Vehicle(BaseModel):
     )
     min_driver_age: int | None = None
     max_driver_age: int | None = None
+
+    @model_validator(mode="after")
+    def _validate_specs_against_sipp(self) -> "Vehicle":
+        """Use SIPP code as source of truth for specs.
+
+        SIPP is an industry standard — more reliable than individual provider APIs.
+        - Fills missing transmission/fuel/AC from SIPP when adapter didn't set them.
+        - Overrides transmission/fuel/AC with SIPP values (SIPP is authoritative).
+        - Validates door count against SIPP body type, drops if contradictory.
+        """
+        if not self.sipp_code:
+            return self
+        validated = apply_sipp_specs(
+            self.sipp_code,
+            transmission=self.transmission,
+            fuel_type=self.fuel_type,
+            air_conditioning=self.air_conditioning,
+            doors=self.doors,
+            seats=self.seats,
+        )
+        self.transmission = validated["transmission"]
+        self.fuel_type = validated["fuel_type"]
+        self.air_conditioning = validated["air_conditioning"]
+        self.doors = validated["doors"]
+        self.seats = validated["seats"]
+        return self
