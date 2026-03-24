@@ -55,11 +55,15 @@ def _safe_int(value, default: int | None = None) -> int | None:
         return default
 
 
-def _parse_transmission_from_sipp(sipp: str) -> TransmissionType:
-    """3rd char of SIPP: A/B/D = automatic, else manual."""
-    if len(sipp) >= 3 and sipp[2].upper() in ("A", "B", "D"):
-        return TransmissionType.AUTOMATIC
-    return TransmissionType.MANUAL
+def _parse_transmission_from_sipp(sipp: str) -> TransmissionType | None:
+    """3rd char of SIPP: A/B/D = automatic, M/N/C = manual. Returns None when not deterministic."""
+    if len(sipp) >= 3:
+        code = sipp[2].upper()
+        if code in ("A", "B", "D"):
+            return TransmissionType.AUTOMATIC
+        if code in ("M", "N", "C"):
+            return TransmissionType.MANUAL
+    return None
 
 
 def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
@@ -78,10 +82,10 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
     return None
 
 
-def _has_ac_from_sipp(sipp: str) -> bool:
-    """4th char: R/D/H/E/L/A/M/V/U denote air conditioning."""
+def _has_ac_from_sipp(sipp: str) -> bool | None:
+    """4th char: R/D/H/E/L/A/M/V/U denote air conditioning. Returns None when < 4 chars."""
     if len(sipp) < 4:
-        return True  # default to True
+        return None
     return sipp[3].upper() in ("R", "D", "H", "E", "L", "A", "M", "V", "U")
 
 
@@ -359,9 +363,15 @@ class WheelsysAdapter(BaseAdapter):
         }
 
         if sipp:
-            vehicle_kwargs["transmission"] = _parse_transmission_from_sipp(sipp)
-            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp)
-            vehicle_kwargs["air_conditioning"] = _has_ac_from_sipp(sipp)
+            transmission = _parse_transmission_from_sipp(sipp)
+            fuel_type = _parse_fuel_from_sipp(sipp)
+            ac = _has_ac_from_sipp(sipp)
+            if transmission is not None:
+                vehicle_kwargs["transmission"] = transmission
+            if fuel_type is not None:
+                vehicle_kwargs["fuel_type"] = fuel_type
+            if ac is not None:
+                vehicle_kwargs["air_conditioning"] = ac
 
         return Vehicle(**vehicle_kwargs)
 

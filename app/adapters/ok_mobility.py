@@ -68,11 +68,15 @@ NS_OK = "http://www.OKGroup.es/RentaCarWebService/getWSDL"
 NS_TEMPURI = "http://tempuri.org/"
 
 
-def _parse_transmission_from_sipp(sipp: str) -> TransmissionType:
-    """3rd char of SIPP: A/B/D = automatic, M/N = manual."""
-    if len(sipp) >= 3 and sipp[2].upper() in ("A", "B", "D"):
-        return TransmissionType.AUTOMATIC
-    return TransmissionType.MANUAL
+def _parse_transmission_from_sipp(sipp: str) -> TransmissionType | None:
+    """3rd char of SIPP: A/B/D = automatic, M/N/C = manual. Returns None when not deterministic."""
+    if len(sipp) >= 3:
+        code = sipp[2].upper()
+        if code in ("A", "B", "D"):
+            return TransmissionType.AUTOMATIC
+        if code in ("M", "N", "C"):
+            return TransmissionType.MANUAL
+    return None
 
 
 def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
@@ -91,10 +95,10 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
     return None
 
 
-def _parse_ac_from_sipp(sipp: str) -> bool:
-    """4th char of SIPP: uppercase vowel-like chars = AC, S/N = no AC."""
+def _parse_ac_from_sipp(sipp: str) -> bool | None:
+    """4th char of SIPP: N/S = no AC; all other known chars = AC. Returns None when < 4 chars."""
     if len(sipp) < 4:
-        return True
+        return None
     return sipp[3].upper() not in ("N", "S")
 
 
@@ -547,9 +551,15 @@ class OkMobilityAdapter(BaseAdapter):
         }
 
         if sipp_for_parse:
-            vehicle_kwargs["transmission"] = _parse_transmission_from_sipp(sipp_for_parse)
-            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp_for_parse)
-            vehicle_kwargs["air_conditioning"] = _parse_ac_from_sipp(sipp_for_parse)
+            transmission = _parse_transmission_from_sipp(sipp_for_parse)
+            fuel_type = _parse_fuel_from_sipp(sipp_for_parse)
+            ac = _parse_ac_from_sipp(sipp_for_parse)
+            if transmission is not None:
+                vehicle_kwargs["transmission"] = transmission
+            if fuel_type is not None:
+                vehicle_kwargs["fuel_type"] = fuel_type
+            if ac is not None:
+                vehicle_kwargs["air_conditioning"] = ac
             vehicle_kwargs["sipp_code"] = sipp or acriss or None
 
         kms_included_raw = data.get("kmsIncluded") or data.get("KmsIncluded")
