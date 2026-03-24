@@ -114,14 +114,6 @@ def _extract_image_url(raw: dict) -> str:
     return ""
 
 
-def _parse_payment_options(raw: dict) -> list[PaymentOption]:
-    """Map Laravel payment_method array to canonical PaymentOption list."""
-    methods = raw.get("payment_method")
-    if not methods or not isinstance(methods, list):
-        return [PaymentOption.PAY_AT_PICKUP]
-    # Internal vehicles are always pay-at-pickup (cash, bank_wire, etc.)
-    return [PaymentOption.PAY_AT_PICKUP]
-
 
 @register_adapter
 class InternalAdapter(BaseAdapter):
@@ -303,7 +295,7 @@ class InternalAdapter(BaseAdapter):
                 daily_rate=daily_rate,
                 deposit_amount=deposit if deposit > 0 else None,
                 deposit_currency=request.currency,
-                payment_options=_parse_payment_options(raw),
+                payment_options=[PaymentOption.PAY_AT_PICKUP],
             ),
             "cancellation_policy": cancellation_policy,
             "supplier_data": {
