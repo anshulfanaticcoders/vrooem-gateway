@@ -46,7 +46,7 @@ def _safe_float(value, default: float = 0.0) -> float:
         return default
 
 
-def _safe_int(value, default: int = 0) -> int:
+def _safe_int(value, default: int | None = None) -> int | None:
     if value is None:
         return default
     try:
@@ -62,10 +62,10 @@ def _parse_transmission_from_sipp(sipp: str) -> TransmissionType:
     return TransmissionType.MANUAL
 
 
-def _parse_fuel_from_sipp(sipp: str) -> FuelType:
+def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
     """4th char of SIPP encodes fuel/AC info."""
     if len(sipp) < 4:
-        return FuelType.UNKNOWN
+        return None
     ch = sipp[3].upper()
     if ch in ("D", "Q"):
         return FuelType.DIESEL
@@ -75,7 +75,7 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType:
         return FuelType.ELECTRIC
     if ch in ("R", "N"):
         return FuelType.PETROL
-    return FuelType.UNKNOWN
+    return None
 
 
 def _has_ac_from_sipp(sipp: str) -> bool:
@@ -277,9 +277,11 @@ class WheelsysAdapter(BaseAdapter):
         # Image
         image_url = rate.get("ImageUrl") or ""
 
-        # Passengers / doors
-        seats = _safe_int(rate.get("Pax"), 5)
-        doors = _safe_int(rate.get("Doors"), 4)
+        # Passengers / doors — None when API doesn't provide them
+        pax_raw = rate.get("Pax")
+        seats = _safe_int(pax_raw) if pax_raw is not None else None
+        doors_raw = rate.get("Doors")
+        doors = _safe_int(doors_raw) if doors_raw is not None else None
         bags_large = _safe_int(rate.get("Suitcases"))
         bags_small = _safe_int(rate.get("Bags"))
 
@@ -287,11 +289,6 @@ class WheelsysAdapter(BaseAdapter):
         is_unlimited = rate.get("Unlimited", False)
         included_km = _safe_int(rate.get("IncKlm")) if not is_unlimited else None
         mileage_policy = MileagePolicy.UNLIMITED if is_unlimited else MileagePolicy.LIMITED
-
-        # Transmission, fuel, AC from SIPP code
-        transmission = _parse_transmission_from_sipp(sipp) if sipp else TransmissionType.AUTOMATIC
-        fuel_type = _parse_fuel_from_sipp(sipp) if sipp else FuelType.UNKNOWN
-        air_conditioning = _has_ac_from_sipp(sipp) if sipp else True
 
         # Availability flag
         availability_str = (rate.get("Availability") or "").upper()
@@ -313,37 +310,34 @@ class WheelsysAdapter(BaseAdapter):
         max_age = _safe_int(rate.get("AgeMaxLimit"))
         max_driver_age = max_age if max_age and max_age < 99 else None
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=group_code,
-            name=name,
-            category=category_from_sipp(sipp) if sipp else category_from_sipp(group_code),
-            make=make,
-            model=model,
-            image_url=image_url,
-            transmission=transmission,
-            fuel_type=fuel_type,
-            seats=seats,
-            doors=doors,
-            bags_large=bags_large,
-            bags_small=bags_small,
-            air_conditioning=air_conditioning,
-            mileage_policy=mileage_policy,
-            mileage_limit_km=included_km,
-            sipp_code=sipp or None,
-            is_available=is_available,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs: dict = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": group_code,
+            "name": name,
+            "category": category_from_sipp(sipp) if sipp else category_from_sipp(group_code),
+            "make": make,
+            "model": model,
+            "image_url": image_url,
+            "seats": seats,
+            "doors": doors,
+            "bags_large": bags_large,
+            "bags_small": bags_small,
+            "mileage_policy": mileage_policy,
+            "mileage_limit_km": included_km,
+            "sipp_code": sipp or None,
+            "is_available": is_available,
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
                 price_includes_tax=tax_inclusive,
                 payment_options=[PaymentOption.PAY_AT_PICKUP],
             ),
-            extras=extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "extras": extras,
+            "cancellation_policy": None,
+            "supplier_data": {
                 "quote_id": quote_id,
                 "group_code": group_code,
                 "sipp_code": sipp,
@@ -360,9 +354,16 @@ class WheelsysAdapter(BaseAdapter):
                 "dropoff_time": request.dropoff_time.strftime("%H:%M"),
                 "raw_rate": rate,
             },
-            min_driver_age=None,
-            max_driver_age=max_driver_age,
-        )
+            "min_driver_age": None,
+            "max_driver_age": max_driver_age,
+        }
+
+        if sipp:
+            vehicle_kwargs["transmission"] = _parse_transmission_from_sipp(sipp)
+            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp)
+            vehicle_kwargs["air_conditioning"] = _has_ac_from_sipp(sipp)
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_options(
         self, options: list[dict], rental_days: int, currency: str
@@ -380,7 +381,6 @@ class WheelsysAdapter(BaseAdapter):
 
             charge_type = (opt.get("ChargeType") or "").lower()
             is_mandatory = opt.get("Mandatory", False)
-            is_inclusive = opt.get("Inclusive", False)
 
             # Determine daily vs total based on charge type
             if charge_type in ("per_rental", "once", "total"):

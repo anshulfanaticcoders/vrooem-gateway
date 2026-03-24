@@ -43,7 +43,7 @@ def _safe_float(value, default: float = 0.0) -> float:
         return default
 
 
-def _safe_int(value, default: int = 0) -> int:
+def _safe_int(value, default: int | None = None) -> int | None:
     if value is None:
         return default
     try:
@@ -74,16 +74,20 @@ _CATEGORY_MAP: dict[int, VehicleCategory] = {
 }
 
 
-def _parse_transmission(value: str | None) -> TransmissionType:
-    if value and value.lower() == "automatic":
-        return TransmissionType.AUTOMATIC
-    return TransmissionType.MANUAL
-
-
-def _parse_fuel(value: str | None) -> FuelType:
+def _parse_transmission(value: str | None) -> TransmissionType | None:
     if not value:
-        return FuelType.UNKNOWN
-    return _FUEL_MAP.get(value.lower(), FuelType.UNKNOWN)
+        return None
+    if value.lower() == "automatic":
+        return TransmissionType.AUTOMATIC
+    if value.lower() == "manual":
+        return TransmissionType.MANUAL
+    return None
+
+
+def _parse_fuel(value: str | None) -> FuelType | None:
+    if not value:
+        return None
+    return _FUEL_MAP.get(value.lower()) or None
 
 
 def _parse_category(category_id: int | None) -> VehicleCategory:
@@ -251,9 +255,9 @@ class InternalAdapter(BaseAdapter):
         cancellation_text = benefits.get("cancellation", "")
 
         # Mileage policy
-        if km_per_day > 0 or km_per_month > 0:
+        if (km_per_day or 0) > 0 or (km_per_month or 0) > 0:
             mileage_policy = MileagePolicy.LIMITED
-            mileage_limit_km = km_per_day * rental_days if km_per_day > 0 else km_per_month
+            mileage_limit_km = km_per_day * rental_days if (km_per_day or 0) > 0 else km_per_month
         else:
             mileage_policy = MileagePolicy.UNLIMITED
             mileage_limit_km = None
@@ -275,24 +279,25 @@ class InternalAdapter(BaseAdapter):
             except (json.JSONDecodeError, TypeError):
                 features = []
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=str(vehicle_id),
-            name=name,
-            category=_parse_category(raw.get("category_id")),
-            make=brand.title(),
-            model=model.title(),
-            image_url=_extract_image_url(raw),
-            transmission=_parse_transmission(raw.get("transmission")),
-            fuel_type=_parse_fuel(raw.get("fuel")),
-            seats=_safe_int(raw.get("seating_capacity"), 5),
-            doors=_safe_int(raw.get("doors"), 4),
-            air_conditioning="Air Conditioning" in features or "AC" in features,
-            mileage_policy=mileage_policy,
-            mileage_limit_km=mileage_limit_km,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        transmission = _parse_transmission(raw.get("transmission"))
+        fuel_type = _parse_fuel(raw.get("fuel"))
+
+        vehicle_kwargs: dict = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": str(vehicle_id),
+            "name": name,
+            "category": _parse_category(raw.get("category_id")),
+            "make": brand.title(),
+            "model": model.title(),
+            "image_url": _extract_image_url(raw),
+            "seats": _safe_int(raw.get("seating_capacity")),
+            "doors": _safe_int(raw.get("doors")),
+            "air_conditioning": (True if ("Air Conditioning" in features or "AC" in features) else None) if features else None,
+            "mileage_policy": mileage_policy,
+            "mileage_limit_km": mileage_limit_km,
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=request.currency,
                 total_price=round(total_price, 2),
                 daily_rate=daily_rate,
@@ -300,8 +305,8 @@ class InternalAdapter(BaseAdapter):
                 deposit_currency=request.currency,
                 payment_options=_parse_payment_options(raw),
             ),
-            cancellation_policy=cancellation_policy,
-            supplier_data={
+            "cancellation_policy": cancellation_policy,
+            "supplier_data": {
                 "laravel_vehicle_id": vehicle_id,
                 "vendor_id": raw.get("vendor_id"),
                 "category_id": raw.get("category_id"),
@@ -316,8 +321,15 @@ class InternalAdapter(BaseAdapter):
                 "price_per_extra_km": _safe_float(benefits.get("price_per_extra_km")),
                 "location": location_str,
             },
-            min_driver_age=min_driver_age,
-        )
+            "min_driver_age": min_driver_age,
+        }
+
+        if transmission is not None:
+            vehicle_kwargs["transmission"] = transmission
+        if fuel_type is not None:
+            vehicle_kwargs["fuel_type"] = fuel_type
+
+        return Vehicle(**vehicle_kwargs)
 
     async def create_booking(
         self, request: CreateBookingRequest, vehicle: Vehicle

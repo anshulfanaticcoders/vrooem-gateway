@@ -39,6 +39,29 @@ from app.schemas.vehicle import (
 logger = logging.getLogger(__name__)
 
 # SOAP namespaces used by OK Mobility
+
+_OK_MOBILITY_COUNTRY_MAP = {
+    "1": ("Spain", "ES"),
+    "2": ("France", "FR"),
+    "4": ("Italy", "IT"),
+    "6": ("United States", "US"),
+    "10": ("Germany", "DE"),
+    "12": ("Albania", "AL"),
+    "62": ("Croatia", "HR"),
+    "64": ("Cyprus", "CY"),
+    "88": ("Gambia", "GM"),
+    "94": ("Greece", "GR"),
+    "146": ("Malta", "MT"),
+    "157": ("Montenegro", "ME"),
+    "159": ("Morocco", "MA"),
+    "186": ("Poland", "PL"),
+    "187": ("Portugal", "PT"),
+    "201": ("Senegal", "SN"),
+    "202": ("Serbia", "RS"),
+    "232": ("Tunisia", "TN"),
+    "233": ("Turkey", "TR"),
+    "239": ("United Arab Emirates", "AE"),
+}
 NS_SOAP11 = "http://schemas.xmlsoap.org/soap/envelope/"
 NS_SOAP12 = "http://www.w3.org/2003/05/soap-envelope"
 NS_OK = "http://www.OKGroup.es/RentaCarWebService/getWSDL"
@@ -52,10 +75,10 @@ def _parse_transmission_from_sipp(sipp: str) -> TransmissionType:
     return TransmissionType.MANUAL
 
 
-def _parse_fuel_from_sipp(sipp: str) -> FuelType:
+def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
     """4th char of SIPP for fuel/AC. R=petrol+AC, N=petrol no-AC, D=diesel+AC, etc."""
     if len(sipp) < 4:
-        return FuelType.UNKNOWN
+        return None
     ch = sipp[3].upper()
     if ch in ("R", "N", "S"):
         return FuelType.PETROL
@@ -65,7 +88,7 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType:
         return FuelType.ELECTRIC
     if ch in ("H", "I"):
         return FuelType.HYBRID
-    return FuelType.UNKNOWN
+    return None
 
 
 def _parse_ac_from_sipp(sipp: str) -> bool:
@@ -439,9 +462,6 @@ class OkMobilityAdapter(BaseAdapter):
 
         # Transmission and fuel from SIPP/ACRISS code
         sipp_for_parse = acriss or sipp
-        transmission = _parse_transmission_from_sipp(sipp_for_parse) if sipp_for_parse else TransmissionType.MANUAL
-        fuel_type = _parse_fuel_from_sipp(sipp_for_parse) if sipp_for_parse else FuelType.UNKNOWN
-        air_conditioning = _parse_ac_from_sipp(sipp_for_parse) if sipp_for_parse else True
 
         # Derive make/model from display name
         name_parts = display_name.split(" ", 1)
@@ -475,26 +495,17 @@ class OkMobilityAdapter(BaseAdapter):
         # Rate code for booking
         rate_code = data.get("rateCode") or data.get("RateCode") or ""
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=f"{group_id}_{token[:16]}" if token else group_id,
-            name=display_name,
-            category=category_from_sipp(acriss or sipp),
-            make=make,
-            model=model_str,
-            image_url=image_url,
-            transmission=transmission,
-            fuel_type=fuel_type,
-            seats=5,  # OK Mobility doesn't provide this in getMultiplePrices
-            doors=4,
-            bags_large=0,
-            bags_small=0,
-            air_conditioning=air_conditioning,
-            mileage_policy=mileage_policy,
-            sipp_code=sipp or acriss or None,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": f"{group_id}_{token[:16]}" if token else group_id,
+            "name": display_name,
+            "category": category_from_sipp(acriss or sipp),
+            "make": make,
+            "model": model_str,
+            "image_url": image_url,
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
@@ -503,9 +514,9 @@ class OkMobilityAdapter(BaseAdapter):
                 deposit_amount=deposit if deposit > 0 else None,
                 deposit_currency=currency if deposit > 0 else None,
             ),
-            extras=extras,
-            cancellation_policy=cancellation,
-            supplier_data={
+            "extras": extras,
+            "cancellation_policy": cancellation,
+            "supplier_data": {
                 "token": token,
                 "group_id": group_id,
                 "sipp": sipp,
@@ -533,7 +544,19 @@ class OkMobilityAdapter(BaseAdapter):
                 "week_day_open": data.get("weekDayOpen") or None,
                 "week_day_close": data.get("weekDayClose") or None,
             },
-        )
+        }
+
+        if sipp_for_parse:
+            vehicle_kwargs["transmission"] = _parse_transmission_from_sipp(sipp_for_parse)
+            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp_for_parse)
+            vehicle_kwargs["air_conditioning"] = _parse_ac_from_sipp(sipp_for_parse)
+            vehicle_kwargs["sipp_code"] = sipp or acriss or None
+
+        kms_included_raw = data.get("kmsIncluded") or data.get("KmsIncluded")
+        if kms_included_raw not in (None, ""):
+            vehicle_kwargs["mileage_policy"] = mileage_policy
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_cancellation(self, data: dict) -> CancellationPolicy:
         """Parse cancellation policy from RateRestriction element."""
@@ -854,13 +877,15 @@ class OkMobilityAdapter(BaseAdapter):
             data = _elem_to_dict(station)
 
             station_id = data.get("StationID") or data.get("stationID") or data.get("stationId") or ""
-            name = data.get("Name") or data.get("name") or ""
+            name = data.get("Name") or data.get("name") or data.get("Station") or data.get("station") or ""
             if not station_id or not name:
                 continue
 
             city = data.get("City") or data.get("city") or ""
             latitude = _safe_float(data.get("Lat") or data.get("lat") or data.get("Latitude"))
             longitude = _safe_float(data.get("Long") or data.get("long") or data.get("Longitude"))
+            country_id = str(data.get("CountryID") or data.get("countryID") or "").strip()
+            country_name, country_code = _OK_MOBILITY_COUNTRY_MAP.get(country_id, ("Spain", "ES"))
 
             # Determine location type from station properties
             location_type = "other"
@@ -875,8 +900,8 @@ class OkMobilityAdapter(BaseAdapter):
                 "provider_location_id": str(station_id),
                 "name": name,
                 "city": city.title() if city else "",
-                "country": "Spain",
-                "country_code": "ES",
+                "country": country_name,
+                "country_code": country_code,
                 "latitude": latitude,
                 "longitude": longitude,
                 "location_type": location_type,
