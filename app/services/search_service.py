@@ -16,6 +16,21 @@ from app.services.circuit_breaker import CircuitBreakerRegistry
 logger = logging.getLogger(__name__)
 
 
+def _provider_entries_signature(provider_entries: list[dict]) -> str | None:
+    signatures: list[str] = []
+    for entry in provider_entries:
+        provider = str(entry.get("provider", "")).strip().lower()
+        pickup_id = str(entry.get("pickup_id", "")).strip()
+        if not provider or not pickup_id:
+            continue
+        signatures.append(f"{provider}:{pickup_id}")
+
+    if not signatures:
+        return None
+
+    return ",".join(sorted(dict.fromkeys(signatures)))
+
+
 async def _search_single_supplier(
     adapter: BaseAdapter,
     request: SearchRequest,
@@ -86,6 +101,7 @@ async def search_vehicles(
         "age": request.driver_age,
         "dloc": request.dropoff_unified_location_id,
         "prov": ",".join(sorted(request.providers)) if request.providers else None,
+        "ploc": _provider_entries_signature(provider_entries),
     }
     cached = await cache.get_search(**cache_key_params)
     if cached:

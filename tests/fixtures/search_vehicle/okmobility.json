@@ -1,0 +1,65 @@
+{
+  "id": "ok-peugeot-108",
+  "gateway_vehicle_id": "gw_ok_1",
+  "provider_vehicle_id": "ok_108",
+  "source": "okmobility",
+  "provider_code": "okmobility",
+  "display_name": "Peugeot 108 Automatic",
+  "brand": "Peugeot",
+  "model": "108",
+  "category": "mini",
+  "image": "https://example.com/okmobility/108.jpg",
+  "specs": {
+    "transmission": "automatic",
+    "fuel": "petrol",
+    "seating_capacity": 4,
+    "doors": 3,
+    "luggage_small": 1,
+    "luggage_medium": 0,
+    "luggage_large": 0,
+    "air_conditioning": true,
+    "sipp_code": "MDAR"
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 70.85,
+    "total_price": 212.55,
+    "deposit_amount": 300.0,
+    "deposit_currency": "EUR",
+    "excess_amount": 900.0,
+    "excess_theft_amount": 900.0
+  },
+  "policies": {
+    "mileage_policy": "unlimited",
+    "mileage_limit_km": null,
+    "fuel_policy": "full_to_full",
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "pmi_airport",
+      "name": "Palma de Mallorca Airport",
+      "latitude": 39.5517,
+      "longitude": 2.7388
+    },
+    "dropoff": {
+      "provider_location_id": "pmi_airport",
+      "name": "Palma de Mallorca Airport",
+      "latitude": 39.5517,
+      "longitude": 2.7388
+    }
+  },
+  "data_quality_flags": [],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "rate_code": "OK-BASE"
+    }
+  }
+}

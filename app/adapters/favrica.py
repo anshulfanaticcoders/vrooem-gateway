@@ -205,19 +205,25 @@ class FavricaAdapter(BaseAdapter):
 
         # Transmission: Turkish
         transmission_str = (raw.get("transmission") or "").lower()
-        transmission = TransmissionType.AUTOMATIC if "otomatik" in transmission_str else TransmissionType.MANUAL
+        transmission = None
+        if transmission_str:
+            if "otomatik" in transmission_str or "automatic" in transmission_str:
+                transmission = TransmissionType.AUTOMATIC
+            elif "manual" in transmission_str or "manuel" in transmission_str:
+                transmission = TransmissionType.MANUAL
 
         # Fuel type: Turkish
         fuel_str = (raw.get("fuel") or "").lower()
-        fuel_type = FUEL_MAP.get(fuel_str, FuelType.UNKNOWN)
+        fuel_type = FUEL_MAP.get(fuel_str) if fuel_str else None
 
         # Image URL
         image_path = raw.get("image_path", "")
         image_url = f"{IMAGE_BASE_URL}/{image_path}" if image_path else ""
 
         # Mileage
-        km_limit = _safe_int_str(raw.get("km_limit", ""))
-        mileage_policy = MileagePolicy.LIMITED if km_limit > 0 else MileagePolicy.UNLIMITED
+        km_limit_raw = raw.get("km_limit", "")
+        km_limit = _safe_int_str(km_limit_raw) if km_limit_raw else 0
+        mileage_policy = MileagePolicy.LIMITED if km_limit > 0 else None
 
         # Deposit
         deposit = _parse_comma_decimal(raw.get("provision", ""))
@@ -232,36 +238,26 @@ class FavricaAdapter(BaseAdapter):
             longitude=pickup_entry.longitude,
         )
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=rez_id,
-            name=name,
-            category=category_from_sipp(sipp),
-            make=brand,
-            model=model,
-            image_url=image_url,
-            transmission=transmission,
-            fuel_type=fuel_type,
-            seats=_safe_int_str(raw.get("chairs", ""), 5),
-            doors=4,
-            bags_large=_safe_int_str(raw.get("big_bags", "")),
-            bags_small=_safe_int_str(raw.get("small_bags", "")),
-            air_conditioning=True,
-            mileage_policy=mileage_policy,
-            mileage_limit_km=km_limit if km_limit > 0 else None,
-            sipp_code=sipp or None,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": rez_id,
+            "name": name,
+            "category": category_from_sipp(sipp),
+            "make": brand,
+            "model": model,
+            "image_url": image_url,
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
                 deposit_amount=deposit if deposit > 0 else None,
                 deposit_currency=currency if deposit > 0 else None,
             ),
-            extras=extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "extras": extras,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "rez_id": rez_id,
                 "cars_park_id": raw.get("cars_park_id"),
                 "group_id": raw.get("group_id"),
@@ -278,8 +274,27 @@ class FavricaAdapter(BaseAdapter):
                 "dropoff_date": request.dropoff_date.isoformat(),
                 "dropoff_time": request.dropoff_time.strftime("%H:%M"),
             },
-            min_driver_age=_safe_int_str(raw.get("driver_age", "")) or None,
-        )
+            "min_driver_age": _safe_int_str(raw.get("driver_age", "")) or None,
+        }
+
+        if transmission is not None:
+            vehicle_kwargs["transmission"] = transmission
+        if fuel_type is not None:
+            vehicle_kwargs["fuel_type"] = fuel_type
+        if raw.get("chairs"):
+            vehicle_kwargs["seats"] = _safe_int_str(raw.get("chairs", ""))
+        if raw.get("big_bags"):
+            vehicle_kwargs["bags_large"] = _safe_int_str(raw.get("big_bags", ""))
+        if raw.get("small_bags"):
+            vehicle_kwargs["bags_small"] = _safe_int_str(raw.get("small_bags", ""))
+        if mileage_policy is not None:
+            vehicle_kwargs["mileage_policy"] = mileage_policy
+        if km_limit > 0:
+            vehicle_kwargs["mileage_limit_km"] = km_limit
+        if sipp:
+            vehicle_kwargs["sipp_code"] = sipp
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_services(self, services: list[dict], rental_days: int) -> list[Extra]:
         extras = []

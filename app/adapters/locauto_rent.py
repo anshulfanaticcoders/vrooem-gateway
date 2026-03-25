@@ -17,8 +17,6 @@ from app.schemas.booking import (
 from app.schemas.common import (
     BookingStatus,
     ExtraType,
-    FuelType,
-    MileagePolicy,
     TransmissionType,
     category_from_sipp,
 )
@@ -238,6 +236,7 @@ class LocautoRentAdapter(BaseAdapter):
         email: str,
         phone: str,
         extras: list[dict] | None = None,
+        booking_ref: str = "",
     ) -> str:
         """Build OTA_VehResRQ SOAP request XML."""
         timestamp = datetime.utcnow().isoformat() + "Z"
@@ -269,13 +268,17 @@ class LocautoRentAdapter(BaseAdapter):
             f"<ns1:GivenName>{_xml_escape(first_name)}</ns1:GivenName>"
             f"<ns1:Surname>{_xml_escape(last_name)}</ns1:Surname>"
             "</ns1:PersonName>"
-            f"<ns1:Email>{_xml_escape(email)}</ns1:Email>"
-            f"<ns1:Telephone>{_xml_escape(phone)}</ns1:Telephone>"
             "</ns1:Primary>"
             "</ns1:Customer>"
             f'<ns1:VehPref Code="{sipp_code}" CodeContext="SIPP"/>'
             f"{extras_xml}"
             "</ns1:VehResRQCore>"
+            "<ns1:VehResRQInfo>"
+            f'<ns1:RentalPaymentPref>'
+            f'<ns1:Voucher SeriesCode="VROOEM"'
+            f' BillingNumber="{_xml_escape(booking_ref)}"/>'
+            f'</ns1:RentalPaymentPref>'
+            "</ns1:VehResRQInfo>"
             "</ns1:OTA_VehResRQ>"
             "</ns2:OTA_VehResRS>"
         )
@@ -467,14 +470,14 @@ class LocautoRentAdapter(BaseAdapter):
 
         # ── Vehicle attributes ──
         sipp_code = _safe_attr(vehicle_el, "Code", "")
-        transmission_raw = _safe_attr(vehicle_el, "TransmissionType", "Manual").lower()
-        passengers = int(_safe_attr(vehicle_el, "PassengerQuantity", "4") or "4")
-        baggage = int(_safe_attr(vehicle_el, "BaggageQuantity", "2") or "2")
-        air_con = _safe_attr(vehicle_el, "AirConditionInd", "true").lower() == "true"
+        transmission_raw = _safe_attr(vehicle_el, "TransmissionType", "").lower()
+        passengers_raw = _safe_attr(vehicle_el, "PassengerQuantity", "")
+        baggage_raw = _safe_attr(vehicle_el, "BaggageQuantity", "")
+        air_con_raw = _safe_attr(vehicle_el, "AirConditionInd", "").lower()
 
         # VehType > DoorCount
         veh_type = self._find_child(vehicle_el, "VehType")
-        door_count = int(_safe_attr(veh_type, "DoorCount", "4") or "4")
+        door_count_raw = _safe_attr(veh_type, "DoorCount", "")
 
         # VehMakeModel > ModelYear contains vehicle name (e.g. "Fiat Panda")
         veh_make_model = self._find_child(vehicle_el, "VehMakeModel")
@@ -611,41 +614,28 @@ class LocautoRentAdapter(BaseAdapter):
                 country_code="IT",
             )
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=effective_sipp or sipp_code,
-            name=f"{vehicle_name} or similar",
-            category=category_from_sipp(effective_sipp),
-            make=make,
-            model=model,
-            image_url=image_url,
-            transmission=(
-                TransmissionType.AUTOMATIC
-                if "auto" in transmission_raw
-                else TransmissionType.MANUAL
-            ),
-            fuel_type=FuelType.UNKNOWN,  # Locauto does not provide fuel type
-            seats=passengers,
-            doors=door_count,
-            bags_large=baggage,
-            bags_small=0,
-            air_conditioning=air_con,
-            mileage_policy=MileagePolicy.UNLIMITED,
-            sipp_code=effective_sipp or None,
-            is_available=is_available,
-            pickup_location=pickup_loc,
-            dropoff_location=dropoff_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": effective_sipp or sipp_code,
+            "name": f"{vehicle_name} or similar",
+            "category": category_from_sipp(effective_sipp),
+            "make": make,
+            "model": model,
+            "image_url": image_url,
+            "is_available": is_available,
+            "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=price,
                 daily_rate=daily_rate,
                 price_includes_tax=True,
                 fees=fees,
             ),
-            extras=extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "extras": extras,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "sipp_code": sipp_code,
                 "acriss_code": acriss_code,
                 "pickup_code": pickup_entry.pickup_id,
@@ -660,7 +650,26 @@ class LocautoRentAdapter(BaseAdapter):
                 "pickup_datetime": self._format_datetime(request.pickup_date, request.pickup_time),
                 "return_datetime": self._format_datetime(request.dropoff_date, request.dropoff_time),
             },
-        )
+        }
+
+        if transmission_raw:
+            vehicle_kwargs["transmission"] = (
+                TransmissionType.AUTOMATIC
+                if "auto" in transmission_raw
+                else TransmissionType.MANUAL
+            )
+        if passengers_raw:
+            vehicle_kwargs["seats"] = int(passengers_raw)
+        if door_count_raw:
+            vehicle_kwargs["doors"] = int(door_count_raw)
+        if baggage_raw:
+            vehicle_kwargs["bags_large"] = int(baggage_raw)
+        if air_con_raw in ("true", "false"):
+            vehicle_kwargs["air_conditioning"] = air_con_raw == "true"
+        if effective_sipp:
+            vehicle_kwargs["sipp_code"] = effective_sipp
+
+        return Vehicle(**vehicle_kwargs)
 
     async def create_booking(
         self, request: CreateBookingRequest, vehicle: Vehicle
@@ -695,6 +704,7 @@ class LocautoRentAdapter(BaseAdapter):
             email=request.driver.email,
             phone=request.driver.phone,
             extras=booking_extras if booking_extras else None,
+            booking_ref=str(request.laravel_booking_id or ""),
         )
 
         response = await self._request(

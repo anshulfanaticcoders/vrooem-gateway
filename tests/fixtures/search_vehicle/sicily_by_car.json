@@ -1,0 +1,75 @@
+{
+  "id": "sicily-fiat-panda",
+  "gateway_vehicle_id": "gw_sicily_1",
+  "provider_vehicle_id": "sbc_panda",
+  "source": "sicily_by_car",
+  "provider_code": "sicily_by_car",
+  "display_name": "Fiat Panda or similar",
+  "brand": "Fiat",
+  "model": "Panda",
+  "category": "economy",
+  "image": "https://example.com/sicily/panda.jpg",
+  "specs": {
+    "transmission": null,
+    "fuel": null,
+    "seating_capacity": null,
+    "doors": null,
+    "luggage_small": null,
+    "luggage_medium": null,
+    "luggage_large": null,
+    "air_conditioning": null,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 22.0,
+    "total_price": 66.0,
+    "deposit_amount": 400.0,
+    "deposit_currency": "EUR",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "CTA",
+      "name": "Catania Airport",
+      "latitude": 37.4668,
+      "longitude": 15.0664
+    },
+    "dropoff": {
+      "provider_location_id": "CTA",
+      "name": "Catania Airport",
+      "latitude": 37.4668,
+      "longitude": 15.0664
+    }
+  },
+  "data_quality_flags": [
+    "unknown_transmission",
+    "unknown_fuel",
+    "unknown_seating_capacity",
+    "unknown_doors",
+    "unknown_luggage_small",
+    "unknown_luggage_medium",
+    "unknown_luggage_large",
+    "unknown_air_conditioning",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "rate_id": "SBC-BASIC"
+    }
+  }
+}

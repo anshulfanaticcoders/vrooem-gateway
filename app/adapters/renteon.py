@@ -54,15 +54,19 @@ def _safe_int(value, default: int = 0) -> int:
         return default
 
 
-def _parse_transmission_from_sipp(sipp: str) -> TransmissionType:
-    """3rd char of SIPP: A/B/D = automatic, M = manual."""
-    if len(sipp) >= 3 and sipp[2].upper() in ("A", "B", "D"):
-        return TransmissionType.AUTOMATIC
-    return TransmissionType.MANUAL
+def _parse_transmission_from_sipp(sipp: str) -> TransmissionType | None:
+    """3rd char of SIPP: A/B/D = automatic, M/N/C = manual when deterministic."""
+    if len(sipp) >= 3:
+        code = sipp[2].upper()
+        if code in ("A", "B", "D"):
+            return TransmissionType.AUTOMATIC
+        if code in ("M", "N", "C"):
+            return TransmissionType.MANUAL
+    return None
 
 
-def _parse_fuel_from_sipp(sipp: str) -> FuelType:
-    """4th char of SIPP: D/Q=diesel, H/I=hybrid, E/C=electric, L=lpg, else petrol."""
+def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
+    """4th char of SIPP: D/Q=diesel, H/I=hybrid, E/C=electric, L=lpg when deterministic."""
     if len(sipp) >= 4:
         c = sipp[3].upper()
         fuel_map = {
@@ -71,8 +75,8 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType:
             "E": FuelType.ELECTRIC, "C": FuelType.ELECTRIC,
             "L": FuelType.LPG,
         }
-        return fuel_map.get(c, FuelType.PETROL)
-    return FuelType.UNKNOWN
+        return fuel_map.get(c)
+    return None
 
 
 def _map_service_type(service: dict) -> ExtraType:
@@ -245,26 +249,17 @@ class RenteonAdapter(BaseAdapter):
                 included=True,
             ))
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=str(raw.get("ConnectorId", "")),
-            name=model_name,
-            category=category_from_sipp(sipp),
-            make=make,
-            model=model,
-            image_url=raw.get("CarModelImageURL", ""),
-            transmission=_parse_transmission_from_sipp(sipp),
-            fuel_type=_parse_fuel_from_sipp(sipp),
-            seats=_safe_int(raw.get("PassengerCapacity"), 5),
-            doors=_safe_int(raw.get("NumberOfDoors"), 4),
-            bags_large=_safe_int(raw.get("BigBagsCapacity")),
-            bags_small=_safe_int(raw.get("SmallBagsCapacity")),
-            air_conditioning=True,
-            mileage_policy=MileagePolicy.UNLIMITED,
-            sipp_code=sipp or None,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": str(raw.get("ConnectorId", "")),
+            "name": model_name,
+            "category": category_from_sipp(sipp),
+            "make": make,
+            "model": model,
+            "image_url": raw.get("CarModelImageURL", ""),
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
@@ -272,10 +267,10 @@ class RenteonAdapter(BaseAdapter):
                 deposit_currency=raw.get("DepositCurrency", currency),
                 payment_options=[payment],
             ),
-            insurance_options=insurance_options,
-            extras=extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "insurance_options": insurance_options,
+            "extras": extras,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "connector_id": raw.get("ConnectorId"),
                 "pricelist_id": raw.get("PricelistId"),
                 "pricelist_code": raw.get("PricelistCode"),
@@ -292,9 +287,28 @@ class RenteonAdapter(BaseAdapter):
                 "excess_theft_amount": _safe_float(raw.get("ExcessTheftAmount")),
                 "prepaid": raw.get("Prepaid", False) or raw.get("IsPrepaid", False),
             },
-            min_driver_age=_safe_int(raw.get("MinimumDriverAge")) or None,
-            max_driver_age=_safe_int(raw.get("MaximumDriverAge")) or None,
-        )
+            "min_driver_age": _safe_int(raw.get("MinimumDriverAge")) or None,
+            "max_driver_age": _safe_int(raw.get("MaximumDriverAge")) or None,
+        }
+
+        transmission = _parse_transmission_from_sipp(sipp)
+        fuel_type = _parse_fuel_from_sipp(sipp)
+        if transmission is not None:
+            vehicle_kwargs["transmission"] = transmission
+        if fuel_type is not None:
+            vehicle_kwargs["fuel_type"] = fuel_type
+        if raw.get("PassengerCapacity") is not None:
+            vehicle_kwargs["seats"] = _safe_int(raw.get("PassengerCapacity"))
+        if raw.get("NumberOfDoors") is not None:
+            vehicle_kwargs["doors"] = _safe_int(raw.get("NumberOfDoors"))
+        if raw.get("BigBagsCapacity") is not None:
+            vehicle_kwargs["bags_large"] = _safe_int(raw.get("BigBagsCapacity"))
+        if raw.get("SmallBagsCapacity") is not None:
+            vehicle_kwargs["bags_small"] = _safe_int(raw.get("SmallBagsCapacity"))
+        if sipp:
+            vehicle_kwargs["sipp_code"] = sipp
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_services(self, services: list[dict], rental_days: int) -> list[Extra]:
         extras = []

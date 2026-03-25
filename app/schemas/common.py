@@ -22,6 +22,7 @@ class LocationType(str, Enum):
     DOWNTOWN = "downtown"
     PORT = "port"
     TRAIN_STATION = "train_station"
+    BUS_STATION = "bus_station"
     HOTEL = "hotel"
     OTHER = "other"
 

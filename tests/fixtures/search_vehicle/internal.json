@@ -1,0 +1,63 @@
+{
+  "id": "internal-toyota-yaris",
+  "gateway_vehicle_id": null,
+  "provider_vehicle_id": "327",
+  "source": "internal",
+  "provider_code": "internal",
+  "display_name": "Toyota Yaris",
+  "brand": "Toyota",
+  "model": "Yaris",
+  "category": "economy",
+  "image": "https://example.com/internal/toyota-yaris.jpg",
+  "specs": {
+    "transmission": "automatic",
+    "fuel": "petrol",
+    "seating_capacity": 5,
+    "doors": 4,
+    "luggage_small": 1,
+    "luggage_medium": 1,
+    "luggage_large": 0,
+    "air_conditioning": true,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 30.0,
+    "total_price": 90.0,
+    "deposit_amount": 150.0,
+    "deposit_currency": "EUR",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": "limited",
+    "mileage_limit_km": 300,
+    "fuel_policy": "same_to_same",
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "3272373056",
+      "name": "Dubai Airport (DXB)",
+      "latitude": 25.251369,
+      "longitude": 55.347204
+    },
+    "dropoff": {
+      "provider_location_id": "3272373056",
+      "name": "Dubai Airport (DXB)",
+      "latitude": 25.251369,
+      "longitude": 55.347204
+    }
+  },
+  "data_quality_flags": [],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {}
+  }
+}

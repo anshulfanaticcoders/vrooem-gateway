@@ -1,0 +1,75 @@
+{
+  "id": "renteon-fiat-500",
+  "gateway_vehicle_id": "gw_renteon_1",
+  "provider_vehicle_id": "alquicoche|fiat|500",
+  "source": "renteon",
+  "provider_code": "renteon",
+  "display_name": "Fiat 500",
+  "brand": "Fiat",
+  "model": "500",
+  "category": "mini",
+  "image": null,
+  "specs": {
+    "transmission": null,
+    "fuel": null,
+    "seating_capacity": null,
+    "doors": null,
+    "luggage_small": null,
+    "luggage_medium": null,
+    "luggage_large": null,
+    "air_conditioning": null,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 38.43,
+    "total_price": 115.29,
+    "deposit_amount": 450.0,
+    "deposit_currency": "EUR",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "MA-CAS-CMN",
+      "name": "Casablanca Airport (CMN)",
+      "latitude": 33.3675,
+      "longitude": -7.58997
+    },
+    "dropoff": {
+      "provider_location_id": "MA-CAS-CMN",
+      "name": "Casablanca Airport (CMN)",
+      "latitude": 33.3675,
+      "longitude": -7.58997
+    }
+  },
+  "data_quality_flags": [
+    "unknown_transmission",
+    "unknown_fuel",
+    "unknown_seating_capacity",
+    "unknown_doors",
+    "unknown_luggage_small",
+    "unknown_luggage_medium",
+    "unknown_luggage_large",
+    "unknown_air_conditioning",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": true
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "connector_id": "alquicoche"
+    }
+  }
+}

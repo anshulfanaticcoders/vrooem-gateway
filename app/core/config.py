@@ -77,6 +77,7 @@ class Settings(BaseSettings):
     surprice_api_url: str = ""
     surprice_api_key: str = ""
     surprice_rate_code: str = ""
+    surprice_fdw_rate_code: str = ""
 
     # ─── Sicily By Car ───
     sicilybycar_api_url: str = ""

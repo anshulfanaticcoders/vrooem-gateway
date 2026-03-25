@@ -5,17 +5,12 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from app.services.country_codes import resolve_country_code
+
 
 _CITY_ALIASES = {
     "marrakesh": "marrakech",
     "antwerpen": "antwerp",
-}
-
-_COUNTRY_NAME_TO_CODE = {
-    "belgium": "BE",
-    "morocco": "MA",
-    "united arab emirates": "AE",
-    "uae": "AE",
 }
 
 _TYPE_ALIASES = {
@@ -31,19 +26,26 @@ _TYPE_ALIASES = {
     "train_station": "train_station",
     "railway": "train_station",
     "station": "train_station",
+    "bus station": "bus_station",
+    "bus_stop": "bus_station",
+    "bus stop": "bus_station",
+    "coach station": "bus_station",
+    "coach stop": "bus_station",
     "hotel": "hotel",
 }
 
 _AIRPORT_HINTS = ("airport", "terminal", "aeropuerto", "aeroport")
 _PORT_HINTS = ("port", "harbour", "harbor", "ferry")
-_TRAIN_HINTS = ("train", "station", "railway", "gare", "bahnhof")
-_DOWNTOWN_HINTS = ("downtown", "city", "office", "center", "centre", "central")
+_BUS_HINTS = ("bus station", "bus stop", "coach station", "coach stop", "bus", "coach")
+_TRAIN_HINTS = ("train station", "railway station", "train", "railway", "gare", "bahnhof", "station")
+_DOWNTOWN_HINTS = ("downtown", "city center", "city centre", "center", "centre", "central", "office", "city")
 
-# Ordered longest-first so "international airport" is checked before "airport".
+# Ordered longest-first so specific suffixes are stripped before generic ones.
 _CITY_TYPE_SUFFIXES = [
     "international airport", "intl airport",
     "airport", "aeropuerto", "aeroport",
     "railway station", "train station",
+    "bus station", "coach station", "bus stop", "coach stop",
     "ferry terminal",
     "downtown", "city center", "city centre",
     "harbour", "harbor", "port",
@@ -66,8 +68,8 @@ def canonicalize_country_code(country_code: str | None, country: str | None) -> 
     if len(code) == 2:
         return code.upper()
 
-    country_key = normalize_string(country)
-    return _COUNTRY_NAME_TO_CODE.get(country_key, code.upper())
+    resolved = resolve_country_code(country)
+    return resolved or code.upper()
 
 
 def canonicalize_city(city: str | None) -> str:
@@ -82,13 +84,9 @@ def strip_type_suffix(name: str) -> str:
     """Remove location-type words and trailing IATA codes from a city/name."""
     text = name.strip()
 
-    # Strip trailing parenthetical codes first: "Dubai Airport (DXB)" → "Dubai Airport"
     text = re.sub(r"\s*\([A-Za-z]{2,4}\)\s*$", "", text).strip()
-
-    # Strip trailing bare IATA-like codes: "Marrakech Menara Airport RAK" → "Marrakech Menara Airport"
     text = re.sub(r"\s+[A-Z]{3}\s*$", "", text).strip()
 
-    # Now strip type suffixes (longest first).
     lowered = text.lower()
     for suffix in _CITY_TYPE_SUFFIXES:
         if lowered.endswith(suffix):
@@ -96,8 +94,6 @@ def strip_type_suffix(name: str) -> str:
             if stripped:
                 text = stripped
                 lowered = text.lower()
-                # Try another pass — handles "Marrakech Menara Airport" → strip
-                # "airport" → "Marrakech Menara", but "Menara" is fine.
                 break
 
     return text
@@ -115,18 +111,25 @@ def display_city(city: str | None) -> str:
 
 def canonicalize_location_type(location_type: str | None, name: str | None = None) -> str:
     value = normalize_string(location_type)
-    if value in _TYPE_ALIASES:
-        return _TYPE_ALIASES[value]
+    mapped = _TYPE_ALIASES.get(value)
 
+    # Provider feeds often send overly-generic types like "station" or "office".
+    # Use the human-readable name first so "bus station" does not collapse into
+    # a train station bucket just because the raw type was generic.
     haystack = normalize_string(name)
-    if any(hint in haystack for hint in _AIRPORT_HINTS):
+    if _contains_hint(haystack, _AIRPORT_HINTS):
         return "airport"
-    if any(hint in haystack for hint in _PORT_HINTS):
+    if _contains_hint(haystack, _PORT_HINTS):
         return "port"
-    if any(hint in haystack for hint in _TRAIN_HINTS):
+    if _contains_hint(haystack, _BUS_HINTS):
+        return "bus_station"
+    if _contains_hint(haystack, _TRAIN_HINTS):
         return "train_station"
-    if any(hint in haystack for hint in _DOWNTOWN_HINTS):
+    if _contains_hint(haystack, _DOWNTOWN_HINTS):
         return "downtown"
+
+    if mapped:
+        return mapped
 
     return "other"
 
@@ -139,6 +142,10 @@ def extract_iata_code(location: dict) -> str | None:
     provider_location_id = str(location.get("provider_location_id") or "")
     for part in provider_location_id.split(":"):
         part = part.strip().upper()
+        if _looks_like_iata(part):
+            return part
+
+    for part in reversed(re.split(r"[^A-Za-z]+", provider_location_id.upper())):
         if _looks_like_iata(part):
             return part
 
@@ -165,3 +172,7 @@ def coordinate_bucket(latitude: float | None, longitude: float | None) -> str:
 
 def _looks_like_iata(value: str | None) -> bool:
     return bool(value and len(value) == 3 and value.isalpha())
+
+
+def _contains_hint(haystack: str, hints: tuple[str, ...]) -> bool:
+    return any(re.search(rf"\b{re.escape(hint)}\b", haystack) for hint in hints)

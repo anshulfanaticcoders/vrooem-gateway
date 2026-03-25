@@ -1,0 +1,68 @@
+{
+  "id": "locauto-fiat-500",
+  "gateway_vehicle_id": "gw_locauto_1",
+  "provider_vehicle_id": "loc_500",
+  "source": "locauto_rent",
+  "provider_code": "locauto_rent",
+  "display_name": "Fiat 500 or similar",
+  "brand": "Fiat",
+  "model": "500",
+  "category": "mini",
+  "image": "https://example.com/locauto/fiat-500.jpg",
+  "specs": {
+    "transmission": "manual",
+    "fuel": null,
+    "seating_capacity": 4,
+    "doors": 3,
+    "luggage_small": 1,
+    "luggage_medium": 0,
+    "luggage_large": 0,
+    "air_conditioning": true,
+    "sipp_code": "MBMR"
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 31.0,
+    "total_price": 93.0,
+    "deposit_amount": 500.0,
+    "deposit_currency": "EUR",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": "full_to_full",
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "FCO",
+      "name": "Fiumicino Airport",
+      "latitude": 41.8003,
+      "longitude": 12.2389
+    },
+    "dropoff": {
+      "provider_location_id": "FCO",
+      "name": "Fiumicino Airport",
+      "latitude": 41.8003,
+      "longitude": 12.2389
+    }
+  },
+  "data_quality_flags": [
+    "unknown_fuel",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "rate_id": "LOC-BASIC"
+    }
+  }
+}

@@ -340,10 +340,12 @@ class AdobeCarAdapter(BaseAdapter):
         total_price = round(tdr * rental_days + dro, 2)
 
         # ─── Vehicle info ───
-        passengers = _safe_int(raw.get("passengers"), 5)
-        doors = _safe_int(raw.get("doors"), 4)
-        is_manual = raw.get("manual", False)
-        transmission = TransmissionType.MANUAL if is_manual else TransmissionType.AUTOMATIC
+        passengers_raw = raw.get("passengers")
+        doors_raw = raw.get("doors")
+        manual_raw = raw.get("manual")
+        transmission = None
+        if isinstance(manual_raw, bool):
+            transmission = TransmissionType.MANUAL if manual_raw else TransmissionType.AUTOMATIC
         photo = raw.get("photo", "")
         traction = (raw.get("traction") or "").upper()
 
@@ -441,34 +443,28 @@ class AdobeCarAdapter(BaseAdapter):
                 )
             )
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=category_code,
-            name=model_name,
-            category=vehicle_category,
-            make=make,
-            model=model,
-            image_url=photo,
-            transmission=transmission,
-            fuel_type=FuelType.PETROL,
-            seats=passengers,
-            doors=doors,
-            air_conditioning=True,
-            mileage_policy=MileagePolicy.UNLIMITED,
-            pickup_location=pickup_loc,
-            dropoff_location=dropoff_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": category_code,
+            "name": model_name,
+            "category": vehicle_category,
+            "make": make,
+            "model": model,
+            "image_url": photo,
+            "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
+            "pricing": Pricing(
                 currency="USD",
                 total_price=total_price,
                 daily_rate=daily_rate,
                 fees=fees,
                 payment_options=[PaymentOption.PAY_AT_PICKUP],
             ),
-            extras=extras,
-            insurance_options=insurance_options,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "extras": extras,
+            "insurance_options": insurance_options,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "category": category_code,
                 "tdr": tdr,
                 "pli": pli,
@@ -483,7 +479,16 @@ class AdobeCarAdapter(BaseAdapter):
                 "pickup_datetime": f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}",
                 "dropoff_datetime": f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}",
             },
-        )
+        }
+
+        if transmission is not None:
+            vehicle_kwargs["transmission"] = transmission
+        if passengers_raw is not None:
+            vehicle_kwargs["seats"] = _safe_int(passengers_raw)
+        if doors_raw is not None:
+            vehicle_kwargs["doors"] = _safe_int(doors_raw)
+
+        return Vehicle(**vehicle_kwargs)
 
     # ─── Booking ───
 

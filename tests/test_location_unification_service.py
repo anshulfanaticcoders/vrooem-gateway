@@ -181,7 +181,7 @@ class LocationUnificationServiceTest(unittest.TestCase):
         results = self.service.search_locations(unified_locations, "marrakesh", limit=5)
 
         self.assertEqual(len(results), 2)
-        self.assertEqual([item["name"] for item in results], ["Marrakech Airport", "Marrakech Downtown"])
+        self.assertEqual([item["name"] for item in results], ["Marrakech Airport (RAK)", "Marrakech Downtown"])
 
     def test_it_merges_terminal_airport_rows_into_nearby_iata_airport(self) -> None:
         locations = [
@@ -226,6 +226,63 @@ class LocationUnificationServiceTest(unittest.TestCase):
         self.assertEqual(len(unified), 1)
         self.assertEqual(unified[0]["iata"], "DXB")
         self.assertEqual(unified[0]["provider_count"], 3)
+
+    def test_it_merges_same_iata_airports_even_when_country_formats_differ(self) -> None:
+        locations = [
+            {
+                "provider": "locauto_rent",
+                "provider_location_id": "VE",
+                "name": "Venice Airport",
+                "city": "Venice",
+                "country": "Italy",
+                "country_code": "",
+                "location_type": "airport",
+                "iata": "VCE",
+            },
+            {
+                "provider": "renteon",
+                "provider_location_id": "IT-VEN-VCE",
+                "name": "Venezia airport",
+                "city": "Venezia",
+                "country": "IT",
+                "country_code": "IT",
+                "location_type": "airport",
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 1)
+        self.assertEqual(unified[0]["iata"], "VCE")
+        self.assertEqual(unified[0]["provider_count"], 2)
+
+    def test_it_keeps_bus_and_train_stations_separate(self) -> None:
+        locations = [
+            {
+                "provider": "renteon",
+                "provider_location_id": "ES-VAL-BS",
+                "name": "Valencia bus station",
+                "city": "Valencia",
+                "country": "Spain",
+                "country_code": "ES",
+                "location_type": "station",
+            },
+            {
+                "provider": "renteon",
+                "provider_location_id": "ES-VAL-RS",
+                "name": "Valencia railway station",
+                "city": "Valencia",
+                "country": "Spain",
+                "country_code": "ES",
+                "location_type": "station",
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 2)
+        self.assertCountEqual([item["name"] for item in unified], ["Valencia Bus Station", "Valencia Train Station"])
+
 
 
 if __name__ == "__main__":

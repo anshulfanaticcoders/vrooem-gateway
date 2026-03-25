@@ -5,70 +5,28 @@ from datetime import date, time
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.auth import verify_api_key
-from app.db.session import get_db
-from app.schemas.search import SearchResponse
-from app.schemas.search import SearchRequest
+from app.schemas.search import SearchRequest, SearchResponse
+from app.schemas.search_vehicle_payload import SearchVehicleResponsePayload
 from app.services.cache_service import CacheService, get_redis
 from app.services.circuit_breaker import CircuitBreakerRegistry
-from app.services.location_repository import LocationRepository
+from app.services.country_codes import resolve_country_code
+from app.services.json_location_repository import JsonLocationRepository
 from app.services.search_service import search_vehicles
+from app.services.search_vehicle_payload_builder import build_search_vehicle_response
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1/vehicles", tags=["vehicles"])
 
-# Country name → ISO 3166-1 alpha-2 code mapping
-_COUNTRY_NAME_TO_CODE: dict[str, str] = {
-    "albania": "AL", "antigua and barbuda": "AG", "argentina": "AR",
-    "armenia": "AM", "australia": "AU", "austria": "AT", "azerbaijan": "AZ",
-    "belgium": "BE", "belgië": "BE", "bonaire": "BQ",
-    "bosnia and herzegovina": "BA", "bulgaria": "BG",
-    "canada": "CA", "colombia": "CO", "costa rica": "CR", "croatia": "HR",
-    "curacao": "CW", "cyprus": "CY", "czech republic": "CZ",
-    "denmark": "DK", "dominican republic": "DO",
-    "egypt": "EG", "estonia": "EE", "ethiopia": "ET",
-    "finland": "FI", "france": "FR", "georgia": "GE", "germany": "DE",
-    "greece": "GR", "guadeloupe": "GP", "hungary": "HU",
-    "iceland": "IS", "ireland": "IE", "israel": "IL", "italy": "IT",
-    "jamaica": "JM", "japan": "JP", "jordan": "JO",
-    "kenya": "KE", "kosovo": "XK", "kuwait": "KW",
-    "latvia": "LV", "lebanon": "LB", "lithuania": "LT", "luxembourg": "LU",
-    "malaysia": "MY", "malta": "MT", "martinique": "MQ", "mauritius": "MU",
-    "mexico": "MX", "montenegro": "ME", "morocco": "MA",
-    "namibia": "NA", "netherlands": "NL", "new zealand": "NZ",
-    "north macedonia": "MK", "norway": "NO",
-    "oman": "OM", "panama": "PA", "peru": "PE", "philippines": "PH",
-    "poland": "PL", "portugal": "PT", "qatar": "QA",
-    "romania": "RO", "rwanda": "RW",
-    "saudi arabia": "SA", "serbia": "RS", "singapore": "SG",
-    "slovakia": "SK", "slovenia": "SI", "south africa": "ZA",
-    "south korea": "KR", "spain": "ES", "españa": "ES",
-    "sri lanka": "LK", "sweden": "SE", "switzerland": "CH",
-    "tanzania": "TZ", "thailand": "TH", "trinidad and tobago": "TT",
-    "tunisia": "TN", "turkey": "TR", "türkiye": "TR",
-    "united arab emirates": "AE", "united kingdom": "GB",
-    "united states": "US", "usa": "US", "uruguay": "UY", "uzbekistan": "UZ",
-}
-
 
 def _resolve_country_code(country: str) -> str | None:
     """Resolve country name or code to ISO 2-letter code."""
-    if not country:
-        return None
-    country = country.strip()
-    # Already a 2-letter code
-    if len(country) == 2 and country.isalpha():
-        return country.upper()
-    # Look up by name
-    return _COUNTRY_NAME_TO_CODE.get(country.lower())
+    return resolve_country_code(country)
 
-# Reference to app-level circuit breaker registry (set from main.py)
+
 _cb_registry: CircuitBreakerRegistry | None = None
-
-_location_repository = LocationRepository()
+_json_location_repository = JsonLocationRepository()
 
 
 def set_circuit_breaker_registry(registry: CircuitBreakerRegistry) -> None:
@@ -97,8 +55,8 @@ class VehicleSearchBody(BaseModel):
     unified_location_id: int
     pickup_date: date
     dropoff_date: date
-    pickup_time: str = "09:00"
-    dropoff_time: str = "09:00"
+    pickup_time: time = time(9, 0)
+    dropoff_time: time = time(9, 0)
     currency: str = "EUR"
     driver_age: int = 30
     dropoff_unified_location_id: int | None = None
@@ -107,26 +65,16 @@ class VehicleSearchBody(BaseModel):
     country_code: str | None = None
 
 
-def _parse_time(value: str) -> time:
-    parts = value.split(":")
-    return time(int(parts[0]), int(parts[1]) if len(parts) > 1 else 0)
-
-
-async def _do_search(
-    body: VehicleSearchBody,
-    db: AsyncSession,
-) -> SearchResponse:
+async def _do_search(body: VehicleSearchBody) -> SearchResponse:
     if _cb_registry is None:
         raise HTTPException(status_code=503, detail="Gateway not ready")
 
     if body.dropoff_date <= body.pickup_date:
         raise HTTPException(status_code=400, detail="Dropoff date must be after pickup date")
 
-    pickup_time = _parse_time(body.pickup_time)
-    dropoff_time = _parse_time(body.dropoff_time)
+    pickup_time = body.pickup_time
+    dropoff_time = body.dropoff_time
 
-    # If Laravel passed provider_locations from the JSON file, use them directly.
-    # Otherwise fall back to Supabase lookup.
     if body.provider_locations:
         provider_entries = [pl.model_dump() for pl in body.provider_locations]
         country_code = body.country_code or None
@@ -136,9 +84,7 @@ async def _do_search(
             body.unified_location_id,
         )
     else:
-        location = await _location_repository.get_location_by_unified_id(
-            db, body.unified_location_id, include_internal_provider=True,
-        )
+        location = _json_location_repository.get_location_by_unified_id(body.unified_location_id)
         if not location:
             raise HTTPException(
                 status_code=404,
@@ -150,7 +96,7 @@ async def _do_search(
                 status_code=404,
                 detail=f"No providers serve location {body.unified_location_id}",
             )
-        country_code = _resolve_country_code(location.get("country", ""))
+        country_code = body.country_code or _resolve_country_code(location.get("country", ""))
 
     request = SearchRequest(
         unified_location_id=body.unified_location_id,
@@ -168,20 +114,24 @@ async def _do_search(
     redis = await get_redis()
     cache = CacheService(redis)
 
-    return await search_vehicles(request, provider_entries, cache, _cb_registry)
+    return await search_vehicles(
+        request=request,
+        provider_entries=provider_entries,
+        cache=cache,
+        cb_registry=_cb_registry,
+    )
 
 
-@router.post("/search", response_model=SearchResponse)
+@router.post("/search", response_model=SearchVehicleResponsePayload)
 async def vehicle_search_post(
     body: VehicleSearchBody,
     _api_key: str = Depends(verify_api_key),
-    db: AsyncSession = Depends(get_db),
-) -> SearchResponse:
+) -> SearchVehicleResponsePayload:
     """Search vehicles — accepts provider_locations from Laravel's JSON file."""
-    return await _do_search(body, db)
+    return build_search_vehicle_response(await _do_search(body))
 
 
-@router.get("/search", response_model=SearchResponse)
+@router.get("/search", response_model=SearchVehicleResponsePayload)
 async def vehicle_search(
     unified_location_id: int = Query(..., description="Unified location ID"),
     pickup_date: date = Query(..., description="Pickup date (YYYY-MM-DD)"),
@@ -193,18 +143,17 @@ async def vehicle_search(
     dropoff_unified_location_id: int | None = Query(None, description="Dropoff location (if one-way)"),
     providers: str | None = Query(None, description="Comma-separated provider IDs, or omit for all"),
     _api_key: str = Depends(verify_api_key),
-    db: AsyncSession = Depends(get_db),
-) -> SearchResponse:
-    """Search vehicles (GET — backward compatible, uses Supabase lookup)."""
+) -> SearchVehicleResponsePayload:
+    """Search vehicles (GET — backward compatible, uses JSON lookup)."""
     body = VehicleSearchBody(
         unified_location_id=unified_location_id,
         pickup_date=pickup_date,
         dropoff_date=dropoff_date,
-        pickup_time=pickup_time.strftime("%H:%M"),
-        dropoff_time=dropoff_time.strftime("%H:%M"),
+        pickup_time=pickup_time,
+        dropoff_time=dropoff_time,
         currency=currency,
         driver_age=driver_age,
         dropoff_unified_location_id=dropoff_unified_location_id,
         providers=providers,
     )
-    return await _do_search(body, db)
+    return build_search_vehicle_response(await _do_search(body))

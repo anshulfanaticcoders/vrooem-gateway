@@ -17,6 +17,8 @@ _PROVIDER_ALIASES: dict[str, str] = {
     "okmobility": "ok_mobility",
 }
 
+_PUBLIC_PROVIDER_IDS: dict[str, str] = {value: key for key, value in _PROVIDER_ALIASES.items()}
+
 # All registered adapter classes (populated by register_adapter)
 _adapter_classes: dict[str, type[BaseAdapter]] = {}
 
@@ -63,6 +65,11 @@ def load_supplier_configs(config_dir: str = "config/suppliers") -> dict[str, dic
 def get_supplier_config(supplier_id: str) -> dict:
     """Get a supplier's YAML config."""
     return _supplier_configs.get(supplier_id, {})
+
+
+def get_public_supplier_id(supplier_id: str) -> str:
+    """Map internal adapter IDs back to the public provider IDs Laravel expects."""
+    return _PUBLIC_PROVIDER_IDS.get(supplier_id, supplier_id)
 
 
 def _resolve_id(supplier_id: str) -> str:

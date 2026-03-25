@@ -1,0 +1,65 @@
+{
+  "id": "favrica-berlingo",
+  "gateway_vehicle_id": "gw_favrica_1",
+  "provider_vehicle_id": "fav_berlingo",
+  "source": "favrica",
+  "provider_code": "favrica",
+  "display_name": "Citroen Berlingo",
+  "brand": "Citroen",
+  "model": "Berlingo",
+  "category": "van",
+  "image": "https://example.com/favrica/berlingo.jpg",
+  "specs": {
+    "transmission": "manual",
+    "fuel": "diesel",
+    "seating_capacity": 5,
+    "doors": 5,
+    "luggage_small": 1,
+    "luggage_medium": 1,
+    "luggage_large": 2,
+    "air_conditioning": true,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 27.15,
+    "total_price": 81.46,
+    "deposit_amount": 250.0,
+    "deposit_currency": "EUR",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": "unlimited",
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "AYT",
+      "name": "Antalya Havalimani",
+      "latitude": 36.8987,
+      "longitude": 30.8005
+    },
+    "dropoff": {
+      "provider_location_id": "AYT",
+      "name": "Antalya Havalimani",
+      "latitude": 36.8987,
+      "longitude": 30.8005
+    }
+  },
+  "data_quality_flags": [],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "reservation_source": "favrica"
+    }
+  }
+}

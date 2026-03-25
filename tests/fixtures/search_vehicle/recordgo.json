@@ -1,0 +1,75 @@
+{
+  "id": "recordgo-opel-corsa",
+  "gateway_vehicle_id": "gw_recordgo_1",
+  "provider_vehicle_id": "rg_corsa",
+  "source": "recordgo",
+  "provider_code": "recordgo",
+  "display_name": "Opel Corsa",
+  "brand": "Opel",
+  "model": "Corsa",
+  "category": "economy",
+  "image": "https://example.com/recordgo/corsa.jpg",
+  "specs": {
+    "transmission": null,
+    "fuel": null,
+    "seating_capacity": null,
+    "doors": null,
+    "luggage_small": null,
+    "luggage_medium": null,
+    "luggage_large": null,
+    "air_conditioning": null,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 25.0,
+    "total_price": 75.0,
+    "deposit_amount": 350.0,
+    "deposit_currency": "EUR",
+    "excess_amount": 1000.0,
+    "excess_theft_amount": 1000.0
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "ALC",
+      "name": "Alicante Airport",
+      "latitude": 38.2822,
+      "longitude": -0.5582
+    },
+    "dropoff": {
+      "provider_location_id": "ALC",
+      "name": "Alicante Airport",
+      "latitude": 38.2822,
+      "longitude": -0.5582
+    }
+  },
+  "data_quality_flags": [
+    "unknown_transmission",
+    "unknown_fuel",
+    "unknown_seating_capacity",
+    "unknown_doors",
+    "unknown_luggage_small",
+    "unknown_luggage_medium",
+    "unknown_luggage_large",
+    "unknown_air_conditioning",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "product_id": "RG-BASE"
+    }
+  }
+}

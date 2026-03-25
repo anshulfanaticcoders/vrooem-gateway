@@ -18,8 +18,12 @@ class _FakeAdapter:
         return []
 
 
-class _FakeCache:
+class _RecordingCache:
+    def __init__(self) -> None:
+        self.get_search_calls = []
+
     async def get_search(self, **kwargs):
+        self.get_search_calls.append(kwargs)
         return None
 
     async def set_vehicle(self, vehicle_id, data):
@@ -75,7 +79,7 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
             await search_vehicles(
                 request=request,
                 provider_entries=provider_entries,
-                cache=_FakeCache(),
+                cache=_RecordingCache(),
                 cb_registry=_FakeCircuitBreakerRegistry(),
             )
 
@@ -83,3 +87,40 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(adapter.last_pickup_entry.pickup_id, "MLO")
         self.assertEqual(getattr(adapter.last_pickup_entry, "extended_location_code", None), "MLOA01")
 
+    async def test_cache_lookup_varies_when_provider_entries_change(self) -> None:
+        request = SearchRequest(
+            unified_location_id=1191543869,
+            pickup_date=date(2026, 5, 21),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 5, 24),
+            dropoff_time=time(9, 0),
+            currency="EUR",
+            driver_age=35,
+        )
+        cache = _RecordingCache()
+        locauto_only_entries = [
+            {"provider": "locauto_rent", "pickup_id": "FCO", "original_name": "Rome Fiumicino Airport"},
+        ]
+        mixed_entries = [
+            {"provider": "greenmotion", "pickup_id": "157", "original_name": "Rome Fiumicino International Airport"},
+            {"provider": "locauto_rent", "pickup_id": "FCO", "original_name": "Rome Fiumicino Airport"},
+        ]
+
+        with patch("app.services.search_service.get_adapter", return_value=_FakeAdapter()):
+            await search_vehicles(
+                request=request,
+                provider_entries=locauto_only_entries,
+                cache=cache,
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+            await search_vehicles(
+                request=request,
+                provider_entries=mixed_entries,
+                cache=cache,
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertEqual(len(cache.get_search_calls), 2)
+        self.assertNotEqual(cache.get_search_calls[0], cache.get_search_calls[1])
+        self.assertIn("ploc", cache.get_search_calls[0])
+        self.assertIn("ploc", cache.get_search_calls[1])

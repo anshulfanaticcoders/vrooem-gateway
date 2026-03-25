@@ -76,16 +76,16 @@ _TRANSMISSION_MAP: dict[str, TransmissionType] = {
 }
 
 
-def _map_fuel_type(raw: str | None) -> FuelType:
+def _map_fuel_type(raw: str | None) -> FuelType | None:
     if not raw:
-        return FuelType.UNKNOWN
-    return _FUEL_MAP.get(raw.lower(), FuelType.UNKNOWN)
+        return None
+    return _FUEL_MAP.get(raw.lower())
 
 
-def _map_transmission(raw: str | None) -> TransmissionType:
+def _map_transmission(raw: str | None) -> TransmissionType | None:
     if not raw:
-        return TransmissionType.MANUAL
-    return _TRANSMISSION_MAP.get(raw.lower(), TransmissionType.MANUAL)
+        return None
+    return _TRANSMISSION_MAP.get(raw.lower())
 
 
 def _map_payment(rate_id: str) -> PaymentOption:
@@ -273,16 +273,23 @@ class SicilyByCarAdapter(BaseAdapter):
 
         # Mileage policy
         distance = rate.get("distance") or {}
-        mileage_policy = MileagePolicy.UNLIMITED if distance.get("unlimited") else MileagePolicy.LIMITED
+        mileage_policy = None
+        if "unlimited" in distance:
+            mileage_policy = (
+                MileagePolicy.UNLIMITED
+                if distance.get("unlimited")
+                else MileagePolicy.LIMITED
+            )
 
-        # Transmission — prefer explicit field, fall back to SIPP 3rd char
+        # Transmission — prefer explicit field, then infer from SIPP only when deterministic
         transmission_raw = veh.get("transmissionType")
-        if transmission_raw:
-            transmission = _map_transmission(transmission_raw)
-        elif len(sipp_4) >= 3 and sipp_4[2].upper() in ("A", "B", "D"):
-            transmission = TransmissionType.AUTOMATIC
-        else:
-            transmission = TransmissionType.MANUAL
+        transmission = _map_transmission(transmission_raw)
+        if transmission is None and len(sipp_4) >= 3:
+            sipp_transmission_code = sipp_4[2].upper()
+            if sipp_transmission_code in ("A", "B", "D"):
+                transmission = TransmissionType.AUTOMATIC
+            elif sipp_transmission_code in ("M", "N", "C"):
+                transmission = TransmissionType.MANUAL
 
         # Pickup location from offer
         offer_pickup = offer.get("pickupLocation") or {}
@@ -312,26 +319,17 @@ class SicilyByCarAdapter(BaseAdapter):
         # Unique supplier vehicle id combines vehicle category + rate for dedup
         supplier_vehicle_id = f"{veh.get('id', '')}_{rate_id}"
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=supplier_vehicle_id,
-            name=description,
-            category=category_from_sipp(sipp_4),
-            make=make,
-            model=model,
-            image_url=veh.get("imageUrl", ""),
-            transmission=transmission,
-            fuel_type=_map_fuel_type(veh.get("fuelType")),
-            seats=_safe_int(veh.get("numberOfPassengers"), 5),
-            doors=_safe_int(veh.get("numberOfDoors"), 4),
-            bags_large=_safe_int(veh.get("luggageBig")),
-            bags_small=_safe_int(veh.get("luggageSmall")),
-            air_conditioning=veh.get("airConditioning", True),
-            mileage_policy=mileage_policy,
-            sipp_code=sipp_raw or None,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": supplier_vehicle_id,
+            "name": description,
+            "category": category_from_sipp(sipp_4),
+            "make": make,
+            "model": model,
+            "image_url": veh.get("imageUrl", ""),
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
@@ -339,10 +337,10 @@ class SicilyByCarAdapter(BaseAdapter):
                 deposit_currency=currency,
                 payment_options=[payment],
             ),
-            insurance_options=insurance_options,
-            extras=self._parse_services(offer.get("services") or [], rental_days),
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "insurance_options": insurance_options,
+            "extras": self._parse_services(offer.get("services") or [], rental_days),
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "availability_id": availability_id,
                 "request_id": request_id,
                 "vehicle_category_id": veh.get("id"),
@@ -354,7 +352,32 @@ class SicilyByCarAdapter(BaseAdapter):
                 "total_prices": total_prices,
                 "services_raw": offer.get("services") or [],
             },
-        )
+        }
+
+        fuel_type = _map_fuel_type(veh.get("fuelType"))
+        if transmission is not None:
+            vehicle_kwargs["transmission"] = transmission
+        if fuel_type is not None:
+            vehicle_kwargs["fuel_type"] = fuel_type
+        if veh.get("numberOfPassengers") is not None:
+            vehicle_kwargs["seats"] = _safe_int(veh.get("numberOfPassengers"))
+        if veh.get("numberOfDoors") is not None:
+            vehicle_kwargs["doors"] = _safe_int(veh.get("numberOfDoors"))
+        if veh.get("luggageBig") is not None:
+            vehicle_kwargs["bags_large"] = _safe_int(veh.get("luggageBig"))
+        if veh.get("luggageSmall") is not None:
+            vehicle_kwargs["bags_small"] = _safe_int(veh.get("luggageSmall"))
+        air_conditioning = veh.get("airConditioning")
+        if isinstance(air_conditioning, bool):
+            vehicle_kwargs["air_conditioning"] = air_conditioning
+        elif isinstance(air_conditioning, str) and air_conditioning.lower() in ("true", "false"):
+            vehicle_kwargs["air_conditioning"] = air_conditioning.lower() == "true"
+        if mileage_policy is not None:
+            vehicle_kwargs["mileage_policy"] = mileage_policy
+        if sipp_raw:
+            vehicle_kwargs["sipp_code"] = sipp_raw
+
+        return Vehicle(**vehicle_kwargs)
 
     @staticmethod
     def _parse_services(services: list, rental_days: int) -> list[Extra]:

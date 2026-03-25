@@ -1,0 +1,75 @@
+{
+  "id": "surprice-kia-picanto",
+  "gateway_vehicle_id": "gw_surprice_1",
+  "provider_vehicle_id": "sur_001",
+  "source": "surprice",
+  "provider_code": "surprice",
+  "display_name": "Kia Picanto Automatic",
+  "brand": "Kia",
+  "model": "Picanto",
+  "category": "mini",
+  "image": "https://example.com/surprice/picanto.jpg",
+  "specs": {
+    "transmission": null,
+    "fuel": null,
+    "seating_capacity": null,
+    "doors": null,
+    "luggage_small": null,
+    "luggage_medium": null,
+    "luggage_large": null,
+    "air_conditioning": null,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "USD",
+    "price_per_day": 17.13,
+    "total_price": 51.38,
+    "deposit_amount": null,
+    "deposit_currency": null,
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "CMN:CMNA01",
+      "name": "Casablanca Airport (CMN)",
+      "latitude": 33.3675,
+      "longitude": -7.58997
+    },
+    "dropoff": {
+      "provider_location_id": "CMN:CMNA01",
+      "name": "Casablanca Airport (CMN)",
+      "latitude": 33.3675,
+      "longitude": -7.58997
+    }
+  },
+  "data_quality_flags": [
+    "unknown_transmission",
+    "unknown_fuel",
+    "unknown_seating_capacity",
+    "unknown_doors",
+    "unknown_luggage_small",
+    "unknown_luggage_medium",
+    "unknown_luggage_large",
+    "unknown_air_conditioning",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "vendor_rate_id": "SUR-BASIC"
+    }
+  }
+}

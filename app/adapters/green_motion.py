@@ -357,37 +357,27 @@ class GreenMotionAdapter(BaseAdapter):
         else:
             final_insurance = []
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=vehicle_id,
-            name=name,
-            category=category_from_sipp(sipp_code),
-            make=make,
-            model=model,
-            image_url=image_url,
-            transmission=TransmissionType.AUTOMATIC if "auto" in transmission_str else TransmissionType.MANUAL,
-            fuel_type=_parse_fuel(_xml_text(veh, "fuel")),
-            seats=_xml_int(veh, "adults", 5),
-            doors=4,
-            bags_large=_xml_int(veh, "luggageLarge"),
-            bags_small=_xml_int(veh, "luggageSmall"),
-            air_conditioning=_xml_text(veh, "airConditioning").lower() in ("yes", "1", "true"),
-            mileage_policy=mileage_policy,
-            mileage_limit_km=mileage_limit if mileage_limit > 0 else None,
-            sipp_code=sipp_code or None,
-            pickup_location=pickup_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": vehicle_id,
+            "name": name,
+            "category": category_from_sipp(sipp_code),
+            "make": make,
+            "model": model,
+            "image_url": image_url,
+            "pickup_location": pickup_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
                 daily_rate=daily_rate,
                 deposit_amount=deposit_amount if deposit_amount > 0 else None,
                 deposit_currency=currency,
             ),
-            insurance_options=final_insurance,
-            extras=shared_extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "insurance_options": final_insurance,
+            "extras": shared_extras,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "quote_id": quote_id,
                 "vehicle_id": vehicle_id,
                 "location_id": pickup_entry.pickup_id,
@@ -400,8 +390,55 @@ class GreenMotionAdapter(BaseAdapter):
                 "end_time": request.dropoff_time.strftime("%H:%M"),
                 "products": all_products,
             },
-            min_driver_age=minage or None,
-        )
+            "min_driver_age": minage or None,
+        }
+
+        if transmission_str:
+            if "auto" in transmission_str:
+                vehicle_kwargs["transmission"] = TransmissionType.AUTOMATIC
+            elif "manual" in transmission_str:
+                vehicle_kwargs["transmission"] = TransmissionType.MANUAL
+
+        fuel_text = _xml_text(veh, "fuel")
+        if fuel_text:
+            vehicle_kwargs["fuel_type"] = _parse_fuel(fuel_text)
+
+        adults_text = _xml_text(veh, "adults")
+        if adults_text:
+            vehicle_kwargs["seats"] = _xml_int(veh, "adults")
+
+        doors_text = _xml_text(veh, "doors")
+        if doors_text:
+            vehicle_kwargs["doors"] = _xml_int(veh, "doors")
+
+        luggage_large_text = _xml_text(veh, "luggageLarge")
+        if luggage_large_text:
+            vehicle_kwargs["bags_large"] = _xml_int(veh, "luggageLarge")
+
+        luggage_small_text = _xml_text(veh, "luggageSmall")
+        if luggage_small_text:
+            vehicle_kwargs["bags_small"] = _xml_int(veh, "luggageSmall")
+
+        air_conditioning_text = _xml_text(veh, "airConditioning").lower()
+        if air_conditioning_text in ("yes", "1", "true"):
+            vehicle_kwargs["air_conditioning"] = True
+        elif air_conditioning_text in ("no", "0", "false"):
+            vehicle_kwargs["air_conditioning"] = False
+
+        mileage_present = False
+        if products and (bas_product.find("mileage") is not None) and _xml_text(bas_product, "mileage") != "":
+            mileage_present = True
+        if veh.find("mileage") is not None and _xml_text(veh, "mileage") != "":
+            mileage_present = True
+        if mileage_present:
+            vehicle_kwargs["mileage_policy"] = mileage_policy
+            if mileage_limit > 0:
+                vehicle_kwargs["mileage_limit_km"] = mileage_limit
+
+        if sipp_code:
+            vehicle_kwargs["sipp_code"] = sipp_code
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_extras(self, extras_elem: ET.Element | None, rental_days: int) -> list[Extra]:
         if extras_elem is None:

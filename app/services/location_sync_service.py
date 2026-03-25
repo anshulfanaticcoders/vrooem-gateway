@@ -21,6 +21,7 @@ from app.services.location_normalization import (
     extract_iata_code,
     normalize_string,
 )
+from app.adapters.registry import get_public_supplier_id
 from app.services.location_unification_service import LocationUnificationService
 
 logger = logging.getLogger(__name__)
@@ -236,11 +237,11 @@ class LocationSyncService:
 
         await db.flush()
 
-        self._export_unified_json(unified_locations)
+        self.export_unified_json(unified_locations)
 
-    def _export_unified_json(self, unified_locations: list[dict]) -> None:
+    def export_unified_json(self, unified_locations: list[dict], output_path: Path | None = None) -> Path:
         """Write unified locations to the JSON file used by the gateway at runtime."""
-        json_path = Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json"
+        json_path = output_path or (Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json")
         exportable = []
         for loc in unified_locations:
             exportable.append({
@@ -255,7 +256,7 @@ class LocationSyncService:
                 "iata": loc.get("iata"),
                 "providers": [
                     {
-                        "provider": p["provider"],
+                        "provider": get_public_supplier_id(p["provider"]),
                         "pickup_id": p["pickup_id"],
                         "original_name": p.get("original_name", ""),
                         "dropoffs": p.get("dropoffs", []),
@@ -268,6 +269,7 @@ class LocationSyncService:
             })
         json_path.write_text(json.dumps(exportable, indent=4, ensure_ascii=False), encoding="utf-8")
         logger.info("Exported %d unified locations to %s", len(exportable), json_path)
+        return json_path
 
     def _dedupe_provider_locations(self, provider: str, raw_locations: list[dict]) -> dict[str, dict]:
         normalized_locations: dict[str, dict] = {}

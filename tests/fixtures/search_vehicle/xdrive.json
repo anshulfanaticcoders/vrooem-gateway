@@ -1,0 +1,65 @@
+{
+  "id": "xdrive-corolla",
+  "gateway_vehicle_id": "gw_xdrive_1",
+  "provider_vehicle_id": "xd_corolla",
+  "source": "xdrive",
+  "provider_code": "xdrive",
+  "display_name": "Toyota Corolla",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "category": "compact",
+  "image": "https://example.com/xdrive/corolla.jpg",
+  "specs": {
+    "transmission": "automatic",
+    "fuel": "petrol",
+    "seating_capacity": 5,
+    "doors": 4,
+    "luggage_small": 1,
+    "luggage_medium": 1,
+    "luggage_large": 1,
+    "air_conditioning": true,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "USD",
+    "price_per_day": 28.0,
+    "total_price": 84.0,
+    "deposit_amount": 300.0,
+    "deposit_currency": "USD",
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": "unlimited",
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "AMM",
+      "name": "Amman Airport",
+      "latitude": 31.7226,
+      "longitude": 35.9932
+    },
+    "dropoff": {
+      "provider_location_id": "AMM",
+      "name": "Amman Airport",
+      "latitude": 31.7226,
+      "longitude": 35.9932
+    }
+  },
+  "data_quality_flags": [],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": false
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "reservation_source": "xdrive"
+    }
+  }
+}

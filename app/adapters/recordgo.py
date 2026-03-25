@@ -66,20 +66,21 @@ def _safe_int(value, default: int = 0) -> int:
         return default
 
 
-def _parse_transmission(gearbox_type: str | None) -> TransmissionType:
+def _parse_transmission(gearbox_type: str | None) -> TransmissionType | None:
     """Parse gearboxType from RecordGo response."""
-    if gearbox_type and gearbox_type.lower() == "automatic":
+    if not gearbox_type:
+        return None
+    if gearbox_type.lower() == "automatic":
         return TransmissionType.AUTOMATIC
-    return TransmissionType.MANUAL
+    if gearbox_type.lower() == "manual":
+        return TransmissionType.MANUAL
+    return None
 
 
-def _parse_fuel_type(sipp: str | None) -> FuelType:
-    """Derive fuel type from 4th character of SIPP/ACRISS code.
-
-    H = hybrid, E = electric, D = diesel. Default to unknown.
-    """
+def _parse_fuel_type(sipp: str | None) -> FuelType | None:
+    """Derive fuel type from 4th character of SIPP/ACRISS code when deterministic."""
     if not sipp or len(sipp) < 4:
-        return FuelType.UNKNOWN
+        return None
     fourth = sipp[3].upper()
     if fourth == "E":
         return FuelType.ELECTRIC
@@ -87,13 +88,13 @@ def _parse_fuel_type(sipp: str | None) -> FuelType:
         return FuelType.HYBRID
     if fourth == "D":
         return FuelType.DIESEL
-    return FuelType.UNKNOWN
+    return None
 
 
-def _parse_mileage_policy(km_policy: dict | None) -> tuple[MileagePolicy, int | None]:
+def _parse_mileage_policy(km_policy: dict | None) -> tuple[MileagePolicy | None, int | None]:
     """Parse mileage policy from product kmPolicyComercial."""
     if not km_policy:
-        return MileagePolicy.UNLIMITED, None
+        return None, None
     name = (km_policy.get("kmPolicyTransName") or "").lower()
     if "unlimited" in name:
         return MileagePolicy.UNLIMITED, None
@@ -101,7 +102,7 @@ def _parse_mileage_policy(km_policy: dict | None) -> tuple[MileagePolicy, int | 
     km_max_daily = _safe_int(km_policy.get("kmMaxDaily"))
     if km_limited > 0 or km_max_daily > 0:
         return MileagePolicy.LIMITED, km_limited or km_max_daily or None
-    return MileagePolicy.UNLIMITED, None
+    return None, None
 
 
 def _extract_preauth_excess(included_complements: list[dict]) -> dict:
@@ -315,9 +316,9 @@ class RecordGoAdapter(BaseAdapter):
         """Parse an ACRISS group into one Vehicle per product (rate tier)."""
         acriss_code = acriss.get("acrissCode", "")
         acriss_id = acriss.get("acrissId")
-        seats = _safe_int(acriss.get("acrissSeats"), 5)
-        doors = _safe_int(acriss.get("acrissDoors"), 4)
-        bags = _safe_int(acriss.get("acrissSuitcase"), 0)
+        seats_raw = acriss.get("acrissSeats")
+        doors_raw = acriss.get("acrissDoors")
+        bags_raw = acriss.get("acrissSuitcase")
         gearbox = acriss.get("gearboxType")
 
         # Resolve image and display name from imagesArray
@@ -442,78 +443,87 @@ class RecordGoAdapter(BaseAdapter):
 
             full_name = f"{vehicle_name} - {product_name}" if product_name else vehicle_name
 
-            vehicles.append(
-                Vehicle(
-                    id=f"gw_{uuid.uuid4().hex[:16]}",
-                    supplier_id=self.supplier_id,
-                    supplier_vehicle_id=f"{acriss_code}_{product_id}_{rate_prod_ver}",
-                    name=full_name,
-                    category=category_from_sipp(acriss_code),
-                    make=make,
-                    model=model,
-                    image_url=image_url,
-                    transmission=_parse_transmission(gearbox),
-                    fuel_type=_parse_fuel_type(acriss_code),
-                    seats=seats,
-                    doors=doors,
-                    bags_large=bags,
-                    bags_small=0,
-                    air_conditioning=True,
-                    mileage_policy=mileage_policy,
-                    mileage_limit_km=mileage_limit,
-                    sipp_code=acriss_code or None,
-                    pickup_location=pickup_loc,
-                    pricing=Pricing(
-                        currency="EUR",
-                        total_price=total_price,
-                        daily_rate=daily_rate,
-                        deposit_amount=deposit,
-                        deposit_currency="EUR" if deposit else None,
-                        payment_options=[PaymentOption.PAY_AT_PICKUP],
-                    ),
-                    insurance_options=insurance_options,
-                    extras=extras,
-                    cancellation_policy=None,  # API does not return cancellation terms
-                    supplier_data={
-                        "acriss_id": acriss_id,
-                        "acriss_code": acriss_code,
+            vehicle_kwargs = {
+                "id": f"gw_{uuid.uuid4().hex[:16]}",
+                "supplier_id": self.supplier_id,
+                "supplier_vehicle_id": f"{acriss_code}_{product_id}_{rate_prod_ver}",
+                "name": full_name,
+                "category": category_from_sipp(acriss_code),
+                "make": make,
+                "model": model,
+                "image_url": image_url,
+                "pickup_location": pickup_loc,
+                "pricing": Pricing(
+                    currency="EUR",
+                    total_price=total_price,
+                    daily_rate=daily_rate,
+                    deposit_amount=deposit,
+                    deposit_currency="EUR" if deposit else None,
+                    payment_options=[PaymentOption.PAY_AT_PICKUP],
+                ),
+                "insurance_options": insurance_options,
+                "extras": extras,
+                "cancellation_policy": None,  # API does not return cancellation terms
+                "supplier_data": {
+                    "acriss_id": acriss_id,
+                    "acriss_code": acriss_code,
+                    "product_id": product_id,
+                    "product_ver": product_ver,
+                    "product_name": product_name,
+                    "rate_prod_ver": rate_prod_ver,
+                    "sell_code": sell_code,
+                    "sell_code_ver": sell_code_ver,
+                    "country": country_code,
+                    "pickup_branch": pickup_branch,
+                    "dropoff_branch": dropoff_branch,
+                    "partner_user": get_settings().recordgo_partner_user,
+                    "booking_total": total_price,
+                    "automatic_complements": automatic_complements,
+                    "included_complements": included_complements,
+                    # Full product data for frontend recordgo_products grouping
+                    "product_data": {
+                        "type": f"RG_{product_id}_{rate_prod_ver}",
+                        "name": product_name,
+                        "subtitle": product.get("productSubtitle"),
+                        "description": product.get("productDescription"),
+                        "total": total_price,
+                        "price_per_day": daily_rate,
                         "product_id": product_id,
                         "product_ver": product_ver,
-                        "product_name": product_name,
                         "rate_prod_ver": rate_prod_ver,
-                        "sell_code": sell_code,
-                        "sell_code_ver": sell_code_ver,
-                        "country": country_code,
-                        "pickup_branch": pickup_branch,
-                        "dropoff_branch": dropoff_branch,
-                        "partner_user": get_settings().recordgo_partner_user,
-                        "booking_total": total_price,
-                        "automatic_complements": automatic_complements,
-                        "included_complements": included_complements,
-                        # Full product data for frontend recordgo_products grouping
-                        "product_data": {
-                            "type": f"RG_{product_id}_{rate_prod_ver}",
-                            "name": product_name,
-                            "subtitle": product.get("productSubtitle"),
-                            "description": product.get("productDescription"),
-                            "total": total_price,
-                            "price_per_day": daily_rate,
-                            "product_id": product_id,
-                            "product_ver": product_ver,
-                            "rate_prod_ver": rate_prod_ver,
-                            "deposit": deposit,
-                            "excess": excess,
-                            "excess_low": preauth_excess.get("excess_low"),
-                            "complements_autom": automatic_complements,
-                            "complements_included": included_complements,
-                            "refuel_policy": product.get("refuelPolicyCommercial"),
-                            "km_policy": product.get("kmPolicyCommercial") or product.get("kmPolicyComercial"),
-                        },
+                        "deposit": deposit,
+                        "excess": excess,
+                        "excess_low": preauth_excess.get("excess_low"),
+                        "complements_autom": automatic_complements,
+                        "complements_included": included_complements,
+                        "refuel_policy": product.get("refuelPolicyCommercial"),
+                        "km_policy": product.get("kmPolicyCommercial") or product.get("kmPolicyComercial"),
                     },
-                    min_driver_age=min_age,
-                    max_driver_age=max_age,
-                )
-            )
+                },
+                "min_driver_age": min_age,
+                "max_driver_age": max_age,
+            }
+
+            transmission = _parse_transmission(gearbox)
+            fuel_type = _parse_fuel_type(acriss_code)
+            if transmission is not None:
+                vehicle_kwargs["transmission"] = transmission
+            if fuel_type is not None:
+                vehicle_kwargs["fuel_type"] = fuel_type
+            if seats_raw is not None:
+                vehicle_kwargs["seats"] = _safe_int(seats_raw)
+            if doors_raw is not None:
+                vehicle_kwargs["doors"] = _safe_int(doors_raw)
+            if bags_raw is not None:
+                vehicle_kwargs["bags_large"] = _safe_int(bags_raw)
+            if mileage_policy is not None:
+                vehicle_kwargs["mileage_policy"] = mileage_policy
+            if mileage_limit is not None:
+                vehicle_kwargs["mileage_limit_km"] = mileage_limit
+            if acriss_code:
+                vehicle_kwargs["sipp_code"] = acriss_code
+
+            vehicles.append(Vehicle(**vehicle_kwargs))
 
         return vehicles
 

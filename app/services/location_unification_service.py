@@ -277,6 +277,7 @@ class LocationUnificationService:
             "downtown": "Downtown",
             "port": "Port",
             "train_station": "Train Station",
+            "bus_station": "Bus Station",
             "hotel": "Hotel",
             "other": "",
         }

@@ -1,0 +1,75 @@
+{
+  "id": "wheelsys-i10",
+  "gateway_vehicle_id": "gw_wheelsys_1",
+  "provider_vehicle_id": "wh_i10",
+  "source": "wheelsys",
+  "provider_code": "wheelsys",
+  "display_name": "Hyundai i10",
+  "brand": "Hyundai",
+  "model": "i10",
+  "category": "mini",
+  "image": null,
+  "specs": {
+    "transmission": null,
+    "fuel": null,
+    "seating_capacity": null,
+    "doors": null,
+    "luggage_small": null,
+    "luggage_medium": null,
+    "luggage_large": null,
+    "air_conditioning": null,
+    "sipp_code": null
+  },
+  "pricing": {
+    "currency": "EUR",
+    "price_per_day": 20.0,
+    "total_price": 60.0,
+    "deposit_amount": null,
+    "deposit_currency": null,
+    "excess_amount": null,
+    "excess_theft_amount": null
+  },
+  "policies": {
+    "mileage_policy": null,
+    "mileage_limit_km": null,
+    "fuel_policy": null,
+    "cancellation": null
+  },
+  "products": [],
+  "extras_preview": [],
+  "location": {
+    "pickup": {
+      "provider_location_id": "MAIN",
+      "name": "Main Station",
+      "latitude": null,
+      "longitude": null
+    },
+    "dropoff": {
+      "provider_location_id": "MAIN",
+      "name": "Main Station",
+      "latitude": null,
+      "longitude": null
+    }
+  },
+  "data_quality_flags": [
+    "unknown_transmission",
+    "unknown_fuel",
+    "unknown_seating_capacity",
+    "unknown_doors",
+    "unknown_luggage_small",
+    "unknown_luggage_medium",
+    "unknown_luggage_large",
+    "unknown_air_conditioning",
+    "unknown_mileage_policy"
+  ],
+  "pricing_transparency_flags": [],
+  "ui_placeholders": {
+    "image": true
+  },
+  "booking_context": {
+    "version": 1,
+    "provider_payload": {
+      "quote_id": "WHEELSYS-QUOTE"
+    }
+  }
+}

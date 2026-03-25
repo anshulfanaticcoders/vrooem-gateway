@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "search-vehicle-v1.schema.json",
+  "title": "SearchVehicle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "gateway_vehicle_id",
+    "provider_vehicle_id",
+    "source",
+    "provider_code",
+    "display_name",
+    "brand",
+    "model",
+    "category",
+    "image",
+    "specs",
+    "pricing",
+    "policies",
+    "products",
+    "extras_preview",
+    "location",
+    "data_quality_flags",
+    "pricing_transparency_flags",
+    "ui_placeholders",
+    "booking_context"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "gateway_vehicle_id": {
+      "type": ["string", "null"]
+    },
+    "provider_vehicle_id": {
+      "type": ["string", "null"]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "internal",
+        "greenmotion",
+        "usave",
+        "okmobility",
+        "surprice",
+        "locauto_rent",
+        "sicily_by_car",
+        "recordgo",
+        "renteon",
+        "xdrive",
+        "favrica",
+        "adobe",
+        "wheelsys"
+      ]
+    },
+    "provider_code": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "brand": {
+      "type": ["string", "null"]
+    },
+    "model": {
+      "type": ["string", "null"]
+    },
+    "category": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "type": ["string", "null"]
+    },
+    "specs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transmission": {
+          "type": ["string", "null"],
+          "enum": ["manual", "automatic", null]
+        },
+        "fuel": {
+          "type": ["string", "null"],
+          "enum": ["petrol", "diesel", "electric", "hybrid", "lpg", null]
+        },
+        "seating_capacity": {
+          "type": ["number", "null"]
+        },
+        "doors": {
+          "type": ["number", "null"]
+        },
+        "luggage_small": {
+          "type": ["number", "null"]
+        },
+        "luggage_medium": {
+          "type": ["number", "null"]
+        },
+        "luggage_large": {
+          "type": ["number", "null"]
+        },
+        "air_conditioning": {
+          "type": ["boolean", "null"]
+        },
+        "sipp_code": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": [
+        "transmission",
+        "fuel",
+        "seating_capacity",
+        "doors",
+        "luggage_small",
+        "luggage_medium",
+        "luggage_large",
+        "air_conditioning",
+        "sipp_code"
+      ]
+    },
+    "pricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "price_per_day": {
+          "type": "number"
+        },
+        "total_price": {
+          "type": "number"
+        },
+        "deposit_amount": {
+          "type": ["number", "null"]
+        },
+        "deposit_currency": {
+          "type": ["string", "null"]
+        },
+        "excess_amount": {
+          "type": ["number", "null"]
+        },
+        "excess_theft_amount": {
+          "type": ["number", "null"]
+        }
+      },
+      "required": [
+        "currency",
+        "price_per_day",
+        "total_price",
+        "deposit_amount",
+        "deposit_currency",
+        "excess_amount",
+        "excess_theft_amount"
+      ]
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mileage_policy": {
+          "type": ["string", "null"],
+          "enum": ["unlimited", "limited", null]
+        },
+        "mileage_limit_km": {
+          "type": ["number", "null"]
+        },
+        "fuel_policy": {
+          "type": ["string", "null"]
+        },
+        "cancellation": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": true
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mileage_policy",
+        "mileage_limit_km",
+        "fuel_policy",
+        "cancellation"
+      ]
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "extras_preview": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pickup": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider_location_id": {
+              "type": ["string", "null"]
+            },
+            "name": {
+              "type": ["string", "null"]
+            },
+            "latitude": {
+              "type": ["number", "null"]
+            },
+            "longitude": {
+              "type": ["number", "null"]
+            }
+          },
+          "required": [
+            "provider_location_id",
+            "name",
+            "latitude",
+            "longitude"
+          ]
+        },
+        "dropoff": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provider_location_id": {
+              "type": ["string", "null"]
+            },
+            "name": {
+              "type": ["string", "null"]
+            },
+            "latitude": {
+              "type": ["number", "null"]
+            },
+            "longitude": {
+              "type": ["number", "null"]
+            }
+          },
+          "required": [
+            "provider_location_id",
+            "name",
+            "latitude",
+            "longitude"
+          ]
+        }
+      },
+      "required": [
+        "pickup",
+        "dropoff"
+      ]
+    },
+    "data_quality_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pricing_transparency_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ui_placeholders": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "booking_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "integer"
+        },
+        "provider_payload": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "version",
+        "provider_payload"
+      ]
+    }
+  }
+}

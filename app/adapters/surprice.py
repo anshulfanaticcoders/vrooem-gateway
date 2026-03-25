@@ -1,5 +1,6 @@
 """Surprice Mobility adapter — REST JSON with Bearer token auth."""
 
+import asyncio
 import logging
 import uuid
 from datetime import datetime
@@ -131,9 +132,6 @@ class SurpriceAdapter(BaseAdapter):
         settings = get_settings()
         base_url = self._base_url()
 
-        # Surprice uses dual location codes: locationCode + extendedLocationCode.
-        # Laravel may pass them either as a combined pickup_id (CODE:EXT) or
-        # as separate fields when using unified_locations.json provider mappings.
         pickup_code, pickup_ext_code = self._resolve_location_codes(
             pickup_entry.pickup_id,
             pickup_entry.extended_location_code,
@@ -150,54 +148,67 @@ class SurpriceAdapter(BaseAdapter):
         pickup_dt = f"{request.pickup_date.isoformat()}T{request.pickup_time.strftime('%H:%M:%S')}"
         dropoff_dt = f"{request.dropoff_date.isoformat()}T{request.dropoff_time.strftime('%H:%M:%S')}"
 
-        payload = {
+        base_payload = {
             "pickUpDateTime": pickup_dt,
             "returnDateTime": dropoff_dt,
             "pickUpLocationCode": pickup_code,
             "pickUpExtendedLocationCode": pickup_ext_code,
             "returnLocationCode": dropoff_code,
             "returnExtendedLocationCode": dropoff_ext_code,
-            "rateCode": settings.surprice_rate_code or "Vrooem",
             "returnExtras": True,
         }
-
         if request.driver_age:
-            payload["driverAge"] = request.driver_age
+            base_payload["driverAge"] = request.driver_age
 
-        response = await self._request(
-            "POST",
-            f"{base_url}/v1/availability",
-            json=payload,
-            headers=self._auth_headers(),
-        )
+        cdw_rate_code = settings.surprice_rate_code or "Vrooem"
+        fdw_rate_code = settings.surprice_fdw_rate_code or ""
 
-        if response.status_code != 200:
-            logger.warning("[surprice] Search returned HTTP %d: %s", response.status_code, response.text[:500])
-            return []
+        # Fetch CDW and FDW results in parallel
+        cdw_task = self._fetch_availability(base_url, {**base_payload, "rateCode": cdw_rate_code})
+        if fdw_rate_code:
+            fdw_task = self._fetch_availability(base_url, {**base_payload, "rateCode": fdw_rate_code})
+            cdw_data, fdw_data = await asyncio.gather(cdw_task, fdw_task)
+        else:
+            cdw_data = await cdw_task
+            fdw_data = None
 
-        data = response.json()
-        if not isinstance(data, dict) or not data.get("productOfferings"):
+        if not cdw_data or not cdw_data.get("productOfferings"):
             return []
 
         rental_days = (request.dropoff_date - request.pickup_date).days or 1
-        pickup_station = data.get("pickupStationInfo") or {}
-        return_station = data.get("returnStationInfo") or {}
+        pickup_station = cdw_data.get("pickupStationInfo") or {}
+        return_station = cdw_data.get("returnStationInfo") or {}
+
+        # Build FDW lookup by SIPP code for merging
+        fdw_by_sipp: dict[str, dict] = {}
+        if fdw_data and fdw_data.get("productOfferings"):
+            for offering in fdw_data["productOfferings"]:
+                sipp = (offering.get("vehicle") or {}).get("code")
+                if sipp:
+                    fdw_by_sipp[sipp] = offering
+
+        parse_kwargs = dict(
+            rental_days=rental_days,
+            request=request,
+            pickup_entry=pickup_entry,
+            dropoff_entry=dropoff_entry,
+            pickup_station=pickup_station,
+            return_station=return_station,
+            pickup_code=pickup_code,
+            pickup_ext_code=pickup_ext_code,
+            dropoff_code=dropoff_code,
+            dropoff_ext_code=dropoff_ext_code,
+        )
 
         vehicles = []
-        for offering in data["productOfferings"]:
+        for offering in cdw_data["productOfferings"]:
             try:
+                sipp = (offering.get("vehicle") or {}).get("code")
+                fdw_offering = fdw_by_sipp.get(sipp) if sipp else None
                 vehicle = self._parse_vehicle(
                     offering=offering,
-                    rental_days=rental_days,
-                    request=request,
-                    pickup_entry=pickup_entry,
-                    dropoff_entry=dropoff_entry,
-                    pickup_station=pickup_station,
-                    return_station=return_station,
-                    pickup_code=pickup_code,
-                    pickup_ext_code=pickup_ext_code,
-                    dropoff_code=dropoff_code,
-                    dropoff_ext_code=dropoff_ext_code,
+                    fdw_offering=fdw_offering,
+                    **parse_kwargs,
                 )
                 if vehicle:
                     vehicles.append(vehicle)
@@ -205,8 +216,32 @@ class SurpriceAdapter(BaseAdapter):
                 logger.warning("[surprice] Failed to parse vehicle offering", exc_info=True)
                 continue
 
-        logger.info("[surprice] Parsed %d vehicles from %d offerings", len(vehicles), len(data["productOfferings"]))
+        logger.info(
+            "[surprice] Parsed %d vehicles (CDW: %d, FDW matched: %d)",
+            len(vehicles),
+            len(cdw_data["productOfferings"]),
+            len(fdw_by_sipp),
+        )
         return vehicles
+
+    async def _fetch_availability(self, base_url: str, payload: dict) -> dict | None:
+        """Fetch availability for a single rate code. Returns parsed JSON or None."""
+        rate_code = payload.get("rateCode", "")
+        try:
+            response = await self._request(
+                "POST",
+                f"{base_url}/v1/availability",
+                json=payload,
+                headers=self._auth_headers(),
+            )
+            if response.status_code != 200:
+                logger.warning("[surprice] %s search returned HTTP %d: %s", rate_code, response.status_code, response.text[:300])
+                return None
+            data = response.json()
+            return data if isinstance(data, dict) else None
+        except Exception:
+            logger.warning("[surprice] %s search request failed", rate_code, exc_info=True)
+            return None
 
     def _parse_vehicle(
         self,
@@ -221,6 +256,7 @@ class SurpriceAdapter(BaseAdapter):
         pickup_ext_code: str,
         dropoff_code: str,
         dropoff_ext_code: str,
+        fdw_offering: dict | None = None,
     ) -> Vehicle | None:
         vehicle_data = offering.get("vehicle") or {}
         rental_details = offering.get("rentalDetails") or []
@@ -228,7 +264,7 @@ class SurpriceAdapter(BaseAdapter):
         if not vehicle_data or not rental_details:
             return None
 
-        # Use first rental detail (our Vrooem rate)
+        # Use first rental detail (our Vrooem CDW rate)
         detail = rental_details[0]
         rate = detail.get("rentalRate") or {}
         total_charge = detail.get("totalCharge") or {}
@@ -305,7 +341,7 @@ class SurpriceAdapter(BaseAdapter):
                 location_type="airport" if (return_station.get("stationType") or "").lower() == "airport" else "other",
             )
 
-        # Deposit and excess from vehicle data
+        # Deposit and excess from CDW vehicle data
         deposit_amount = _safe_float(vehicle_data.get("insuranceDeposit")) or None
         excess_amount = _safe_float(vehicle_data.get("insuranceExcess"))
 
@@ -316,7 +352,7 @@ class SurpriceAdapter(BaseAdapter):
         vat_amount = _safe_float(total_charge.get("VAT"))
         vat_percentage = _safe_float(total_charge.get("VATPercentage"))
 
-        # Insurance
+        # Insurance options — CDW (included in base price)
         insurance_data = rate.get("insurance") or {}
         insurance_options = []
         if insurance_data:
@@ -334,31 +370,60 @@ class SurpriceAdapter(BaseAdapter):
                 )
             )
 
+        # FDW option — zero excess upgrade (from parallel FDW API call)
+        fdw_supplier_data = {}
+        if fdw_offering:
+            fdw_vehicle = fdw_offering.get("vehicle") or {}
+            fdw_details = fdw_offering.get("rentalDetails") or []
+            if fdw_details:
+                fdw_detail = fdw_details[0]
+                fdw_rate = fdw_detail.get("rentalRate") or {}
+                fdw_total_charge = fdw_detail.get("totalCharge") or {}
+                fdw_qualifier = fdw_rate.get("rateQualifier") or {}
+                fdw_insurance = fdw_rate.get("insurance") or {}
+                fdw_total = _safe_float(fdw_total_charge.get("estimatedTotalAmount"))
+                fdw_excess = _safe_float(fdw_vehicle.get("insuranceExcess"))
+                fdw_deposit = _safe_float(fdw_vehicle.get("insuranceDeposit"))
+                fdw_upgrade_cost = round(fdw_total - total_amount, 2) if fdw_total > 0 else 0
+                fdw_daily_upgrade = round(fdw_upgrade_cost / rental_days, 2) if rental_days > 0 else fdw_upgrade_cost
+
+                insurance_options.append(
+                    InsuranceOption(
+                        id=f"ins_{self.supplier_id}_fdw",
+                        coverage_type=CoverageType.FULL,
+                        name=fdw_insurance.get("description") or "Full Damage Waiver (0 Excess)",
+                        daily_rate=fdw_daily_upgrade,
+                        total_price=fdw_upgrade_cost,
+                        currency=currency,
+                        excess_amount=fdw_excess if fdw_excess > 0 else 0,
+                        included=False,
+                        description=fdw_insurance.get("detailedDescription") or "Zero excess — no deductible in case of damage or theft.",
+                    )
+                )
+
+                fdw_supplier_data = {
+                    "fdw_vendor_rate_id": fdw_qualifier.get("vendorRateID") or "",
+                    "fdw_rate_code": fdw_qualifier.get("rateCode") or "",
+                    "fdw_total_amount": round(fdw_total, 2),
+                    "fdw_deposit_amount": fdw_deposit,
+                    "fdw_excess_amount": fdw_excess,
+                }
+
         # Extras
         extras = self._parse_extras(rate.get("extras") or [], currency)
 
-        return Vehicle(
-            id=f"gw_{uuid.uuid4().hex[:16]}",
-            supplier_id=self.supplier_id,
-            supplier_vehicle_id=sipp_code or "",
-            name=description,
-            category=category_from_sipp(sipp_code),
-            make=make,
-            model=model,
-            image_url=image_url,
-            transmission=transmission,
-            fuel_type=fuel_type,
-            seats=_safe_int(vehicle_data.get("passengerQuantity"), 4),
-            doors=_safe_int(vehicle_data.get("doorsNum"), 4),
-            bags_large=_safe_int(vehicle_data.get("suitcasesNum")),
-            bags_small=0,
-            air_conditioning=bool(vehicle_data.get("airConditionInd", True)),
-            mileage_policy=mileage_policy,
-            mileage_limit_km=mileage_limit_km,
-            sipp_code=sipp_code,
-            pickup_location=pickup_loc,
-            dropoff_location=dropoff_loc,
-            pricing=Pricing(
+        vehicle_kwargs = {
+            "id": f"gw_{uuid.uuid4().hex[:16]}",
+            "supplier_id": self.supplier_id,
+            "supplier_vehicle_id": sipp_code or "",
+            "name": description,
+            "category": category_from_sipp(sipp_code),
+            "make": make,
+            "model": model,
+            "image_url": image_url,
+            "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
+            "pricing": Pricing(
                 currency=currency,
                 total_price=round(total_amount, 2),
                 daily_rate=daily_rate,
@@ -368,10 +433,10 @@ class SurpriceAdapter(BaseAdapter):
                 deposit_amount=deposit_amount,
                 deposit_currency=currency if deposit_amount else None,
             ),
-            insurance_options=insurance_options,
-            extras=extras,
-            cancellation_policy=None,  # API does not return cancellation terms
-            supplier_data={
+            "insurance_options": insurance_options,
+            "extras": extras,
+            "cancellation_policy": None,  # API does not return cancellation terms
+            "supplier_data": {
                 "vendor_rate_id": vendor_rate_id,
                 "rate_code": rate_code,
                 "pickup_code": pickup_code,
@@ -392,10 +457,37 @@ class SurpriceAdapter(BaseAdapter):
                 "return_station_name": return_station.get("name"),
                 "pickup_office": self._normalize_station(pickup_station),
                 "dropoff_office": self._normalize_station(return_station),
+                **fdw_supplier_data,
             },
-            min_driver_age=_safe_int(vehicle_data.get("minDriverAge")) or None,
-            max_driver_age=_safe_int(vehicle_data.get("maxDriverAge")) or None,
-        )
+            "min_driver_age": _safe_int(vehicle_data.get("minDriverAge")) or None,
+            "max_driver_age": _safe_int(vehicle_data.get("maxDriverAge")) or None,
+        }
+
+        if vehicle_data.get("transmissionType"):
+            vehicle_kwargs["transmission"] = _parse_transmission(vehicle_data.get("transmissionType") or "")
+
+        if sipp_code:
+            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp_code)
+            vehicle_kwargs["sipp_code"] = sipp_code
+
+        if vehicle_data.get("passengerQuantity") not in (None, ""):
+            vehicle_kwargs["seats"] = _safe_int(vehicle_data.get("passengerQuantity"))
+
+        if vehicle_data.get("doorsNum") not in (None, ""):
+            vehicle_kwargs["doors"] = _safe_int(vehicle_data.get("doorsNum"))
+
+        if vehicle_data.get("suitcasesNum") not in (None, ""):
+            vehicle_kwargs["bags_large"] = _safe_int(vehicle_data.get("suitcasesNum"))
+
+        if vehicle_data.get("airConditionInd") is not None:
+            vehicle_kwargs["air_conditioning"] = bool(vehicle_data.get("airConditionInd"))
+
+        if mileage_data:
+            vehicle_kwargs["mileage_policy"] = mileage_policy
+            if mileage_limit_km is not None:
+                vehicle_kwargs["mileage_limit_km"] = mileage_limit_km
+
+        return Vehicle(**vehicle_kwargs)
 
     def _parse_extras(self, raw_extras: list[dict], currency: str) -> list[Extra]:
         """Parse Surprice extras into canonical Extra objects."""
