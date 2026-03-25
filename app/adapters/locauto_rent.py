@@ -725,6 +725,7 @@ class LocautoRentAdapter(BaseAdapter):
             },
         )
 
+        logger.info("[%s] Booking response: %s", self.supplier_id, response.text[:1000])
         return self._parse_booking_response(response.text, vehicle)
 
     def _parse_booking_response(self, xml_text: str, vehicle: Vehicle) -> BookingResponse:
