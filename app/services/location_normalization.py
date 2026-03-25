@@ -90,6 +90,8 @@ def strip_type_suffix(name: str) -> str:
 
     text = re.sub(r"\s*\([A-Za-z]{2,4}\)\s*$", "", text).strip()
     text = re.sub(r"\s+[A-Z]{3}\s*$", "", text).strip()
+    # Strip terminal numbers (e.g. "Dubai Airport Terminal 1" → "Dubai Airport")
+    text = re.sub(r"\s+[Tt]erminal\s*\d*\s*$", "", text).strip()
 
     lowered = text.lower()
     for suffix in _CITY_TYPE_SUFFIXES:

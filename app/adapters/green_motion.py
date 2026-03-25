@@ -614,11 +614,11 @@ class GreenMotionAdapter(BaseAdapter):
             if area_resp is None:
                 continue
 
-            for area in area_resp.findall("service_area"):
+            for area in area_resp.findall("servicearea"):
                 locations.append({
                     "provider": self.supplier_id,
-                    "provider_location_id": _xml_text(area, "location_id"),
-                    "name": _xml_text(area, "location_name"),
+                    "provider_location_id": _xml_text(area, "locationID") or _xml_text(area, "location_id"),
+                    "name": _xml_text(area, "name") or _xml_text(area, "location_name"),
                     "country": country_name,
                     "country_code": country_code,
                 })
