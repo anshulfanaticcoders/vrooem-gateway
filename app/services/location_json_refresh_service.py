@@ -47,10 +47,17 @@ class LocationJsonRefreshService:
                 for location in locations:
                     fresh_locations.append({**location, "provider": public_provider})
 
-                if public_provider in _STICKY_PROVIDERS:
-                    raw_locations.extend(self._merge_provider_locations(existing_locations.get(public_provider, []), fresh_locations))
+                if fresh_locations:
+                    if public_provider in _STICKY_PROVIDERS:
+                        raw_locations.extend(self._merge_provider_locations(existing_locations.get(public_provider, []), fresh_locations))
+                    else:
+                        raw_locations.extend(fresh_locations)
                 else:
-                    raw_locations.extend(fresh_locations)
+                    # Provider returned 0 locations — keep existing data instead of losing it
+                    existing = existing_locations.get(public_provider, [])
+                    if existing:
+                        logger.info("[%s] Returned 0 locations, keeping %d existing", provider, len(existing))
+                        raw_locations.extend(existing)
             except Exception:
                 logger.exception("[%s] location JSON refresh failed", provider)
                 summary["providers_failed"] += 1
