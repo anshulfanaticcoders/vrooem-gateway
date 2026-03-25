@@ -32,6 +32,10 @@ _TYPE_ALIASES = {
     "coach station": "bus_station",
     "coach stop": "bus_station",
     "hotel": "hotel",
+    "industrial": "downtown",
+    "terminal": "airport",
+    "residential": "downtown",
+    "commercial": "downtown",
 }
 
 _AIRPORT_HINTS = ("airport", "terminal", "aeropuerto", "aeroport")

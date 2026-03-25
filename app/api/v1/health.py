@@ -1,6 +1,10 @@
 """Health and readiness endpoints."""
 
+import logging
+
 from fastapi import APIRouter
+
+logger = logging.getLogger(__name__)
 
 from app.db.session import check_db_health
 from app.services.cache_service import CacheService, get_redis
@@ -24,13 +28,13 @@ async def readiness_check():
         redis_client = await get_redis()
         cache = CacheService(redis_client)
         redis_ok = await cache.health_check()
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Health check: Redis unreachable: %s", exc)
 
     try:
         db_ok = await check_db_health()
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Health check: Database unreachable: %s", exc)
 
     status = "ready" if (redis_ok and db_ok) else "degraded"
     return {

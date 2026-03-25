@@ -1,14 +1,20 @@
 """Location search and lookup endpoints backed by unified_locations.json."""
 
+import asyncio
+import logging
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.core.auth import verify_api_key
 from app.schemas.location import Location, LocationSearchResponse
 from app.services.json_location_repository import JsonLocationRepository
 
+logger = logging.getLogger(__name__)
+
 router = APIRouter(prefix="/api/v1/locations", tags=["locations"])
 
 _repository = JsonLocationRepository()
+_sync_lock = asyncio.Lock()
 
 
 @router.get("", response_model=list[Location])
@@ -55,6 +61,29 @@ async def get_location_by_provider(
         raise HTTPException(status_code=404, detail="Location not found")
 
     return Location.model_validate(location)
+
+
+@router.post("/sync")
+async def sync_locations(
+    _api_key: str = Depends(verify_api_key),
+) -> dict:
+    """Trigger a location sync from all providers."""
+    if _sync_lock.locked():
+        return {"status": "already_running", "message": "A sync is already in progress"}
+
+    async with _sync_lock:
+        try:
+            from app.adapters.registry import load_supplier_configs
+            from app.services.location_json_refresh_service import LocationJsonRefreshService
+            load_supplier_configs()
+            service = LocationJsonRefreshService()
+            summary = await service.refresh()
+            _repository.reload()
+            logger.info("Location sync completed: %s", summary)
+            return {"status": "completed", "summary": summary}
+        except Exception as exc:
+            logger.exception("Location sync failed: %s", exc)
+            return {"status": "failed", "error": str(exc)}
 
 
 @router.get("/{unified_location_id}", response_model=Location)
