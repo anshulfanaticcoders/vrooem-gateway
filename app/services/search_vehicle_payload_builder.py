@@ -108,7 +108,7 @@ def _build_location_point(location: VehicleLocation | None) -> SearchVehicleLoca
 
 def _build_policies(vehicle: Vehicle) -> SearchVehiclePoliciesPayload:
     mileage_policy = None
-    if _is_explicit(vehicle, "mileage_policy"):
+    if _is_explicit(vehicle, "mileage_policy") and vehicle.mileage_policy is not None:
         mileage_policy = vehicle.mileage_policy.value
 
     mileage_limit_km = None
