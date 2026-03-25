@@ -233,7 +233,7 @@ def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
         gateway_vehicle_id=vehicle.id,
         provider_vehicle_id=vehicle.supplier_vehicle_id or None,
         source=source,
-        provider_code=source,
+        provider_code=(vehicle.supplier_data or {}).get("provider_code") or source,
         display_name=vehicle.name,
         brand=_explicit_string(vehicle, "make"),
         model=_explicit_string(vehicle, "model"),
