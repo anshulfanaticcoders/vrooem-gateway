@@ -38,7 +38,9 @@ class LocationJsonRefreshService:
             provider = getattr(adapter, "supplier_id", None) or "unknown"
             public_provider = get_public_supplier_id(provider)
             try:
+                logger.info("[%s] Fetching locations...", provider)
                 locations = await adapter.get_locations() or []
+                logger.info("[%s] Got %d locations", provider, len(locations))
                 summary["providers_succeeded"] += 1
                 summary["locations_received"] += len(locations)
                 fresh_locations = []

@@ -13856,31 +13856,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1122814670,
-        "name": "Dubai Airport",
-        "aliases": [
-            "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
-            "Dubai"
-        ],
-        "city": "Dubai",
-        "country": "VE",
-        "latitude": 25.2503,
-        "longitude": 55.3452,
-        "location_type": "airport",
-        "iata": null,
-        "providers": [
-            {
-                "provider": "internal",
-                "pickup_id": "266",
-                "original_name": "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
-                "dropoffs": [],
-                "latitude": 25.2503,
-                "longitude": 55.3452
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 3385755165,
         "name": "Dubai Airport (DXB)",
         "aliases": [
@@ -13888,6 +13863,7 @@
             "Dubai",
             "Dubai Airport Terminal 2",
             "Dubai Airport Terminal 3",
+            "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
             "airport st, Dubai, Dubai, United Arab Emirates",
             "OK DXB - Airport",
             "Dubai Airport",
@@ -13896,8 +13872,8 @@
         ],
         "city": "Dubai",
         "country": "United Arab Emirates",
-        "latitude": 25.251148,
-        "longitude": 55.346412,
+        "latitude": 25.251063,
+        "longitude": 55.346291,
         "location_type": "airport",
         "iata": "DXB",
         "providers": [
@@ -13939,6 +13915,14 @@
                 ],
                 "latitude": 25.24808104894642,
                 "longitude": 55.34509318818677
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "266",
+                "original_name": "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
+                "dropoffs": [],
+                "latitude": 25.2503,
+                "longitude": 55.3452
             },
             {
                 "provider": "internal",
@@ -22517,54 +22501,22 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2675766585,
-        "name": "Karmelava Airport",
-        "aliases": [
-            "Karmėlava",
-            "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
-            "Karmelava",
-            "4 Oro uosto gatvė, Karmėlava, Lithuania"
-        ],
-        "city": "Karmelava",
-        "country": "LI",
-        "latitude": 54.967,
-        "longitude": 24.0738,
-        "location_type": "airport",
-        "iata": null,
-        "providers": [
-            {
-                "provider": "internal",
-                "pickup_id": "211",
-                "original_name": "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
-                "dropoffs": [],
-                "latitude": 54.967,
-                "longitude": 24.0738
-            },
-            {
-                "provider": "internal",
-                "pickup_id": "212",
-                "original_name": "4 Oro uosto gatvė, Karmėlava, Lithuania",
-                "dropoffs": [],
-                "latitude": 54.967,
-                "longitude": 24.0738
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 2699164738,
         "name": "Karmelava Airport (KUN)",
         "aliases": [
             "Kaunas Airport",
             "Karmelava",
+            "Karmėlava",
+            "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
+            "4 Oro uosto gatvė, Karmėlava, Lithuania",
             "Kaunas airport",
             "Kaunas",
             "KUN"
         ],
         "city": "Karmelava",
         "country": "Lithuania",
-        "latitude": 54.964592,
-        "longitude": 24.074926,
+        "latitude": 54.965796,
+        "longitude": 24.074363,
         "location_type": "airport",
         "iata": "KUN",
         "providers": [
@@ -22584,6 +22536,22 @@
                 ],
                 "latitude": 54.964592,
                 "longitude": 24.074926
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "211",
+                "original_name": "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
+                "dropoffs": [],
+                "latitude": 54.967,
+                "longitude": 24.0738
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "212",
+                "original_name": "4 Oro uosto gatvė, Karmėlava, Lithuania",
+                "dropoffs": [],
+                "latitude": 54.967,
+                "longitude": 24.0738
             },
             {
                 "provider": "renteon",
