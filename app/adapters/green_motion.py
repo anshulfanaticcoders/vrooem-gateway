@@ -85,7 +85,7 @@ class GreenMotionAdapter(BaseAdapter):
     supplier_id = "green_motion"
     supplier_name = "GreenMotion"
     supports_one_way = True
-    default_timeout = 20.0
+    default_timeout = 45.0
 
     def _api_url(self) -> str:
         return get_settings().greenmotion_api_url
