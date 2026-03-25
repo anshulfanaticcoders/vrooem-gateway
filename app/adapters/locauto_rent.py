@@ -185,8 +185,11 @@ class LocautoRentAdapter(BaseAdapter):
         return (
             "<ns1:POS>"
             '<ns1:Source ISOCountry="IT" ISOCurrency="EUR">'
-            f'<ns1:RequestorID ID_Context="{settings.locauto_username}"'
-            f' MessagePassword="{settings.locauto_password}"/>'
+            f'<ns1:RequestorID ID="{settings.locauto_username}"'
+            f' ID_Context="{settings.locauto_username}"'
+            f' MessagePassword="{settings.locauto_password}">'
+            "<ns1:CompanyName>Vrooem</ns1:CompanyName>"
+            "</ns1:RequestorID>"
             "</ns1:Source>"
             "</ns1:POS>"
         )
@@ -237,6 +240,7 @@ class LocautoRentAdapter(BaseAdapter):
         phone: str,
         extras: list[dict] | None = None,
         booking_ref: str = "",
+        flight_number: str = "",
     ) -> str:
         """Build OTA_VehResRQ SOAP request XML."""
         timestamp = datetime.utcnow().isoformat() + "Z"
@@ -268,6 +272,8 @@ class LocautoRentAdapter(BaseAdapter):
             f"<ns1:GivenName>{_xml_escape(first_name)}</ns1:GivenName>"
             f"<ns1:Surname>{_xml_escape(last_name)}</ns1:Surname>"
             "</ns1:PersonName>"
+            f"<ns1:Email>{_xml_escape(email)}</ns1:Email>"
+            f"<ns1:Telephone PhoneNumber=\"{_xml_escape(phone)}\"/>"
             "</ns1:Primary>"
             "</ns1:Customer>"
             f'<ns1:VehPref Code="{sipp_code}" CodeContext="SIPP"/>'
@@ -278,6 +284,7 @@ class LocautoRentAdapter(BaseAdapter):
             f'<ns1:Voucher SeriesCode="VROOEM"'
             f' BillingNumber="{_xml_escape(booking_ref)}"/>'
             f'</ns1:RentalPaymentPref>'
+            f'{f"""<ns1:ArrivalDetails TransportationCode="14"><ns1:OperatingCompany Code="{_xml_escape(flight_number)}"/></ns1:ArrivalDetails>""" if flight_number else ""}'
             "</ns1:VehResRQInfo>"
             "</ns1:OTA_VehResRQ>"
             "</ns2:OTA_VehResRS>"
@@ -705,6 +712,7 @@ class LocautoRentAdapter(BaseAdapter):
             phone=request.driver.phone,
             extras=booking_extras if booking_extras else None,
             booking_ref=str(request.laravel_booking_id or ""),
+            flight_number=request.flight_number or "",
         )
 
         response = await self._request(
