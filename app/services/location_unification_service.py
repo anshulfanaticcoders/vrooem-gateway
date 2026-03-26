@@ -98,8 +98,8 @@ class LocationUnificationService:
         first = items[0]
         aliases = []
         providers = []
-        latitudes = [item["latitude"] for item in items if item["latitude"] is not None]
-        longitudes = [item["longitude"] for item in items if item["longitude"] is not None]
+        latitudes = [item["latitude"] for item in items if item["latitude"] is not None and item["latitude"] != 0.0]
+        longitudes = [item["longitude"] for item in items if item["longitude"] is not None and item["longitude"] != 0.0]
         our_location_id = None
 
         for item in items:
@@ -109,14 +109,16 @@ class LocationUnificationService:
             if item["our_location_id"] and not our_location_id:
                 our_location_id = item["our_location_id"]
 
+            prov_lat = item["latitude"] if item["latitude"] and item["latitude"] != 0.0 else None
+            prov_lon = item["longitude"] if item["longitude"] and item["longitude"] != 0.0 else None
             providers.append(
                 {
                     "provider": item["provider"],
                     "pickup_id": item["provider_location_id"],
                     "original_name": item["name"],
                     "dropoffs": item["dropoffs"],
-                    "latitude": item["latitude"],
-                    "longitude": item["longitude"],
+                    "latitude": prov_lat,
+                    "longitude": prov_lon,
                     "supports_one_way": item["supports_one_way"],
                 }
             )
