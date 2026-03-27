@@ -1,6 +1,6 @@
 import unittest
 from datetime import date, time
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from app.schemas.search import SearchRequest
 from app.services.search_service import search_vehicles
@@ -12,9 +12,11 @@ class _FakeAdapter:
 
     def __init__(self) -> None:
         self.last_pickup_entry = None
+        self.last_dropoff_entry = None
 
     async def search_vehicles(self, request, pickup_entry, dropoff_entry):
         self.last_pickup_entry = pickup_entry
+        self.last_dropoff_entry = dropoff_entry
         return []
 
 
@@ -86,6 +88,62 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertIsNotNone(adapter.last_pickup_entry)
         self.assertEqual(adapter.last_pickup_entry.pickup_id, "MLO")
         self.assertEqual(getattr(adapter.last_pickup_entry, "extended_location_code", None), "MLOA01")
+
+    async def test_resolves_provider_specific_dropoff_entry_from_dropoff_unified_location(self) -> None:
+        adapter = _FakeAdapter()
+        request = SearchRequest(
+            unified_location_id=111,
+            pickup_date=date(2026, 6, 25),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 6, 28),
+            dropoff_time=time(9, 0),
+            dropoff_unified_location_id=222,
+            currency="EUR",
+            driver_age=35,
+            country_code="MA",
+        )
+
+        provider_entries = [
+            {
+                "provider": "surprice",
+                "pickup_id": "CMN:CMNA01",
+                "original_name": "Casablanca Airport",
+                "dropoffs": ["CMNC01:CMNC01"],
+                "supports_one_way": True,
+                "extended_location_code": "CMNA01",
+                "extended_dropoff_code": "CMNC01",
+            }
+        ]
+
+        dropoff_location = {
+            "unified_location_id": 222,
+            "providers": [
+                {
+                    "provider": "surprice",
+                    "pickup_id": "CMNC01:CMNC01",
+                    "original_name": "Casablanca Downtown",
+                    "extended_location_code": "CMNC01",
+                    "extended_dropoff_code": "CMNC01",
+                }
+            ],
+        }
+
+        dropoff_repository = MagicMock()
+        dropoff_repository.get_location_by_unified_id.return_value = dropoff_location
+
+        with patch("app.services.search_service.get_adapter", return_value=adapter), \
+             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+            await search_vehicles(
+                request=request,
+                provider_entries=provider_entries,
+                cache=_RecordingCache(),
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertIsNotNone(adapter.last_dropoff_entry)
+        self.assertEqual(adapter.last_dropoff_entry.pickup_id, "CMNC01:CMNC01")
+        self.assertEqual(adapter.last_dropoff_entry.original_name, "Casablanca Downtown")
+        self.assertEqual(adapter.last_dropoff_entry.extended_location_code, "CMNC01")
 
     async def test_cache_lookup_varies_when_provider_entries_change(self) -> None:
         request = SearchRequest(

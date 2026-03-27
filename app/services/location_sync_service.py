@@ -250,10 +250,12 @@ class LocationSyncService:
                 "aliases": loc["aliases"],
                 "city": loc["city"],
                 "country": loc["country"],
+                "country_code": loc.get("country_code", ""),
                 "latitude": loc["latitude"],
                 "longitude": loc["longitude"],
                 "location_type": loc["location_type"],
                 "iata": loc.get("iata"),
+                "provider_count": loc.get("provider_count", len(loc.get("providers") or [])),
                 "providers": [
                     {
                         "provider": get_public_supplier_id(p["provider"]),
@@ -262,6 +264,12 @@ class LocationSyncService:
                         "dropoffs": p.get("dropoffs", []),
                         "latitude": p.get("latitude"),
                         "longitude": p.get("longitude"),
+                        "supports_one_way": bool(p.get("supports_one_way")),
+                        "extended_location_code": p.get("extended_location_code"),
+                        "extended_dropoff_code": p.get("extended_dropoff_code"),
+                        "country_code": p.get("country_code"),
+                        "iata": p.get("iata"),
+                        "provider_code": p.get("provider_code"),
                     }
                     for p in loc["providers"]
                 ],
@@ -312,6 +320,24 @@ class LocationSyncService:
             "iata": iata,
             "dropoffs": list(raw_location.get("dropoffs") or []),
             "supports_one_way": bool(raw_location.get("dropoffs") or raw_location.get("supports_one_way")),
+            "extended_location_code": (
+                str(raw_location.get("extended_location_code")).strip()
+                if raw_location.get("extended_location_code") is not None
+                and str(raw_location.get("extended_location_code")).strip()
+                else None
+            ),
+            "extended_dropoff_code": (
+                str(raw_location.get("extended_dropoff_code")).strip()
+                if raw_location.get("extended_dropoff_code") is not None
+                and str(raw_location.get("extended_dropoff_code")).strip()
+                else None
+            ),
+            "provider_code": (
+                str(raw_location.get("provider_code")).strip()
+                if raw_location.get("provider_code") is not None
+                and str(raw_location.get("provider_code")).strip()
+                else None
+            ),
             "our_location_id": our_location_id,
         }
 

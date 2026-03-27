@@ -12,8 +12,10 @@ from app.schemas.search import SearchRequest, SearchResponse, SupplierResult
 from app.schemas.vehicle import Vehicle
 from app.services.cache_service import CacheService
 from app.services.circuit_breaker import CircuitBreakerRegistry
+from app.services.json_location_repository import JsonLocationRepository
 
 logger = logging.getLogger(__name__)
+_json_location_repository = JsonLocationRepository()
 
 
 def _provider_entries_signature(provider_entries: list[dict]) -> str | None:
@@ -29,6 +31,39 @@ def _provider_entries_signature(provider_entries: list[dict]) -> str | None:
         return None
 
     return ",".join(sorted(dict.fromkeys(signatures)))
+
+
+def _build_provider_location_entry(entry: dict, provider_id: str) -> ProviderLocationEntry:
+    return ProviderLocationEntry.model_validate({
+        **entry,
+        "provider": provider_id,
+        "pickup_id": entry.get("pickup_id", ""),
+        "original_name": entry.get("original_name", ""),
+        "latitude": entry.get("latitude"),
+        "longitude": entry.get("longitude"),
+        "dropoffs": entry.get("dropoffs", []),
+        "supports_one_way": entry.get("supports_one_way", False),
+        "extended_location_code": entry.get("extended_location_code"),
+        "extended_dropoff_code": entry.get("extended_dropoff_code"),
+        "country_code": entry.get("country_code"),
+        "iata": entry.get("iata"),
+        "provider_code": entry.get("provider_code"),
+    })
+
+
+def _resolve_dropoff_entry(
+    dropoff_location: dict | None,
+    provider_id: str,
+) -> ProviderLocationEntry | None:
+    if not dropoff_location:
+        return None
+
+    for entry in dropoff_location.get("providers") or []:
+        if str(entry.get("provider", "")).strip().lower() != provider_id:
+            continue
+        return _build_provider_location_entry(entry, provider_id)
+
+    return None
 
 
 async def _search_single_supplier(
@@ -89,6 +124,15 @@ async def search_vehicles(
     """
     search_id = f"search_{uuid.uuid4().hex[:12]}"
     start = time.time()
+    is_one_way = (
+        request.dropoff_unified_location_id is not None
+        and request.dropoff_unified_location_id != request.unified_location_id
+    )
+    dropoff_location = None
+    if is_one_way:
+        dropoff_location = _json_location_repository.get_location_by_unified_id(
+            request.dropoff_unified_location_id
+        )
 
     # Check cache first
     cache_key_params = {
@@ -123,26 +167,11 @@ async def search_vehicles(
             continue
 
         # Check one-way support
-        is_one_way = (
-            request.dropoff_unified_location_id is not None
-            and request.dropoff_unified_location_id != request.unified_location_id
-        )
         if is_one_way and not adapter.supports_one_way:
             continue
 
-        pickup = ProviderLocationEntry.model_validate({
-            **entry,
-            "provider": provider_id,
-            "pickup_id": entry.get("pickup_id", ""),
-            "original_name": entry.get("original_name", ""),
-            "latitude": entry.get("latitude"),
-            "longitude": entry.get("longitude"),
-            "dropoffs": entry.get("dropoffs", []),
-            "supports_one_way": entry.get("supports_one_way", False),
-        })
-
-        # TODO: Resolve dropoff entry from dropoff_unified_location_id
-        dropoff = None
+        pickup = _build_provider_location_entry(entry, provider_id)
+        dropoff = _resolve_dropoff_entry(dropoff_location, provider_id)
 
         tasks.append(
             _search_single_supplier(adapter, request, pickup, dropoff, cb_registry)

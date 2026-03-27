@@ -41,6 +41,41 @@ class LocationUnificationServiceTest(unittest.TestCase):
         self.assertEqual(unified[0]["city"], "Marrakech")
         self.assertEqual(len(unified[0]["providers"]), 2)
 
+    def test_it_preserves_provider_metadata_needed_for_runtime_searches(self) -> None:
+        locations = [
+            {
+                "provider": "surprice",
+                "provider_location_id": "CMN:CMNA01",
+                "name": "Casablanca Airport",
+                "city": "Nouaceur",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.381853,
+                "longitude": -7.545275,
+                "iata": "CMN",
+                "dropoffs": ["CMNC01:CMNC01"],
+                "supports_one_way": True,
+                "extended_location_code": "CMNA01",
+                "extended_dropoff_code": "CMNC01",
+                "provider_code": "surprice",
+            }
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 1)
+        provider = unified[0]["providers"][0]
+        self.assertEqual(provider["provider"], "surprice")
+        self.assertEqual(provider["pickup_id"], "CMN:CMNA01")
+        self.assertEqual(provider["dropoffs"], ["CMNC01:CMNC01"])
+        self.assertTrue(provider["supports_one_way"])
+        self.assertEqual(provider["extended_location_code"], "CMNA01")
+        self.assertEqual(provider["extended_dropoff_code"], "CMNC01")
+        self.assertEqual(provider["country_code"], "MA")
+        self.assertEqual(provider["iata"], "CMN")
+        self.assertEqual(provider["provider_code"], "surprice")
+
     def test_it_keeps_distinct_airports_separate_when_identifiers_differ(self) -> None:
         locations = [
             {
@@ -71,6 +106,134 @@ class LocationUnificationServiceTest(unittest.TestCase):
 
         self.assertEqual(len(unified), 2)
         self.assertCountEqual([item["iata"] for item in unified], ["DXB", "DWC"])
+
+    def test_it_merges_nearby_airports_even_when_provider_cities_differ(self) -> None:
+        locations = [
+            {
+                "provider": "internal",
+                "provider_location_id": "66",
+                "name": "Tit Mellil Airport, Casablanca, Morocco",
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.594703,
+                "longitude": -7.462264,
+            },
+            {
+                "provider": "internal",
+                "provider_location_id": "155",
+                "name": "Mohamed V airport, Casablanca, Morocco",
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.372954,
+                "longitude": -7.577391,
+            },
+            {
+                "provider": "surprice",
+                "provider_location_id": "CMN:CMNA01",
+                "name": "Casablanca Airport",
+                "city": "Nouaceur",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.381853,
+                "longitude": -7.545275,
+                "iata": "CMN",
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 2)
+        cmn = next(item for item in unified if item.get("iata") == "CMN")
+        self.assertEqual(cmn["provider_count"], 2)
+        cmn_pickups = {provider["pickup_id"] for provider in cmn["providers"]}
+        self.assertEqual(cmn_pickups, {"155", "CMN:CMNA01"})
+        names = {item["name"] for item in unified}
+        self.assertIn("Tit Mellil Airport", names)
+        self.assertNotIn("Mohamed V airport", names)
+
+    def test_it_drops_weaker_duplicate_rows_for_the_same_our_location_id(self) -> None:
+        locations = [
+            {
+                "provider": "internal",
+                "provider_location_id": "154",
+                "name": "Mohamed V airport, Casablanca, Morocco",
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 20.838278,
+                "longitude": 76.59668,
+                "our_location_id": "internal_641e4a7fa6e3c4841a7839f231a161ed",
+            },
+            {
+                "provider": "internal",
+                "provider_location_id": "155",
+                "name": "Mohamed V airport, Casablanca, Morocco",
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.372954,
+                "longitude": -7.577391,
+                "our_location_id": "internal_641e4a7fa6e3c4841a7839f231a161ed",
+            },
+            {
+                "provider": "surprice",
+                "provider_location_id": "CMN:CMNA01",
+                "name": "Casablanca Airport",
+                "city": "Nouaceur",
+                "country": "Morocco",
+                "country_code": "MA",
+                "location_type": "airport",
+                "latitude": 33.381853,
+                "longitude": -7.545275,
+                "iata": "CMN",
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 1)
+        cmn = unified[0]
+        self.assertEqual(cmn["iata"], "CMN")
+        pickup_ids = {provider["pickup_id"] for provider in cmn["providers"]}
+        self.assertEqual(pickup_ids, {"155", "CMN:CMNA01"})
+
+    def test_it_maps_generic_no_coord_city_airports_to_the_primary_iata(self) -> None:
+        locations = [
+            {
+                "provider": "xdrive",
+                "provider_location_id": "83",
+                "name": "Dubai International Airport (DXB)",
+                "city": "Dubai",
+                "country": "United Arab Emirates",
+                "country_code": "AE",
+                "location_type": "airport",
+                "latitude": 25.254444,
+                "longitude": 55.356389,
+                "iata": "DXB",
+            },
+            {
+                "provider": "renteon",
+                "provider_location_id": "AE-DXB",
+                "name": "Dubai Airport",
+                "city": "Dubai",
+                "country": "United Arab Emirates",
+                "country_code": "AE",
+                "location_type": "airport",
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 1)
+        self.assertEqual(unified[0]["iata"], "DXB")
+        self.assertEqual(unified[0]["provider_count"], 2)
 
     def test_it_finds_canonical_results_by_alias(self) -> None:
         unified_locations = self.service.build_unified_locations(

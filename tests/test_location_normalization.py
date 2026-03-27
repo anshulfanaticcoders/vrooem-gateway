@@ -20,6 +20,12 @@ class LocationNormalizationTest(unittest.TestCase):
             'DXB',
         )
 
+    def test_extract_iata_code_reads_airport_code_field(self) -> None:
+        self.assertEqual(
+            extract_iata_code({'airport_code': 'VIE'}),
+            'VIE',
+        )
+
     def test_canonicalize_country_code_resolves_country_names(self) -> None:
         self.assertEqual(canonicalize_country_code('', 'Italy'), 'IT')
         self.assertEqual(canonicalize_country_code(None, 'Spain'), 'ES')

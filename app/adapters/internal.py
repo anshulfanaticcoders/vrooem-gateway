@@ -1,5 +1,6 @@
 """Internal adapter — platform's own fleet via Laravel REST API."""
 
+import hashlib
 import logging
 import uuid
 
@@ -50,6 +51,16 @@ def _safe_int(value, default: int | None = None) -> int | None:
         return int(value)
     except (ValueError, TypeError):
         return default
+
+
+def _build_internal_location_id(raw: dict) -> str:
+    payload = ''.join([
+        str(raw.get('city') or ''),
+        str(raw.get('state') or ''),
+        str(raw.get('country') or ''),
+        str(raw.get('location') or ''),
+    ])
+    return 'internal_' + hashlib.md5(payload.encode('utf-8')).hexdigest()
 
 
 # Map Laravel fuel strings to canonical FuelType
@@ -486,10 +497,12 @@ class InternalAdapter(BaseAdapter):
                 "provider_location_id": str(loc.get("id", "")),
                 "name": loc.get("name", loc.get("location", "")),
                 "city": loc.get("city", ""),
+                "country": loc.get("country", ""),
                 "country_code": loc.get("country_code", "BE"),
                 "latitude": _safe_float(loc.get("latitude")) or None,
                 "longitude": _safe_float(loc.get("longitude")) or None,
                 "location_type": (loc.get("type") or "other").lower(),
+                "our_location_id": _build_internal_location_id(loc),
             })
 
         return locations

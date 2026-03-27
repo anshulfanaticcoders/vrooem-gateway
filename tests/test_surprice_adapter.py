@@ -1,6 +1,7 @@
+import unittest
 from datetime import date, time
 
-from app.adapters.surprice import SurpriceAdapter
+from app.adapters.surprice import SurpriceAdapter, SurpriceOneWayNotAllowedError
 from app.schemas.location import ProviderLocationEntry
 from app.schemas.search import SearchRequest
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
@@ -73,3 +74,36 @@ def test_surprice_parse_vehicle_keeps_missing_specs_missing() -> None:
     assert payload.specs.luggage_large is None
     assert payload.specs.air_conditioning is None
     assert payload.policies.mileage_policy is None
+
+
+class SurpriceAdapterFetchAvailabilityTest(unittest.IsolatedAsyncioTestCase):
+    async def test_fetch_availability_raises_for_known_one_way_restriction(self) -> None:
+        adapter = SurpriceAdapter()
+
+        class _Resp:
+            status_code = 422
+            text = '{"type":3,"code":225,"message":"One way rentals not allowed to this location"}'
+
+            def json(self):
+                return {
+                    "type": 3,
+                    "code": 225,
+                    "message": "One way rentals not allowed to this location",
+                }
+
+        async def fake_request(*args, **kwargs):
+            return _Resp()
+
+        adapter._request = fake_request  # type: ignore[method-assign]
+
+        with self.assertRaises(SurpriceOneWayNotAllowedError):
+            await adapter._fetch_availability(
+                adapter._base_url(),
+                {
+                    "pickUpLocationCode": "CMN",
+                    "pickUpExtendedLocationCode": "CMNA01",
+                    "returnLocationCode": "CMNC01",
+                    "returnExtendedLocationCode": "CMNC01",
+                    "rateCode": "Vrooem",
+                },
+            )

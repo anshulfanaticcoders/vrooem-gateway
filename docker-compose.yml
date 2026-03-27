@@ -2,7 +2,7 @@ services:
   gateway:
     build: .
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - GATEWAY_ENV=production
       - GATEWAY_DEBUG=false
@@ -77,6 +77,8 @@ services:
   location-sync:
     build: .
     entrypoint: ["sh", "-c", "while true; do python -m app.scripts.refresh_locations_json; sleep 21600; done"]
+    healthcheck:
+      disable: true
     environment:
       - GATEWAY_API_KEYS=${GATEWAY_API_KEYS}
       - DATABASE_URL=${DATABASE_URL}

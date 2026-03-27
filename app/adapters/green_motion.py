@@ -1,5 +1,6 @@
 """GreenMotion adapter — Custom XML API."""
 
+import asyncio
 import logging
 import uuid
 import xml.etree.ElementTree as ET
@@ -104,6 +105,67 @@ class GreenMotionAdapter(BaseAdapter):
     </request>
 </gm_webservice>"""
 
+    async def _fetch_location_info(self, location_id: str) -> dict:
+        """Fetch office details (address, phone, hours, pickup instructions) for a location."""
+        try:
+            body = f"<location_id>{location_id}</location_id><language>en</language>"
+            xml = self._build_xml("GetLocationInfo", body)
+            resp = await self._request(
+                "POST", self._api_url(),
+                content=xml, headers={"Content-Type": "application/xml"},
+            )
+            root = ET.fromstring(resp.text)
+            li = root.find("response/location_info")
+            if li is None:
+                return {}
+
+            # Parse opening hours
+            opening_hours = []
+            oh = li.find("opening_hours")
+            if oh is not None:
+                for day in oh.findall("day"):
+                    opening_hours.append({
+                        "day": day.get("name", ""),
+                        "open": day.get("open", ""),
+                        "close": day.get("close", ""),
+                        "closed": day.get("is_closed", "false") == "true",
+                    })
+
+            # Parse out-of-hours charges
+            out_of_hours = []
+            ooh = li.find("out_of_hours")
+            if ooh is not None:
+                for day in ooh.findall("day"):
+                    charge = day.get("charge", "")
+                    if charge and charge != "0":
+                        out_of_hours.append({
+                            "day": day.get("name", ""),
+                            "charge": charge,
+                        })
+
+            return {
+                "pickup_station_name": _xml_text(li, "location_name"),
+                "pickup_address": ", ".join(filter(None, [
+                    _xml_text(li, "address_1"),
+                    _xml_text(li, "address_2") if _xml_text(li, "address_2") != "-" else None,
+                    _xml_text(li, "address_city"),
+                    _xml_text(li, "address_postcode"),
+                ])),
+                "pickup_instructions": _xml_text(li, "collectiondetails"),
+                "office_phone": _xml_text(li, "telephone"),
+                "office_email": _xml_text(li, "email"),
+                "office_opening_hours": opening_hours,
+                "out_of_hours_charge": out_of_hours,
+                "at_airport": _xml_text(li, "is_airport") == "y",
+                "airport_type": _xml_text(li, "airport_details/Type") or (
+                    li.find("airport_details").findtext("Type", "") if li.find("airport_details") is not None else ""
+                ),
+                "iata": _xml_text(li, "iata"),
+            }
+        except Exception:
+            logger.debug("[%s] GetLocationInfo failed for %s", self.supplier_id, location_id)
+            return {}
+
     async def search_vehicles(
         self,
         request: SearchRequest,
@@ -131,13 +193,14 @@ class GreenMotionAdapter(BaseAdapter):
 
         xml_payload = self._build_xml("GetVehicles", body)
         response = await self._request(
-            "POST",
-            self._api_url(),
-            content=xml_payload,
-            headers={"Content-Type": "application/xml"},
+            "POST", self._api_url(),
+            content=xml_payload, headers={"Content-Type": "application/xml"},
         )
 
-        return self._parse_vehicles(response.text, request, pickup_entry, dropoff_entry)
+        # Fetch location info (pickup instructions, phone, hours) after vehicles
+        location_info = await self._fetch_location_info(pickup_entry.pickup_id)
+
+        return self._parse_vehicles(response.text, request, pickup_entry, dropoff_entry, location_info)
 
     def _parse_vehicles(
         self,
@@ -145,6 +208,7 @@ class GreenMotionAdapter(BaseAdapter):
         request: SearchRequest,
         pickup_entry: ProviderLocationEntry,
         dropoff_entry: ProviderLocationEntry | None,
+        location_info: dict | None = None,
     ) -> list[Vehicle]:
         try:
             root = ET.fromstring(xml_text)
@@ -185,7 +249,7 @@ class GreenMotionAdapter(BaseAdapter):
         for veh in vehicle_elems:
             try:
                 vehicle = self._parse_single_vehicle(
-                    veh, quote_id, rental_days, shared_extras, request, pickup_entry, dropoff_entry
+                    veh, quote_id, rental_days, shared_extras, request, pickup_entry, dropoff_entry, location_info
                 )
                 if vehicle:
                     vehicles.append(vehicle)
@@ -204,6 +268,7 @@ class GreenMotionAdapter(BaseAdapter):
         request: SearchRequest,
         pickup_entry: ProviderLocationEntry,
         dropoff_entry: ProviderLocationEntry | None,
+        location_info: dict | None = None,
     ) -> Vehicle | None:
         # name, id, image are XML ATTRIBUTES on <vehicle>, not child elements
         name = veh.get("name", "")
@@ -338,6 +403,16 @@ class GreenMotionAdapter(BaseAdapter):
             latitude=pickup_entry.latitude,
             longitude=pickup_entry.longitude,
         )
+        dropoff_loc = None
+        if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
+            dropoff_loc = VehicleLocation(
+                supplier_location_id=dropoff_entry.pickup_id,
+                name=dropoff_entry.original_name,
+                country_code=dropoff_entry.country_code or "",
+                latitude=dropoff_entry.latitude,
+                longitude=dropoff_entry.longitude,
+                airport_code=dropoff_entry.iata,
+            )
 
         # Use per-vehicle insurance if available, else fall back to excess-based default
         if vehicle_insurance:
@@ -367,6 +442,7 @@ class GreenMotionAdapter(BaseAdapter):
             "model": model,
             "image_url": image_url,
             "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
             "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,
@@ -389,6 +465,7 @@ class GreenMotionAdapter(BaseAdapter):
                 "end_date": request.dropoff_date.isoformat(),
                 "end_time": request.dropoff_time.strftime("%H:%M"),
                 "products": all_products,
+                **(location_info or {}),
             },
             "min_driver_age": minage or None,
         }
@@ -577,8 +654,6 @@ class GreenMotionAdapter(BaseAdapter):
         )
 
     async def get_locations(self) -> list[dict]:
-        settings = get_settings()
-
         # Step 1: Get countries
         xml_payload = self._build_xml("GetCountryList", "")
         response = await self._request(
@@ -593,15 +668,44 @@ class GreenMotionAdapter(BaseAdapter):
         if resp is None:
             return []
 
-        locations = []
-        for country in resp.findall("country"):
-            country_id = _xml_text(country, "countryID")
-            country_name = _xml_text(country, "countryName")
-            country_code = _xml_text(country, "iso_alpha2")
+        country_semaphore = asyncio.Semaphore(8)
+        info_semaphore = asyncio.Semaphore(16)
 
-            # Step 2: Get locations for each country
-            area_body = f"<country_id>{country_id}</country_id><language>en</language>"
-            area_xml = self._build_xml("GetServiceAreas", area_body)
+        country_tasks = [
+            self._fetch_service_areas_for_country(country, country_semaphore)
+            for country in resp.findall("country")
+        ]
+        country_results = await asyncio.gather(*country_tasks)
+
+        location_tasks = []
+        for country_name, country_code, areas in country_results:
+            for area in areas:
+                location_tasks.append(
+                    self._build_location_entry(area, country_name, country_code, info_semaphore)
+                )
+
+        locations = [
+            location
+            for location in await asyncio.gather(*location_tasks)
+            if location is not None
+        ]
+        return locations
+
+    async def _fetch_service_areas_for_country(
+        self,
+        country: ET.Element,
+        semaphore: asyncio.Semaphore,
+    ) -> tuple[str, str, list[ET.Element]]:
+        country_id = _xml_text(country, "countryID")
+        country_name = _xml_text(country, "countryName")
+        country_code = _xml_text(country, "iso_alpha2")
+        if not country_id:
+            return country_name, country_code, []
+
+        area_body = f"<country_id>{country_id}</country_id><language>en</language>"
+        area_xml = self._build_xml("GetServiceAreas", area_body)
+
+        async with semaphore:
             area_response = await self._request(
                 "POST",
                 self._api_url(),
@@ -609,18 +713,58 @@ class GreenMotionAdapter(BaseAdapter):
                 headers={"Content-Type": "application/xml"},
             )
 
-            area_root = ET.fromstring(area_response.text)
-            area_resp = area_root.find("response")
-            if area_resp is None:
-                continue
+        area_root = ET.fromstring(area_response.text)
+        area_resp = area_root.find("response")
+        if area_resp is None:
+            return country_name, country_code, []
 
-            for area in area_resp.findall("servicearea"):
-                locations.append({
-                    "provider": self.supplier_id,
-                    "provider_location_id": _xml_text(area, "locationID") or _xml_text(area, "location_id"),
-                    "name": _xml_text(area, "name") or _xml_text(area, "location_name"),
-                    "country": country_name,
-                    "country_code": country_code,
-                })
+        return country_name, country_code, list(area_resp.findall("servicearea"))
 
-        return locations
+    async def _build_location_entry(
+        self,
+        area: ET.Element,
+        country_name: str,
+        country_code: str,
+        semaphore: asyncio.Semaphore,
+    ) -> dict | None:
+        location_id = _xml_text(area, "locationID") or _xml_text(area, "location_id")
+        location_name = _xml_text(area, "name") or _xml_text(area, "location_name")
+        if not location_id:
+            return None
+
+        loc_entry = {
+            "provider": self.supplier_id,
+            "provider_location_id": location_id,
+            "name": location_name,
+            "country": country_name,
+            "country_code": country_code,
+        }
+
+        try:
+            info_body = f"<location_id>{location_id}</location_id><language>en</language>"
+            info_xml = self._build_xml("GetLocationInfo", info_body)
+            async with semaphore:
+                info_resp = await self._request(
+                    "POST",
+                    self._api_url(),
+                    content=info_xml,
+                    headers={"Content-Type": "application/xml"},
+                )
+            info_root = ET.fromstring(info_resp.text)
+            info = info_root.find("response")
+            if info is not None:
+                li = info.find("location_info")
+                if li is not None:
+                    lat = _xml_text(li, "latitude")
+                    lon = _xml_text(li, "longitude")
+                    iata = _xml_text(li, "iata")
+                    if lat:
+                        loc_entry["latitude"] = float(lat)
+                    if lon:
+                        loc_entry["longitude"] = float(lon)
+                    if iata:
+                        loc_entry["iata"] = iata
+        except Exception:
+            logger.debug("[%s] GetLocationInfo failed for %s", self.supplier_id, location_id)
+
+        return loc_entry

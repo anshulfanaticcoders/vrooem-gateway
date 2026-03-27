@@ -141,7 +141,7 @@ def canonicalize_location_type(location_type: str | None, name: str | None = Non
 
 
 def extract_iata_code(location: dict) -> str | None:
-    raw_iata = (location.get("iata") or "").strip().upper()
+    raw_iata = (location.get("iata") or location.get("airport_code") or "").strip().upper()
     if _looks_like_iata(raw_iata):
         return raw_iata
 

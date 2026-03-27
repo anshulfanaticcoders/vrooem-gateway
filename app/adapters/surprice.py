@@ -37,6 +37,10 @@ from app.schemas.vehicle import (
 logger = logging.getLogger(__name__)
 
 
+class SurpriceOneWayNotAllowedError(RuntimeError):
+    """Raised when Surprice explicitly rejects a one-way route."""
+
+
 def _safe_float(value, default: float = 0.0) -> float:
     if value is None:
         return default
@@ -235,10 +239,26 @@ class SurpriceAdapter(BaseAdapter):
                 headers=self._auth_headers(),
             )
             if response.status_code != 200:
-                logger.warning("[surprice] %s search returned HTTP %d: %s", rate_code, response.status_code, response.text[:300])
+                body = response.text[:300]
+                try:
+                    data = response.json()
+                except Exception:
+                    data = None
+
+                if response.status_code == 422 and isinstance(data, dict):
+                    message = str(data.get("message") or "").strip()
+                    code = data.get("code")
+                    if code == 225 or "one way rentals not allowed" in message.lower():
+                        raise SurpriceOneWayNotAllowedError(
+                            message or "One-way rentals not allowed to this location"
+                        )
+
+                logger.warning("[surprice] %s search returned HTTP %d: %s", rate_code, response.status_code, body)
                 return None
             data = response.json()
             return data if isinstance(data, dict) else None
+        except SurpriceOneWayNotAllowedError:
+            raise
         except Exception:
             logger.warning("[surprice] %s search request failed", rate_code, exc_info=True)
             return None

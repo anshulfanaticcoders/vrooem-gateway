@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 from pathlib import Path
@@ -38,22 +39,39 @@ class JsonLocationRepository:
         self._by_unified_id: dict[int, dict] = {}
         self._by_provider: dict[str, dict] = {}
         self._loaded = False
+        self._file_signature: str | None = None
         self._search_service = LocationUnificationService()
 
-    def _ensure_loaded(self) -> None:
-        if self._loaded:
-            return
-
+    def _read_file(self) -> tuple[str | None, str | None]:
         path = _DATA_PATH
         if not path.exists():
+            return None, None
+
+        raw_text = path.read_text(encoding="utf-8")
+        signature = hashlib.sha1(raw_text.encode("utf-8")).hexdigest()
+        return signature, raw_text
+
+    def _ensure_loaded(self) -> None:
+        current_signature, raw_text = self._read_file()
+        if self._loaded and self._file_signature == current_signature:
+            return
+
+        self._locations = []
+        self._by_unified_id = {}
+        self._by_provider = {}
+
+        path = _DATA_PATH
+        if current_signature is None:
             logger.warning("unified_locations.json not found at %s", path)
+            self._file_signature = None
             self._loaded = True
             return
 
         try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
+            raw = json.loads(raw_text)
         except Exception:
             logger.error("Failed to read unified_locations.json", exc_info=True)
+            self._file_signature = current_signature
             self._loaded = True
             return
 
@@ -79,6 +97,7 @@ class JsonLocationRepository:
                 key = f"{provider['provider']}:{provider['pickup_id']}"
                 self._by_provider[key] = entry
 
+        self._file_signature = current_signature
         self._loaded = True
         logger.info("Loaded %d locations from JSON file", len(self._locations))
 
@@ -104,6 +123,7 @@ class JsonLocationRepository:
         self._locations = []
         self._by_unified_id = {}
         self._by_provider = {}
+        self._file_signature = None
         self._loaded = False
         self._ensure_loaded()
         return len(self._locations)

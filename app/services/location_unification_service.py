@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import statistics
 import zlib
 from collections import defaultdict
 
@@ -30,6 +31,7 @@ class LocationUnificationService:
             for match_key, items in groups.items()
             if items
         ]
+        unified_locations = self._dedupe_by_our_location_id(unified_locations)
 
         return sorted(unified_locations, key=lambda item: (item["name"], item["country"]))
 
@@ -71,6 +73,24 @@ class LocationUnificationService:
             "iata": iata,
             "dropoffs": list(location.get("dropoffs") or []),
             "supports_one_way": bool(location.get("supports_one_way")),
+            "extended_location_code": (
+                str(location.get("extended_location_code")).strip()
+                if location.get("extended_location_code") is not None
+                and str(location.get("extended_location_code")).strip()
+                else None
+            ),
+            "extended_dropoff_code": (
+                str(location.get("extended_dropoff_code")).strip()
+                if location.get("extended_dropoff_code") is not None
+                and str(location.get("extended_dropoff_code")).strip()
+                else None
+            ),
+            "provider_code": (
+                str(location.get("provider_code")).strip()
+                if location.get("provider_code") is not None
+                and str(location.get("provider_code")).strip()
+                else None
+            ),
             "our_location_id": location.get("our_location_id"),
             "alias_tokens": self._build_aliases(location, city),
         }
@@ -79,8 +99,17 @@ class LocationUnificationService:
         country_code = location["country_code"] or normalize_string(location["country"]).upper()
         location_type = location["location_type"]
 
-        if location_type == "airport" and location["iata"]:
-            return f"{country_code}|airport|{location['iata']}"
+        if location_type == "airport":
+            if location["iata"]:
+                return f"{country_code}|airport|{location['iata']}"
+
+            geo_key = coordinate_bucket(location["latitude"], location["longitude"])
+            if geo_key:
+                return f"{country_code}|airport|geo|{geo_key}"
+
+            name_key = normalize_string(location["name"])
+            if name_key:
+                return f"{country_code}|airport|name|{name_key}"
 
         city_key = normalize_string(location["city"])
 
@@ -120,13 +149,18 @@ class LocationUnificationService:
                     "latitude": prov_lat,
                     "longitude": prov_lon,
                     "supports_one_way": item["supports_one_way"],
+                    "extended_location_code": item.get("extended_location_code"),
+                    "extended_dropoff_code": item.get("extended_dropoff_code"),
+                    "country_code": item.get("country_code"),
+                    "iata": item.get("iata"),
+                    "provider_code": item.get("provider_code"),
                 }
             )
 
         location_type = first["location_type"]
         city = first["city"]
         iata = first.get("iata")
-        name = self._build_display_name(city, location_type, iata)
+        name = self._build_display_name(city, location_type, iata, items)
         if location_type == "airport" and iata and iata not in aliases:
             aliases.append(iata)
 
@@ -146,8 +180,8 @@ class LocationUnificationService:
             "city": city,
             "country": first["country"],
             "country_code": first["country_code"],
-            "latitude": round(sum(latitudes) / len(latitudes), 6) if latitudes else 0.0,
-            "longitude": round(sum(longitudes) / len(longitudes), 6) if longitudes else 0.0,
+            "latitude": round(statistics.median(latitudes), 6) if latitudes else 0.0,
+            "longitude": round(statistics.median(longitudes), 6) if longitudes else 0.0,
             "location_type": location_type,
             "iata": iata,
             "providers": providers,
@@ -212,8 +246,6 @@ class LocationUnificationService:
             best_distance = None
             if has_coords:
                 for candidate in airports_with_iata:
-                    if normalize_string(candidate["city"]) != normalize_string(location["city"]):
-                        continue
                     if candidate["country_code"] != location["country_code"]:
                         continue
                     distance = _distance_km(
@@ -230,13 +262,30 @@ class LocationUnificationService:
                 location["iata"] = best_match["iata"]
                 continue
 
-            # Fallback: no coords or no nearby match — assign the most popular
-            # IATA code for this city so the location merges instead of creating
-            # a duplicate group.
+            if has_coords or not self._is_generic_city_airport_name(location):
+                continue
+
+            # Only nameless/generic airport rows without coordinates inherit the
+            # city's primary IATA. That keeps providers like renteon mergeable
+            # without collapsing distinct same-city airports into one row.
             city_key = (location["country_code"], normalize_string(location["city"]))
             city_iatas = iata_popularity.get(city_key)
             if city_iatas:
                 location["iata"] = max(city_iatas, key=city_iatas.get)
+
+    def _is_generic_city_airport_name(self, location: dict) -> bool:
+        city = normalize_string(location.get("city"))
+        name = normalize_string(location.get("name"))
+        if not city or not name:
+            return False
+
+        generic_names = {
+            city,
+            f"{city} airport",
+            f"airport {city}",
+            f"{city} international airport",
+        }
+        return name in generic_names
 
     def _filter_generic_city_rows(self, locations: list[dict]) -> list[dict]:
         specific_cities = {
@@ -256,6 +305,32 @@ class LocationUnificationService:
 
         return filtered
 
+    def _dedupe_by_our_location_id(self, locations: list[dict]) -> list[dict]:
+        grouped: dict[str, list[dict]] = defaultdict(list)
+        passthrough: list[dict] = []
+
+        for location in locations:
+            our_location_id = location.get("our_location_id")
+            if not our_location_id:
+                passthrough.append(location)
+                continue
+            grouped[str(our_location_id)].append(location)
+
+        deduped = list(passthrough)
+        for items in grouped.values():
+            if len(items) == 1:
+                deduped.extend(items)
+                continue
+            deduped.append(max(items, key=self._our_location_rank))
+
+        return deduped
+
+    def _our_location_rank(self, location: dict) -> tuple[int, int, int]:
+        has_iata = 1 if location.get("iata") else 0
+        provider_count = int(location.get("provider_count") or 0)
+        has_coords = 1 if location.get("latitude") not in (None, 0.0) and location.get("longitude") not in (None, 0.0) else 0
+        return (has_iata, provider_count, has_coords)
+
     def _build_aliases(self, location: dict, canonical_city: str) -> list[str]:
         aliases = []
         name = str(location.get("name") or "").strip()
@@ -273,7 +348,13 @@ class LocationUnificationService:
 
         return aliases
 
-    def _build_display_name(self, city: str, location_type: str, iata: str | None = None) -> str:
+    def _build_display_name(
+        self,
+        city: str,
+        location_type: str,
+        iata: str | None = None,
+        items: list[dict] | None = None,
+    ) -> str:
         type_labels = {
             "airport": "Airport",
             "downtown": "Downtown",
@@ -283,6 +364,11 @@ class LocationUnificationService:
             "hotel": "Hotel",
             "other": "",
         }
+
+        if location_type == "airport" and not iata:
+            distinct_airport_name = self._build_distinct_airport_name(city, items or [])
+            if distinct_airport_name:
+                return distinct_airport_name
 
         suffix = type_labels.get(location_type, "")
         if not suffix:
@@ -298,6 +384,33 @@ class LocationUnificationService:
         if location_type == "airport" and iata:
             return f"{base} ({iata})"
         return base
+
+    def _build_distinct_airport_name(self, city: str, items: list[dict]) -> str | None:
+        city_key = normalize_string(city)
+        generic_names = {
+            city_key,
+            f"{city_key} airport",
+            f"airport {city_key}",
+            f"{city_key} international airport",
+        }
+
+        for item in items:
+            raw_name = str(item.get("name") or "").strip()
+            if not raw_name:
+                continue
+
+            candidate = raw_name.split(",", 1)[0].strip()
+            candidate = candidate.replace("  ", " ")
+            candidate_key = normalize_string(candidate)
+            if not candidate_key or candidate_key in generic_names:
+                continue
+
+            if "airport" not in candidate_key and "terminal" not in candidate_key:
+                continue
+
+            return candidate
+
+        return None
 
     def _display_country(self, country: str | None, country_code: str) -> str:
         if country and len(country.strip()) > 2:
