@@ -114,12 +114,12 @@ def _extract_image_url(raw: dict) -> str:
         return ""
     # Prefer primary image, fall back to first
     for img in images:
-        if isinstance(img, dict) and img.get("type") == "primary":
-            return img.get("url", img.get("path", ""))
+        if isinstance(img, dict) and (img.get("type") == "primary" or img.get("image_type") == "primary"):
+            return img.get("url") or img.get("image_url") or img.get("path", "")
     # No primary found — use first image
     first = images[0]
     if isinstance(first, dict):
-        return first.get("url", first.get("path", ""))
+        return first.get("url") or first.get("image_url") or first.get("path", "")
     if isinstance(first, str):
         return first
     return ""
@@ -137,6 +137,7 @@ class InternalAdapter(BaseAdapter):
         settings = get_settings()
         return {
             "Authorization": f"Bearer {settings.laravel_api_token}",
+            "X-Gateway-Token": settings.laravel_api_token,
             "Accept": "application/json",
             "Content-Type": "application/json",
         }
@@ -289,6 +290,8 @@ class InternalAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": str(vehicle_id),
+            "provider_product_id": str(vehicle_id),
+            "availability_status": "available",
             "name": name,
             "category": _parse_category(raw.get("category_id")),
             "make": brand.title(),
@@ -323,6 +326,10 @@ class InternalAdapter(BaseAdapter):
                 "km_per_day": km_per_day,
                 "price_per_extra_km": _safe_float(benefits.get("price_per_extra_km")),
                 "location": location_str,
+                "vendor": raw.get("vendor") or {},
+                "vendorProfileData": raw.get("vendorProfileData") or raw.get("vendor_profile_data") or {},
+                "vendor_profile_data": raw.get("vendor_profile_data") or raw.get("vendorProfileData") or {},
+                "images": raw.get("images") or [],
             },
             "min_driver_age": min_driver_age,
         }

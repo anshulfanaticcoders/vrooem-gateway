@@ -3,6 +3,8 @@ services:
     build: .
     ports:
       - "8001:8000"
+    extra_hosts:
+      - "carrental.test:host-gateway"
     environment:
       - GATEWAY_ENV=production
       - GATEWAY_DEBUG=false
@@ -79,6 +81,8 @@ services:
     entrypoint: ["sh", "-c", "while true; do python -m app.scripts.refresh_locations_json; sleep 21600; done"]
     healthcheck:
       disable: true
+    extra_hosts:
+      - "carrental.test:host-gateway"
     environment:
       - GATEWAY_API_KEYS=${GATEWAY_API_KEYS}
       - DATABASE_URL=${DATABASE_URL}

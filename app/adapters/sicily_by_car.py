@@ -323,11 +323,13 @@ class SicilyByCarAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": supplier_vehicle_id,
+            "provider_rate_id": rate_id or None,
             "name": description,
             "category": category_from_sipp(sipp_4),
             "make": make,
             "model": model,
             "image_url": veh.get("imageUrl", ""),
+            "availability_status": offer.get("availability") or None,
             "pickup_location": pickup_loc,
             "pricing": Pricing(
                 currency=currency,

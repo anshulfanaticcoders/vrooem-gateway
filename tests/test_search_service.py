@@ -50,6 +50,14 @@ class _FakeCircuitBreakerRegistry:
         return _FakeCircuitBreaker()
 
 
+class _FailingAdapter:
+    supplier_id = "surprice"
+    supports_one_way = True
+
+    async def search_vehicles(self, request, pickup_entry, dropoff_entry):
+        raise ValueError("One way rentals not allowed to this location")
+
+
 class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
     async def test_preserves_surprice_extended_location_code_when_laravel_passes_provider_locations(self) -> None:
         adapter = _FakeAdapter()
@@ -182,3 +190,41 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertNotEqual(cache.get_search_calls[0], cache.get_search_calls[1])
         self.assertIn("ploc", cache.get_search_calls[0])
         self.assertIn("ploc", cache.get_search_calls[1])
+
+    async def test_returns_structured_provider_failure_when_supplier_raises(self) -> None:
+        request = SearchRequest(
+            unified_location_id=111,
+            pickup_date=date(2026, 6, 25),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 6, 28),
+            dropoff_time=time(9, 0),
+            currency="EUR",
+            driver_age=35,
+            country_code="MA",
+        )
+        provider_entries = [
+            {
+                "provider": "surprice",
+                "pickup_id": "CMN:CMNA01",
+                "original_name": "Casablanca Airport",
+            }
+        ]
+
+        with patch("app.services.search_service.get_adapter", return_value=_FailingAdapter()):
+            response = await search_vehicles(
+                request=request,
+                provider_entries=provider_entries,
+                cache=_RecordingCache(),
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertEqual(response.suppliers_queried, 1)
+        self.assertEqual(response.suppliers_responded, 0)
+        self.assertEqual(len(response.provider_status), 1)
+        failure = response.provider_status[0]
+        self.assertEqual(failure.provider, "surprice")
+        self.assertEqual(failure.failure_type, "provider_error")
+        self.assertEqual(failure.message, "One way rentals not allowed to this location")
+        self.assertEqual(failure.stage, "vehicle_search")
+        self.assertFalse(failure.retryable)
+        self.assertEqual(response.supplier_results[0].error, "One way rentals not allowed to this location")

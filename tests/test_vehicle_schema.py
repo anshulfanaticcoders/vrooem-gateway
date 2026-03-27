@@ -19,3 +19,6 @@ def test_vehicle_defaults_do_not_invent_specs():
     assert v.fuel_type is None
     assert v.air_conditioning is None
     assert v.mileage_policy is None
+    assert v.provider_product_id is None
+    assert v.provider_rate_id is None
+    assert v.availability_status is None

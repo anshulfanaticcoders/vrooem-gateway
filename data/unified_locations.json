@@ -540,8 +540,8 @@
         "city": "Adana Sehir Ofis",
         "country": "TR",
         "country_code": "TR",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 36.90431,
+        "longitude": 35.066042,
         "location_type": "other",
         "iata": null,
         "provider_count": 1,
@@ -551,8 +551,8 @@
                 "pickup_id": "99",
                 "original_name": "ADANA ŞEHİR OFİS",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 36.9043104,
+                "longitude": 35.066042,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -737,6 +737,106 @@
                 "extended_dropoff_code": null,
                 "country_code": "AR",
                 "iata": "SLA",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2712240382,
+        "name": "Aeropuerto Liberia Lir Airport (LIR)",
+        "aliases": [
+            "Aeropuerto Liberia [LIR]",
+            "Aeropuerto Liberia Lir",
+            "Liberia Airport",
+            "Liberia",
+            "LIR"
+        ],
+        "city": "Aeropuerto Liberia Lir",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.572466,
+        "longitude": -85.584583,
+        "location_type": "airport",
+        "iata": "LIR",
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "LIB",
+                "original_name": "Aeropuerto Liberia [LIR]",
+                "dropoffs": [],
+                "latitude": 10.57268,
+                "longitude": -85.585494,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": "LIR",
+                "provider_code": null
+            },
+            {
+                "provider": "greenmotion",
+                "pickup_id": "61411",
+                "original_name": "Liberia Airport",
+                "dropoffs": [],
+                "latitude": 10.572251453261012,
+                "longitude": -85.58367145942069,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": "LIR",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4277689257,
+        "name": "Aeropuerto San Jose Sjo Airport (SJO)",
+        "aliases": [
+            "Aeropuerto San Jose [SJO]",
+            "Aeropuerto San Jose Sjo",
+            "San Jose Airport",
+            "San Jose",
+            "SJO"
+        ],
+        "city": "Aeropuerto San Jose Sjo",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.003597,
+        "longitude": -84.196666,
+        "location_type": "airport",
+        "iata": "SJO",
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "OCO",
+                "original_name": "Aeropuerto San Jose [SJO]",
+                "dropoffs": [],
+                "latitude": 10.00413,
+                "longitude": -84.185504,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": "SJO",
+                "provider_code": null
+            },
+            {
+                "provider": "greenmotion",
+                "pickup_id": "61410",
+                "original_name": "San Jose Airport",
+                "dropoffs": [],
+                "latitude": 10.003063102424242,
+                "longitude": -84.2078272590781,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": "SJO",
                 "provider_code": null
             }
         ],
@@ -2501,8 +2601,6 @@
         "aliases": [
             "Antakya airport",
             "Antakya",
-            "HATAY HAVALİMANI (HTY)",
-            "Hatay Havalimani",
             "HTY"
         ],
         "city": "Antakya",
@@ -2512,26 +2610,12 @@
         "longitude": 0.0,
         "location_type": "airport",
         "iata": "HTY",
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
             {
                 "provider": "renteon",
                 "pickup_id": "TR-ANT-HTY",
                 "original_name": "Antakya airport",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "TR",
-                "iata": "HTY",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "102",
-                "original_name": "HATAY HAVALİMANI (HTY)",
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
@@ -2590,8 +2674,8 @@
         "city": "Antalya",
         "country": "Turkiye",
         "country_code": "TR",
-        "latitude": 36.929146,
-        "longitude": 30.800423,
+        "latitude": 36.921633,
+        "longitude": 30.80184,
         "location_type": "airport",
         "iata": "AYT",
         "provider_count": 3,
@@ -2629,8 +2713,8 @@
                 "pickup_id": "76",
                 "original_name": "Antalya Airport (AYT)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 36.91412,
+                "longitude": 30.803257,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -8726,8 +8810,8 @@
         "city": "Bridgetown",
         "country": "BB",
         "country_code": "BB",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 13.080063,
+        "longitude": -59.489834,
         "location_type": "airport",
         "iata": "BGI",
         "provider_count": 1,
@@ -8737,8 +8821,8 @@
                 "pickup_id": "74",
                 "original_name": "Bridgetown Airport (BGI)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 13.0800629,
+                "longitude": -59.4898343,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -11242,6 +11326,36 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1529426670,
+        "name": "Cartago",
+        "aliases": [],
+        "city": "Cartago",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.864708,
+        "longitude": -83.926186,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "CAR",
+                "original_name": "Cartago",
+                "dropoffs": [],
+                "latitude": 9.864708,
+                "longitude": -83.926186,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2103212009,
         "name": "Casablanca",
         "aliases": [
@@ -13101,6 +13215,36 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "MX",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1431870769,
+        "name": "Ciudad Quesada",
+        "aliases": [],
+        "city": "Ciudad Quesada",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.335992,
+        "longitude": -84.433008,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "CQ",
+                "original_name": "Ciudad Quesada",
+                "dropoffs": [],
+                "latitude": 10.335992,
+                "longitude": -84.433008,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -16547,8 +16691,8 @@
                 "pickup_id": "83",
                 "original_name": "Dubai International Airport (DXB)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 25.25278,
+                "longitude": 55.36444,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -18493,38 +18637,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 4106855392,
-        "name": "Exclusive Orlando",
-        "aliases": [
-            "Exclusive ORLANDO"
-        ],
-        "city": "Exclusive Orlando",
-        "country": "US",
-        "country_code": "US",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "105",
-                "original_name": "Exclusive ORLANDO",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "US",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1814702934,
         "name": "Exochi Airport (IOA)",
         "aliases": [
@@ -19948,8 +20060,6 @@
         "aliases": [
             "Gaziantep airport",
             "Gaziantep",
-            "GAZİANTEP HAVALİMANI (GZT)",
-            "Gaziantep Havalimani",
             "GZT"
         ],
         "city": "Gaziantep",
@@ -19959,26 +20069,12 @@
         "longitude": 0.0,
         "location_type": "airport",
         "iata": "GZT",
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
             {
                 "provider": "renteon",
                 "pickup_id": "TR-GAZ-GZT",
                 "original_name": "Gaziantep airport",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "TR",
-                "iata": "GZT",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "101",
-                "original_name": "GAZİANTEP HAVALİMANI (GZT)",
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
@@ -21917,6 +22013,36 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2973423964,
+        "name": "Grecia",
+        "aliases": [],
+        "city": "Grecia",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.077895,
+        "longitude": -84.315142,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "GRE",
+                "original_name": "Grecia",
+                "dropoffs": [],
+                "latitude": 10.077895,
+                "longitude": -84.315142,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 994491455,
         "name": "Grecia",
         "aliases": [
@@ -23350,6 +23476,36 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3557732996,
+        "name": "Heredia Centro",
+        "aliases": [],
+        "city": "Heredia Centro",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.001089,
+        "longitude": -84.112375,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "HRD",
+                "original_name": "Heredia Centro",
+                "dropoffs": [],
+                "latitude": 10.001089,
+                "longitude": -84.112375,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1343140441,
         "name": "Hermosillo Airport (HMO)",
         "aliases": [
@@ -23655,8 +23811,8 @@
         "city": "Hotel Napolitano",
         "country": "DO",
         "country_code": "DO",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 18.466397,
+        "longitude": -69.891452,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -23666,8 +23822,8 @@
                 "pickup_id": "95",
                 "original_name": "Hotel Napolitano Office",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 18.466397,
+                "longitude": -69.8914523,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -30360,18 +30516,20 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 546452799,
-        "name": "Lanzarote Airport",
+        "unified_location_id": 1810619172,
+        "name": "Lanzarote Airport (ACE)",
         "aliases": [
-            "Lanzarote"
+            "Lanzarote Airport",
+            "Lanzarote",
+            "ACE"
         ],
         "city": "Lanzarote",
         "country": "IC",
         "country_code": "IC",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 28.9462,
+        "longitude": -13.6052,
         "location_type": "airport",
-        "iata": null,
+        "iata": "ACE",
         "provider_count": 1,
         "providers": [
             {
@@ -30379,13 +30537,13 @@
                 "pickup_id": "34903",
                 "original_name": "Lanzarote Airport",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 28.9462,
+                "longitude": -13.6052,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "IC",
-                "iata": null,
+                "iata": "ACE",
                 "provider_code": null
             }
         ],
@@ -30595,8 +30753,8 @@
         "city": "Las Americas",
         "country": "Dominican Republic",
         "country_code": "DO",
-        "latitude": 18.446513,
-        "longitude": -69.676653,
+        "latitude": 18.438587,
+        "longitude": -69.674444,
         "location_type": "airport",
         "iata": "SDQ",
         "provider_count": 4,
@@ -30648,8 +30806,8 @@
                 "pickup_id": "92",
                 "original_name": "Las Américas International Airport (SDQ)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 18.4297,
+                "longitude": -69.6689,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -31345,34 +31503,30 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2712240382,
-        "name": "Liberia Airport (LIR)",
-        "aliases": [
-            "Liberia Airport",
-            "Liberia",
-            "LIR"
-        ],
-        "city": "Liberia",
-        "country": "Costa Rica",
+        "unified_location_id": 1907398711,
+        "name": "Liberia Centro",
+        "aliases": [],
+        "city": "Liberia Centro",
+        "country": "CR",
         "country_code": "CR",
-        "latitude": 10.572251,
-        "longitude": -85.583671,
-        "location_type": "airport",
-        "iata": "LIR",
+        "latitude": 10.629219,
+        "longitude": -85.437639,
+        "location_type": "other",
+        "iata": null,
         "provider_count": 1,
         "providers": [
             {
-                "provider": "greenmotion",
-                "pickup_id": "61411",
-                "original_name": "Liberia Airport",
+                "provider": "adobe",
+                "pickup_id": "LDT",
+                "original_name": "Liberia Centro",
                 "dropoffs": [],
-                "latitude": 10.572251453261012,
-                "longitude": -85.58367145942069,
+                "latitude": 10.629219,
+                "longitude": -85.437639,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "CR",
-                "iata": "LIR",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -31551,6 +31705,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "GR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4065354468,
+        "name": "Limon",
+        "aliases": [
+            "Limón"
+        ],
+        "city": "Limon",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.991211,
+        "longitude": -83.029433,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "LIM",
+                "original_name": "Limón",
+                "dropoffs": [],
+                "latitude": 9.991211,
+                "longitude": -83.029433,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -36168,11 +36354,11 @@
         "city": "Melbourne",
         "country": "Australia",
         "country_code": "AU",
-        "latitude": -37.687172,
-        "longitude": 144.849773,
+        "latitude": -37.705344,
+        "longitude": 144.858546,
         "location_type": "airport",
         "iata": "MEL",
-        "provider_count": 3,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -36195,20 +36381,6 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": "MEL",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "97",
-                "original_name": "Melbourne Airport (MEL)",
-                "dropoffs": [],
-                "latitude": -37.669,
-                "longitude": 144.841,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -36429,8 +36601,8 @@
         "city": "Mersin Cukurova",
         "country": "Turkiye",
         "country_code": "TR",
-        "latitude": 36.901616,
-        "longitude": 35.067608,
+        "latitude": 36.902963,
+        "longitude": 35.066825,
         "location_type": "airport",
         "iata": "COV",
         "provider_count": 3,
@@ -36468,8 +36640,8 @@
                 "pickup_id": "100",
                 "original_name": "ÇUKUROVA HAVALİMANI (COV)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 36.9043104,
+                "longitude": 35.066042,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -40214,8 +40386,8 @@
         "city": "Nevsehir",
         "country": "TR",
         "country_code": "TR",
-        "latitude": 38.770686,
-        "longitude": 34.523817,
+        "latitude": 38.773538,
+        "longitude": 34.525104,
         "location_type": "airport",
         "iata": "NAV",
         "provider_count": 3,
@@ -40253,8 +40425,8 @@
                 "pickup_id": "78",
                 "original_name": "Nevşehir Cappadocia Airport (NAV)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 38.77639,
+                "longitude": 34.52639,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -42165,8 +42337,8 @@
         "city": "Orlando",
         "country": "Florida",
         "country_code": "US",
-        "latitude": 28.456537,
-        "longitude": -81.274978,
+        "latitude": 28.442991,
+        "longitude": -81.291934,
         "location_type": "airport",
         "iata": "MCO",
         "provider_count": 7,
@@ -42260,8 +42432,8 @@
                 "pickup_id": "79",
                 "original_name": "Orlando International Airport (MCO)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 28.429444,
+                "longitude": -81.308889,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -47722,6 +47894,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 855999285,
+        "name": "Puerto Viejo Limon",
+        "aliases": [
+            "Puerto Viejo / Limón"
+        ],
+        "city": "Puerto Viejo Limon",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.65605,
+        "longitude": -82.754968,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "PTV",
+                "original_name": "Puerto Viejo / Limón",
+                "dropoffs": [],
+                "latitude": 9.65605,
+                "longitude": -82.754968,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2315806162,
         "name": "Pula Airport (PUY)",
         "aliases": [
@@ -47958,8 +48162,8 @@
         "city": "Punta Cana",
         "country": "DO",
         "country_code": "DO",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 18.5674,
+        "longitude": -68.363403,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 1,
@@ -47969,12 +48173,42 @@
                 "pickup_id": "94",
                 "original_name": "Punta Cana Station (PUJ)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 18.5674,
+                "longitude": -68.3634033,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "DO",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3577774544,
+        "name": "Puntarenas",
+        "aliases": [],
+        "city": "Puntarenas",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.969012,
+        "longitude": -84.74059,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "HFT",
+                "original_name": "Puntarenas",
+                "dropoffs": [],
+                "latitude": 9.969012,
+                "longitude": -84.74059,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -48151,6 +48385,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "NZ",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2614757844,
+        "name": "Quepos Manuel Antonio",
+        "aliases": [
+            "Quepos / Manuel Antonio"
+        ],
+        "city": "Quepos Manuel Antonio",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.429472,
+        "longitude": -84.160968,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "XQP",
+                "original_name": "Quepos / Manuel Antonio",
+                "dropoffs": [],
+                "latitude": 9.429472,
+                "longitude": -84.160968,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -51874,40 +52140,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 4277689257,
-        "name": "San Jose Airport (SJO)",
-        "aliases": [
-            "San Jose Airport",
-            "San Jose",
-            "SJO"
-        ],
-        "city": "San Jose",
-        "country": "Costa Rica",
-        "country_code": "CR",
-        "latitude": 10.003063,
-        "longitude": -84.207827,
-        "location_type": "airport",
-        "iata": "SJO",
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "greenmotion",
-                "pickup_id": "61410",
-                "original_name": "San Jose Airport",
-                "dropoffs": [],
-                "latitude": 10.003063102424242,
-                "longitude": -84.2078272590781,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "CR",
-                "iata": "SJO",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 2704306575,
         "name": "San Jose Apt",
         "aliases": [],
@@ -51927,6 +52159,39 @@
                 "dropoffs": [],
                 "latitude": 10.00146,
                 "longitude": -84.1912,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2961643722,
+        "name": "San Jose Centro Downtown",
+        "aliases": [
+            "San Jose Centro / Downtown",
+            "San Jose Centro"
+        ],
+        "city": "San Jose Centro",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.925435,
+        "longitude": -84.09706,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "SJO",
+                "original_name": "San Jose Centro / Downtown",
+                "dropoffs": [],
+                "latitude": 9.925435,
+                "longitude": -84.09706,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -52237,6 +52502,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3337758536,
+        "name": "San Pedro En San Jose",
+        "aliases": [
+            "San Pedro [en San Jose]"
+        ],
+        "city": "San Pedro En San Jose",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.94043,
+        "longitude": -84.055989,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "SJ1",
+                "original_name": "San Pedro [en San Jose]",
+                "dropoffs": [],
+                "latitude": 9.94043,
+                "longitude": -84.055989,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -53036,8 +53333,8 @@
         "city": "Santiago",
         "country": "DO",
         "country_code": "DO",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 42.89639,
+        "longitude": -8.41528,
         "location_type": "airport",
         "iata": "STI",
         "provider_count": 1,
@@ -53047,8 +53344,8 @@
                 "pickup_id": "93",
                 "original_name": "Santiago Airport (STI)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 42.89639,
+                "longitude": -8.41528,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -57574,96 +57871,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2904590168,
-        "name": "Sydney Alexandria",
-        "aliases": [],
-        "city": "Sydney Alexandria",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "84",
-                "original_name": "Sydney Alexandria",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 1994696190,
-        "name": "Sydney Blacktown",
-        "aliases": [],
-        "city": "Sydney Blacktown",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "85",
-                "original_name": "Sydney Blacktown",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 4204101958,
-        "name": "Sydney Castle Hill",
-        "aliases": [],
-        "city": "Sydney Castle Hill",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "86",
-                "original_name": "Sydney Castle Hill",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 2760328072,
         "name": "Sydney Cbd Downtown",
         "aliases": [
@@ -57716,158 +57923,6 @@
                 "provider": "renteon",
                 "pickup_id": "AU-SYD-DT",
                 "original_name": "Sydney downtown",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 207727236,
-        "name": "Sydney Liverpool",
-        "aliases": [],
-        "city": "Sydney Liverpool",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "87",
-                "original_name": "Sydney Liverpool",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 4123435425,
-        "name": "Sydney Oran Park",
-        "aliases": [],
-        "city": "Sydney Oran Park",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "88",
-                "original_name": "Sydney Oran Park",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3448928233,
-        "name": "Sydney Parramatta",
-        "aliases": [],
-        "city": "Sydney Parramatta",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "89",
-                "original_name": "Sydney Parramatta",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 2031399539,
-        "name": "Sydney Penrith",
-        "aliases": [],
-        "city": "Sydney Penrith",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "90",
-                "original_name": "Sydney Penrith",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AU",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3630135204,
-        "name": "Sydney St Marys",
-        "aliases": [
-            "Sydney St. Marys"
-        ],
-        "city": "Sydney St Marys",
-        "country": "AU",
-        "country_code": "AU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "91",
-                "original_name": "Sydney St. Marys",
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
@@ -58423,6 +58478,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1715924694,
+        "name": "Tamarindo Flamingo Potrero",
+        "aliases": [
+            "Tamarindo / Flamingo / Potrero"
+        ],
+        "city": "Tamarindo Flamingo Potrero",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 10.379203,
+        "longitude": -85.786049,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "TNO",
+                "original_name": "Tamarindo / Flamingo / Potrero",
+                "dropoffs": [],
+                "latitude": 10.379203,
+                "longitude": -85.786049,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 4022613167,
         "name": "Tampa Airport (TPA)",
         "aliases": [
@@ -58435,8 +58522,8 @@
         "city": "Tampa",
         "country": "Florida",
         "country_code": "US",
-        "latitude": 27.981357,
-        "longitude": -82.519379,
+        "latitude": 27.978428,
+        "longitude": -82.52146,
         "location_type": "airport",
         "iata": "TPA",
         "provider_count": 4,
@@ -58488,8 +58575,8 @@
                 "pickup_id": "96",
                 "original_name": "Tampa International Airport (TPA)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 27.975500106811523,
+                "longitude": -82.53,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -59865,8 +59952,8 @@
         "city": "Tirana",
         "country": "Albania",
         "country_code": "AL",
-        "latitude": 41.416834,
-        "longitude": 19.712262,
+        "latitude": 41.416594,
+        "longitude": 19.712274,
         "location_type": "airport",
         "iata": "TIA",
         "provider_count": 6,
@@ -59946,8 +60033,8 @@
                 "pickup_id": "98",
                 "original_name": "Tirana International Airport (TIA)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 41.41472,
+                "longitude": 19.72056,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -60394,8 +60481,8 @@
         "city": "Tobago",
         "country": "TT",
         "country_code": "TT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 11.1496,
+        "longitude": -60.8313,
         "location_type": "airport",
         "iata": "TAB",
         "provider_count": 1,
@@ -60405,8 +60492,8 @@
                 "pickup_id": "66",
                 "original_name": "Tobago Airport (TAB)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": 11.1496,
+                "longitude": -60.8313,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -61903,6 +61990,36 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 914876380,
+        "name": "Uruca",
+        "aliases": [],
+        "city": "Uruca",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.950438,
+        "longitude": -84.103497,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "GQU",
+                "original_name": "Uruca",
+                "dropoffs": [],
+                "latitude": 9.950438,
+                "longitude": -84.103497,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1587562370,
         "name": "Uskup Sehir Merkezi",
         "aliases": [
@@ -61960,6 +62077,36 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2841292297,
+        "name": "Uvita",
+        "aliases": [],
+        "city": "Uvita",
+        "country": "CR",
+        "country_code": "CR",
+        "latitude": 9.165391,
+        "longitude": -83.735919,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "adobe",
+                "pickup_id": "UVT",
+                "original_name": "Uvita",
+                "dropoffs": [],
+                "latitude": 9.165391,
+                "longitude": -83.735919,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CR",
                 "iata": null,
                 "provider_code": null
             }
@@ -65881,8 +66028,8 @@
         "city": "Zanzibar",
         "country": "Zanzibar",
         "country_code": "TZ",
-        "latitude": -6.218384,
-        "longitude": 39.221229,
+        "latitude": -6.218492,
+        "longitude": 39.221283,
         "location_type": "airport",
         "iata": "ZNZ",
         "provider_count": 4,
@@ -65934,8 +66081,8 @@
                 "pickup_id": "63",
                 "original_name": "Zanzibar Airport (ZNZ)",
                 "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
+                "latitude": -6.22202,
+                "longitude": 39.224899,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,

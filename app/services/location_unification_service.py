@@ -50,6 +50,7 @@ class LocationUnificationService:
         scored.sort(key=lambda item: (-item[0], item[1]["name"]))
         ranked = [location for _, location in scored]
         filtered = self._filter_generic_city_rows(ranked)
+        filtered = self._filter_by_query_location_type(filtered, normalized_query)
         return filtered[:limit]
 
     def _canonicalize_location(self, location: dict) -> dict:
@@ -304,6 +305,91 @@ class LocationUnificationService:
             filtered.append(location)
 
         return filtered
+
+    def _filter_by_query_location_type(self, locations: list[dict], query: str) -> list[dict]:
+        requested_types = self._requested_location_types(query)
+        if not requested_types:
+            return locations
+
+        filtered = [
+            location
+            for location in locations
+            if self._location_matches_requested_type(location, requested_types)
+        ]
+        return filtered or locations
+
+    def _requested_location_types(self, query: str) -> set[str]:
+        requested: set[str] = set()
+
+        if "airport" in query or "terminal" in query:
+            requested.add("airport")
+        if "downtown" in query or "city center" in query or "city centre" in query or "office" in query:
+            requested.add("downtown")
+        if "port" in query or "harbour" in query or "harbor" in query or "ferry" in query:
+            requested.add("port")
+        if (
+            "bus station" in query
+            or "bus stop" in query
+            or "coach station" in query
+            or "coach stop" in query
+        ):
+            requested.add("bus_station")
+        if (
+            "train station" in query
+            or "railway station" in query
+            or "rail station" in query
+            or "gare" in query
+            or "bahnhof" in query
+        ):
+            requested.add("train_station")
+
+        # Generic "station" search should still surface both station types.
+        if "station" in query and not (requested & {"bus_station", "train_station"}):
+            requested.update({"bus_station", "train_station"})
+
+        return requested
+
+    def _location_matches_requested_type(self, location: dict, requested_types: set[str]) -> bool:
+        location_type = str(location.get("location_type") or "")
+        if location_type in requested_types:
+            return True
+
+        name = normalize_string(location.get("name"))
+        aliases = [normalize_string(alias) for alias in location.get("aliases", [])]
+        haystacks = [name, *aliases]
+
+        if "airport" in requested_types and any(
+            "airport" in value or "terminal" in value
+            for value in haystacks
+        ):
+            return True
+
+        if "downtown" in requested_types and any(
+            "downtown" in value or "city center" in value or "city centre" in value or "office" in value
+            for value in haystacks
+        ):
+            return True
+
+        if "port" in requested_types and any(
+            "port" in value or "harbour" in value or "harbor" in value or "ferry" in value
+            for value in haystacks
+        ):
+            return True
+
+        if "bus_station" in requested_types and any(
+            "bus station" in value or "bus stop" in value or "coach station" in value or "coach stop" in value
+            for value in haystacks
+        ):
+            return True
+
+        if "train_station" in requested_types and any(
+            "train station" in value or "railway station" in value or "rail station" in value
+            or "gare" in value or "bahnhof" in value
+            for value in haystacks
+        ):
+            return True
+
+        return False
 
     def _dedupe_by_our_location_id(self, locations: list[dict]) -> list[dict]:
         grouped: dict[str, list[dict]] = defaultdict(list)

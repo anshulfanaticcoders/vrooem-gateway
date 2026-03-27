@@ -436,6 +436,7 @@ class SurpriceAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": sipp_code or "",
+            "provider_rate_id": vendor_rate_id or None,
             "name": description,
             "category": category_from_sipp(sipp_code),
             "make": make,

@@ -80,6 +80,14 @@ class Vehicle(BaseModel):
     id: str = Field(description="Gateway vehicle ID (gw_<uuid>)")
     supplier_id: str = Field(description="Provider identifier (e.g. green_motion)")
     supplier_vehicle_id: str = Field(description="Provider's own vehicle/offer ID")
+    provider_product_id: str | None = Field(
+        default=None,
+        description="Provider product/package ID when supplier exposes multiple sellable products",
+    )
+    provider_rate_id: str | None = Field(
+        default=None,
+        description="Provider rate/tariff ID when distinct from vehicle/product ID",
+    )
     name: str = Field(description="Display name (e.g. Toyota Aygo or similar)")
     category: VehicleCategory = VehicleCategory.OTHER
     make: str = ""
@@ -96,6 +104,7 @@ class Vehicle(BaseModel):
     mileage_limit_km: int | None = None
     sipp_code: str | None = None
     is_available: bool = True
+    availability_status: str | None = None
 
     pickup_location: VehicleLocation = Field(default_factory=VehicleLocation)
     dropoff_location: VehicleLocation | None = None
@@ -109,6 +118,10 @@ class Vehicle(BaseModel):
     supplier_data: dict = Field(
         default_factory=dict,
         description="Raw supplier-specific data needed for booking (opaque to Laravel)",
+    )
+    raw_payload: dict | list | None = Field(
+        default=None,
+        description="Optional raw provider payload excerpt for debugging/normalization tracing",
     )
     min_driver_age: int | None = None
     max_driver_age: int | None = None

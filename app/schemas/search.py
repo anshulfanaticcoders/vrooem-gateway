@@ -41,6 +41,19 @@ class SupplierResult(BaseModel):
     from_cache: bool = False
 
 
+class ProviderFailure(BaseModel):
+    """Structured provider failure surfaced to API consumers."""
+
+    provider: str
+    stage: str = "vehicle_search"
+    failure_type: str
+    http_status: int | None = None
+    provider_code: str | None = None
+    message: str
+    retryable: bool = False
+    raw_excerpt: str | None = None
+
+
 class SearchResponse(BaseModel):
     """Aggregated search response from all suppliers."""
 
@@ -50,5 +63,6 @@ class SearchResponse(BaseModel):
     suppliers_queried: int = 0
     suppliers_responded: int = 0
     supplier_results: list[SupplierResult] = Field(default_factory=list)
+    provider_status: list[ProviderFailure] = Field(default_factory=list)
     from_cache: bool = False
     response_time_ms: int = 0

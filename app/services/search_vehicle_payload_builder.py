@@ -9,6 +9,7 @@ from app.schemas.search_vehicle_payload import (
     SearchVehiclePayload,
     SearchVehiclePoliciesPayload,
     SearchVehiclePricingPayload,
+    SearchVehicleProviderStatusPayload,
     SearchVehicleResponsePayload,
     SearchVehicleSpecsPayload,
     SearchVehicleSupplierResultPayload,
@@ -223,18 +224,26 @@ def _build_products(vehicle: Vehicle) -> list[dict]:
 def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
     source = _normalize_source(vehicle.supplier_id)
     image = _explicit_string(vehicle, "image_url")
+    supplier_data = vehicle.supplier_data or {}
 
     category = None
     if _is_explicit(vehicle, "category") or vehicle.category != VehicleCategory.OTHER:
         category = vehicle.category.value
 
+    provider_product_id = vehicle.provider_product_id or supplier_data.get("product_id")
+    provider_rate_id = vehicle.provider_rate_id or supplier_data.get("rate_id") or supplier_data.get("vendor_rate_id")
+    availability_status = vehicle.availability_status or supplier_data.get("availability_status") or supplier_data.get("availability")
+
     return SearchVehiclePayload(
         id=vehicle.id,
         gateway_vehicle_id=vehicle.id,
         provider_vehicle_id=vehicle.supplier_vehicle_id or None,
+        provider_product_id=provider_product_id,
+        provider_rate_id=provider_rate_id,
         source=source,
-        provider_code=(vehicle.supplier_data or {}).get("provider_code") or source,
+        provider_code=supplier_data.get("provider_code") or source,
         display_name=vehicle.name,
+        availability_status=availability_status,
         brand=_explicit_string(vehicle, "make"),
         model=_explicit_string(vehicle, "model"),
         category=category,
@@ -253,7 +262,7 @@ def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
         ui_placeholders=SearchVehicleUiPlaceholdersPayload(image=image is None),
         booking_context=SearchVehicleBookingContextPayload(
             version=1,
-            provider_payload=dict(vehicle.supplier_data or {}),
+            provider_payload=dict(supplier_data),
         ),
     )
 
@@ -268,6 +277,19 @@ def _build_supplier_result_payload(result: SupplierResult) -> SearchVehicleSuppl
     )
 
 
+def _build_provider_status_payload(failure) -> SearchVehicleProviderStatusPayload:
+    return SearchVehicleProviderStatusPayload(
+        provider=_normalize_source(failure.provider),
+        stage=failure.stage,
+        failure_type=failure.failure_type,
+        http_status=failure.http_status,
+        provider_code=failure.provider_code,
+        message=failure.message,
+        retryable=failure.retryable,
+        raw_excerpt=failure.raw_excerpt,
+    )
+
+
 def build_search_vehicle_response(response: SearchResponse) -> SearchVehicleResponsePayload:
     return SearchVehicleResponsePayload(
         search_id=response.search_id,
@@ -276,6 +298,7 @@ def build_search_vehicle_response(response: SearchResponse) -> SearchVehicleResp
         suppliers_queried=response.suppliers_queried,
         suppliers_responded=response.suppliers_responded,
         supplier_results=[_build_supplier_result_payload(result) for result in response.supplier_results],
+        provider_status=[_build_provider_status_payload(failure) for failure in response.provider_status],
         from_cache=response.from_cache,
         response_time_ms=response.response_time_ms,
     )

@@ -346,6 +346,83 @@ class LocationUnificationServiceTest(unittest.TestCase):
         self.assertEqual(len(results), 2)
         self.assertEqual([item["name"] for item in results], ["Marrakech Airport (RAK)", "Marrakech Downtown"])
 
+    def test_search_prefers_downtown_rows_for_downtown_queries(self) -> None:
+        unified_locations = self.service.build_unified_locations(
+            [
+                {
+                    "provider": "green_motion",
+                    "provider_location_id": "59610",
+                    "name": "Dubai Airport Terminal 1",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "airport",
+                    "latitude": 25.248081,
+                    "longitude": 55.345093,
+                    "iata": "DXB",
+                },
+                {
+                    "provider": "green_motion",
+                    "provider_location_id": "60160",
+                    "name": "Dubai Downtown",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "office",
+                    "latitude": 25.25812,
+                    "longitude": 55.297569,
+                },
+                {
+                    "provider": "ok_mobility",
+                    "provider_location_id": "650",
+                    "name": "Dubai",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "unknown",
+                    "latitude": 25.085,
+                    "longitude": 55.215,
+                },
+            ]
+        )
+
+        results = self.service.search_locations(unified_locations, "dubai downtown", limit=10)
+
+        self.assertEqual([item["name"] for item in results], ["Dubai Downtown"])
+
+    def test_search_prefers_airport_rows_for_airport_queries(self) -> None:
+        unified_locations = self.service.build_unified_locations(
+            [
+                {
+                    "provider": "green_motion",
+                    "provider_location_id": "59610",
+                    "name": "Dubai Airport Terminal 1",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "airport",
+                    "latitude": 25.248081,
+                    "longitude": 55.345093,
+                    "iata": "DXB",
+                },
+                {
+                    "provider": "green_motion",
+                    "provider_location_id": "60160",
+                    "name": "Dubai Downtown",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "office",
+                    "latitude": 25.25812,
+                    "longitude": 55.297569,
+                },
+            ]
+        )
+
+        results = self.service.search_locations(unified_locations, "dubai airport", limit=10)
+
+        self.assertEqual([item["name"] for item in results], ["Dubai Airport (DXB)"])
+
     def test_it_merges_terminal_airport_rows_into_nearby_iata_airport(self) -> None:
         locations = [
             {

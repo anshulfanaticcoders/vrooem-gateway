@@ -447,6 +447,8 @@ class AdobeCarAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": category_code,
+            "provider_product_id": category_code or None,
+            "availability_status": "available",
             "name": model_name,
             "category": vehicle_category,
             "make": make,

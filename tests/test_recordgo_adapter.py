@@ -1,8 +1,21 @@
 import sys
 import types
 import unittest
+import asyncio
 
-sys.modules.setdefault("httpx", types.SimpleNamespace())
+class _FakeAsyncClient:
+    def __init__(self, *args, **kwargs):
+        pass
+
+
+sys.modules.setdefault(
+    "httpx",
+    types.SimpleNamespace(
+        AsyncClient=_FakeAsyncClient,
+        Response=object,
+        TimeoutException=Exception,
+    ),
+)
 
 from app.adapters.recordgo import RecordGoAdapter
 from app.schemas.pricing import Pricing
@@ -10,6 +23,17 @@ from app.schemas.vehicle import Vehicle, VehicleLocation
 
 
 class RecordGoAdapterTest(unittest.TestCase):
+    def test_static_locations_include_iata_and_coordinates_for_lanzarote(self) -> None:
+        adapter = RecordGoAdapter()
+
+        locations = asyncio.run(adapter.get_locations())
+
+        lanz = next(location for location in locations if location["provider_location_id"] == "34903")
+        self.assertEqual(lanz["name"], "Lanzarote Airport")
+        self.assertEqual(lanz["iata"], "ACE")
+        self.assertAlmostEqual(lanz["latitude"], 28.9462, places=4)
+        self.assertAlmostEqual(lanz["longitude"], -13.6052, places=4)
+
     def test_groups_product_variants_into_one_vehicle_with_booking_products(self) -> None:
         adapter = RecordGoAdapter()
 

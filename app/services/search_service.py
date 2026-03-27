@@ -8,7 +8,7 @@ import uuid
 from app.adapters.base import BaseAdapter
 from app.adapters.registry import get_adapter
 from app.schemas.location import ProviderLocationEntry
-from app.schemas.search import SearchRequest, SearchResponse, SupplierResult
+from app.schemas.search import ProviderFailure, SearchRequest, SearchResponse, SupplierResult
 from app.schemas.vehicle import Vehicle
 from app.services.cache_service import CacheService
 from app.services.circuit_breaker import CircuitBreakerRegistry
@@ -105,6 +105,36 @@ async def _search_single_supplier(
             error=str(exc),
             response_time_ms=elapsed_ms,
         )
+
+
+def _build_provider_failure(result: SupplierResult) -> ProviderFailure | None:
+    if not result.error:
+        return None
+
+    error = result.error.strip()
+    lowered = error.lower()
+
+    failure_type = "provider_error"
+    retryable = False
+
+    if "circuit breaker open" in lowered:
+        failure_type = "circuit_open"
+        retryable = True
+    elif "timeout" in lowered:
+        failure_type = "timeout"
+        retryable = True
+    elif "connect" in lowered or "unreachable" in lowered or "connection" in lowered:
+        failure_type = "transport_error"
+        retryable = True
+
+    return ProviderFailure(
+        provider=result.supplier_id,
+        stage="vehicle_search",
+        failure_type=failure_type,
+        message=error,
+        retryable=retryable,
+        raw_excerpt=error,
+    )
 
 
 async def search_vehicles(
@@ -214,10 +244,16 @@ async def search_vehicles(
     # Merge all vehicles
     all_vehicles: list[Vehicle] = []
     suppliers_responded = 0
+    provider_status: list[ProviderFailure] = []
     for result in supplier_results:
         if result.error is None:
             suppliers_responded += 1
             all_vehicles.extend(result.vehicles)
+            continue
+
+        failure = _build_provider_failure(result)
+        if failure is not None:
+            provider_status.append(failure)
 
     # Cache individual vehicles for booking retrieval
     for vehicle in all_vehicles:
@@ -232,6 +268,7 @@ async def search_vehicles(
         suppliers_queried=len(tasks),
         suppliers_responded=suppliers_responded,
         supplier_results=supplier_results,
+        provider_status=provider_status,
         response_time_ms=elapsed_ms,
     )
 

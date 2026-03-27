@@ -436,6 +436,7 @@ class GreenMotionAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": vehicle_id,
+            "availability_status": "available",
             "name": name,
             "category": category_from_sipp(sipp_code),
             "make": make,

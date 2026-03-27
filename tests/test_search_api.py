@@ -3,6 +3,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from app.api.v1.search import VehicleSearchBody, _do_search
 from app.services.circuit_breaker import CircuitBreakerRegistry
+from app.schemas.search import ProviderFailure, SearchResponse
 
 
 class SearchApiTest(unittest.IsolatedAsyncioTestCase):
@@ -44,6 +45,32 @@ class SearchApiTest(unittest.IsolatedAsyncioTestCase):
         provider_entries = search_vehicles.await_args.kwargs['provider_entries']
         self.assertEqual(request.country_code, 'MA')
         self.assertEqual(provider_entries[0]['pickup_id'], 'CMN:CMNA01')
+
+    async def test_vehicle_search_payload_includes_structured_provider_status(self) -> None:
+        from app.api.v1.search import build_search_vehicle_response
+
+        response = SearchResponse(
+            search_id="search_123",
+            provider_status=[
+                ProviderFailure(
+                    provider="surprice",
+                    stage="vehicle_search",
+                    failure_type="provider_error",
+                    http_status=422,
+                    provider_code="225",
+                    message="One way rentals not allowed to this location",
+                    retryable=False,
+                    raw_excerpt='{"code":"225"}',
+                )
+            ],
+        )
+
+        payload = build_search_vehicle_response(response)
+
+        self.assertEqual(len(payload.provider_status), 1)
+        self.assertEqual(payload.provider_status[0].provider, "surprice")
+        self.assertEqual(payload.provider_status[0].failure_type, "provider_error")
+        self.assertEqual(payload.provider_status[0].http_status, 422)
 
 
 if __name__ == '__main__':

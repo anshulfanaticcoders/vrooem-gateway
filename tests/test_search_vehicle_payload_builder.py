@@ -123,3 +123,22 @@ def test_build_search_vehicle_payload_maps_greenmotion_products_from_supplier_pa
     assert payload.products[0]["fuel_policy"] == "Same to same"
     assert payload.products[1]["type"] == "PRE"
     assert payload.products[1]["total"] == 150.0
+
+
+def test_build_search_vehicle_payload_exposes_canonical_product_and_rate_ids() -> None:
+    payload = build_search_vehicle_payload(
+        _make_vehicle(
+            supplier_vehicle_id="SBC-CAR-1",
+            supplier_data={
+                "booking_token": "opaque-booking-data",
+                "product_id": "SBC-PRODUCT-1",
+                "rate_id": "BASIC-PRE",
+                "availability_status": "Immediate",
+            },
+        )
+    )
+
+    assert payload.provider_vehicle_id == "SBC-CAR-1"
+    assert payload.provider_product_id == "SBC-PRODUCT-1"
+    assert payload.provider_rate_id == "BASIC-PRE"
+    assert payload.availability_status == "Immediate"

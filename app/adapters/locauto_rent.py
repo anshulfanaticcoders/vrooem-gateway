@@ -40,7 +40,7 @@ NS_LOCAUTO = "https://nextrent.locautorent.com"
 # Location codes follow IATA convention or Locauto-specific codes.
 _PREDEFINED_LOCATIONS: list[dict] = [
     # Major Airports
-    {"code": "AHO", "name": "Alghero Airport", "city": "Alghero", "lat": 40.6361, "lng": 8.1200},
+    {"code": "AHO", "name": "Alghero Airport", "city": "Alghero", "lat": 40.6321, "lng": 8.2908},
     {"code": "BGY", "name": "Bergamo Orio al Serio Airport", "city": "Bergamo", "lat": 45.6745, "lng": 9.7046},
     {"code": "BLQ", "name": "Bologna Airport", "city": "Bologna", "lat": 44.5354, "lng": 11.2887},
     {"code": "CAG", "name": "Cagliari Airport", "city": "Cagliari", "lat": 39.2515, "lng": 9.0544},
@@ -625,6 +625,8 @@ class LocautoRentAdapter(BaseAdapter):
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
             "supplier_vehicle_id": effective_sipp or sipp_code,
+            "provider_product_id": effective_sipp or sipp_code or None,
+            "availability_status": status.lower() if status else ("available" if is_available else None),
             "name": f"{vehicle_name} or similar",
             "category": category_from_sipp(effective_sipp),
             "make": make,
