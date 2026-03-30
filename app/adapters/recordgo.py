@@ -376,9 +376,11 @@ class RecordGoAdapter(BaseAdapter):
             km_policy = product.get("kmPolicyComercial") or product.get("kmPolicyCommercial")
             mileage_policy, mileage_limit = _parse_mileage_policy(km_policy)
 
-            # Age restrictions
+            # Age restrictions & driver requirements
             min_age = _safe_int(product.get("minAgeProduct")) or None
             max_age = _safe_int(product.get("maxAgeProduct")) or None
+            min_driver_license = _safe_int(product.get("minDriverLicense")) or None
+            product_ttcc = product.get("productTTCC") or ""
 
             # Insurance / preauth+excess from included complements
             included_complements = product.get("productComplementsIncluded") or []
@@ -500,6 +502,10 @@ class RecordGoAdapter(BaseAdapter):
                         "complements_included": included_complements,
                         "refuel_policy": product.get("refuelPolicyCommercial"),
                         "km_policy": product.get("kmPolicyCommercial") or product.get("kmPolicyComercial"),
+                        "terms": product_ttcc,
+                        "min_driver_license": min_driver_license,
+                        "min_age": min_age,
+                        "max_age": max_age,
                     },
                 },
                 "min_driver_age": min_age,
@@ -707,8 +713,11 @@ class RecordGoAdapter(BaseAdapter):
         # Build complements from selected extras
         associated_complements = []
         for extra in request.extras:
+            # Strip gateway prefix to get raw RecordGo complementId (numeric)
+            raw_id = extra.extra_id.replace(f"ext_{self.supplier_id}_", "")
+            comp_id = int(raw_id) if raw_id.isdigit() else raw_id
             associated_complements.append({
-                "complementId": extra.extra_id,
+                "complementId": comp_id,
                 "complementUnits": extra.quantity,
             })
 
@@ -729,7 +738,7 @@ class RecordGoAdapter(BaseAdapter):
             "country": sd.get("country", ""),
             "sellCode": sd.get("sell_code"),
             "sellCodeVer": sd.get("sell_code_ver"),
-            "partnerBookingCode": request.laravel_booking_id or f"gw_{uuid.uuid4().hex[:12]}",
+            "partnerBookingCode": str(request.laravel_booking_id) if request.laravel_booking_id else f"gw_{uuid.uuid4().hex[:12]}",
             "bookingDate": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "pickupBranch": sd.get("pickup_branch"),
             "dropoffBranch": sd.get("dropoff_branch"),
