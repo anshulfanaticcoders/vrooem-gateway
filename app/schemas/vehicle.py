@@ -72,6 +72,14 @@ class VehicleLocation(BaseModel):
     longitude: float | None = None
     location_type: str = "other"
     airport_code: str | None = None
+    address: str | None = None
+    phone: str | None = None
+    email: str | None = None
+    is_airport: bool = False
+    operating_hours: dict | None = None
+    pickup_instructions: str | None = None
+    dropoff_instructions: str | None = None
+    out_of_hours: dict | None = None
 
 
 class Vehicle(BaseModel):

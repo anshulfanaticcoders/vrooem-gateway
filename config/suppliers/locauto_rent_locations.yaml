@@ -1,0 +1,4934 @@
+locations:
+- code: AHO
+  name: Alghero Airport
+  city: Alghero
+  province: Sassari
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: AHO
+  latitude: 40.6314
+  longitude: 8.29532
+  address: AEROPORTO FERTILIA - Regione Nuraghe Biancu, 07041 - Alghero (SS)
+  postal_code: '07041'
+  phone: +39 079 999241
+  email: algheroapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: Our car rental office is located inside Alghero airport, on
+    the right side after the arrivals gate.
+  dropoff_instructions: The parking is located just outside the terminal on the right.
+    Follow the "Autonoleggi/Car rental" signs and park the vehicle in the Locauto
+    parking spaces.
+  out_of_hours:
+    key_box: Key box available. OOH return is not available during airport closing
+      time from 00.00 am until 04.00 am.
+    pickup: ON REQUEST
+    exceptions: null
+- code: ANCD
+  name: Ancona
+  city: Ancona
+  province: Ancona
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.57249
+  longitude: 13.50524
+  address: Via Achille Grandi 45 M, 60131 Ancona (AN)
+  postal_code: '60131'
+  phone: +39 0719 940001
+  email: ancona@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 14:00 - 18:00
+    saturday: 09:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 02/05/2026:CLOSED 02/01/2027:CLOSED
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Achille Grandi 45 M, close to
+    the Baraccola commercial area, about 4 km from the Ancona Sud/Osimo motorway exit.
+  dropoff_instructions: Customers can park the vehicle in the free public parking
+    in front of the office. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: AOT
+  name: Aosta Airport
+  city: Saint Christophe
+  province: Aosta
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: AOT
+  latitude: 45.87328
+  longitude: 7.36543
+  address: Aeroporto Corrado Gex, Località Les Iles 13, 11020 SAINT CHRISTOPHE (AO)
+  postal_code: '11020'
+  phone: +39 0165 41432
+  email: aostaapt@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED From 13/04/2026 until 18/04/2026:
+      CLOSED 02/05/2026: CLOSED 01/06/2026: CLOSED From 14/09/2026 until 19/09/2026:
+      CLOSED 07/12/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located inside the departure/arrival hall of
+    the Corrado Gex Airport, about 3 km from the Aosta train station and city centre.
+  dropoff_instructions: 'The parking lot it''s located on the right side of the airport
+    building. Important: out of hours return is not allowed.'
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: ARD
+  name: Arezzo
+  city: Arezzo
+  province: Arezzo
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.46954
+  longitude: 11.87037
+  address: Via Marco Perennio 69/2 c/o Stazione IP 52100 Arezzo (AR)
+  postal_code: '52100'
+  phone: +39 0575 969683
+  email: arezzo@locautorent.it
+  operating_hours:
+    weekday: 'Mon - Thur 09:00 - 13:00 / 14:30 - 17:30 Fri: 09:00 - 13:00 / 14:30
+      - 18:00'
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 07/08/2026: CLOSED 14/08/2026:
+      09:00-13:00 From 17/08/2026 until 30/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Marco Perennio 69/2 at the IP
+    gas station, about 1 km from historic centre and 1.5 km from Arezzo train station
+    and fair & congress centre.
+  dropoff_instructions: The parking lot is next to our rental office at the IP gas
+    station. Out of hours return is not alllowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: ATD
+  name: Asti
+  city: Asti
+  province: Asti
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.90201
+  longitude: 8.23222
+  address: Via Del Lavoro 46/48, 14100 Asti (AT)
+  postal_code: '14100'
+  phone: +39 0141 479720
+  email: asti@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 12:00 / 14:30 - 18:30
+    saturday: 08:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '06/05/2026: CLOSED From 09/08/2026 until 23/08/2026:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via del Lavoro 46/48 in the Asti business
+    area, about 2km from the historic centre and 2.5 km from Asti railway station.
+  dropoff_instructions: The parking lot is next to the branch. Out of hours return
+    is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: BAAPT
+  name: Bari Airport
+  city: Bari
+  province: Bari
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 41.43068
+  longitude: 16.78268
+  address: AEROPORTO WOIJTYLA - Viale Enzo Ferrari SNC, 70128 Bari (BA)
+  postal_code: '70128'
+  phone: +39 080 5378995
+  email: bariapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 09:00 - 20:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The office is located on the ground-floor in front of the arrivals
+    gate (car rental hall).
+  dropoff_instructions: The parking is outside the Terminal, about 300 meters from
+    the office. Follow the 'Autonoleggi/Car Rental' signs and look for the Locauto
+    Rent signpost.
+  out_of_hours:
+    key_box: Key box available in front of the office inside the terminal.
+    pickup: ON REQUEST
+    exceptions: null
+- code: BAT
+  name: Bari Train Station
+  city: Bari
+  province: Bari
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 41.11819
+  longitude: 16.87127
+  address: Stazione centrale, Piazza Aldo Moro snc, 70121 Bari (BA)
+  postal_code: '70121'
+  phone: +39 080 3525370
+  email: barifs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 20:00
+    sunday: 08:00 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 17:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 20:00
+    LIBERATION DAY 25/4/26: 08:00 - 20:00
+    LABOUR DAY 1/5/26: 08:00 - 20:00
+    REPUBLIC DAY 2/6/26: 08:00 - 20:00
+    FERRAGOSTO 15/08/26: 08:00 - 20:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 20:00
+    IMMACOLATA 08/12/26: 08:00 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: 'The office is located in Piazza Aldo Moro: take the main exit
+    of Bari train station on Piazza Aldo Moro and turn right, the office is 50 mt
+    away.'
+  dropoff_instructions: Cars must be returned to the Saba Guadagni parking located
+    in Via Dieta di Bari 18/C (500 mt from the office). Key box is available and located
+    on the ground floor of the Saba Guadagni parking next to the cash machine.
+  out_of_hours:
+    key_box: Key box is available and located on the ground floor of the Saba Guadagni
+      parking next to the cash machine.
+    pickup: ON REQUEST
+    exceptions: null
+- code: BDS
+  name: Brindisi Airport
+  city: Brindisi
+  province: Brindisi
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: BDS
+  latitude: 40.77102
+  longitude: 17.94831
+  address: AEROPORTO PAPOLA-CASALE - Contrada Baroncino, 72100 Brindisi (BR)
+  postal_code: '72100'
+  phone: +39 0831 412882
+  email: brindisiapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: 'The office is located in front of Brindisi airport’s Arrivals
+    Gate, inside a building near the terminal: in order to reach it, please follow
+    the signs pointing to the car rental area.'
+  dropoff_instructions: Locauto parking is adjacent to the office, just a few meters
+    away.
+  out_of_hours:
+    key_box: Key box available inside the terminal at departures hall.
+    pickup: ON REQUEST
+    exceptions: null
+- code: BGY
+  name: Bergamo Airport
+  city: Orio Al Serio
+  province: Bergamo
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: BGY
+  latitude: 45.66983
+  longitude: 9.68433
+  address: AEROPORTO ORIO AL SERIO Via Dell'Aeroporto 13, 24050 Orio al Serio (BG)
+  postal_code: '24050'
+  phone: +39 035 4596283
+  email: bergamoapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 08:00 23:00
+    EASTER 5/4/26: 08:00 23:00
+    EASTER MONDAY 6/4/26: 08:00 23:00
+    LIBERATION DAY 25/4/26: 08:00 23:00
+    LABOUR DAY 1/5/26: 08:00 23:00
+    REPUBLIC DAY 2/6/26: 08:00 23:00
+    FERRAGOSTO 15/08/26: 08:00 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 23:00
+    IMMACOLATA 08/12/26: 08:00 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located at the Arrivals hall in the car rental's
+    area, right outside the Arrivals Gate.
+  dropoff_instructions: The car park is located inside the P3 car park at Bergamo
+    Orio al Serio airport, which can be reached by following the signs "P3 car park
+    - autonoleggi car rental". The car park is also connected to the airport by shuttle
+    bus that runs every 10 minutes from the stop nr. 8 located at the Exit 1 of the
+    terminal.
+  out_of_hours:
+    key_box: Key box available at the Locauto parking (checkin cabin).
+    pickup: ON REQUEST
+    exceptions: null
+- code: BID
+  name: Biella
+  city: Biella
+  province: Biella
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.55288
+  longitude: 8.06934
+  address: Corso Europa 6, 13900 Biella (BI)
+  postal_code: '13900'
+  phone: +39 015 8493710
+  email: biella@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 15:00 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Corso Europa 6, the main road for
+    entering the city, about 500 mt from the Biella train station and 1.5 KM from
+    the historic city centre
+  dropoff_instructions: The parking garage is next to the rental office. Out of hours
+    returns are not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: BLQ
+  name: Bologna Airport
+  city: Bologna
+  province: Bologna
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: BLQ
+  latitude: 44.52977
+  longitude: 11.29356
+  address: AEROPORTO G. MARCONI - Via del Triumvirato 84, 40132, Bologna (BO)
+  postal_code: '40132'
+  phone: +39 051 6472128
+  email: bolognaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 23:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 10:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: 'The office is located inside the Arrival''s terminal. Exit
+    from the Arrivals Gate and keep walking for a few meters: the office willl be
+    on your left.'
+  dropoff_instructions: 'The Parking is located a few meters away from the terminal:
+    follow the signs to ''Autonoleggi/Car Rental'' on the right side of the airport
+    entrance.'
+  out_of_hours:
+    key_box: Key box available at the rental desk.
+    pickup: ON REQUEST
+    exceptions: null
+- code: BOC
+  name: Bologna Central Station
+  city: Bologna
+  province: Bologna
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 40.50553
+  longitude: 11.34092
+  address: Via Pietro Pietramellara 35/I, 40131 Bologna (BO)
+  postal_code: '40131'
+  phone: +39 051 243995
+  email: bolognafs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located outside the station’s west exit, about
+    150 meters from the front exit in Viale Pietramellara 35.
+  dropoff_instructions: The parking is located in Viale Pietramellara 27/A at the
+    Garage Stazione Centrale, about 100mt from the office. The parking is open from
+    7.00 am until 11.00 pm. Out of hours drop-off is not allowed during the garage
+    closing time.
+  out_of_hours:
+    key_box: The out of hours return is available Mon - Sun from 7.00 AM to 11.00
+      PM at the Garage Stazione Centrale located inViale Pietramellara 27/A. Out of
+      hours drop-off is not allowed during the garage closing time.
+    pickup: ON REQUEST
+    exceptions: null
+- code: CAG
+  name: Cagliari Airport
+  city: Elmas
+  province: Cagliari
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: CAG
+  latitude: 39.2564
+  longitude: 9.0598
+  address: AEROPORTO M. MAMELI - Via dei trasvolatori SNC, 09030 Elmas (CA)
+  postal_code: 09030
+  phone: +39 070 242042
+  email: cagliariapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located inside the rent a car, about 100 mt from
+    the airport on the left.
+  dropoff_instructions: Locauto parking is adjacent to the office, just a few meters
+    away.
+  out_of_hours:
+    key_box: Key box available at the Locauto parking (checkin cabin).
+    pickup: ON REQUEST
+    exceptions: null
+- code: CARD
+  name: Cardano Al Campo
+  city: Cardano Al Campo
+  province: Varese
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.6756
+  longitude: 8.76127
+  address: Via Papa Giovanni XXIII 191, Cardano al Campo (VA)
+  postal_code: null
+  phone: +39 0331 384314
+  email: cardanoalcampo@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 18:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 18:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: A8 highway Busto Arsizio exit, follow the SS336 direction "airport",
+    exit "Casorate sempione" and follow Provincial Route 15 del Ciglione, via Papa
+    Giovanni XXIII is about 500 mt on the right.
+  dropoff_instructions: Car must be returned to Via Papa Giovanni XXIII 191. Out of
+    hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CED
+  name: Caserta
+  city: Casagiove
+  province: Caserta
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.07363
+  longitude: 14.30328
+  address: Via Nazionale Appia 276, 81022 Casagiove (CE)
+  postal_code: '81022'
+  phone: +39 0823 881375
+  email: caserta@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 15:00 - 19:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 08/08/2026 until 16/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Nazionale Appia 276, just after
+    the Caserta Nord motorway exit. The Caserta railway station is about 2 km away.
+  dropoff_instructions: The parking garage entrance is on the corner of Via Autostrada
+    and Via Caduti sul lavoro, just behind the rental office. Out of hours returns
+    are not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CIA
+  name: Roma Ciampino Airport
+  city: Ciampino
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: CIA
+  latitude: 41.79627
+  longitude: 12.58955
+  address: Via Mario Mameli SNC c/o PARKING 8 - 00043 Ciampino (RM)
+  postal_code: '00043'
+  phone: +39 06 65959475
+  email: ciampinoapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 21:00
+    EPIPHANY 2026 6/1/26: 08:00 - 21:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 21:00
+    LIBERATION DAY 25/4/26: 08:00 - 21:00
+    LABOUR DAY 1/5/26: 08:00 - 21:00
+    REPUBLIC DAY 2/6/26: 08:00 - 21:00
+    FERRAGOSTO 15/08/26: 08:00 - 21:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 21:00
+    IMMACOLATA 08/12/26: 08:00 - 21:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 16:00
+    BOXING DAY 26/12/26: 08:00 - 21:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 21:00
+    EPIPHANY 6/1/27: 08:00 - 21:00
+  pickup_instructions: Exit from Arrivals Gate and take the free shuttle bus that
+    will get you to the rent a car area in a couple of minutes. The office is about
+    350 mt, within walking distance.
+  dropoff_instructions: The parking is located in the immediate vicinity of the office.
+  out_of_hours:
+    key_box: key box available on the left side of the car rental building.
+    pickup: ON REQUEST
+    exceptions: null
+- code: COD
+  name: Como
+  city: Como
+  province: Como
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.79151
+  longitude: 9.06571
+  address: Via Varesina 138, 22100 Como (CO)
+  postal_code: '22100'
+  phone: +39 031 522300
+  email: como@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:00 / 14:00 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 02/01/2026 until 06/01/2026: CLOSED 04/04/2026:
+      CLOSED 02/05/2026: CLOSED 01/06/2026: CLOSED 07/12/2026: CLOSED From 02/01/2027
+      until 06/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Varesina 138, about 5 km from
+    the Como Lago train station and 4 km from Como City center.
+  dropoff_instructions: The parking lot is next to the office. Out of hours return
+    is not allowed.
+  out_of_hours:
+    key_box: Key box available on the left side of the office front door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: CON
+  name: Conegliano
+  city: Conegliano
+  province: Treviso
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.89806
+  longitude: 12.29403
+  address: Via Immacolata di Lourdes 111, 31015 Conegliano Veneto (TV)
+  postal_code: '31015'
+  phone: +39 0438 411437
+  email: conegliano@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 17:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: ON REQUEST 09:00-13:00 14/08/2026: 09:00-13:00
+      02/01/2027: ON REQUEST 09:00-13:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: Our Conegliano car rental office is located at 111, Via Immacolata
+    Di Lourdes, near the central railway station. If you are coming by train, you
+    can reach us by bus in about 8 minutes using bus line number 43 or by foot in
+    about 20 minutes.
+  dropoff_instructions: Locauto parking is next to the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CRD
+  name: Cremona
+  city: Cremona
+  province: Cremona
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.15579
+  longitude: 9.9886
+  address: VIA CASTELLEONE 130M, 26100 CREMONA (CR)
+  postal_code: '26100'
+  phone: +39 0372 1920751
+  email: cremona@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:00 / 15:00 - 18:30
+    saturday: 08:30 - 11:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED 04/04/2026:CLOSED
+      02/05/2026:CLOSED 01/06/2026:CLOSED 01/08/2026:CLOSED 08/08/2026:CLOSED From
+      08/08/2026 until 23/08/2026:CLOSED 29/08/2026:CLOSED From 13/11/2026 until 15/11/2026:
+      CLOSED 07/12/2026:CLOSED From 01/01/2027 until 06/01/2027:CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: 'The office is located in Via Castelleone 130M, 26100 Cremona:
+    arriving from A1 exit Piacenza Sud and follow directions A21/E70 towards Brescia/Cremona.
+    Exit Cremona and follow directions to Cremona Fiera/Crema.'
+  dropoff_instructions: The parking lots are inside Storci-Car Service repair shop
+    and accessible during the shop's opening hours.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CT
+  name: Catania Airport
+  city: Catania
+  province: Catania
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 37.470455
+  longitude: 15.066043
+  address: AEROPORTO FONTANAROSSA - Via Fontanarossa, (c/o terminal arrivi) 95151
+    Catania (CT)
+  postal_code: '95151'
+  phone: +39 095 346893
+  email: cataniaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 24:00
+    saturday: 08:00 - 24:00
+    sunday: 08:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 24:00
+    EASTER 5/4/26: 08:00 - 24:00
+    EASTER MONDAY 6/4/26: 08:00 - 24:00
+    LIBERATION DAY 25/4/26: 08:00 - 24:00
+    LABOUR DAY 1/5/26: 08:00 - 24:00
+    REPUBLIC DAY 2/6/26: 08:00 - 24:00
+    FERRAGOSTO 15/08/26: 08:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 24:00
+    IMMACOLATA 08/12/26: 08:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 24:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 24:00
+  pickup_instructions: The office is located in the terminal, just in front of the
+    arrivals gate.
+  dropoff_instructions: The parking is located on the right side of the terminal,
+    about 50mt from the office. Follow the signs to parking lot P4 and continue towards
+    the 'Rent a Car'/'Locauto Rent' area.
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the terminal.
+    pickup: ON REQUEST
+    exceptions: null
+- code: CTD
+  name: Catania San Giuseppe La Rena
+  city: Catania
+  province: Catania
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 37.481
+  longitude: 15.07831
+  address: Via San Giuseppe La Rena, 19 D/E - 95121 Catania (CT)
+  postal_code: '95121'
+  phone: +39 331 1214796
+  email: catanialarena@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 15:00 - 18:00
+    saturday: 08:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/02/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via San Giuseppe La Rena, 19 D/E,
+    about 3km from Catania Fontanarossa airport.
+  dropoff_instructions: The parking is located in Via San Giuseppe la Rena 19 D/E.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CVT
+  name: Civitavecchia
+  city: Civitavecchia
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 42.08818
+  longitude: 11.79774
+  address: Stazione ferroviaria di Civitavecchia, Piazzale Scipione Matteuzzi snc,
+    00053 Civitavecchia (RM)
+  postal_code: '00053'
+  phone: +39 0766 1800750
+  email: civitavecchiafs@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 15:00 - 18:30
+    saturday: 08:30 - 13:00
+    sunday: 08:30 - 13:00
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/08/2026 until 31/08/2026: Mon-Sun 08:30 -
+      13:30'
+    NEW YEAR 1/1/26: 08:30 - 13:00
+    EPIPHANY 2026 6/1/26: 08:30 - 13:00
+    EASTER 5/4/26: 08:30 - 13:00
+    EASTER MONDAY 6/4/26: 08:30 - 13:00
+    LIBERATION DAY 25/4/26: 08:30 - 13:00
+    LABOUR DAY 1/5/26: 08:30 - 13:00
+    REPUBLIC DAY 2/6/26: 08:30 - 13:00
+    FERRAGOSTO 15/08/26: 08:30 - 13:00
+    ALL SAINTS' DAY 01/11/26: 08:30 - 13:00
+    IMMACOLATA 08/12/26: 08:30 - 13:00
+    CHRISTMAS'EVE 24/12/26: 08:30 - 19:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: 08:30 - 13:00
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: 08:30 - 13:00
+    EPIPHANY 6/1/27: 08:30 - 13:00
+  pickup_instructions: The office is located inside the Civitavecchia Train station,
+    accessible through platform 1 or from Piazzale Scipione Matteuzzi. The office
+    is 1km from the cruise terminal of Civitavecchia Port.
+  dropoff_instructions: Cars must be returned in front of the office and the keys
+    must be delivered to our staff. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: CZD
+  name: Catanzaro
+  city: Germaneto
+  province: Catanzaro
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 38.861597
+  longitude: 16.567929
+  address: Viale Europa Snc - Località Germaneto - 88100 Catanzaro (CZ)
+  postal_code: '88100'
+  phone: +39 0961 525146
+  email: catanzaro@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 17:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Germaneto, inside the Esso gas station,
+    2.5 km from the Catanzaro University, 11 km from the Catanzaro railway station/city
+    centre and 7 km from the SS280 Exit "Due Mari/E848".
+  dropoff_instructions: Customers can park the vehicle in the free parking area in
+    front of the rental office. In case of out of hours returns, customers will have
+    to leave the keys into the dedicated key box located on the front door of the
+    office.
+  out_of_hours:
+    key_box: Key box available on the front shutter of the office.
+    pickup: ON REQUEST
+    exceptions: null
+- code: DCS
+  name: Cosenza
+  city: Rende
+  province: Cosenza
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 39.36853
+  longitude: 16.23958
+  address: Via Cristoforo Colombo 79 - 87036 Rende (CS)
+  postal_code: '87036'
+  phone: +39 0984 1758129
+  email: cosenza@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 15:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in VIA Cristoforo Colombo snc (ex n.
+    74), in the Rende commercial area, next to the Best Western Palance Hotel.
+  dropoff_instructions: The parking is in front of the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DESD
+  name: Desenzano Del Garda
+  city: Desenzano Del Garda
+  province: Brescia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.46225
+  longitude: 10.52652
+  address: Via Adua 3, 25015 Desenzano del Garda (BS)
+  postal_code: '25015'
+  phone: +39 0307 281664
+  email: desenzanodelgarda@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:00 - 18:00
+    saturday: 08:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 05/01/2026: CLOSED 02/05/2026:CLOSED
+      01/06/2026: CLOSED 07/12/2026: CLOSED 02/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Adua 3, about 1.8 km from the
+    Desenzano railway station and historic city centre.
+  dropoff_instructions: Customers can park the vehicle in the free parking area in
+    front of the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DFE
+  name: Ferrara
+  city: Ferrara
+  province: Ferrara
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.80651
+  longitude: 11.58677
+  address: Via Bologna 623 - frazione Chiesuol del Fosso - 44124 Ferrara (FE)
+  postal_code: '44124'
+  phone: +39 0532 905322
+  email: ferrara@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 12:30 / 15:00 - 19:00
+    saturday: 09:00 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: Ferrara rental office is located in Via Bologna 623.
+  dropoff_instructions: The parking is in front of the office.
+  out_of_hours:
+    key_box: Key box available on the office front door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: DGE
+  name: Genova Downtown
+  city: Genova
+  province: Genova
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.40396
+  longitude: 8.95276
+  address: via G.Casaregis 46/1, 16129 Genova (GE)
+  postal_code: '16129'
+  phone: +39 010 580071
+  email: genovacasaregis@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 19:00
+    saturday: 08:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 02/05/0226: CLOSED 01/06/2026:
+      CLOSED 24/06/2026: CLOSED 02/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 16:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 16:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in via Casaregis 46, about 650 mt from
+    the Genova Brignole train station, 1.5 km from Genova fair and 2.4 km from Porto
+    Antico and historical centre.
+  dropoff_instructions: The parking is located in Via Casaregis 46.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DIM
+  name: Imperia
+  city: Imperia
+  province: Imperia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.8894
+  longitude: 8.03675
+  address: Via A.Manzoni 41/43,18100 Imperia (IM)
+  postal_code: '18100'
+  phone: +39 0183 499901
+  email: imperia@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '26/11/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Alessandro Manzoni 41/43, about
+    500 mt from the Oneglia train station.
+  dropoff_instructions: Parking area in front of the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DMIA
+  name: Milano Cassala
+  city: Milano
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.44515
+  longitude: 9.16544
+  address: Viale Cassala 57, 20143 Milano (MI)
+  postal_code: '20143'
+  phone: +39 02 89420090
+  email: milanocassala@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 12:30 / 14:30 - 19:00
+    saturday: 09:00 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 10/08/2026 until 18/08/2026: CLOSED 07/12/2026:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Cassala 57, about 250 mt from
+    the Romolo (M2) underground stop. From exit A7 MILANO CENTRO - VIALE LIGURIA follow
+    the directions to Via Spezia and then turn left to Viale Liguria.
+  dropoff_instructions: The parking lot is beside the rental office, inside the Cassala
+    garage.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DMT
+  name: Matera
+  city: Matera
+  province: Matera
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.67387
+  longitude: 16.57193
+  address: Via della Scienza 21, 75100 Matera (MT)
+  postal_code: '75100'
+  phone: +39 0835 262484
+  email: matera@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:00
+    saturday: 08:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/026: CLOSED 02/05/2026: CLOSED 02/07/2026:
+      CLOSED 02/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The rental desk is located in Via della Scienza 21, inside
+    RAD Colaianni workshop.
+  dropoff_instructions: The parking is located in Via della Scienza 21, inside RAD
+    Colaianni workshop.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DNAF
+  name: Napoli Fuorigrotta
+  city: Napoli
+  province: Napoli
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.82278
+  longitude: 14.19197
+  address: Via Diocleziano 80, 80125 Napoli
+  postal_code: '80125'
+  phone: +39 081 7419 613
+  email: napolifuorigrotta@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:00 - 18:00
+    saturday: 08:30 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '19/09/2026: CLOSED From 13/08/2026 until 17/08/2026:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Diocleziano 8, in the Fuorigrotta
+    district, about 200mt from Napoli Campi Flegrei Train station.
+  dropoff_instructions: The parking is right in front of the office. Out of hours
+    return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DPOM
+  name: Pomezia
+  city: Pomezia
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.6869
+  longitude: 12.5034
+  address: Via Dei Castelli Romani 10, 00071 POMEZIA (RM)
+  postal_code: '00071'
+  phone: +39 06 69489100
+  email: pomezia@locautorent.it
+  operating_hours:
+    weekday: 07:30 - 13:00 / 14:30 - 18:00
+    saturday: 07:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 07:30 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 07:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: Our Pomezia car rental office is located in Via Dei Castelli
+    Romani, 10.
+  dropoff_instructions: The parking lot is in front of the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DRNM
+  name: Roma Nomentana
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.57006
+  longitude: 12.34167
+  address: Via Giggi Spaducci 5, 00156 Roma (RM)
+  postal_code: '00156'
+  phone: +39 06 88917554
+  email: romanomentana@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 13:00 / 14:00 - 18:00
+    saturday: 08:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '29/06/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 13:00 / 14:00 - 18:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 13:00 / 14:00 - 18:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Giggi Spaducci 5 (from Grande
+    Raccordo Anulare exit No. 11 towards Roma Centro - Nomentano Montesacro).
+  dropoff_instructions: The parking is located in front of the office. In case of
+    out of hours return, park the vehicle in the designated parking space and leave
+    the keays into the dedicated key box.
+  out_of_hours:
+    key_box: Key box is located on the right side of the office entrance.
+    pickup: ON REQUEST
+    exceptions: null
+- code: DRP
+  name: Roma Prati
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.92081
+  longitude: 12.46614
+  address: Viale Carso 50, 00195 Roma (RM)
+  postal_code: 00195
+  phone: +39 06 6934 3371
+  email: romaprati@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 17:00
+    saturday: 08:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 02/05/2026:chiuso
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Carso 50, a few metres from
+    the Lepanto metro stop (line A).
+  dropoff_instructions: Park the vehicle in front of the office's entrance.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: DTO
+  name: Torino Mirafiori
+  city: Torino
+  province: Torino
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.01904
+  longitude: 7.64886
+  address: Via Pio VII 159- 10127 Torino (TO)
+  postal_code: '10127'
+  phone: +39 011 6598879
+  email: torinomirafiori@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 14/08/2026 until 23/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Pio VII 159, at the Mirafiori
+    district, about 6 km from Porta Nuova and Porta Susa FS railway stations. Lingotto
+    Fiere is 2,5 km away.
+  dropoff_instructions: Park the vehicle in the parkig lot located in Via Pio VII
+    159.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: EFD
+  name: Erbusco Franciacorta
+  city: Erbusco
+  province: Brescia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.57929
+  longitude: 10.00319
+  address: VIA ISEO 3, 25030 ERBUSCO (BS)
+  postal_code: '25030'
+  phone: +39 030 6383796
+  email: erbuscofranciacorta@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 17:00
+    saturday: CLOSED
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED From 08/08/2026
+      until 23/08/2026:CLOSED From 24/08/2026 until 28/08/2026: 09:00-13:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located inisde the Bon shop center, at the Bonomelli
+    roundabout exit.
+  dropoff_instructions: The parking is inside the Bon shop center.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: FCO
+  name: Roma Fiumicino Airport
+  city: Fiumicino
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: FCO
+  latitude: 41.79479
+  longitude: 12.25221
+  address: AEROPORTO L.DA VINCI - Via dell'aeroporto di Fiumicino 320, 00054 Fiumicino
+    (RM)
+  postal_code: '00054'
+  phone: +39 06 65953615
+  email: fiumicinoapt@locautorent.it
+  operating_hours:
+    weekday: 07:00 - 24:00
+    saturday: 07:00 - 24:00
+    sunday: 07:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 07:00 - 24:00
+    EASTER 5/4/26: 07:00 - 24:00
+    EASTER MONDAY 6/4/26: 07:00 - 24:00
+    LIBERATION DAY 25/4/26: 07:00 - 24:00
+    LABOUR DAY 1/5/26: 07:00 - 24:00
+    REPUBLIC DAY 2/6/26: 07:00 - 24:00
+    FERRAGOSTO 15/08/26: 07:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 07:00 - 24:00
+    IMMACOLATA 08/12/26: 07:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 07:00 - 24:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+  pickup_instructions: 'The office is located inside the Epua 2 Tower: exit the arrivals
+    gate and follow the signs to the ‘Rent-a-car’ area.'
+  dropoff_instructions: Follow the 'Car Rental', 'Multilevel Parking C' signs. Take
+    the ticket at the entrance and go to the third floor.
+  out_of_hours:
+    key_box: Key box available at the Locauto parking, on the left side of the checkin
+      cabin door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: FGD
+  name: Foggia
+  city: Foggia
+  province: Foggia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.46542
+  longitude: 15.5631
+  address: Viale Fortore angolo Via Di Salpi snc, 71121 Foggia (FG)
+  postal_code: '71121'
+  phone: +39 351 8213153
+  email: foggia@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 15:30 - 19:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 14/08/2026 until 16/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Fortore corner with Via Di Salpi
+    snc, one of the main roads of the city. The office is 1.5KM from the train station
+    and 2KM from the historic centre.
+  dropoff_instructions: The car park is located in the area in front of the office.
+    Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: FI
+  name: Firenze Downtown
+  city: Firenze
+  province: Firenze
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.77811
+  longitude: 11.24562
+  address: Via Maso Finiguerra 31/R, 50123 Firenze (FI)
+  postal_code: '50123'
+  phone: +39 055 285456
+  email: firenzefs@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 19:00
+    saturday: 08:30 - 13:00
+    sunday: 08:30 - 13:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 13:00
+    EPIPHANY 2026 6/1/26: 08:30 - 13:00
+    EASTER 5/4/26: 08:30 - 13:00
+    EASTER MONDAY 6/4/26: 08:30 - 13:00
+    LIBERATION DAY 25/4/26: 08:30 - 13:00
+    LABOUR DAY 1/5/26: 08:30 - 13:00
+    REPUBLIC DAY 2/6/26: 08:30 - 13:00
+    FERRAGOSTO 15/08/26: 08:30 - 13:00
+    ALL SAINTS' DAY 01/11/26: 08:30 - 13:00
+    IMMACOLATA 08/12/26: 08:30 - 13:00
+    CHRISTMAS'EVE 24/12/26: 08:30 - 19:00
+    CHRISTMAS 25/12/26: 08:30 - 13:00
+    BOXING DAY 26/12/26: 08:30 - 13:00
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: 09:00 - 13:00
+    EPIPHANY 6/1/27: 08:30 - 13:00
+  pickup_instructions: The Locauto office in Florence is located in Via Maso Finiguerra,
+    400 meters from Santa Maria Novella railway station.
+  dropoff_instructions: The parking is located at Parking Garage Excelsior in Via
+    Palazzuolo 94, about 150 mt from the office.
+  out_of_hours:
+    key_box: Out of hours return is allowed only from 8.00 until 23.00 at the Parking
+      Garage Excelsior located in Via Palazzuolo 94. This service costs 20 euros,
+      that customers will pay directly to the garage staff.
+    pickup: ON REQUEST
+    exceptions: null
+- code: FID
+  name: Firenze Isolotto
+  city: Firenze
+  province: Firenze
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.77192
+  longitude: 11.2151
+  address: Via Ludovico Cigoli 16, 50142 Firenze (FI)
+  postal_code: '50142'
+  phone: +39 055 7195584
+  email: firenze.isolotto@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '16/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: 08:30 - 12:30
+    LABOUR DAY 1/5/26: 08:30 - 12:30
+    REPUBLIC DAY 2/6/26: 08:30 - 12:30
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: 08:30 - 12:30
+    IMMACOLATA 08/12/26: 08:30 - 12:30
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Ludovico Cigoli 16, in the Isolotto
+    district (West Florence), about 5km from the historic city center, 4 km from Santa
+    Maria Novella Train Station and 2 km from the exit A1 Milano - Roma - Napoli /
+    Firenze - Pisa - Livorno.
+  dropoff_instructions: The car park is located in front of the office in Via Ludovico
+    Cigoli 16​. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: FIUD
+  name: Fiumicino Downtown
+  city: Fiumicino
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.773166
+  longitude: 12.245886
+  address: Via Portuense 2413, 00054 Fiumicino (RM)
+  postal_code: '00054'
+  phone: +39 06 6504 7780
+  email: fiumicinodt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 18:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 18:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 18:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: From the highway Roma-Fiumicino follow the directions to Fiumicino-Ostia,
+    take the exit Fiumicino Nord (Via A. Marchetti), turn right to Fiumicino downtown
+    (Viale Lago di Traiano) and turn right to Via Portuense.
+  dropoff_instructions: Cars must be returned to our staff in Via Portuense 2413 Out
+    of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: FLR
+  name: Firenze Airport
+  city: Firenze
+  province: Firenze
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: FLR
+  latitude: 43.802
+  longitude: 11.19755
+  address: AEROPORTO AMERIGO VESPUCCI - Via Palagio degli Spini snc, 50145 Firenze
+    (FI)
+  postal_code: '50145'
+  phone: +39 055 310150
+  email: firenzeapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 23:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 23:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: Exit the terminal and wait for the free shuttle bus which will
+    take you to the rent-a-car building located in the Business center in Via Palagio
+    Degli Spini.
+  dropoff_instructions: Follow the directions to 'Autonoleggi/Car rental', get your
+    entry ticket to the toll gate and park the vehicle in the Locauto parking spaces.
+  out_of_hours:
+    key_box: Key box available at the Locauto parking (checkin cabin).
+    pickup: ON REQUEST
+    exceptions: null
+- code: FOLD
+  name: Foligno
+  city: Foligno
+  province: Perugia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 42.92749
+  longitude: 12.72534
+  address: Via Franco Santocchia 90, 06034 Foligno (PG)
+  postal_code: '06034'
+  phone: +39 0742 321322
+  email: foligno@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 02/05/2026:CLOSED
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in the south part of the city, about
+    4 km from the city center and 3.8 from Foligno central station. Arriving from
+    Perugia follow the signs SS 75, take the exit S. Eraclio and turn right to Via
+    Santocchia.
+  dropoff_instructions: The parking lot is right in front of the office. Out of hours
+    return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: FRD
+  name: Frosinone
+  city: Frosinone
+  province: Frosinone
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.65031
+  longitude: 13.33913
+  address: Via Madonna della Neve 1, 03100, Frosinone (FR)
+  postal_code: '03100'
+  phone: +39 0775 961253
+  email: frosinone@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 13:00 / 15:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Madonna della Neve 1, about 4,5
+    km from Frosinone City centre.
+  dropoff_instructions: Cars must be returned to our staff in Via Madonna della Neve
+    1, the parking lot is next to the branch. Out of hours return is on request from
+    Monday to Friday.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: GOA
+  name: Genova Airport
+  city: Genova
+  province: Genova
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: GOA
+  latitude: 44.41589
+  longitude: 8.85028
+  address: AEROPORTO CRISTOFORO COLOMBO - Via Pionieri e Aviatori d'Italia 1, 16154
+    Genova (GE)
+  postal_code: '16154'
+  phone: +39 010 6143056
+  email: genovaapt@locautorent.it
+  operating_hours:
+    weekday: 07:30 - 23:00
+    saturday: 07:30 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 12:00 / 16:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 -23:00
+    LABOUR DAY 1/5/26: 08:00 -23:00
+    REPUBLIC DAY 2/6/26: 08:00 -23:00
+    FERRAGOSTO 15/08/26: 08:00 -23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 -23:00
+    IMMACOLATA 08/12/26: 08:00 -23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 12:00 / 16:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located in the terminal, right outside the Arrivals
+    Gate on the left.
+  dropoff_instructions: Parking is located very close to the office. Follow the signs
+    to 'Autonoleggi/Rent a Car' and 'Locauto Rent'.
+  out_of_hours:
+    key_box: Key box available at the Locauto parking (checkin cabin). Keybox at the
+      rental desk available only until 00.30.
+    pickup: ON REQUEST
+    exceptions: null
+- code: GRD
+  name: Grosseto
+  city: Grosseto
+  province: Grosseto
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 42.76884
+  longitude: 11.10883
+  address: Via Aurelia Nord 17, 58100 Grosseto (GR) (c/o Stazione IP)
+  postal_code: '58100'
+  phone: +39 0564 1793502
+  email: grosseto@locautorent.it
+  operating_hours:
+    weekday: 'Mon - Thur 09:00 - 13:00 / 14:30 - 17:30 Fri: 09:00 - 13:00 / 14:30
+      - 18:00'
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 10/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Aurelia Nord 17, at the IP gas
+    station, about 300mt from the Grosseto Train Station and 650 from the historic
+    centre.
+  dropoff_instructions: The parking lot is located in the service area next to the
+    office. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: IMOD
+  name: Imola
+  city: Imola
+  province: Bologna
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.3599337
+  longitude: 11.7246806
+  address: Via Claudio Treves 10 40026 Imola (BO)
+  postal_code: '40026'
+  phone: +39 0542 363156
+  email: imola@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:00 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED 02/05/2026:
+      CLOSED 01/08/2026: CLOSED From 08/08/2026 until 23/08/2026: CLOSED 29/08/2026:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Claudio Treves 10, in the commercial
+    area close to the city center, about 850mt from railway station and 3km from the
+    A14 Adriatica motorway exit.
+  dropoff_instructions: The parking is nearby the office. Out of hours return is not
+    alllowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: LED
+  name: Lecce
+  city: Lecce
+  province: Lecce
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.3568
+  longitude: 18.15221
+  address: Viale della Repubblica 37, 73100 Lecce (LE)
+  postal_code: '73100'
+  phone: +39 0832 253697
+  email: lecce@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 16:00 - 19:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale della Repubblica 37, inside
+    Kia motors car dealership and about 2km from Lecce railway station.
+  dropoff_instructions: The parking is located outside the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: LTD
+  name: Latina
+  city: Latina
+  province: Latina
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.47377
+  longitude: 12.88679
+  address: Via Piave 14, 04100 Latina (LT)
+  postal_code: '04100'
+  phone: +39 0773 061083
+  email: latina@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Piave 14, about 1,5km from latina
+    city center.
+  dropoff_instructions: The parking is located in front of the office in Via Piave
+    14. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MBD
+  name: Monza
+  city: Monza
+  province: Monza E Brianza
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.58813
+  longitude: 9.2661
+  address: Via Eugenio Villoresi 4, 20900 Monza (MB)
+  postal_code: '20900'
+  phone: +39 039 6360633
+  email: monza@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:00 / 15:00 - 19:00
+    saturday: 08:30 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'from 02/01/2026 until 06/01/2026: CLOSED 02/05/2026:
+      CLOSED 01/06/2026: CLOSED 24/06/2026: CLOSED from 10/08/2026 until 13/08/2026:
+      08:30-12:00 from 14/08/2026 until 23/08/2026: CLOSED 07/12/2026: CLOSED from
+      02/01/2027 until 06/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is Located in Via Eugenio Villoresi 4, about 900
+    mt from Monza city centre and 1.2 km from Monza railway station. Arriving from
+    Milan, is reachable through Viale Zara taking the exit Monza Parco Villa Reale.
+  dropoff_instructions: The parking is located in Via Eugenio Villoresi 4, inside
+    the Mariani Garage.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MED
+  name: Messina
+  city: Messina
+  province: Messina
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 38.1735
+  longitude: 15.54943
+  address: Via Croce Rossa, 15 - 98124 Messina (ME)
+  postal_code: '98124'
+  phone: +39 090 2922652
+  email: messina@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 18:30
+    saturday: 08:30 - 13:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Croce Rossa, 15, about 2.5 km
+    from the city centre, 2 km from the Messina railway station and 2.8 from the port.
+    Arriving from Catania, take the exit "Messina Centro".
+  dropoff_instructions: The parking is in front of the rental office's entrance.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MICOD
+  name: Milano Corvetto
+  city: Milano
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.44125
+  longitude: 9.22462
+  address: Viale Lucania 8, 20139 Milano (MI)
+  postal_code: '20139'
+  phone: +39 02 57406422
+  email: milanocorvetto@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '07/12/2026: CLOSED From 10/08/2026 until 14/08/2026:
+      08:30-12:30 From 17/08/2026 until 22/08/2026: 08:30-12:30'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Lucania 8, about 1 km from the
+    Rogoredo railway station, in the south-east area of Milan, accessible with the
+    yellow line subway, the stop is Corvetto.
+  dropoff_instructions: The vehicle must be returned to the Polesine parking garage
+    located in Via Polesine 31, about 100 mts from the office.
+  out_of_hours:
+    key_box: Out of hours return is avilable Mon - Fri 6.00 - 21.00 / Sat 8.00 - 20.00
+      / Sun 8.00 - 12.30. Customers shall reach the Parking Corvetto in Via Polesine
+      31, park the vehicle in the Locauto parking spaces and deliver the keys to the
+      garage staff. The entrance ticket must be left inside the car. Out of hours
+      return is not allowed during the parking closing time.
+    pickup: ON REQUEST
+    exceptions: null
+- code: MIDCY
+  name: Milano City Life
+  city: Milano
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.47646
+  longitude: 9.14967
+  address: Via Sebastiano del Piombo 3, 20149 Milano (MI)
+  postal_code: '20149'
+  phone: +39 02 45477985
+  email: milanocitylife@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 17:30
+    saturday: 09:00 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 02/05/2026: CLOSED 02/06/2026:
+      CLOSED From 08/08/2026 until 23/08/2026: CLOSED 31/10/2026: CLOSED 07/12/2026:
+      CLOSED 02/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in the City life district, about 450
+    mt from Amendola Metro Station (Line M1) and 600 mt from Lotto Metro station (Lines
+    M1/M5).
+  dropoff_instructions: Car must be returned to our staff in Via Sebastiano del Piombo
+    3. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MIT
+  name: Milano Central Station
+  city: Milano
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: null
+  longitude: null
+  address: Piazza Duca d'Aosta 1 - Galleria delle Carrozze, lato piazza Luigi Savoia
+    - 20124 Milano (MI)
+  postal_code: '20124'
+  phone: +39 02 67075767
+  email: milanocentralefs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 20:00
+    sunday: 08:00 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 20:00
+    LIBERATION DAY 25/4/26: 08:00 - 20:00
+    LABOUR DAY 1/5/26: 08:00 - 20:00
+    REPUBLIC DAY 2/6/26: 08:00 - 20:00
+    FERRAGOSTO 15/08/26: 08:00 - 20:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 20:00
+    IMMACOLATA 08/12/26: 08:00 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The office is located in Piazza Duca D'Aosta 1, inside the
+    Galleria delle Carrozze (the central station's covered main entrance that provides
+    access to the MM2 and MM3 subway lines), on the right side towards Piazza Luigi
+    di Savoia.
+  dropoff_instructions: The parking main entrance is located in Via Ferrante Aporti
+    1/A. Secondary entrance located in Via Sammartini 29​M. Once inside the parking,
+    follow the Enterprise/Alamo/National signage and park the vehicle in the designated
+    spaces. The keys will have to be delivered to our staff. In case of out of hours
+    return, customers must reach the Parking CM7 in Via Ferrante Aporti 1A/​Via Sammartini
+    29M, park the car in​ our parking lot and drop the key into the key box next to
+    our ​c​heckin cabin. ​O​ut of hours return is available Mon - Sun 5.00 am - 1.00
+    am​.
+  out_of_hours:
+    key_box: Key box is available. Customers must reach the Parking CM7 in Via Ferrante
+      Aporti 1A/​Via Sammartini 29M, park the car in​ our parking lot and drop the
+      key into the key box next to our ​c​heckin cabin. ​O​ut of hours return is available
+      Mon - Sun 5.00 am - 1.00 am​.
+    pickup: ON REQUEST
+    exceptions: null
+- code: ML
+  name: Milano Linate Airport
+  city: Segrate
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.46213
+  longitude: 9.27909
+  address: Milano Linate Aeroporto, 20090 Segrate (MI)
+  postal_code: '20090'
+  phone: +39 02 70200238
+  email: linateapt@locautorent.it
+  operating_hours:
+    weekday: 07:00 - 24:00
+    saturday: 07:00 - 24:00
+    sunday: 07:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 23:00
+    EPIPHANY 2026 6/1/26: 07:00 - 24:00
+    EASTER 5/4/26: 07:00 - 24:00
+    EASTER MONDAY 6/4/26: 07:00 - 24:00
+    LIBERATION DAY 25/4/26: 07:00 - 24:00
+    LABOUR DAY 1/5/26: 07:00 - 24:00
+    REPUBLIC DAY 2/6/26: 07:00 - 24:00
+    FERRAGOSTO 15/08/26: 07:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 07:00 - 24:00
+    IMMACOLATA 08/12/26: 07:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 07:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 24:00
+    NEW YEAR'S EVE 31/12/26: 07:00 -20:00
+    NEW YEAR 1/1/27: 09:00 - 23:00
+    EPIPHANY 6/1/27: 07:00 - 24:00
+  pickup_instructions: 'The office is located in the car rental area: exit the Arrivals
+    Gate located and follow the signs to ‘Rent-a-car’ or ‘Autonoleggi’.'
+  dropoff_instructions: Follow the signs to parking lot P2 and to the 'Car Return'
+    area. We are on the 5th floor of the building.
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the terminal.
+    pickup: ON REQUEST
+    exceptions: null
+- code: MM
+  name: Milano Malpensa Airport T1
+  city: Ferno
+  province: Varese
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.62762
+  longitude: 8.71299
+  address: AEROPORTO MALPENSA 2000 - TERMINAL 1, 21010 Ferno (VA)
+  postal_code: '21010'
+  phone: +39 02 58580333
+  email: malpensaapt1@locautorent.it
+  operating_hours:
+    weekday: 07:00 - 24:00
+    saturday: 07:00 - 24:00
+    sunday: 07:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 23:00
+    EPIPHANY 2026 6/1/26: 07:00 - 24:00
+    EASTER 5/4/26: 07:00 - 24:00
+    EASTER MONDAY 6/4/26: 07:00 - 24:00
+    LIBERATION DAY 25/4/26: 07:00 - 24:00
+    LABOUR DAY 1/5/26: 07:00 - 24:00
+    REPUBLIC DAY 2/6/26: 07:00 - 24:00
+    FERRAGOSTO 15/08/26: 07:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 07:00 - 24:00
+    IMMACOLATA 08/12/26: 07:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 07:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 24:00
+    NEW YEAR'S EVE 31/12/26: 07:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 23:00
+    EPIPHANY 6/1/27: 07:00 - 24:00
+  pickup_instructions: Leaving the Gate of national and international Arrivals, follow
+    the signs "Rent-a-car" or "Autonoleggi" inside the terminal. The Locauto offices
+    are located on level -1 in the car rental area.
+  dropoff_instructions: The parking is located in Terminal 1, under the Sheraton hotel,
+    a 5-minute walk from the rental office. To return the vehcile, take the garage
+    private lane on your right. At the roundabout, take the third exit and stay on
+    the central lane. Follow the indications to 'Locauto Rent', 'Parcheggio B'.
+  out_of_hours:
+    key_box: Key box available on the office front door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: MND
+  name: Mantova
+  city: Mantova
+  province: Mantova
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.14816
+  longitude: 10.76589
+  address: Via Vivenza 4, 46100 Mantova (MN)
+  postal_code: '46100'
+  phone: +39 0376 261742
+  email: mantova@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 02/05/2026: CLOSED From 30/05/2026
+      until 06/06/2026: CLOSED 01/08/2026: CLOSED From 08/08/2026 until16/08/2026:
+      CLOSED 22/08/2026: CLOSED 29/08/2026: CLOSED 07/12/026: CLOSED 02/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Vivenza 4, in the Mantova commercial
+    area.
+  dropoff_instructions: The parking lot is located in Via Vivenza 4, right in front
+    of the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MOD
+  name: Modena
+  city: Modena
+  province: Modena
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.66125
+  longitude: 10.92964
+  address: Strada Nazionale Canaletto Sud 218, 41122 Modena
+  postal_code: '41122'
+  phone: +39 059 8396741
+  email: modena@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 14:00 - 18:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED 31/01//2026:
+      CLOSED From 10/08/2026 until 14/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Strada Nazionale Canaletto Sud 218,
+    about 700mt from Modena train station, 1.5KM from the historic centre and 10KM
+    from Modena Nord A1 highway exit.
+  dropoff_instructions: The parking is right in front of the office in Strada Nazionale
+    Canaletto Sud 218. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: MPRD
+  name: Milano Porta Romana
+  city: Milano
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.45793
+  longitude: 9.20523
+  address: VIALE MONTE NERO 41, 20135 MILANO (MI)
+  postal_code: '20135'
+  phone: +39 02 36728938
+  email: milanoportaromana@locautorent.it
+  operating_hours:
+    weekday: PERMANENTLY CLOSED
+    saturday: PERMANENTLY CLOSED
+    sunday: PERMANENTLY CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Monte nero 41, about 650mt from
+    the Metro stop "Porta Romana", Line M3.
+  dropoff_instructions: The parking is located in Via Andrea Maffei 19, about 650mt
+    from the Metro stop "Porta Romana", Line M3.Out of hours return is available 24/7
+    at the Maffei Garage in Via Andrea Maffei 19. This service costs 20 EUR that customers
+    will pay directly to the parking staff.
+  out_of_hours:
+    key_box: Out of hours return is available 24/7 at the Maffei Garage located in
+      Via Andrea Maffei 19. This service costs 20 EUR that customers will pay directly
+      to the parking staff.
+    pickup: ON REQUEST
+    exceptions: null
+- code: MXP2
+  name: Milano Malpensa Airport T2
+  city: Somma Lombardo
+  province: Varese
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.64917
+  longitude: 8.72163
+  address: AEROPORTO MALPENSA 2000 - TERMINAL 2, 21010 Somma Lombardo (VA)
+  postal_code: '21010'
+  phone: +39 02 58583832
+  email: malpensaapt2@locautorent.it.
+  operating_hours:
+    weekday: 07:00 - 24:00
+    saturday: 07:00 - 24:00
+    sunday: 07:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 23:00
+    EPIPHANY 2026 6/1/26: 07:00 - 24:00
+    EASTER 5/4/26: 07:00 - 24:00
+    EASTER MONDAY 6/4/26: 07:00 - 24:00
+    LIBERATION DAY 25/4/26: 07:00 - 24:00
+    LABOUR DAY 1/5/26: 07:00 - 24:00
+    REPUBLIC DAY 2/6/26: 07:00 - 24:00
+    FERRAGOSTO 15/08/26: 07:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 07:00 - 24:00
+    IMMACOLATA 08/12/26: 07:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 07:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 24:00
+    NEW YEAR'S EVE 31/12/26: 07:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 23:00
+    EPIPHANY 6/1/27: 07:00 - 24:00
+  pickup_instructions: 'The office is located in the car rental area: exit the Arrivals
+    Gate at Malpensa Terminal 2, keep left and follow the signs pointing to the railway
+    station.'
+  dropoff_instructions: The parking is located on the top floor of the car rental
+    area, accessible by elevator. At the Terminal 2 entrance, 2 follow the signs to
+    ARRIVALS - CAR HIRE CAR RENTAL and turn right torwards the car rental parking.
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the car rental area.
+    pickup: ON REQUEST
+    exceptions: null
+- code: MZD
+  name: Milazzo
+  city: Milazzo
+  province: Messina
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 38.21495
+  longitude: 15.240889
+  address: Via Giorgio Rizzo, 138 – 98057 MILAZZO (ME)
+  postal_code: '98057'
+  phone: +39 090 9287238
+  email: milazzo@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 15:00 - 18:30
+    saturday: 08:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Giorgio Rizzo 138, about 350mt
+    from the port where ferries and hydrofoils leave for the Aeolian Islands. Capo
+    Milazzo, one of the best beaches in Sicily, is 7 KM away (19 mins drive).
+  dropoff_instructions: Park the vehicle in the free public spaces in front of the
+    office. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: NAP
+  name: Napoli Airport
+  city: Napoli
+  province: Napoli
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: NAP
+  latitude: 40.87344
+  longitude: 14.28142
+  address: AEROPORTO CAPODICHINO - Viale F. Ruffo di Calabria, 80144 Napoli (NA)
+  postal_code: '80144'
+  phone: +39 081 7518899
+  email: napoliapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: CLOSED FROM 1/11/2026 UNTIL 30/11/2026
+    NEW YEAR 1/1/26: 08:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 08:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: Exit the arrivals terminal and follow signs to "autonoleggi/car
+    rental" and " "uffici autonoleggi - car rental offices". Take the elevator up
+    to the 1° floor.
+  dropoff_instructions: Follow directions to 'Autonoleggi/Car Rental', the parking
+    is located 400 mt from the arrival's gate. Free shuttle bus is available. During
+    the office closing hours, ask at the porter's lodge to let you in. Key box is
+    available on the left side of the car rental hall.
+  out_of_hours:
+    key_box: Key box available on the left side of the car rental hall.
+    pickup: ON REQUEST
+    exceptions: null
+- code: NOD
+  name: Novara
+  city: Novara
+  province: Novara
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.470888
+  longitude: 8.627341
+  address: Via Verbano 140, 28100 Novara (NO)
+  postal_code: '28100'
+  phone: +39 351 6479396
+  email: novara@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:00 - 18:00
+    saturday: 08:30 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 03/01/2026 until 11/01/2026: CLOSED 22/01/2026:
+      CLOSED 02/05/2026: CLOSED From 15/08/2026 until 22/08/2026: CLOSED 22/01/2027:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Verbano 10, Loc. Veveri on the
+    SS 33 Sempione direction to Malpensa/Lake Maggiore. The office is about 10 minutes
+    from the Novara City center and train station.
+  dropoff_instructions: The parking is right in front of the office. Out of hours
+    return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: OLB
+  name: Olbia Airport
+  city: Olbia
+  province: Sassari
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: OLB
+  latitude: 40.90482
+  longitude: 9.51621
+  address: AEROPORTO COSTA SMERALDA, 07026 Olbia (SS)
+  postal_code: '07026'
+  phone: +39 0789 68979
+  email: olbiaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 23:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 21:00
+    CHRISTMAS 25/12/26: 09:00 - 21:00
+    BOXING DAY 26/12/26: 09:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 21:00
+    NEW YEAR 1/1/27: 09:00 - 23:00
+    EPIPHANY 6/1/27: 08:00 -23:00
+  pickup_instructions: The office is located in the car rental area just outside the
+    Arrivals Gate on the right.
+  dropoff_instructions: 'The parking is close to the office: follow the signs to ''Autonoleggi''.'
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the car rental building.
+    pickup: ON REQUEST
+    exceptions: null
+- code: OLBD
+  name: Olbia Downtown
+  city: Olbia
+  province: Sassari
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.907455
+  longitude: 9.517188
+  address: Via Antonio Melis, 10 - 07026 Olbia (SS)
+  postal_code: '07026'
+  phone: +39 379 2565437
+  email: olbiadt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 18:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: 08:00 -13:00
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Melis 10, next to the Decathlon
+    shop.
+  dropoff_instructions: Customers can park the vehicle in the free parking area in
+    front of the office. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PA
+  name: Palermo Airport
+  city: Punta Raisi
+  province: Palermo
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 38.18712
+  longitude: 13.10508
+  address: AEROPORTO FALCONE E BORSELLINO - Loc. Punta Raisi, 90145 Palermo (PA)
+  postal_code: '90145'
+  phone: +39 091 7044013
+  email: palermoapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 24:00
+    saturday: 08:00 - 24:00
+    sunday: 08:00 - 24:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 24:00
+    LIBERATION DAY 25/4/26: 08:00 - 24:00
+    LABOUR DAY 1/5/26: 08:00 - 24:00
+    REPUBLIC DAY 2/6/26: 08:00 - 24:00
+    FERRAGOSTO 15/08/26: 08:00 - 24:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 24:00
+    IMMACOLATA 08/12/26: 08:00 - 24:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is inside the airport, right in front of the arrivals
+    gate.
+  dropoff_instructions: Follow the 'Rent-a-car' signs. The parking is about 100 mts
+    away from the Arrivals terminal entrance.
+  out_of_hours:
+    key_box: Key box available in front of the desk inside the terminal (same facility
+      as per other car rental).
+    pickup: ON REQUEST
+    exceptions: null
+- code: PAD
+  name: Palermo Notarbartolo Station
+  city: Palermo
+  province: Palermo
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 38.132079
+  longitude: 13.340216
+  address: Via Umberto Giordano 8, 90144 - Palermo (PA)
+  postal_code: '90144'
+  phone: +39 091 6850991
+  email: palermonotarbartolo@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 20:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: 08:00 -13:00
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Umberto Giordano 8, on the corner
+    with Via G. Puccini, right in front of the parking area reserved to car rentals.
+  dropoff_instructions: The parking spaces are right in front of the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PCD
+  name: Piacenza
+  city: Piacenza
+  province: Piacenza
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.055477
+  longitude: 9.643309
+  address: Via Emilia Pavese 205, 29121 Piacenza (PC)
+  postal_code: '29121'
+  phone: +39 3287272093.0
+  email: piacenza@locautorent.it
+  operating_hours:
+    weekday: CLOSED UNTIL FURTHER NOTICE
+    saturday: CLOSED UNTIL FURTHER NOTICE
+    sunday: CLOSED UNTIL FURTHER NOTICE
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Emilia Pavese 205, about 5km from
+    the Piacenza city centre and the central railway station.
+  dropoff_instructions: 'The parking lot is located next to the office. Important:
+    Out of hours return is not allowed.'
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PGD
+  name: Perugia
+  city: Perugia
+  province: Perugia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.10411
+  longitude: 12.38045
+  address: Via XX Settembre 92P 06124 Perugia (PG)
+  postal_code: '06124'
+  phone: +39 075 9474038
+  email: perugia@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 -12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 -12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via XX Settembre 92 P, 1 km from Perugia
+    Railway Station and 800 mt from the historical centre.
+  dropoff_instructions: The parking is located in Via XX Settembre 45, at the ENI
+    gas station.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PI
+  name: Pisa Airport
+  city: Pisa
+  province: Pisa
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 43.69883
+  longitude: 10.404
+  address: AEROPORTO GALILEO GALILEI - Piazzale Mario Cobianchi SNC, 56121 Pisa (PI)
+  postal_code: '56121'
+  phone: +39 050 24347
+  email: pisaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 -23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located in the car rental building, about 400mt
+    from the main terminal. A free shuttle service is available.
+  dropoff_instructions: 'The parking lot is just a few meters away from the rental
+    office: follow the ''Autonoleggi/Car rental'' and ''Locauto'' signs.'
+  out_of_hours:
+    key_box: Key box available at the entrance of the car rental building.
+    pickup: ON REQUEST
+    exceptions: null
+- code: POD
+  name: Prato
+  city: Prato
+  province: Prato
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.86011
+  longitude: 11.10972
+  address: c/o Art Hotel Museo V.le della Repubblica 289 59100 Prato (PO)
+  postal_code: '59100'
+  phone: +39 0574 969834
+  email: prato@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located at Art Hotel Museo in V.le della Repubblica
+    289, about 3 km from the historic city center and from Prato central station.
+  dropoff_instructions: Park the vehicle in the public square in front of the office.
+    Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PRD
+  name: Parma
+  city: Parma
+  province: Parma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.7769069
+  longitude: 10.3435329
+  address: Centro Commerciale EUROSIA L.go Alfredo Bottai 21A 43123 Parma (PR)
+  postal_code: '43123'
+  phone: +39 370 1270985
+  email: parma@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 14:00 - 18:00
+    saturday: 09:00 - 12:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '13 Gennaio 2026: CLOSED 02/05/2026: CLOSED From 10/08/2026
+      until 15/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located at the Eurosia Shopping Center in L.go
+    Alfredo Bottai 21A, in the south part of Parma close to the exit nr.17 of the
+    Parma ring road.
+  dropoff_instructions: The public parking of the Shopping Centre is located in front
+    of the rental office. Please note that out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: PSR
+  name: Pescara Airport
+  city: Pescara
+  province: Pescara
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: PSR
+  latitude: 42.43047
+  longitude: 14.1875
+  address: AEROPORTO D'ABRUZZO PASQUALE LIBERI - Via Tiburtina KM 229,100 65131 -
+    Pescara (PE)
+  postal_code: '65131'
+  phone: +39 085 4312994
+  email: pescaraapt@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:00 - 19:00
+    saturday: 09:00-13:00 /14:30-15:30 / 19:00-20:00
+    sunday: 09:00-12:00 / 14:00-15:00 / 19:00-20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: 08:30 - 12:30 / 14:00 - 19:00
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: 08:30 - 12:30 / 14:00 - 19:00
+    LIBERATION DAY 25/4/26: 10:00-16:00 / 19:30-20:30
+    LABOUR DAY 1/5/26: 08:30 - 12:30 / 14:00 - 19:00
+    REPUBLIC DAY 2/6/26: 08:30 - 12:30 / 14:00 - 19:00
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: 10:30-14:30 /19:30-20:30
+    IMMACOLATA 08/12/26: 08:30 - 12:30 / 14:00 - 19:00
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30 / 14:00 - 19:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: 10:00-16:00 / 19:30-20:30
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30 / 14:00 - 19:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: 08:30 - 12:30 / 14:00 - 19:00
+  pickup_instructions: The office is located in front of the Arrivals gate in the
+    car rental area.
+  dropoff_instructions: 'The parkin is v200mt from the office: follow the ''Autonoleggi/Car
+    Rental'' signs.'
+  out_of_hours:
+    key_box: Key box available on the office front door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: PVD
+  name: Pavia (san Martino Siccomario)
+  city: San Martino Siccomario
+  province: Pavia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.14341
+  longitude: 9.11931
+  address: Via Antonio Gramsci 38A, 27028 San Martino Siccomario (PV)
+  postal_code: '27028'
+  phone: +39 0382 302437
+  email: pavia@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:00 / 14:30 - 18:30
+    saturday: CLOSED
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 08/08/2026 until 25/08/2026: CLOSED 09/12/2026:
+      CLOSED From 24/12/2026 until 06/01/2027: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Antonio Gramsci 38A in the municipality
+    of San Martino Siccomario, about 8 km from Pavia City centre and 6.5 km from Pavia
+    train station.
+  dropoff_instructions: The parking lot is right in front of the office. In case of
+    after hours return, park the vehicle in the parking lots located in front of and
+    next to our office. Ensure you have gathered all personal belongings before locking
+    and leaving the vehicle. Use the key drop box located at the front entrance of
+    the office to return the keys.
+  out_of_hours:
+    key_box: Key box available on the office front door.
+    pickup: ON REQUEST
+    exceptions: null
+- code: PZD
+  name: Potenza
+  city: Potenza
+  province: Potenza
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.62904
+  longitude: 15.80781
+  address: Via della Chimica 1, 85100 Potenza (PZ)
+  postal_code: '85100'
+  phone: +39 0971 54515
+  email: potenza@locautorent.it
+  operating_hours:
+    weekday: 08:45 - 13:00 / 15:15 - 18:30
+    saturday: 08:45 - 12:15
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 02/05/2026 CLOSED 29/05/2026:
+      08:45-13:00 30/05/2026: CLOSED From 13/08/2026 until 19/08/2026: CLOSED 07/12/2026:
+      CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:45 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:45 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via della Chimica 1, about 300mt from
+    the Potenza train station. From the railway station, keep straight for the underpass
+    towards Viale del Basento to reach Via della Chimica.
+  dropoff_instructions: Parking is located Via della Chimica 1. Out of hours return
+    is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: RAD
+  name: Ravenna
+  city: Ravenna
+  province: Ravenna
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.420954
+  longitude: 12.218162
+  address: Via Adria 6, 48122 Ravenna (RA)
+  postal_code: '48122'
+  phone: +39 0544 1935638
+  email: ravenna@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 14:00 - 18:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED 02/05/2026:
+      CLOSED 23/07/2026: CLOSED From 10/08/2026 until 16/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The Ravenna office is located in Via Adria 5, nearby the Darsena,
+    about 1.5 km from the railway station and from the city centre. Marina di Ravenna
+    is 10 km away.
+  dropoff_instructions: Customers can park the vehicle in the free open parking area
+    in front of the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: RC
+  name: Reggio Calabria Airport
+  city: Reggio Calabria
+  province: Reggio Calabria
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 30.07457
+  longitude: 15.65604
+  address: AEROPORTO DELLO STRETTO - Via Ravagnese Superiore 144 - Palazzina autonoleggi,
+    89131 Reggio Calabria (RC)
+  postal_code: '89131'
+  phone: +39 0965 643134
+  email: reggiocalabriaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 -20:00
+    CHRISTMAS 25/12/26: 09:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: 'The office is 150 mt from the airport: exit the Terminal,
+    keep right and walk for few minutes until you reach the car rental building located
+    in Via Ravagnese Superiore.'
+  dropoff_instructions: The parking is located beside the 'Rent-a-car' building.
+  out_of_hours:
+    key_box: Key box available at the entrance of the car rental building.
+    pickup: ON REQUEST
+    exceptions: null
+- code: RME
+  name: Roma Eur
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.83013
+  longitude: 12.47335
+  address: Viale Europa 321, 00144 Roma (RM)
+  postal_code: '00144'
+  phone: +39 06 5923262
+  email: romaeur@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 13:00 / 14:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '29/06/2026: CLOSED From 17/08/2026 until 21/08/2026:
+      08:00-15:00 From 24/08/2026 until 28/08//2026: 08:00-15:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: 08:00 - 13:00
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: 08:00 - 13:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 17:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 17:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Europa 321 (underground line
+    B - Fermi stop).
+  dropoff_instructions: Park the vehicle in front of the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: RMT
+  name: Roma Termini Central Station
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 41.89924
+  longitude: 12.50326
+  address: STAZIONE FF.SS.TERMINI - VIA GIOLITTI 34, 00185 ROMA (RM)
+  postal_code: 00185
+  phone: +39 06 4826140
+  email: romaterminifs@locautorent.it
+  operating_hours:
+    weekday: 07:30 - 20:00
+    saturday: 07:30 - 20:00
+    sunday: 07:30 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 07:30 - 20:00
+    EASTER 5/4/26: 07:30 - 20:00
+    EASTER MONDAY 6/4/26: 07:30 - 20:00
+    LIBERATION DAY 25/4/26: 07:30 - 20:00
+    LABOUR DAY 1/5/26: 07:30 - 20:00
+    REPUBLIC DAY 2/6/26: 07:30 - 20:00
+    FERRAGOSTO 15/08/26: 07:30 - 20:00
+    ALL SAINTS' DAY 01/11/26: 07:30 - 20:00
+    IMMACOLATA 08/12/26: 07:30 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 07:30 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 07:30 - 20:00
+  pickup_instructions: The office is located inside the Roma Termini train station,
+    at the platform 24/ car rental hall.
+  dropoff_instructions: The parking is located on the 1° floor of the "Piastra Parking
+    Garage" in Via Marsala 53, about 500 mt from the office. Customers will have to
+    enter the garage, reach the first floor and leave the car in one of the Locauto
+    assigned parking spots.
+  out_of_hours:
+    key_box: 'Our parking lot is located on the 1° floor of the "Piastra Parking Garage"
+      in Via Marsala 53, about 500 mt from the office. Once gone past the first gate,
+      go to the first floor, turn right and go past the second gate. In case of out
+      of hours return, customers will have to leave the keys into the dedicated key
+      box nearby the check-in cabin. Important: The parking lot is closed from 1 am
+      to 5 am and out of hours return is not allowed during the parking closing time.'
+    pickup: ON REQUEST
+    exceptions: null
+- code: RMTIB
+  name: Roma Tiburtina Station
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 41.90921
+  longitude: 12.52639
+  address: Piazza delle Crociate 23 (primo piano interno A), 00162 Roma (RM)
+  postal_code: '00162'
+  phone: +39 06 4425 1147
+  email: romatiburtinafs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '29/06/2026: 08:00-13:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: 08:00 - 13:00
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: 08:00 - 13:00
+    LIBERATION DAY 25/4/26: 08:00 - 13:00
+    LABOUR DAY 1/5/26: 08:00 - 13:00
+    REPUBLIC DAY 2/6/26: 08:00 - 13:00
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: 08:00 - 13:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: 08:00 - 13:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: 08:00 - 13:00
+  pickup_instructions: The office is located in Piazza delle Crociate 23, about 350
+    mt from the Tiburtina railway station and line B metro stop.
+  dropoff_instructions: Park the vehicle in front of the rental office.
+  out_of_hours:
+    key_box: Customers shall reach the Parking Stazione Tiburtina located in Via Lorenzo
+      il Magnifico 156, park the car in the Locauto parking spaces and deliver the
+      keys to the garage staff. The entrance ticket must be left inside the car. This
+      service is available only up to 23.00.
+    pickup: ON REQUEST
+    exceptions: null
+- code: RMV
+  name: Roma Via Veneto
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.908982
+  longitude: 12.489578
+  address: Via Sardegna 25, 00187 Roma (RM)
+  postal_code: 00187
+  phone: +39 06 42742395
+  email: romaviaveneto@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 13:00
+    sunday: 08:00 - 13:00
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '29/06/2026: 08:00 - 13:00'
+    NEW YEAR 1/1/26: 08:00 - 13:00
+    EPIPHANY 2026 6/1/26: 08:00 - 13:00
+    EASTER 5/4/26: 08:00 - 13:00
+    EASTER MONDAY 6/4/26: 08:00 - 13:00
+    LIBERATION DAY 25/4/26: 08:00 - 13:00
+    LABOUR DAY 1/5/26: 08:00 - 13:00
+    REPUBLIC DAY 2/6/26: 08:00 - 13:00
+    FERRAGOSTO 15/08/26: 08:00 - 13:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 13:00
+    IMMACOLATA 08/12/26: 08:00 - 13:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 18:00
+    CHRISTMAS 25/12/26: 08:00 - 13:00
+    BOXING DAY 26/12/26: 08:00 - 13:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 08:00 - 13:00
+    EPIPHANY 6/1/27: 08:00 - 13:00
+  pickup_instructions: The office is located in Via Sardegna 25, in Rome Downtown,
+    about 700 mt from Barberini metro station.
+  dropoff_instructions: The parking is located at the SABA Parking garage Villa Borghese
+    in Viale del Muro Torto​ snc. To return the vehicle, access the parking lot in
+    Via Del Muro Torto, take the ticket (which will have to be left inside the car)
+    and follow directions to the Rent a Car parking, Area B. Our parking spaces are
+    located ​in rows 21 and 22. Key box is available.
+  out_of_hours:
+    key_box: Key box is available at the SABA Parking garage Villa Borghese located
+      in Viale del Muro Torto​ snc. To return the vehicle, access the parking lot
+      in Via Del Muro Torto, take the ticket (which will have to be left inside the
+      car) and follow directions to the Rent a Car parking, Area B. Our parking spaces
+      are located ​in rows 21 and 22.
+    pickup: ON REQUEST
+    exceptions: null
+- code: RND
+  name: Rimini
+  city: Rimini
+  province: Rimini
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.06544
+  longitude: 12.57039
+  address: Corso Giovanni XXIII 134, 47921 Rimini (RN)
+  postal_code: '47921'
+  phone: +39 0541 1369770
+  email: rimini@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '14/10/2026 : CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located downtown, in Corso Giovanni XXIII 134,
+    about 200mt from the Rimini Train station, 900mt from the historic centre and
+    1km from the Rimini coast.
+  dropoff_instructions: The parking lot is next to the office in Corso Giovanni XXIII
+    134. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: RTD
+  name: Roma Appio Tuscolano
+  city: Roma
+  province: Roma
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 41.8669
+  longitude: 12.53095
+  address: Via Appia Nuova 645, 00179 Roma
+  postal_code: 00179
+  phone: +39 06 4754 4703
+  email: romaappiotuscolano@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 13:00 / 14:30 - 18:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026:CLOSED 29/06/2026: CLOSED From 10/08/2026
+      until 14/08/2026: 08:00-13:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Appia Nuova 645, about 300 mt
+    from metro line A, stop Colli Albani.
+  dropoff_instructions: Park the vehicle in front of the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: SAT
+  name: Salerno
+  city: Salerno
+  province: Salerno
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.67496
+  longitude: 14.77038
+  address: Via Giacinto Vicinanza 10, 84123 Salerno (SA)
+  postal_code: '84123'
+  phone: +39 089 2872037
+  email: salernofs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 19:00
+    saturday: 08:00 - 19:00
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: 08:00 - 15:00
+    EPIPHANY 2026 6/1/26: 08:00 - 19:00
+    EASTER 5/4/26: 08:00 - 15:00
+    EASTER MONDAY 6/4/26: 08:00 - 19:00
+    LIBERATION DAY 25/4/26: 08:00 - 19:00
+    LABOUR DAY 1/5/26: 08:00 - 19:00
+    REPUBLIC DAY 2/6/26: 08:00 - 19:00
+    FERRAGOSTO 15/08/26: 08:00 - 19:00
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: 08:00 - 19:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 15:00
+    CHRISTMAS 25/12/26: 08:00 - 15:00
+    BOXING DAY 26/12/26: 08:00 - 19:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 15:00
+    NEW YEAR 1/1/27: 08:00 - 15:00
+    EPIPHANY 6/1/27: 08:00 - 19:00
+  pickup_instructions: The office is located in Via Giacinto Vicinanza 10, about 200
+    mt from the Salerno railway station, 2.5 km from the Port of Salerno and 2 km
+    from Salerno city centre.
+  dropoff_instructions: Park the vehicle in front of the office's entrance.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: SID
+  name: Siena
+  city: Siena
+  province: Siena
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 43.31063
+  longitude: 11.3592
+  address: Viale Europa 23 53100 Siena (SI)
+  postal_code: '53100'
+  phone: +39 0577 288938
+  email: siena@locautorent.it
+  operating_hours:
+    weekday: 09:00 - 13:00 / 14:00 - 18:00
+    saturday: 09:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '01/12/2026: CLOSED 02/07/2026: 09:00-13:00 14/08/2026:
+      09:00-13:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 09:00 - 13:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 09:00 - 13:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Europa 23, south-east side of
+    the town, about 3km from historic centre and 4km from Siena train station.
+  dropoff_instructions: Parking is next to the office
+  out_of_hours:
+    key_box: Key box available outside the office.
+    pickup: ON REQUEST
+    exceptions: null
+- code: SPD
+  name: La Spezia
+  city: La Spezia
+  province: La Spezia
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 44.12024
+  longitude: 9.84548
+  address: Viale Italia 434, 19126 La Spezia (SP)
+  postal_code: '19126'
+  phone: +39 0187 919445
+  email: laspezia@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '19/03/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Italia 434, about 3km from the
+    commercial port, 2km from the cruise port and 3.5km from La Spezia railway station.
+  dropoff_instructions: Park the vehicle in the public area next to the rental office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: SRD
+  name: Siracusa
+  city: Siracusa
+  province: Siracusa
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 37.0661
+  longitude: 15.28751
+  address: Viale Regina Margherita 10, 96100 Siracusa (SR)
+  postal_code: '96100'
+  phone: +39 0931 483627
+  email: siracusa@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 15:30 - 18:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '13/12/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Regina Margherita 10, a cross
+    of Corso Umberto I, the Siracusa main street. The location is near the bridge
+    to the Island of Ortigia and about 1 km from the Siracusa train station.
+  dropoff_instructions: Customers can park the vehicle in the free open parking area
+    in front of the rental office. Please note that out of hours returns are not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: SSG
+  name: Sesto San Giovanni
+  city: Sesto San Giovanni
+  province: Milano
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.52382
+  longitude: 9.22632
+  address: Via Fiume 33/35, 20099 Sesto S. Giovanni (MI)
+  postal_code: '20099'
+  phone: +39 02 24412013
+  email: sestosangiovanni@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED 02/05/2026:
+      CLOSED 01/06/2026: CLOSED 01/08/2026: CLOSED From 03/08/2026 until 05/08/2026:
+      08:30-12:30 From 06/08/2026 until 24/08/2026: CLOSED From 24/08/2026 until 28/08/2026:
+      08:30-12:30 29/08/2026: CLOSED 31/08/2026: 08:30-12:30 07/12/2026 CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Fiume 33/35 inside Midas workshop,
+    about 200 mt from Sesto Marelli red line stop.
+  dropoff_instructions: Park the vehicle in the area next to the office.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: SUF
+  name: Lamezia Terme Airport
+  city: Lamezia Terme
+  province: Catanzaro
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: SUF
+  latitude: 38.86219
+  longitude: 16.56832
+  address: AEROPORTO S. EUFEMIA - Via Aeroporto 40, 88046 LAMEZIA TERME (CZ)
+  postal_code: '88046'
+  phone: +39 0968 418555
+  email: lameziatermeapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 19:30
+    EPIPHANY 2026 6/1/26: 09:00 - 21:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 21:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 19:30
+    BOXING DAY 26/12/26: 09:00 - 21:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 19:30
+    EPIPHANY 6/1/27: 09:00 - 21:00
+  pickup_instructions: The office is located in the car rental building, about 100
+    mt from the airport, on the right.
+  dropoff_instructions: The parking is close to the office. Follow the signs to 'Autonoleggi/Car
+    Rental' and 'Locauto Rent'.
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the car rental area.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TAD
+  name: Taranto
+  city: San Giorgio Jonico
+  province: Taranto
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 40.45882
+  longitude: 17.35714
+  address: Via Amilcare Cipriani 2, Contrada Baronia 74027, San Giorgio Jonico (TA)
+  postal_code: '74027'
+  phone: +39 099 5919121
+  email: taranto@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 16:00 - 19:30
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 07/08/2026 until 23/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Amilcare Cipriani 2, Contrada
+    Baronia 74027, San Giorgio Jonico, 10 km from the Taranto city centre and 20 km
+    from the port of Taranto. Arriving from Taranto, take the SSter and turn right
+    to SP110. Arriving from Brindisi, take the SS7 direction of Taranto and exit in
+    "Grottaglie" to SP110.
+  dropoff_instructions: The car park is adjacent to the train station.Out of hours
+    return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: TBS
+  name: Brescia Central Station
+  city: Brescia
+  province: Brescia
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 45.56262
+  longitude: 10.20168
+  address: Via della Stazione n° 49, c/o palazzina autonoleggi - stazione FS, 25122
+    Brescia (BS)
+  postal_code: '25122'
+  phone: +39 030 2411014
+  email: bresciafs@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 18:30
+    saturday: 08:30 - 13:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '15/02/2026:CLOSED From 03/08/2026 until 7/08/2026:
+      08:30-16:30 From 10/08/2026 until 14/08/2026: 08:30-13:30'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 13:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 13:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located on the 1° floor of the car rental building
+    in Via Della Stazione 49, in front of the train station and metro exit.
+  dropoff_instructions: The parking is located inside the train station's garage connected
+    to the car rental building by lifts. Locauto parking lots are located in Hall
+    3. The entry ticket must be left inside the car.
+  out_of_hours:
+    key_box: Customers shall reach the railway station parking and follow the signs
+      to the Hall 3. The entrance ticket will have to be left inside the car (as a
+      proof of the drop-off time) and then leave the keys into the dedicated key box.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TERD
+  name: Terni
+  city: Terni
+  province: Terni
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 42.56633
+  longitude: 12.65395
+  address: Viale Curio Dentato 72, 05100 Terni (TR)
+  postal_code: '05100'
+  phone: +39 0744 402175
+  email: terni@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 13:00 / 14:30 - 18:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: 'The office is located in Viale Curio Dentato 72, about 500
+    mt from the train station: exit the Terni railway station, cross Dante Alighieri
+    square and go straight to Viale Curio Dentato.'
+  dropoff_instructions: Cars must be returned to the rental agents at Viale Curio
+    Dentato 72. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: TNA
+  name: Napoli Central Station
+  city: Napoli
+  province: Napoli
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 40.85257
+  longitude: 14.27174
+  address: Stazione di Napoli Centrale - Piazza Garibaldi - Interno Stazione - Piano
+    Interrato - 80143 Napoli (NA)
+  postal_code: '80143'
+  phone: +39 081 5534282
+  email: napolifs@locautorent.it
+  operating_hours:
+    weekday: 07:00 - 21:00
+    saturday: 07:00 - 21:00
+    sunday: 07:00 - 21:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 07:00 - 21:00
+    EASTER MONDAY 6/4/26: 07:00 - 21:00
+    LIBERATION DAY 25/4/26: 07:00 - 21:00
+    LABOUR DAY 1/5/26: 07:00 - 21:00
+    REPUBLIC DAY 2/6/26: 07:00 - 21:00
+    FERRAGOSTO 15/08/26: 07:00 - 21:00
+    ALL SAINTS' DAY 01/11/26: 07:00 - 21:00
+    IMMACOLATA 08/12/26: 07:00 - 21:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 07:00 - 21:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The officeis located on the basement level of the central railway
+    station at Piazza Garibaldi 68.
+  dropoff_instructions: The parking is located at the Naples central railway station,
+    Piazza Garibaldi 68, floor -1.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: TO
+  name: Torino Airport
+  city: Caselle Torinese
+  province: Torino
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.19256
+  longitude: 7.64284
+  address: AEROPORTO S. PERTINI - STRADA SAN MAURIZIO 12, 10072 CASELLE TORINESI (TO)
+  postal_code: '10072'
+  phone: +39 011 9963426
+  email: torinoapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 09:00 - 22:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: 'The office is located in the car rental area: exit the airport
+    and cross the road to reach it.'
+  dropoff_instructions: 'The parking is just a few meters away from the office: after
+    entering the airport area, follow the indications to ''Autonoleggi/Car Rental'',
+    ''B sector''.'
+  out_of_hours:
+    key_box: Key box available at the entrance of the car rental area.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TOT
+  name: Torino Porta Nuova Ts
+  city: Torino
+  province: Torino
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.062722
+  longitude: 7.676797
+  address: Via Giovanni Camerana, 3/B 10128 Torino (TO)
+  postal_code: '10128'
+  phone: +39 011 5629488
+  email: torino.tot@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:30
+    saturday: 08:30 - 12:30 / 14:30 - 18:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '24/06/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:30 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:30 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Giovanni Camerana 3/B, about 50mt
+    from Torino Porta Nuova Train station.
+  dropoff_instructions: The parking lot is located on level -1 of the FS Parking in
+    via Paolo Sacchi/Corso Vittorio Emanuele II, 10128 Torino. Key box is available.
+  out_of_hours:
+    key_box: Key box available at the FS Parking located in via Paolo Sacchi/Corso
+      Vittorio Emanuele II, on level -1.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TPD
+  name: Padova Central Station
+  city: Padova
+  province: Padova
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 45.41854
+  longitude: 11.87741
+  address: VIA Fra' G.Eremitano 8, 35138 Padova (PD)
+  postal_code: '35138'
+  phone: +39 049 8754286
+  email: padovafs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 13:00 / 14:00 - 19:00
+    saturday: 08:00 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '05/01/2026: CLOSED 02/05/2026: CLOSED 13/06/2026:
+      CLOSED From 10 until 14/8/2026: 09:00-12:00 /13:00-17:00 Froml 17 until 21/08/2026:
+      09:00-12:00 / 13:00-17:00'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 12:00
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 12:00
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: 'The office is located in Via Fra’ Giovanni Eremitano 8, at
+    the San Marco garage: exit from the Padova railway station and keep right to Borgomahno
+    overpass.'
+  dropoff_instructions: The parking is inside the Garage San Marco.
+  out_of_hours:
+    key_box: Out of hours return is available 24/7. Customers shall reach the Garage
+      San Marco located in Via Fra G. Eremitano 10 and park the car in the Locauto
+      parking spaces. The entrance ticket must be left inside the car together with
+      the keys.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TPS
+  name: Trapani Airport
+  city: Trapani -birgi
+  province: Trapani
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: TPS
+  latitude: 37.90668
+  longitude: 12.49391
+  address: AEROPORTO VINCENZO FLORIO - CONTRADA BIRGI 91100 - TRAPANI (TP)
+  postal_code: '91100'
+  phone: +39 0923 842884
+  email: trapaniapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 21:00
+    EPIPHANY 2026 6/1/26: 08:00 - 22:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 21:00
+    EPIPHANY 6/1/27: 08:00 - 22:00
+  pickup_instructions: 'The office is located inside the terminal: exit from the arrivals
+    gate and reach the car rental area.'
+  dropoff_instructions: The parking is 50 mt from the rental counter. Follow the 'Autonoleggi/Car
+    Rental' signs, the parking lots are about 70 mts left of the airport entrance.
+  out_of_hours:
+    key_box: Key box available at the rental desk, inside the terminal.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TRMD
+  name: Termoli
+  city: Termoli
+  province: Campobasso
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 42.00217
+  longitude: 14.9926
+  address: Via XX Settembre 79, 86039 Termoli (CB)
+  postal_code: '86039'
+  phone: +39 0875 714881
+  email: termoli@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 15:30 - 19:00
+    saturday: 08:30 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: '02/05/2026: CLOSED 04/08/2026: CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via XX Settembre 79, nearby the Termoli
+    railway station, about 600 mt from the historic city center and 900 mt from the
+    Termoli port. The office is located at the left side of the station's exit (approximately
+    50 mt).
+  dropoff_instructions: Customers can park the vehicle in the free parking area in
+    front of the office. Out of hours return is not allowed.
+  out_of_hours:
+    key_box: NOT AVAILABLE
+    pickup: ON REQUEST
+    exceptions: null
+- code: TS
+  name: Trieste Airport
+  city: Ronchi Dei Legionari
+  province: Gorizia
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.82111
+  longitude: 13.48578
+  address: AEROPORTO FRIULI VENEZIA GIULIA - Via Aquileia 46, 34077 Ronchi dei Legionari
+    (GO)
+  postal_code: '34077'
+  phone: +39 0481 778572
+  email: triesteapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 23:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is inside the terminal, at the arrivals hall.
+  dropoff_instructions: To drop off the vehicle, follow the 'Rent a Car'/'Autonoleggi'
+    and 'Locauto' signs.
+  out_of_hours:
+    key_box: Key box available at the rental desk inside the terminal during airport's
+      opening times. Airport is closed from 24.00 until 05.00.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TST
+  name: Trieste Train Station
+  city: Trieste
+  province: Trieste
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 45.65726
+  longitude: 13.77088
+  address: Piazza della Libertà 9, 34135 Trieste (TS)
+  postal_code: '34135'
+  phone: +39 040 3402870
+  email: triestefs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 12:30 / 14:30 - 19:00
+    saturday: 08:00 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via della Libertà 9, next to the Trieste
+    train station, very close to the historic city centre and the Trieste ferry terminal.
+  dropoff_instructions: The parking is located at the 2° floor of the Saba Silos in
+    Via della Libertà 9. Key box is available 24/7.
+  out_of_hours:
+    key_box: Key box available at the 2° floor of the Saba Silos in Via della Libertà
+      9
+    pickup: ON REQUEST
+    exceptions: null
+- code: TUD
+  name: Udine Central Station
+  city: Udine
+  province: Udine
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 46.05633
+  longitude: 13.24036
+  address: Viale Europa Unita n° 129 - 33100 Udine (UD)
+  postal_code: '33100'
+  phone: +39 0432 204842
+  email: udinefs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 12:30 / 14:30 - 19:00
+    saturday: 08:00 - 12:30
+    sunday: CLOSED
+  holiday_hours:
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: 08:00 - 12:30
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: 08:00 - 12:30
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Viale Europa Unita n° 129, in front
+    of the Udine train station. Exit therailway station, cross the street and keep
+    left for 50 mt.
+  dropoff_instructions: The parking lots are located in close proximity to the rental
+    office.
+  out_of_hours:
+    key_box: Key box available at the office's entrance.
+    pickup: ON REQUEST
+    exceptions: null
+- code: TV
+  name: Treviso Airport
+  city: Treviso
+  province: Treviso
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.65528
+  longitude: 12.20475
+  address: AEROPORTO A. CANOVA Via Noalese 63, 31100 Treviso (TV)
+  postal_code: '31100'
+  phone: +39 0422 433834
+  email: trevisoapt@locautorent.it
+  operating_hours:
+    weekday: 'Mon - Thu 08:00 - 20:00 Fri: 08:00 - 22:00'
+    saturday: 08:00 - 22:00
+    sunday: 08:00 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 20:00
+    LIBERATION DAY 25/4/26: 08:00 - 20:00
+    LABOUR DAY 1/5/26: 08:00 - 20:00
+    REPUBLIC DAY 2/6/26: 08:00 - 20:00
+    FERRAGOSTO 15/08/26: 08:00 - 20:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 20:00
+    IMMACOLATA 08/12/26: 08:00 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 18:00
+    CHRISTMAS 25/12/26: ON REQUEST
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 18:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The office is inside the terminal, at the arrivals hall.
+  dropoff_instructions: 'The parking is very close to the rental office: to drop off
+    the vehicle, follow the ''Rent a Car''/''Autonoleggi'' and ''Locauto'' signs.'
+  out_of_hours:
+    key_box: Key box available at the rental desk inside the terminal during airport's
+      opening times. Airport is closed from 23.30 until 06.00.
+    pickup: ON REQUEST
+    exceptions: null
+- code: VAD
+  name: Varese
+  city: Varese
+  province: Varese
+  country: Italy
+  country_code: IT
+  location_type: downtown
+  is_airport: false
+  iata: null
+  latitude: 45.82402
+  longitude: 8.8131
+  address: Via Silvestro Sanvito 68, 21100 Varese (VA)
+  postal_code: '21100'
+  phone: +39 0332 973929
+  email: varese@locautorent.it
+  operating_hours:
+    weekday: 08:30 - 12:30 / 14:30 - 18:00
+    saturday: 08:30 - 13:00
+    sunday: CLOSED
+  holiday_hours:
+    SPECIAL OPENINGS - CLOSING: 'From 01/01/2026 until 06/01/2026: CLOSED From 10/08/2026
+      until 16/08/2026: CLOSED 02/05/2026:CLOSED'
+    NEW YEAR 1/1/26: CLOSED
+    EPIPHANY 2026 6/1/26: CLOSED
+    EASTER 5/4/26: CLOSED
+    EASTER MONDAY 6/4/26: CLOSED
+    LIBERATION DAY 25/4/26: CLOSED
+    LABOUR DAY 1/5/26: CLOSED
+    REPUBLIC DAY 2/6/26: CLOSED
+    FERRAGOSTO 15/08/26: CLOSED
+    ALL SAINTS' DAY 01/11/26: CLOSED
+    IMMACOLATA 08/12/26: CLOSED
+    CHRISTMAS'EVE 24/12/26: CLOSED
+    CHRISTMAS 25/12/26: CLOSED
+    BOXING DAY 26/12/26: CLOSED
+    NEW YEAR'S EVE 31/12/26: CLOSED
+    NEW YEAR 1/1/27: CLOSED
+    EPIPHANY 6/1/27: CLOSED
+  pickup_instructions: The office is located in Via Silvestro Sanvito 68, 1 km from
+    Varese city centre and about 2 km from Varese Railway Station. Arriving from A8,
+    follow the directions to Varese and take SS 707 to Varese City Centre for about
+    2,3 km.
+  dropoff_instructions: The parking is located in Via Silvestro Sanvito 68, at the
+    IP gas station.
+  out_of_hours:
+    key_box: Key box available outside the office.
+    pickup: ON REQUEST
+    exceptions: null
+- code: VE
+  name: Venezia Airport
+  city: Venezia
+  province: Venezia
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: null
+  latitude: 45.50451
+  longitude: 13.34015
+  address: AEROPORTO MARCO POLO - Via Galileo Galilei 30, 30173 Venezia (VE)
+  postal_code: '30173'
+  phone: +39 041 5416737
+  email: veneziaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 09:00 - 22:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 20:00
+    CHRISTMAS 25/12/26: 08:00 - 23:00
+    BOXING DAY 26/12/26: 08:00 - 23:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 20:00
+    NEW YEAR 1/1/27: 09:00 - 22:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located in the car rental area, on the 3° floor
+    of the Multipark P1.
+  dropoff_instructions: The parking is located at the 3° floor of the Multipark P1.
+  out_of_hours:
+    key_box: Key box available at the checkin cabin.
+    pickup: ON REQUEST
+    exceptions: null
+- code: VMS
+  name: Venezia Mestre Station
+  city: Mestre
+  province: Venezia
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 45.48246
+  longitude: 12.2317
+  address: Stazione ferroviaria, Piazzale Favretti - binario1, 30173 MESTRE (VE)
+  postal_code: '30173'
+  phone: +39 041 923973
+  email: veneziamestrefs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 20:00
+    sunday: 08:00 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 20:00
+    LIBERATION DAY 25/4/26: 08:00 - 20:00
+    LABOUR DAY 1/5/26: 08:00 - 20:00
+    REPUBLIC DAY 2/6/26: 08:00 - 20:00
+    FERRAGOSTO 15/08/26: 08:00 - 20:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 20:00
+    IMMACOLATA 08/12/26: 08:00 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The office is located inside the train station, just besides
+    the platform 1.
+  dropoff_instructions: The parking is located at 4° Floor/Green Floor of the Park
+    Stazione Multipiano, Piazzale Favretti 1.
+  out_of_hours:
+    key_box: Customers shall reach the 4° floor/green sector of the Park Stazione
+      Multipiano located in Piazzale Favretti 1. The entrance ticket must be left
+      inside the car while the keys must inserted the dedicated key box located on
+      the ground-floor/guardhouse side. The parking is open every day from 5AM to
+      Midnight. Out of hours drop-off is not allowed during the garage closing time.
+    pickup: ON REQUEST
+    exceptions: null
+- code: VRA
+  name: Verona Airport
+  city: Caselle Di Sommacampagna
+  province: Verona
+  country: Italy
+  country_code: IT
+  location_type: airport
+  is_airport: true
+  iata: VRA
+  latitude: 45.4045
+  longitude: 10.90913
+  address: AEROPORTO V. CATULLO - Via Aeroporto 5, 37060 Caselle di Sommacampagna
+    (VR)
+  postal_code: '37060'
+  phone: +39 045 8600846
+  email: veronaapt@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 23:00
+    saturday: 08:00 - 23:00
+    sunday: 08:00 - 23:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 23:00
+    EASTER 5/4/26: 08:00 - 23:00
+    EASTER MONDAY 6/4/26: 08:00 - 23:00
+    LIBERATION DAY 25/4/26: 08:00 - 23:00
+    LABOUR DAY 1/5/26: 08:00 - 23:00
+    REPUBLIC DAY 2/6/26: 08:00 - 23:00
+    FERRAGOSTO 15/08/26: 08:00 - 23:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 23:00
+    IMMACOLATA 08/12/26: 08:00 - 23:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 18:00
+    CHRISTMAS 25/12/26: 09:00 - 15:00
+    BOXING DAY 26/12/26: 10:00 - 18:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 18:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 23:00
+  pickup_instructions: The office is located in the car rental building, about 100
+    mt from the terminal on the left.
+  dropoff_instructions: The parking is a few steps away from the rental office. Follow
+    the 'Autonoleggi'/'Car Rental' signs.
+  out_of_hours:
+    key_box: Key box available inside the car rental building.
+    pickup: ON REQUEST
+    exceptions: null
+- code: VRS
+  name: Verona Porta Nuova Station
+  city: Verona
+  province: Verona
+  country: Italy
+  country_code: IT
+  location_type: train_station
+  is_airport: false
+  iata: null
+  latitude: 45.42955
+  longitude: 10.98393
+  address: Piazzale XXV Aprile N° 6 – 37138 – VERONA (VR)
+  postal_code: '37138'
+  phone: +39 045 596926
+  email: veronaportanuovafs@locautorent.it
+  operating_hours:
+    weekday: 08:00 - 20:00
+    saturday: 08:00 - 20:00
+    sunday: 08:00 - 20:00
+  holiday_hours:
+    NEW YEAR 1/1/26: 10:00 - 20:00
+    EPIPHANY 2026 6/1/26: 08:00 - 20:00
+    EASTER 5/4/26: 08:00 - 20:00
+    EASTER MONDAY 6/4/26: 08:00 - 20:00
+    LIBERATION DAY 25/4/26: 08:00 - 20:00
+    LABOUR DAY 1/5/26: 08:00 - 20:00
+    REPUBLIC DAY 2/6/26: 08:00 - 20:00
+    FERRAGOSTO 15/08/26: 08:00 - 20:00
+    ALL SAINTS' DAY 01/11/26: 08:00 - 20:00
+    IMMACOLATA 08/12/26: 08:00 - 20:00
+    CHRISTMAS'EVE 24/12/26: 08:00 - 19:00
+    CHRISTMAS 25/12/26: 10:00 - 20:00
+    BOXING DAY 26/12/26: 08:00 - 20:00
+    NEW YEAR'S EVE 31/12/26: 08:00 - 19:00
+    NEW YEAR 1/1/27: 10:00 - 20:00
+    EPIPHANY 6/1/27: 08:00 - 20:00
+  pickup_instructions: The office is located in Piazzale XXV Aprile 6, about 50 mt
+    from the Verona train station.
+  dropoff_instructions: The parking is in front of the office. To return the vehicle,
+    enter the parking lot using the bus and taxi lane.
+  out_of_hours:
+    key_box: Customers are required to park the vehicle in the blue sector of the
+      railway station parking located in Piazzale XXV Aprile. The entrance ticket
+      must be left inside the car and the keys must be inserted into the keybox located
+      nearby the rental location door, located in Piazzale XXV Aprile 6 (50 mt on
+      foot from the parking).
+    pickup: ON REQUEST
+    exceptions: null

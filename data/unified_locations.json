@@ -1650,8 +1650,8 @@
         "city": "Alghero",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 40.6361,
-        "longitude": 8.12,
+        "latitude": 40.6314,
+        "longitude": 8.29532,
         "location_type": "airport",
         "iata": "AHO",
         "provider_count": 2,
@@ -1661,8 +1661,8 @@
                 "pickup_id": "AHO",
                 "original_name": "Alghero Airport",
                 "dropoffs": [],
-                "latitude": 40.6361,
-                "longitude": 8.12,
+                "latitude": 40.6314,
+                "longitude": 8.29532,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -2265,8 +2265,8 @@
         "city": "Ancona",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.6158,
-        "longitude": 13.5189,
+        "latitude": 43.57249,
+        "longitude": 13.50524,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 2,
@@ -2274,10 +2274,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "ANCD",
-                "original_name": "Ancona Downtown",
+                "original_name": "Ancona",
                 "dropoffs": [],
-                "latitude": 43.6158,
-                "longitude": 13.5189,
+                "latitude": 43.57249,
+                "longitude": 13.50524,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -3021,40 +3021,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1687819352,
-        "name": "Aosta Airport (AOT)",
-        "aliases": [
-            "Aosta Airport",
-            "Aosta",
-            "AOT"
-        ],
-        "city": "Aosta",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.7366,
-        "longitude": 7.3639,
-        "location_type": "airport",
-        "iata": "AOT",
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "AOT",
-                "original_name": "Aosta Airport",
-                "dropoffs": [],
-                "latitude": 45.7366,
-                "longitude": 7.3639,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": "AOT",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1702570566,
         "name": "Aqaba Airport (AQJ)",
         "aliases": [
@@ -3328,8 +3294,8 @@
         "city": "Arezzo",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.4625,
-        "longitude": 11.8791,
+        "latitude": 43.46954,
+        "longitude": 11.87037,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -3337,10 +3303,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "ARD",
-                "original_name": "Arezzo Downtown",
+                "original_name": "Arezzo",
                 "dropoffs": [],
-                "latitude": 43.4625,
-                "longitude": 11.8791,
+                "latitude": 43.46954,
+                "longitude": 11.87037,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -3649,8 +3615,8 @@
         "city": "Asti",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.9041,
-        "longitude": 8.2082,
+        "latitude": 44.90201,
+        "longitude": 8.23222,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -3658,10 +3624,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "ATD",
-                "original_name": "Asti Downtown",
+                "original_name": "Asti",
                 "dropoffs": [],
-                "latitude": 44.9041,
-                "longitude": 8.2082,
+                "latitude": 44.90201,
+                "longitude": 8.23222,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -4663,18 +4629,32 @@
         "unified_location_id": 886154175,
         "name": "Baku Downtown",
         "aliases": [
-            "Baku downtown",
-            "Baku"
+            "Baku",
+            "Baku downtown"
         ],
         "city": "Baku",
-        "country": "AZ",
+        "country": "Azerbaijan",
         "country_code": "AZ",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 40.41151,
+        "longitude": 49.86118,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "greenmotion",
+                "pickup_id": "61771",
+                "original_name": "Baku Downtown",
+                "dropoffs": [],
+                "latitude": 40.41151,
+                "longitude": 49.86118,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AZ",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "AZ-BAK-DT",
@@ -5561,40 +5541,58 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 4206275268,
-        "name": "Bari Airport (BRI)",
+        "unified_location_id": 2471232056,
+        "name": "Bari Airport",
         "aliases": [
-            "Bari Airport",
-            "Bari",
-            "Bari airport",
-            "Zona Industriale",
-            "Bari Palese International Airport",
-            "Bari Palese",
-            "BRI"
+            "Bari"
         ],
         "city": "Bari",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.133692,
-        "longitude": 16.778645,
+        "latitude": 41.43068,
+        "longitude": 16.78268,
         "location_type": "airport",
-        "iata": "BRI",
-        "provider_count": 4,
+        "iata": null,
+        "provider_count": 1,
         "providers": [
             {
                 "provider": "locauto_rent",
                 "pickup_id": "BAAPT",
                 "original_name": "Bari Airport",
                 "dropoffs": [],
-                "latitude": 41.1395,
-                "longitude": 16.7753,
+                "latitude": 41.43068,
+                "longitude": 16.78268,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "IT",
-                "iata": "BRI",
+                "iata": null,
                 "provider_code": null
-            },
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4206275268,
+        "name": "Bari Airport (BRI)",
+        "aliases": [
+            "Bari airport",
+            "Bari",
+            "Bari Airport",
+            "Zona Industriale",
+            "Bari Palese International Airport",
+            "Bari Palese",
+            "BRI"
+        ],
+        "city": "Bari",
+        "country": "IT",
+        "country_code": "IT",
+        "latitude": 41.124702,
+        "longitude": 16.787364,
+        "location_type": "airport",
+        "iata": "BRI",
+        "provider_count": 3,
+        "providers": [
             {
                 "provider": "renteon",
                 "pickup_id": "IT-BAR-BRI",
@@ -5682,8 +5680,8 @@
         "city": "Bari",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.1171,
-        "longitude": 16.8719,
+        "latitude": 41.11819,
+        "longitude": 16.87127,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 1,
@@ -5693,8 +5691,8 @@
                 "pickup_id": "BAT",
                 "original_name": "Bari Train Station",
                 "dropoffs": [],
-                "latitude": 41.1171,
-                "longitude": 16.8719,
+                "latitude": 41.11819,
+                "longitude": 16.87127,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -6435,7 +6433,7 @@
         "aliases": [
             "Bergamo Airport",
             "Bergamo",
-            "Bergamo Orio al Serio Airport",
+            "Orio Al Serio",
             "OK BGY",
             "Bergamo airport",
             "Bergamo-Orio al Serio International Airport",
@@ -6445,7 +6443,7 @@
         "city": "Bergamo",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.67,
+        "latitude": 45.66983,
         "longitude": 9.705139,
         "location_type": "airport",
         "iata": "BGY",
@@ -6468,10 +6466,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "BGY",
-                "original_name": "Bergamo Orio al Serio Airport",
+                "original_name": "Bergamo Airport",
                 "dropoffs": [],
-                "latitude": 45.6745,
-                "longitude": 9.7046,
+                "latitude": 45.66983,
+                "longitude": 9.68433,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -6542,33 +6540,18 @@
         "unified_location_id": 487293610,
         "name": "Bergamo Downtown",
         "aliases": [
-            "Milan Bergamo Downtown",
-            "Bergamo",
-            "Bergamo downtown"
+            "Bergamo downtown",
+            "Bergamo"
         ],
         "city": "Bergamo",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 45.6981,
-        "longitude": 9.6773,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "MBD",
-                "original_name": "Milan Bergamo Downtown",
-                "dropoffs": [],
-                "latitude": 45.6981,
-                "longitude": 9.6773,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-BER-DT",
@@ -6896,8 +6879,8 @@
         "city": "Biella",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.5658,
-        "longitude": 8.0568,
+        "latitude": 45.55288,
+        "longitude": 8.06934,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -6905,10 +6888,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "BID",
-                "original_name": "Biella Downtown",
+                "original_name": "Biella",
                 "dropoffs": [],
-                "latitude": 45.5658,
-                "longitude": 8.0568,
+                "latitude": 45.55288,
+                "longitude": 8.06934,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -7728,7 +7711,7 @@
         "country": "Italy",
         "country_code": "IT",
         "latitude": 44.542518,
-        "longitude": 11.295444,
+        "longitude": 11.297874,
         "location_type": "airport",
         "iata": "BLQ",
         "provider_count": 5,
@@ -7752,8 +7735,8 @@
                 "pickup_id": "BLQ",
                 "original_name": "Bologna Airport",
                 "dropoffs": [],
-                "latitude": 44.5354,
-                "longitude": 11.2887,
+                "latitude": 44.52977,
+                "longitude": 11.29356,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -7843,15 +7826,15 @@
         "unified_location_id": 373738265,
         "name": "Bologna Train Station",
         "aliases": [
-            "Bologna Centrale Train Station",
+            "Bologna Central Station",
             "Bologna",
             "Bologna railway station"
         ],
         "city": "Bologna",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.504562,
-        "longitude": 11.344204,
+        "latitude": 42.505177,
+        "longitude": 11.343814,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 3,
@@ -7859,10 +7842,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "BOC",
-                "original_name": "Bologna Centrale Train Station",
+                "original_name": "Bologna Central Station",
                 "dropoffs": [],
-                "latitude": 44.5043,
-                "longitude": 11.3417,
+                "latitude": 40.50553,
+                "longitude": 11.34092,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -8677,8 +8660,8 @@
         "city": "Brescia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.5395,
-        "longitude": 10.2091,
+        "latitude": 45.56262,
+        "longitude": 10.20168,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 1,
@@ -8688,8 +8671,8 @@
                 "pickup_id": "TBS",
                 "original_name": "Brescia Central Station",
                 "dropoffs": [],
-                "latitude": 45.5395,
-                "longitude": 10.2091,
+                "latitude": 45.56262,
+                "longitude": 10.20168,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -8844,8 +8827,8 @@
         "city": "Brindisi",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 40.652202,
-        "longitude": 17.927729,
+        "latitude": 40.710612,
+        "longitude": 17.929884,
         "location_type": "airport",
         "iata": "BDS",
         "provider_count": 2,
@@ -8869,8 +8852,8 @@
                 "pickup_id": "BDS",
                 "original_name": "Brindisi Airport",
                 "dropoffs": [],
-                "latitude": 40.6542,
-                "longitude": 17.944,
+                "latitude": 40.77102,
+                "longitude": 17.94831,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -10268,14 +10251,15 @@
         "aliases": [
             "Cagliari Airport",
             "Cagliari",
+            "Elmas",
             "Cagliari airport",
             "CAG"
         ],
         "city": "Cagliari",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 39.255818,
-        "longitude": 9.058211,
+        "latitude": 39.256023,
+        "longitude": 9.0598,
         "location_type": "airport",
         "iata": "CAG",
         "provider_count": 5,
@@ -10299,8 +10283,8 @@
                 "pickup_id": "CAG",
                 "original_name": "Cagliari Airport",
                 "dropoffs": [],
-                "latitude": 39.2515,
-                "longitude": 9.0544,
+                "latitude": 39.2564,
+                "longitude": 9.0598,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -10666,38 +10650,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 526912783,
-        "name": "Caltanissetta Downtown",
-        "aliases": [
-            "Caltanissetta"
-        ],
-        "city": "Caltanissetta",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 37.4895,
-        "longitude": 14.0574,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "CTD",
-                "original_name": "Caltanissetta Downtown",
-                "dropoffs": [],
-                "latitude": 37.4895,
-                "longitude": 14.0574,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1087642021,
         "name": "Cambridge Downtown",
         "aliases": [
@@ -11029,6 +10981,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ZA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 30532719,
+        "name": "Cardano Al Campo Downtown",
+        "aliases": [
+            "Cardano Al Campo"
+        ],
+        "city": "Cardano Al Campo",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.6756,
+        "longitude": 8.76127,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "CARD",
+                "original_name": "Cardano Al Campo",
+                "dropoffs": [],
+                "latitude": 45.6756,
+                "longitude": 8.76127,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -11751,6 +11735,73 @@
         "our_location_id": "internal_170888802bfd2982fc9b67f1e5d96641"
     },
     {
+        "unified_location_id": 2970051291,
+        "name": "Casagiove Downtown",
+        "aliases": [
+            "Caserta",
+            "Casagiove"
+        ],
+        "city": "Casagiove",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 41.07363,
+        "longitude": 14.30328,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "CED",
+                "original_name": "Caserta",
+                "dropoffs": [],
+                "latitude": 41.07363,
+                "longitude": 14.30328,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4014090586,
+        "name": "Caselle Di Sommacampagna Airport (VRA)",
+        "aliases": [
+            "Verona Airport",
+            "Caselle Di Sommacampagna",
+            "VRA"
+        ],
+        "city": "Caselle Di Sommacampagna",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.4045,
+        "longitude": 10.90913,
+        "location_type": "airport",
+        "iata": "VRA",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "VRA",
+                "original_name": "Verona Airport",
+                "dropoffs": [],
+                "latitude": 45.4045,
+                "longitude": 10.90913,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "VRA",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 112817494,
         "name": "Castelldefels Downtown",
         "aliases": [
@@ -11896,8 +11947,8 @@
         "city": "Catania",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 37.469939,
-        "longitude": 15.068144,
+        "latitude": 37.470187,
+        "longitude": 15.067966,
         "location_type": "airport",
         "iata": "CTA",
         "provider_count": 7,
@@ -11907,8 +11958,8 @@
                 "pickup_id": "CT",
                 "original_name": "Catania Airport",
                 "dropoffs": [],
-                "latitude": 37.4667,
-                "longitude": 15.0664,
+                "latitude": 37.470455,
+                "longitude": 15.066043,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -12007,18 +12058,33 @@
         "unified_location_id": 38719050,
         "name": "Catania Downtown",
         "aliases": [
-            "Catania downtown",
-            "Catania"
+            "Catania San Giuseppe La Rena",
+            "Catania",
+            "Catania downtown"
         ],
         "city": "Catania",
-        "country": "IT",
+        "country": "Italy",
         "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 37.481,
+        "longitude": 15.07831,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "CTD",
+                "original_name": "Catania San Giuseppe La Rena",
+                "dropoffs": [],
+                "latitude": 37.481,
+                "longitude": 15.07831,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-CAT-DT",
@@ -12059,38 +12125,6 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3040593733,
-        "name": "Catanzaro Downtown",
-        "aliases": [
-            "Catanzaro"
-        ],
-        "city": "Catanzaro",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 38.9075,
-        "longitude": 16.5886,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "CZD",
-                "original_name": "Catanzaro Downtown",
-                "dropoffs": [],
-                "latitude": 38.9075,
-                "longitude": 16.5886,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -13095,6 +13129,7 @@
         "aliases": [
             "Ciampino Airport",
             "Ciampino",
+            "Roma Ciampino Airport",
             "Rome airport",
             "Rome",
             "Rome Ciampino Airport",
@@ -13104,11 +13139,11 @@
         "city": "Ciampino",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.786858,
-        "longitude": 12.574977,
+        "latitude": 41.788692,
+        "longitude": 12.58955,
         "location_type": "airport",
         "iata": "CIA",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -13117,6 +13152,20 @@
                 "dropoffs": [],
                 "latitude": 41.785024760016604,
                 "longitude": 12.600126338696603,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "CIA",
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "CIA",
+                "original_name": "Roma Ciampino Airport",
+                "dropoffs": [],
+                "latitude": 41.79627,
+                "longitude": 12.58955,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -13327,8 +13376,8 @@
         "city": "Civitavecchia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 42.0906,
-        "longitude": 11.7977,
+        "latitude": 42.08818,
+        "longitude": 11.79774,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -13336,10 +13385,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "CVT",
-                "original_name": "Civitavecchia Downtown",
+                "original_name": "Civitavecchia",
                 "dropoffs": [],
-                "latitude": 42.0906,
-                "longitude": 11.7977,
+                "latitude": 42.08818,
+                "longitude": 11.79774,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -13476,38 +13525,6 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "RO",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 525586372,
-        "name": "Codogno Downtown",
-        "aliases": [
-            "Codogno"
-        ],
-        "city": "Codogno",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.1583,
-        "longitude": 9.6965,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "COD",
-                "original_name": "Codogno Downtown",
-                "dropoffs": [],
-                "latitude": 45.1583,
-                "longitude": 9.6965,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -13672,6 +13689,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3014340630,
+        "name": "Como Downtown",
+        "aliases": [
+            "Como"
+        ],
+        "city": "Como",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.79151,
+        "longitude": 9.06571,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "COD",
+                "original_name": "Como",
+                "dropoffs": [],
+                "latitude": 45.79151,
+                "longitude": 9.06571,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3533371539,
         "name": "Conegliano Downtown",
         "aliases": [
@@ -13680,8 +13729,8 @@
         "city": "Conegliano",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.8844,
-        "longitude": 12.2972,
+        "latitude": 45.89806,
+        "longitude": 12.29403,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -13689,10 +13738,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "CON",
-                "original_name": "Conegliano Downtown",
+                "original_name": "Conegliano",
                 "dropoffs": [],
-                "latitude": 45.8844,
-                "longitude": 12.2972,
+                "latitude": 45.89806,
+                "longitude": 12.29403,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -14171,38 +14220,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1693033967,
-        "name": "Cosenza Downtown",
-        "aliases": [
-            "Cosenza"
-        ],
-        "city": "Cosenza",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 39.3001,
-        "longitude": 16.2556,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "DCS",
-                "original_name": "Cosenza Downtown",
-                "dropoffs": [],
-                "latitude": 39.3001,
-                "longitude": 16.2556,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1667904832,
         "name": "Costa Adeje Downtown",
         "aliases": [
@@ -14373,8 +14390,8 @@
         "city": "Cremona",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.1343,
-        "longitude": 10.0224,
+        "latitude": 45.15579,
+        "longitude": 9.9886,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -14382,10 +14399,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "CRD",
-                "original_name": "Cremona Downtown",
+                "original_name": "Cremona",
                 "dropoffs": [],
-                "latitude": 45.1343,
-                "longitude": 10.0224,
+                "latitude": 45.15579,
+                "longitude": 9.9886,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -14873,32 +14890,18 @@
         "unified_location_id": 1013279757,
         "name": "Cuneo Downtown",
         "aliases": [
-            "Cuneo",
-            "Cuneo downtown"
+            "Cuneo downtown",
+            "Cuneo"
         ],
         "city": "Cuneo",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 44.3845,
-        "longitude": 7.5425,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "CED",
-                "original_name": "Cuneo Downtown",
-                "dropoffs": [],
-                "latitude": 44.3845,
-                "longitude": 7.5425,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-CUN-DT",
@@ -14924,16 +14927,18 @@
             "Curaaao",
             "Curaçao International Airport",
             "Curacao",
+            "Willemstad Curacao International Airport (CUR)",
+            "Willemstad Curacao",
             "CUR"
         ],
         "city": "Curaaao",
         "country": "Curacao",
         "country_code": "CW",
-        "latitude": 12.110146,
-        "longitude": -68.896149,
+        "latitude": 12.149523,
+        "longitude": -68.927975,
         "location_type": "airport",
         "iata": "CUR",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -14956,6 +14961,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "CW",
+                "iata": "CUR",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "106",
+                "original_name": "Willemstad Curacao International Airport (CUR)",
+                "dropoffs": [],
+                "latitude": 12.1889,
+                "longitude": -68.959801,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -15043,11 +15062,11 @@
         "city": "Dalaman",
         "country": "Turkiye",
         "country_code": "TR",
-        "latitude": 36.742348,
-        "longitude": 28.811024,
+        "latitude": 36.727724,
+        "longitude": 28.801762,
         "location_type": "airport",
         "iata": "DLM",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -15070,6 +15089,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "DLM",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "108",
+                "original_name": "Dalaman Airport (DLM)",
+                "dropoffs": [],
+                "latitude": 36.7131,
+                "longitude": 28.7925,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -15433,6 +15466,38 @@
                 "extended_dropoff_code": null,
                 "country_code": "US",
                 "iata": "DEN",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 147328939,
+        "name": "Desenzano Del Garda Downtown",
+        "aliases": [
+            "Desenzano Del Garda"
+        ],
+        "city": "Desenzano Del Garda",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.46225,
+        "longitude": 10.52652,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DESD",
+                "original_name": "Desenzano Del Garda",
+                "dropoffs": [],
+                "latitude": 45.46225,
+                "longitude": 10.52652,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -18131,38 +18196,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2287265351,
-        "name": "Empoli Downtown",
-        "aliases": [
-            "Empoli"
-        ],
-        "city": "Empoli",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 43.7208,
-        "longitude": 10.9456,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "EFD",
-                "original_name": "Empoli Downtown",
-                "dropoffs": [],
-                "latitude": 43.7208,
-                "longitude": 10.9456,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1734545613,
         "name": "Entebbe Airport (EBB)",
         "aliases": [
@@ -18191,6 +18224,39 @@
                 "extended_dropoff_code": null,
                 "country_code": "UG",
                 "iata": "EBB",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3719224321,
+        "name": "Erbusco Downtown",
+        "aliases": [
+            "Erbusco Franciacorta",
+            "Erbusco"
+        ],
+        "city": "Erbusco",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.57929,
+        "longitude": 10.00319,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "EFD",
+                "original_name": "Erbusco Franciacorta",
+                "dropoffs": [],
+                "latitude": 45.57929,
+                "longitude": 10.00319,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -18856,8 +18922,8 @@
         "city": "Ferrara",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.8367,
-        "longitude": 11.6198,
+        "latitude": 44.80651,
+        "longitude": 11.58677,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -18865,10 +18931,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "DFE",
-                "original_name": "Ferrara Downtown",
+                "original_name": "Ferrara",
                 "dropoffs": [],
-                "latitude": 44.8367,
-                "longitude": 11.6198,
+                "latitude": 44.80651,
+                "longitude": 11.58677,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -19126,16 +19192,15 @@
         "aliases": [
             "Firenze Airport",
             "Firenze",
-            "Florence Airport",
-            "Florence",
             "Florence airport",
+            "Florence",
             "FLR"
         ],
         "city": "Firenze",
         "country": "Italy",
         "country_code": "IT",
         "latitude": 43.801596,
-        "longitude": 11.198539,
+        "longitude": 11.19755,
         "location_type": "airport",
         "iata": "FLR",
         "provider_count": 4,
@@ -19157,10 +19222,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "FLR",
-                "original_name": "Florence Airport",
+                "original_name": "Firenze Airport",
                 "dropoffs": [],
-                "latitude": 43.81,
-                "longitude": 11.2056,
+                "latitude": 43.802,
+                "longitude": 11.19755,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -19203,16 +19268,17 @@
         "unified_location_id": 3666183420,
         "name": "Firenze Downtown",
         "aliases": [
-            "Firenze"
+            "Firenze",
+            "Firenze Isolotto"
         ],
         "city": "Firenze",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.780032,
+        "latitude": 43.77811,
         "longitude": 11.239698,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -19221,6 +19287,34 @@
                 "dropoffs": [],
                 "latitude": 43.780032195992774,
                 "longitude": 11.239697924846617,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FI",
+                "original_name": "Firenze Downtown",
+                "dropoffs": [],
+                "latitude": 43.77811,
+                "longitude": 11.24562,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FID",
+                "original_name": "Firenze Isolotto",
+                "dropoffs": [],
+                "latitude": 43.77192,
+                "longitude": 11.2151,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -19273,19 +19367,19 @@
         "city": "Fiumicino",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.773,
-        "longitude": 12.2367,
+        "latitude": 41.773166,
+        "longitude": 12.245886,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
         "providers": [
             {
                 "provider": "locauto_rent",
-                "pickup_id": "FRD",
+                "pickup_id": "FIUD",
                 "original_name": "Fiumicino Downtown",
                 "dropoffs": [],
-                "latitude": 41.773,
-                "longitude": 12.2367,
+                "latitude": 41.773166,
+                "longitude": 12.245886,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -19330,32 +19424,18 @@
         "unified_location_id": 4274986930,
         "name": "Florence Downtown",
         "aliases": [
-            "Florence",
-            "Florence downtown"
+            "Florence downtown",
+            "Florence"
         ],
         "city": "Florence",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 43.7696,
-        "longitude": 11.2558,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "FID",
-                "original_name": "Florence Downtown",
-                "dropoffs": [],
-                "latitude": 43.7696,
-                "longitude": 11.2558,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-FLO-DT",
@@ -19415,8 +19495,8 @@
         "city": "Foggia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.4626,
-        "longitude": 15.5447,
+        "latitude": 41.46542,
+        "longitude": 15.5631,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -19424,10 +19504,42 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "FGD",
-                "original_name": "Foggia Downtown",
+                "original_name": "Foggia",
                 "dropoffs": [],
-                "latitude": 41.4626,
-                "longitude": 15.5447,
+                "latitude": 41.46542,
+                "longitude": 15.5631,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1483797630,
+        "name": "Foligno Downtown",
+        "aliases": [
+            "Foligno"
+        ],
+        "city": "Foligno",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 42.92749,
+        "longitude": 12.72534,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FOLD",
+                "original_name": "Foligno",
+                "dropoffs": [],
+                "latitude": 42.92749,
+                "longitude": 12.72534,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -19821,6 +19933,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "US",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1194875639,
+        "name": "Frosinone Downtown",
+        "aliases": [
+            "Frosinone"
+        ],
+        "city": "Frosinone",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 41.65031,
+        "longitude": 13.33913,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FRD",
+                "original_name": "Frosinone",
+                "dropoffs": [],
+                "latitude": 41.65031,
+                "longitude": 13.33913,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -20437,19 +20581,18 @@
     },
     {
         "unified_location_id": 231377921,
-        "name": "Genoa Airport (GOA)",
+        "name": "Genova Airport (GOA)",
         "aliases": [
-            "Genoa Airport",
-            "Genoa",
-            "Genova airport",
+            "Genova Airport",
             "Genova",
+            "Genova airport",
             "GOA"
         ],
-        "city": "Genoa",
+        "city": "Genova",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.4133,
-        "longitude": 8.8326,
+        "latitude": 44.41589,
+        "longitude": 8.85028,
         "location_type": "airport",
         "iata": "GOA",
         "provider_count": 2,
@@ -20457,10 +20600,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "GOA",
-                "original_name": "Genoa Airport",
+                "original_name": "Genova Airport",
                 "dropoffs": [],
-                "latitude": 44.4133,
-                "longitude": 8.8326,
+                "latitude": 44.41589,
+                "longitude": 8.85028,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -20486,53 +20629,35 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2225821919,
-        "name": "Genoa Downtown",
+        "unified_location_id": 4225523400,
+        "name": "Genova Downtown",
         "aliases": [
-            "Genoa"
+            "Genova",
+            "Genova downtown"
         ],
-        "city": "Genoa",
+        "city": "Genova",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.4056,
-        "longitude": 8.9463,
+        "latitude": 44.40396,
+        "longitude": 8.95276,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "locauto_rent",
                 "pickup_id": "DGE",
-                "original_name": "Genoa Downtown",
+                "original_name": "Genova Downtown",
                 "dropoffs": [],
-                "latitude": 44.4056,
-                "longitude": 8.9463,
+                "latitude": 44.40396,
+                "longitude": 8.95276,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "IT",
                 "iata": null,
                 "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 4225523400,
-        "name": "Genova Downtown",
-        "aliases": [
-            "Genova downtown",
-            "Genova"
-        ],
-        "city": "Genova",
-        "country": "IT",
-        "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-GEN-DT",
@@ -20773,6 +20898,39 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "GR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1962358193,
+        "name": "Germaneto Downtown",
+        "aliases": [
+            "Catanzaro",
+            "Germaneto"
+        ],
+        "city": "Germaneto",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 38.861597,
+        "longitude": 16.567929,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "CZD",
+                "original_name": "Catanzaro",
+                "dropoffs": [],
+                "latitude": 38.861597,
+                "longitude": 16.567929,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -21052,11 +21210,11 @@
         "city": "Gold Coast",
         "country": "Australia",
         "country_code": "AU",
-        "latitude": -28.180541,
-        "longitude": 153.538828,
+        "latitude": -28.090421,
+        "longitude": 153.484864,
         "location_type": "airport",
         "iata": "OOL",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -21079,6 +21237,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AU",
+                "iata": "OOL",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "107",
+                "original_name": "Gold Coast Airport (OOL)",
+                "dropoffs": [],
+                "latitude": -28.0003,
+                "longitude": 153.4309,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -22230,6 +22402,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "US",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2761251621,
+        "name": "Grosseto Downtown",
+        "aliases": [
+            "Grosseto"
+        ],
+        "city": "Grosseto",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 42.76884,
+        "longitude": 11.10883,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "GRD",
+                "original_name": "Grosseto",
+                "dropoffs": [],
+                "latitude": 42.76884,
+                "longitude": 11.10883,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -24373,6 +24577,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3569416101,
+        "name": "Imola Downtown",
+        "aliases": [
+            "Imola"
+        ],
+        "city": "Imola",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 44.359934,
+        "longitude": 11.724681,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "IMOD",
+                "original_name": "Imola",
+                "dropoffs": [],
+                "latitude": 44.3599337,
+                "longitude": 11.7246806,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3189914364,
         "name": "Imperia Downtown",
         "aliases": [
@@ -24381,8 +24617,8 @@
         "city": "Imperia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.8895,
-        "longitude": 8.0404,
+        "latitude": 43.8894,
+        "longitude": 8.03675,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -24390,10 +24626,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "DIM",
-                "original_name": "Imperia Downtown",
+                "original_name": "Imperia",
                 "dropoffs": [],
-                "latitude": 43.8895,
-                "longitude": 8.0404,
+                "latitude": 43.8894,
+                "longitude": 8.03675,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -30052,18 +30288,32 @@
         "unified_location_id": 2052170374,
         "name": "La Spezia Downtown",
         "aliases": [
-            "La Spezia downtown",
-            "La Spezia"
+            "La Spezia",
+            "La Spezia downtown"
         ],
         "city": "La Spezia",
-        "country": "IT",
+        "country": "Italy",
         "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 44.12024,
+        "longitude": 9.84548,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "SPD",
+                "original_name": "La Spezia",
+                "dropoffs": [],
+                "latitude": 44.12024,
+                "longitude": 9.84548,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-LAS-DT",
@@ -30300,8 +30550,8 @@
         "city": "Lamezia Terme",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 38.911486,
-        "longitude": 16.23416,
+        "latitude": 38.895331,
+        "longitude": 16.39607,
         "location_type": "airport",
         "iata": "SUF",
         "provider_count": 3,
@@ -30311,8 +30561,8 @@
                 "pickup_id": "SUF",
                 "original_name": "Lamezia Terme Airport",
                 "dropoffs": [],
-                "latitude": 38.8945,
-                "longitude": 16.2445,
+                "latitude": 38.86219,
+                "longitude": 16.56832,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -30916,6 +31166,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3718863835,
+        "name": "Latina Downtown",
+        "aliases": [
+            "Latina"
+        ],
+        "city": "Latina",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 41.47377,
+        "longitude": 12.88679,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "LTD",
+                "original_name": "Latina",
+                "dropoffs": [],
+                "latitude": 41.47377,
+                "longitude": 12.88679,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2564014959,
         "name": "Laurel",
         "aliases": [],
@@ -31061,6 +31343,38 @@
                 "dropoffs": [],
                 "latitude": 40.35419712199556,
                 "longitude": 18.165368829449957,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1350267272,
+        "name": "Lecce Downtown",
+        "aliases": [
+            "Lecce"
+        ],
+        "city": "Lecce",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.3568,
+        "longitude": 18.15221,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "LED",
+                "original_name": "Lecce",
+                "dropoffs": [],
+                "latitude": 40.3568,
+                "longitude": 18.15221,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -34847,16 +35161,16 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2493105212,
-        "name": "Mantua Downtown",
+        "unified_location_id": 3548313904,
+        "name": "Mantova Downtown",
         "aliases": [
-            "Mantua"
+            "Mantova"
         ],
-        "city": "Mantua",
+        "city": "Mantova",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.1667,
-        "longitude": 10.7833,
+        "latitude": 45.14816,
+        "longitude": 10.76589,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -34864,10 +35178,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "MND",
-                "original_name": "Mantua Downtown",
+                "original_name": "Mantova",
                 "dropoffs": [],
-                "latitude": 45.1667,
-                "longitude": 10.7833,
+                "latitude": 45.14816,
+                "longitude": 10.76589,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -35995,6 +36309,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 4187499591,
+        "name": "Matera Downtown",
+        "aliases": [
+            "Matera"
+        ],
+        "city": "Matera",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.67387,
+        "longitude": 16.57193,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DMT",
+                "original_name": "Matera",
+                "dropoffs": [],
+                "latitude": 40.67387,
+                "longitude": 16.57193,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 567404328,
         "name": "Mauritius Airport (MRU)",
         "aliases": [
@@ -36491,38 +36837,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 800394717,
-        "name": "Merano Downtown",
-        "aliases": [
-            "Merano"
-        ],
-        "city": "Merano",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 46.6729,
-        "longitude": 11.1589,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "MED",
-                "original_name": "Merano Downtown",
-                "dropoffs": [],
-                "latitude": 46.6729,
-                "longitude": 11.1589,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 4221202399,
         "name": "Meridian",
         "aliases": [],
@@ -36744,6 +37058,71 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3420337223,
+        "name": "Messina Downtown",
+        "aliases": [
+            "Messina"
+        ],
+        "city": "Messina",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 38.1735,
+        "longitude": 15.54943,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MED",
+                "original_name": "Messina",
+                "dropoffs": [],
+                "latitude": 38.1735,
+                "longitude": 15.54943,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 652653096,
+        "name": "Mestre Train Station",
+        "aliases": [
+            "Venezia Mestre Station",
+            "Mestre"
+        ],
+        "city": "Mestre",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.48246,
+        "longitude": 12.2317,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "VMS",
+                "original_name": "Venezia Mestre Station",
+                "dropoffs": [],
+                "latitude": 45.48246,
+                "longitude": 12.2317,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -37097,71 +37476,24 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 581110187,
-        "name": "Milan",
-        "aliases": [
-            "Milan Assago Cassala"
-        ],
-        "city": "Milan",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.4175,
-        "longitude": 9.166,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "DMIA",
-                "original_name": "Milan Assago Cassala",
-                "dropoffs": [],
-                "latitude": 45.4175,
-                "longitude": 9.166,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 3346717175,
         "name": "Milan Airport (LIN)",
         "aliases": [
-            "Milan Linate Airport",
-            "Milan",
             "Milan airport",
+            "Milan",
             "Milano Linate Airport",
             "Milano",
             "LIN"
         ],
         "city": "Milan",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 45.4465,
-        "longitude": 9.2774,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "airport",
         "iata": "LIN",
-        "provider_count": 3,
+        "provider_count": 2,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "LIN",
-                "original_name": "Milan Linate Airport",
-                "dropoffs": [],
-                "latitude": 45.4465,
-                "longitude": 9.2774,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": "LIN",
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-MIL-LIN",
@@ -37229,48 +37561,18 @@
         "unified_location_id": 2306153399,
         "name": "Milan Downtown",
         "aliases": [
-            "Milan Corvetto Downtown",
-            "Milan",
-            "Sesto San Giovanni Downtown",
-            "Milan downtown"
+            "Milan downtown",
+            "Milan"
         ],
         "city": "Milan",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 45.489,
-        "longitude": 9.2249,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 3,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "MICOD",
-                "original_name": "Milan Corvetto Downtown",
-                "dropoffs": [],
-                "latitude": 45.4456,
-                "longitude": 9.2147,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "SSG",
-                "original_name": "Sesto San Giovanni Downtown",
-                "dropoffs": [],
-                "latitude": 45.5324,
-                "longitude": 9.2351,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-MIL-DT",
@@ -37292,33 +37594,18 @@
         "unified_location_id": 1324357085,
         "name": "Milan Train Station",
         "aliases": [
-            "Milan Central Station",
-            "Milan",
-            "Milan railway station"
+            "Milan railway station",
+            "Milan"
         ],
         "city": "Milan",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 45.4864,
-        "longitude": 9.1876,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "MIT",
-                "original_name": "Milan Central Station",
-                "dropoffs": [],
-                "latitude": 45.4864,
-                "longitude": 9.1876,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-MIL-RS",
@@ -37369,27 +37656,137 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1518583920,
+        "name": "Milano Downtown",
+        "aliases": [
+            "Milano Cassala",
+            "Milano",
+            "Milano Corvetto",
+            "Milano City Life",
+            "Milano Porta Romana"
+        ],
+        "city": "Milano",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.45154,
+        "longitude": 9.185335,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 4,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DMIA",
+                "original_name": "Milano Cassala",
+                "dropoffs": [],
+                "latitude": 45.44515,
+                "longitude": 9.16544,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MICOD",
+                "original_name": "Milano Corvetto",
+                "dropoffs": [],
+                "latitude": 45.44125,
+                "longitude": 9.22462,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MIDCY",
+                "original_name": "Milano City Life",
+                "dropoffs": [],
+                "latitude": 45.47646,
+                "longitude": 9.14967,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MPRD",
+                "original_name": "Milano Porta Romana",
+                "dropoffs": [],
+                "latitude": 45.45793,
+                "longitude": 9.20523,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 607504110,
+        "name": "Milano Linate Airport",
+        "aliases": [
+            "Segrate"
+        ],
+        "city": "Segrate",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.46213,
+        "longitude": 9.27909,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "ML",
+                "original_name": "Milano Linate Airport",
+                "dropoffs": [],
+                "latitude": 45.46213,
+                "longitude": 9.27909,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1869524403,
         "name": "Milano Malpensa Airport (MXP)",
         "aliases": [
             "Milano Malpensa Airport",
             "Milano Malpensa",
-            "Milan Malpensa Airport T1",
-            "Milan",
-            "Milan Malpensa Airport T2",
+            "Milano Malpensa Airport T1",
+            "Ferno",
+            "Milano Malpensa Airport T2",
+            "Somma Lombardo",
             "OK MXP",
             "Malpensa",
             "Milan airport",
-            "Milano Malpensa Airport T1",
+            "Milan",
             "Milano",
-            "Milano Malpensa Airport T2",
             "MXP"
         ],
         "city": "Milano Malpensa",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.6326,
-        "longitude": 8.7261,
+        "latitude": 45.63,
+        "longitude": 8.722647,
         "location_type": "airport",
         "iata": "MXP",
         "provider_count": 8,
@@ -37410,11 +37807,11 @@
             },
             {
                 "provider": "locauto_rent",
-                "pickup_id": "MXP",
-                "original_name": "Milan Malpensa Airport T1",
+                "pickup_id": "MM",
+                "original_name": "Milano Malpensa Airport T1",
                 "dropoffs": [],
-                "latitude": 45.6326,
-                "longitude": 8.7261,
+                "latitude": 45.62762,
+                "longitude": 8.71299,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -37425,10 +37822,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "MXP2",
-                "original_name": "Milan Malpensa Airport T2",
+                "original_name": "Milano Malpensa Airport T2",
                 "dropoffs": [],
-                "latitude": 45.6326,
-                "longitude": 8.7261,
+                "latitude": 45.64917,
+                "longitude": 8.72163,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -37504,6 +37901,71 @@
                 "extended_dropoff_code": null,
                 "country_code": "IT",
                 "iata": "MXP",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4146318648,
+        "name": "Milano Train Station",
+        "aliases": [
+            "Milano Central Station",
+            "Milano"
+        ],
+        "city": "Milano",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MIT",
+                "original_name": "Milano Central Station",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1942653952,
+        "name": "Milazzo Downtown",
+        "aliases": [
+            "Milazzo"
+        ],
+        "city": "Milazzo",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 38.21495,
+        "longitude": 15.240889,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "MZD",
+                "original_name": "Milazzo",
+                "dropoffs": [],
+                "latitude": 38.21495,
+                "longitude": 15.240889,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -37775,39 +38237,24 @@
         "name": "Modena Downtown",
         "aliases": [
             "Modena",
-            "Modena City",
             "Modena downtown"
         ],
         "city": "Modena",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.6478,
-        "longitude": 10.9254,
+        "latitude": 44.649537,
+        "longitude": 10.909229,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 4,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "locauto_rent",
-                "pickup_id": "DMT",
-                "original_name": "Modena Downtown",
-                "dropoffs": [],
-                "latitude": 44.6478,
-                "longitude": 10.9254,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
                 "pickup_id": "MOD",
-                "original_name": "Modena City",
+                "original_name": "Modena",
                 "dropoffs": [],
-                "latitude": 44.6478,
-                "longitude": 10.9254,
+                "latitude": 44.66125,
+                "longitude": 10.92964,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -38237,19 +38684,19 @@
         "city": "Monza",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.5845,
-        "longitude": 9.2744,
+        "latitude": 45.58813,
+        "longitude": 9.2661,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
         "providers": [
             {
                 "provider": "locauto_rent",
-                "pickup_id": "MZD",
-                "original_name": "Monza Downtown",
+                "pickup_id": "MBD",
+                "original_name": "Monza",
                 "dropoffs": [],
-                "latitude": 45.5845,
-                "longitude": 9.2744,
+                "latitude": 45.58813,
+                "longitude": 9.2661,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -39623,67 +40070,21 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 489655730,
-        "name": "Naples",
-        "aliases": [
-            "Naples Fuorigrotta"
-        ],
-        "city": "Naples",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 40.8397,
-        "longitude": 14.1708,
-        "location_type": "other",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "DNAF",
-                "original_name": "Naples Fuorigrotta",
-                "dropoffs": [],
-                "latitude": 40.8397,
-                "longitude": 14.1708,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 159713263,
         "name": "Naples Downtown",
         "aliases": [
-            "Naples",
-            "Naples downtown"
+            "Naples downtown",
+            "Naples"
         ],
         "city": "Naples",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 40.8518,
-        "longitude": 14.2681,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "TNA",
-                "original_name": "Naples Downtown",
-                "dropoffs": [],
-                "latitude": 40.8518,
-                "longitude": 14.2681,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-NAP-DT",
@@ -39773,9 +40174,8 @@
         "aliases": [
             "Napoli Airport",
             "Napoli",
-            "Naples Airport",
-            "Naples",
             "Naples airport",
+            "Naples",
             "Napoli capodichino airport",
             "Naples Capodichino Airport",
             "Naples Capodichino",
@@ -39784,8 +40184,8 @@
         "city": "Napoli",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 40.874259,
-        "longitude": 14.285312,
+        "latitude": 40.873702,
+        "longitude": 14.283309,
         "location_type": "airport",
         "iata": "NAP",
         "provider_count": 5,
@@ -39807,10 +40207,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "NAP",
-                "original_name": "Naples Airport",
+                "original_name": "Napoli Airport",
                 "dropoffs": [],
-                "latitude": 40.886,
-                "longitude": 14.2908,
+                "latitude": 40.87344,
+                "longitude": 14.28142,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -39886,6 +40286,72 @@
                 "dropoffs": [],
                 "latitude": 40.854736,
                 "longitude": 14.271103,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 660863877,
+        "name": "Napoli Downtown",
+        "aliases": [
+            "Napoli Fuorigrotta",
+            "Napoli"
+        ],
+        "city": "Napoli",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.82278,
+        "longitude": 14.19197,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DNAF",
+                "original_name": "Napoli Fuorigrotta",
+                "dropoffs": [],
+                "latitude": 40.82278,
+                "longitude": 14.19197,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2328098509,
+        "name": "Napoli Train Station",
+        "aliases": [
+            "Napoli Central Station",
+            "Napoli"
+        ],
+        "city": "Napoli",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.85257,
+        "longitude": 14.27174,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TNA",
+                "original_name": "Napoli Central Station",
+                "dropoffs": [],
+                "latitude": 40.85257,
+                "longitude": 14.27174,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -41292,8 +41758,8 @@
         "city": "Novara",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.4452,
-        "longitude": 8.6186,
+        "latitude": 45.470888,
+        "longitude": 8.627341,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -41301,10 +41767,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "NOD",
-                "original_name": "Novara Downtown",
+                "original_name": "Novara",
                 "dropoffs": [],
-                "latitude": 45.4452,
-                "longitude": 8.6186,
+                "latitude": 45.470888,
+                "longitude": 8.627341,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -41788,8 +42254,8 @@
         "city": "Olbia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 40.9,
-        "longitude": 9.51,
+        "latitude": 40.90482,
+        "longitude": 9.51621,
         "location_type": "airport",
         "iata": "OLB",
         "provider_count": 5,
@@ -41799,8 +42265,8 @@
                 "pickup_id": "OLB",
                 "original_name": "Olbia Airport",
                 "dropoffs": [],
-                "latitude": 40.8941,
-                "longitude": 9.4975,
+                "latitude": 40.90482,
+                "longitude": 9.51621,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -41871,18 +42337,32 @@
         "unified_location_id": 2526216822,
         "name": "Olbia Downtown",
         "aliases": [
-            "Olbia downtown",
-            "Olbia"
+            "Olbia",
+            "Olbia downtown"
         ],
         "city": "Olbia",
-        "country": "IT",
+        "country": "Italy",
         "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 40.907455,
+        "longitude": 9.517188,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "OLBD",
+                "original_name": "Olbia Downtown",
+                "dropoffs": [],
+                "latitude": 40.907455,
+                "longitude": 9.517188,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-OLB-DT",
@@ -43179,60 +43659,28 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1689516823,
-        "name": "Padua Downtown",
+        "unified_location_id": 3532793607,
+        "name": "Padova Train Station",
         "aliases": [
-            "Padua"
+            "Padova Central Station",
+            "Padova"
         ],
-        "city": "Padua",
+        "city": "Padova",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.4064,
-        "longitude": 11.8768,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "TPD",
-                "original_name": "Padua Downtown",
-                "dropoffs": [],
-                "latitude": 45.4064,
-                "longitude": 11.8768,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 2738287997,
-        "name": "Padua Train Station",
-        "aliases": [
-            "Padua Station",
-            "Padua"
-        ],
-        "city": "Padua",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.4064,
-        "longitude": 11.8768,
+        "latitude": 45.41854,
+        "longitude": 11.87741,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 1,
         "providers": [
             {
                 "provider": "locauto_rent",
-                "pickup_id": "PAD",
-                "original_name": "Padua Station",
+                "pickup_id": "TPD",
+                "original_name": "Padova Central Station",
                 "dropoffs": [],
-                "latitude": 45.4064,
-                "longitude": 11.8768,
+                "latitude": 45.41854,
+                "longitude": 11.87741,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -43419,54 +43867,23 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2010218537,
-        "name": "Palermo Airport",
-        "aliases": [
-            "Palermo"
-        ],
-        "city": "Palermo",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 38.1607,
-        "longitude": 13.2919,
-        "location_type": "airport",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "PA",
-                "original_name": "Palermo Airport",
-                "dropoffs": [],
-                "latitude": 38.1607,
-                "longitude": 13.2919,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 3240982129,
         "name": "Palermo Airport (PMO)",
         "aliases": [
             "Palermo Airport",
             "Palermo",
+            "Punta Raisi",
             "Palermo airport",
             "PMO"
         ],
         "city": "Palermo",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 38.170649,
-        "longitude": 13.105234,
+        "latitude": 38.17619,
+        "longitude": 13.10508,
         "location_type": "airport",
         "iata": "PMO",
-        "provider_count": 5,
+        "provider_count": 6,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -43475,6 +43892,20 @@
                 "dropoffs": [],
                 "latitude": 38.1651088,
                 "longitude": 13.0922412,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "PMO",
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "PA",
+                "original_name": "Palermo Airport",
+                "dropoffs": [],
+                "latitude": 38.18712,
+                "longitude": 13.10508,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -43643,18 +44074,33 @@
         "unified_location_id": 1707661493,
         "name": "Palermo Train Station",
         "aliases": [
-            "Palermo railway station",
-            "Palermo"
+            "Palermo Notarbartolo Station",
+            "Palermo",
+            "Palermo railway station"
         ],
         "city": "Palermo",
-        "country": "IT",
+        "country": "Italy",
         "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 38.132079,
+        "longitude": 13.340216,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "PAD",
+                "original_name": "Palermo Notarbartolo Station",
+                "dropoffs": [],
+                "latitude": 38.132079,
+                "longitude": 13.340216,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-PAL-RS",
@@ -44171,8 +44617,8 @@
         "city": "Parma",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 44.8014,
-        "longitude": 10.3279,
+        "latitude": 44.776907,
+        "longitude": 10.343533,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -44180,10 +44626,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "PRD",
-                "original_name": "Parma Downtown",
+                "original_name": "Parma",
                 "dropoffs": [],
-                "latitude": 44.8014,
-                "longitude": 10.3279,
+                "latitude": 44.7769069,
+                "longitude": 10.3435329,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -44627,38 +45073,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 2640761172,
-        "name": "Pavia Downtown",
-        "aliases": [
-            "Pavia"
-        ],
-        "city": "Pavia",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.1883,
-        "longitude": 9.1572,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "PVD",
-                "original_name": "Pavia Downtown",
-                "dropoffs": [],
-                "latitude": 45.1883,
-                "longitude": 9.1572,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 3505690374,
         "name": "Pazin Downtown",
         "aliases": [
@@ -45037,8 +45451,8 @@
         "city": "Perugia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.1107,
-        "longitude": 12.3908,
+        "latitude": 43.10411,
+        "longitude": 12.38045,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -45046,10 +45460,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "PGD",
-                "original_name": "Perugia Downtown",
+                "original_name": "Perugia",
                 "dropoffs": [],
-                "latitude": 43.1107,
-                "longitude": 12.3908,
+                "latitude": 43.10411,
+                "longitude": 12.38045,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -45071,8 +45485,8 @@
         "city": "Pescara",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 42.4433,
-        "longitude": 14.2016,
+        "latitude": 42.43047,
+        "longitude": 14.1875,
         "location_type": "airport",
         "iata": "PSR",
         "provider_count": 1,
@@ -45082,8 +45496,8 @@
                 "pickup_id": "PSR",
                 "original_name": "Pescara Airport",
                 "dropoffs": [],
-                "latitude": 42.4433,
-                "longitude": 14.2016,
+                "latitude": 42.43047,
+                "longitude": 14.1875,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -45183,6 +45597,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ME",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3989093114,
+        "name": "Piacenza Downtown",
+        "aliases": [
+            "Piacenza"
+        ],
+        "city": "Piacenza",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.055477,
+        "longitude": 9.643309,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "PCD",
+                "original_name": "Piacenza",
+                "dropoffs": [],
+                "latitude": 45.055477,
+                "longitude": 9.643309,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -45369,8 +45815,8 @@
         "city": "Pisa",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 43.697907,
-        "longitude": 10.401986,
+        "latitude": 43.698405,
+        "longitude": 10.403986,
         "location_type": "airport",
         "iata": "PSA",
         "provider_count": 5,
@@ -45394,8 +45840,8 @@
                 "pickup_id": "PI",
                 "original_name": "Pisa Airport",
                 "dropoffs": [],
-                "latitude": 43.6839,
-                "longitude": 10.3966,
+                "latitude": 43.69883,
+                "longitude": 10.404,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -46352,8 +46798,8 @@
         "city": "Pomezia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.6747,
-        "longitude": 12.4974,
+        "latitude": 41.6869,
+        "longitude": 12.5034,
         "location_type": "downtown",
         "iata": null,
         "provider_count": 1,
@@ -46361,10 +46807,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "DPOM",
-                "original_name": "Pomezia Downtown",
+                "original_name": "Pomezia",
                 "dropoffs": [],
-                "latitude": 41.6747,
-                "longitude": 12.4974,
+                "latitude": 41.6869,
+                "longitude": 12.5034,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -46902,6 +47348,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2164260780,
+        "name": "Potenza Downtown",
+        "aliases": [
+            "Potenza"
+        ],
+        "city": "Potenza",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.62904,
+        "longitude": 15.80781,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "PZD",
+                "original_name": "Potenza",
+                "dropoffs": [],
+                "latitude": 40.62904,
+                "longitude": 15.80781,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2203315062,
         "name": "Poza Rica Airport (PAZ)",
         "aliases": [
@@ -47385,6 +47863,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "SC",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3732397515,
+        "name": "Prato Downtown",
+        "aliases": [
+            "Prato"
+        ],
+        "city": "Prato",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 43.86011,
+        "longitude": 11.10972,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "POD",
+                "original_name": "Prato",
+                "dropoffs": [],
+                "latitude": 43.86011,
+                "longitude": 11.10972,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -48791,6 +49301,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2030308288,
+        "name": "Ravenna Downtown",
+        "aliases": [
+            "Ravenna"
+        ],
+        "city": "Ravenna",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 44.420954,
+        "longitude": 12.218162,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "RAD",
+                "original_name": "Ravenna",
+                "dropoffs": [],
+                "latitude": 44.420954,
+                "longitude": 12.218162,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2218612499,
         "name": "Redcliffe Airport (PER)",
         "aliases": [
@@ -48825,7 +49367,7 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 373402096,
+        "unified_location_id": 2366970635,
         "name": "Reggio Calabria Airport",
         "aliases": [
             "Reggio Calabria"
@@ -48833,8 +49375,8 @@
         "city": "Reggio Calabria",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 38.0666,
-        "longitude": 15.6459,
+        "latitude": 30.07457,
+        "longitude": 15.65604,
         "location_type": "airport",
         "iata": null,
         "provider_count": 1,
@@ -48844,8 +49386,8 @@
                 "pickup_id": "RC",
                 "original_name": "Reggio Calabria Airport",
                 "dropoffs": [],
-                "latitude": 38.0666,
-                "longitude": 15.6459,
+                "latitude": 30.07457,
+                "longitude": 15.65604,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -48946,6 +49488,39 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "GB",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3358744063,
+        "name": "Rende Downtown",
+        "aliases": [
+            "Cosenza",
+            "Rende"
+        ],
+        "city": "Rende",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 39.36853,
+        "longitude": 16.23958,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DCS",
+                "original_name": "Cosenza",
+                "dropoffs": [],
+                "latitude": 39.36853,
+                "longitude": 16.23958,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -50141,6 +50716,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 4157596630,
+        "name": "Rimini Downtown",
+        "aliases": [
+            "Rimini"
+        ],
+        "city": "Rimini",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 44.06544,
+        "longitude": 12.57039,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "RND",
+                "original_name": "Rimini",
+                "dropoffs": [],
+                "latitude": 44.06544,
+                "longitude": 12.57039,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1698551783,
         "name": "Rionegro Airport (MDE)",
         "aliases": [
@@ -50317,6 +50924,99 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3166055915,
+        "name": "Roma Downtown",
+        "aliases": [
+            "Roma Nomentana",
+            "Roma",
+            "Roma Prati",
+            "Roma Eur",
+            "Roma Via Veneto",
+            "Roma Appio Tuscolano"
+        ],
+        "city": "Roma",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 41.8669,
+        "longitude": 12.47335,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 5,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DRNM",
+                "original_name": "Roma Nomentana",
+                "dropoffs": [],
+                "latitude": 41.57006,
+                "longitude": 12.34167,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DRP",
+                "original_name": "Roma Prati",
+                "dropoffs": [],
+                "latitude": 41.92081,
+                "longitude": 12.46614,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "RME",
+                "original_name": "Roma Eur",
+                "dropoffs": [],
+                "latitude": 41.83013,
+                "longitude": 12.47335,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "RMV",
+                "original_name": "Roma Via Veneto",
+                "dropoffs": [],
+                "latitude": 41.908982,
+                "longitude": 12.489578,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "RTD",
+                "original_name": "Roma Appio Tuscolano",
+                "dropoffs": [],
+                "latitude": 41.8669,
+                "longitude": 12.53095,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 97063204,
         "name": "Roma Termini",
         "aliases": [
@@ -50349,29 +51049,29 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 3170151645,
-        "name": "Rome",
+        "unified_location_id": 3994088336,
+        "name": "Roma Train Station",
         "aliases": [
-            "Rome Via Veneto",
-            "Rome EUR",
-            "Rome Prati"
+            "Roma Termini Central Station",
+            "Roma",
+            "Roma Tiburtina Station"
         ],
-        "city": "Rome",
+        "city": "Roma",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.9061,
-        "longitude": 12.4697,
-        "location_type": "other",
+        "latitude": 41.904225,
+        "longitude": 12.514825,
+        "location_type": "train_station",
         "iata": null,
-        "provider_count": 3,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "locauto_rent",
-                "pickup_id": "RMV",
-                "original_name": "Rome Via Veneto",
+                "pickup_id": "RMT",
+                "original_name": "Roma Termini Central Station",
                 "dropoffs": [],
-                "latitude": 41.9076,
-                "longitude": 12.4919,
+                "latitude": 41.89924,
+                "longitude": 12.50326,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -50381,25 +51081,11 @@
             },
             {
                 "provider": "locauto_rent",
-                "pickup_id": "RME",
-                "original_name": "Rome EUR",
+                "pickup_id": "RMTIB",
+                "original_name": "Roma Tiburtina Station",
                 "dropoffs": [],
-                "latitude": 41.8359,
-                "longitude": 12.4697,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "DRP",
-                "original_name": "Rome Prati",
-                "dropoffs": [],
-                "latitude": 41.9061,
-                "longitude": 12.447,
+                "latitude": 41.90921,
+                "longitude": 12.52639,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -50449,21 +51135,22 @@
         "aliases": [
             "Rome Fiumicino International Airport",
             "Rome Fiumicino",
-            "Rome Fiumicino Airport",
-            "Rome",
+            "Roma Fiumicino Airport",
+            "Fiumicino",
             "OK FCO",
             "Fiumincino",
+            "Rome Fiumicino Airport",
             "Rome airport",
+            "Rome",
             "Roma",
             "Fiumicino Airport",
-            "Fiumicino",
             "FCO"
         ],
         "city": "Rome Fiumicino",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 41.795153,
-        "longitude": 12.242366,
+        "latitude": 41.79479,
+        "longitude": 12.25,
         "location_type": "airport",
         "iata": "FCO",
         "provider_count": 8,
@@ -50485,10 +51172,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "FCO",
-                "original_name": "Rome Fiumicino Airport",
+                "original_name": "Roma Fiumicino Airport",
                 "dropoffs": [],
-                "latitude": 41.8012,
-                "longitude": 12.2389,
+                "latitude": 41.79479,
+                "longitude": 12.25221,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -50606,54 +51293,6 @@
                 "dropoffs": [],
                 "latitude": 41.896715385,
                 "longitude": 12.506561861,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3917297545,
-        "name": "Rome Train Station",
-        "aliases": [
-            "Rome Termini Station",
-            "Rome",
-            "Rome Tiburtina Station"
-        ],
-        "city": "Rome",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 41.90345,
-        "longitude": 12.5125,
-        "location_type": "train_station",
-        "iata": null,
-        "provider_count": 2,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "RMT",
-                "original_name": "Rome Termini Station",
-                "dropoffs": [],
-                "latitude": 41.9027,
-                "longitude": 12.4964,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "RMTIB",
-                "original_name": "Rome Tiburtina Station",
-                "dropoffs": [],
-                "latitude": 41.9042,
-                "longitude": 12.5286,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -51057,6 +51696,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1687819352,
+        "name": "Saint Christophe Airport (AOT)",
+        "aliases": [
+            "Aosta Airport",
+            "Saint Christophe",
+            "AOT"
+        ],
+        "city": "Saint Christophe",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.87328,
+        "longitude": 7.36543,
+        "location_type": "airport",
+        "iata": "AOT",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "AOT",
+                "original_name": "Aosta Airport",
+                "dropoffs": [],
+                "latitude": 45.87328,
+                "longitude": 7.36543,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "AOT",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 855975866,
         "name": "Saint Tropez Airport (LTT)",
         "aliases": [
@@ -51185,6 +51858,38 @@
                 "extended_dropoff_code": null,
                 "country_code": "OM",
                 "iata": "SLL",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 128448580,
+        "name": "Salerno Downtown",
+        "aliases": [
+            "Salerno"
+        ],
+        "city": "Salerno",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.67496,
+        "longitude": 14.77038,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "SAT",
+                "original_name": "Salerno",
+                "dropoffs": [],
+                "latitude": 40.67496,
+                "longitude": 14.77038,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -52041,6 +52746,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2078275009,
+        "name": "San Giorgio Jonico Downtown",
+        "aliases": [
+            "Taranto",
+            "San Giorgio Jonico"
+        ],
+        "city": "San Giorgio Jonico",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 40.45882,
+        "longitude": 17.35714,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TAD",
+                "original_name": "Taranto",
+                "dropoffs": [],
+                "latitude": 40.45882,
+                "longitude": 17.35714,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3227623249,
         "name": "San Isidro Downtown",
         "aliases": [
@@ -52436,6 +53174,39 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 892104079,
+        "name": "San Martino Siccomario Downtown",
+        "aliases": [
+            "Pavia (san Martino Siccomario)",
+            "San Martino Siccomario"
+        ],
+        "city": "San Martino Siccomario",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.14341,
+        "longitude": 9.11931,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "PVD",
+                "original_name": "Pavia (san Martino Siccomario)",
+                "dropoffs": [],
+                "latitude": 45.14341,
+                "longitude": 9.11931,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -54463,6 +55234,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1687594040,
+        "name": "Sesto San Giovanni Downtown",
+        "aliases": [
+            "Sesto San Giovanni"
+        ],
+        "city": "Sesto San Giovanni",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.52382,
+        "longitude": 9.22632,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "SSG",
+                "original_name": "Sesto San Giovanni",
+                "dropoffs": [],
+                "latitude": 45.52382,
+                "longitude": 9.22632,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 376115239,
         "name": "Sevilla",
         "aliases": [
@@ -55007,6 +55810,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1314064517,
+        "name": "Siena Downtown",
+        "aliases": [
+            "Siena"
+        ],
+        "city": "Siena",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 43.31063,
+        "longitude": 11.3592,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "SID",
+                "original_name": "Siena",
+                "dropoffs": [],
+                "latitude": 43.31063,
+                "longitude": 11.3592,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1034383250,
         "name": "Siirt Havaliman",
         "aliases": [
@@ -55211,6 +56046,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "PT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2014525000,
+        "name": "Siracusa Downtown",
+        "aliases": [
+            "Siracusa"
+        ],
+        "city": "Siracusa",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 37.0661,
+        "longitude": 15.28751,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "SRD",
+                "original_name": "Siracusa",
+                "dropoffs": [],
+                "latitude": 37.0661,
+                "longitude": 15.28751,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -59320,6 +60187,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2354999876,
+        "name": "Termoli Downtown",
+        "aliases": [
+            "Termoli"
+        ],
+        "city": "Termoli",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 42.00217,
+        "longitude": 14.9926,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TRMD",
+                "original_name": "Termoli",
+                "dropoffs": [],
+                "latitude": 42.00217,
+                "longitude": 14.9926,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2702661354,
+        "name": "Terni Downtown",
+        "aliases": [
+            "Terni"
+        ],
+        "city": "Terni",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 42.56633,
+        "longitude": 12.65395,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TERD",
+                "original_name": "Terni",
+                "dropoffs": [],
+                "latitude": 42.56633,
+                "longitude": 12.65395,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2780478190,
         "name": "Terrassa Downtown",
         "aliases": [
@@ -60670,6 +61601,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2029831167,
+        "name": "Torino Airport",
+        "aliases": [
+            "Caselle Torinese"
+        ],
+        "city": "Caselle Torinese",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.19256,
+        "longitude": 7.64284,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TO",
+                "original_name": "Torino Airport",
+                "dropoffs": [],
+                "latitude": 45.19256,
+                "longitude": 7.64284,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2088362149,
         "name": "Torino Airport (TRN)",
         "aliases": [
@@ -60723,18 +61686,48 @@
         "unified_location_id": 1338972055,
         "name": "Torino Downtown",
         "aliases": [
-            "Torino downtown",
-            "Torino"
+            "Torino Mirafiori",
+            "Torino",
+            "Torino Porta Nuova Ts",
+            "Torino downtown"
         ],
         "city": "Torino",
-        "country": "IT",
+        "country": "Italy",
         "country_code": "IT",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 45.040881,
+        "longitude": 7.662828,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 3,
         "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "DTO",
+                "original_name": "Torino Mirafiori",
+                "dropoffs": [],
+                "latitude": 45.01904,
+                "longitude": 7.64886,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TOT",
+                "original_name": "Torino Porta Nuova Ts",
+                "dropoffs": [],
+                "latitude": 45.062722,
+                "longitude": 7.676797,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-TOR-DT",
@@ -61131,18 +62124,20 @@
     },
     {
         "unified_location_id": 759820030,
-        "name": "Trapani Airport (TPS)",
+        "name": "Trapani Birgi Airport (TPS)",
         "aliases": [
+            "Trapani -birgi",
             "Trapani Airport",
-            "Trapani",
+            "Trapani Birgi",
             "Trapani airport",
+            "Trapani",
             "TPS"
         ],
-        "city": "Trapani",
+        "city": "Trapani Birgi",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 37.91,
-        "longitude": 12.4778,
+        "latitude": 37.90668,
+        "longitude": 12.49391,
         "location_type": "airport",
         "iata": "TPS",
         "provider_count": 2,
@@ -61152,8 +62147,8 @@
                 "pickup_id": "TPS",
                 "original_name": "Trapani Airport",
                 "dropoffs": [],
-                "latitude": 37.91,
-                "longitude": 12.4778,
+                "latitude": 37.90668,
+                "longitude": 12.49391,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -61286,8 +62281,8 @@
         "city": "Treviso",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.6579,
-        "longitude": 12.1916,
+        "latitude": 45.65528,
+        "longitude": 12.20475,
         "location_type": "airport",
         "iata": null,
         "provider_count": 1,
@@ -61297,8 +62292,8 @@
                 "pickup_id": "TV",
                 "original_name": "Treviso Airport",
                 "dropoffs": [],
-                "latitude": 45.6579,
-                "longitude": 12.1916,
+                "latitude": 45.65528,
+                "longitude": 12.20475,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -61376,6 +62371,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3471517143,
+        "name": "Trieste Airport",
+        "aliases": [
+            "Ronchi Dei Legionari"
+        ],
+        "city": "Ronchi Dei Legionari",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.82111,
+        "longitude": 13.48578,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TS",
+                "original_name": "Trieste Airport",
+                "dropoffs": [],
+                "latitude": 45.82111,
+                "longitude": 13.48578,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 528452732,
         "name": "Trieste Airport (TRS)",
         "aliases": [
@@ -61410,38 +62437,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 3471517143,
-        "name": "Trieste Airport Ronchi dei Legionari",
-        "aliases": [
-            "Trieste"
-        ],
-        "city": "Trieste",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.8289,
-        "longitude": 13.4767,
-        "location_type": "airport",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "TS",
-                "original_name": "Trieste Airport Ronchi dei Legionari",
-                "dropoffs": [],
-                "latitude": 45.8289,
-                "longitude": 13.4767,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 3734519933,
         "name": "Trieste Downtown",
         "aliases": [
@@ -61464,6 +62459,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2788305362,
+        "name": "Trieste Train Station",
+        "aliases": [
+            "Trieste"
+        ],
+        "city": "Trieste",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.65726,
+        "longitude": 13.77088,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TST",
+                "original_name": "Trieste Train Station",
+                "dropoffs": [],
+                "latitude": 45.65726,
+                "longitude": 13.77088,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -61630,38 +62657,6 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "TN",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 2029831167,
-        "name": "Turin Caselle Airport",
-        "aliases": [
-            "Turin"
-        ],
-        "city": "Turin",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.2009,
-        "longitude": 7.6495,
-        "location_type": "airport",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "TO",
-                "original_name": "Turin Caselle Airport",
-                "dropoffs": [],
-                "latitude": 45.2009,
-                "longitude": 7.6495,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -61839,6 +62834,39 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "BA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4203419375,
+        "name": "Udine Train Station",
+        "aliases": [
+            "Udine Central Station",
+            "Udine"
+        ],
+        "city": "Udine",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 46.05633,
+        "longitude": 13.24036,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "TUD",
+                "original_name": "Udine Central Station",
+                "dropoffs": [],
+                "latitude": 46.05633,
+                "longitude": 13.24036,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
                 "iata": null,
                 "provider_code": null
             }
@@ -62765,6 +63793,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2878633115,
+        "name": "Varese Downtown",
+        "aliases": [
+            "Varese"
+        ],
+        "city": "Varese",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.82402,
+        "longitude": 8.8131,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "VAD",
+                "original_name": "Varese",
+                "dropoffs": [],
+                "latitude": 45.82402,
+                "longitude": 8.8131,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1290197231,
         "name": "Varna Airport (VAR)",
         "aliases": [
@@ -63023,25 +64083,55 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3742909523,
+        "name": "Venezia Airport",
+        "aliases": [
+            "Venezia"
+        ],
+        "city": "Venezia",
+        "country": "Italy",
+        "country_code": "IT",
+        "latitude": 45.50451,
+        "longitude": 13.34015,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "VE",
+                "original_name": "Venezia Airport",
+                "dropoffs": [],
+                "latitude": 45.50451,
+                "longitude": 13.34015,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3153514067,
         "name": "Venezia Airport (VCE)",
         "aliases": [
             "Venezia Airport",
             "Venezia",
-            "Venice Marco Polo Airport",
-            "Venice",
-            "Venice Airport",
             "Venice airport",
+            "Venice",
             "VCE"
         ],
         "city": "Venezia",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.501386,
-        "longitude": 12.333112,
+        "latitude": 45.497436,
+        "longitude": 12.314034,
         "location_type": "airport",
         "iata": "VCE",
-        "provider_count": 5,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "greenmotion",
@@ -63050,34 +64140,6 @@
                 "dropoffs": [],
                 "latitude": 45.49747248705358,
                 "longitude": 12.313743843559909,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": "VCE",
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "VE",
-                "original_name": "Venice Marco Polo Airport",
-                "dropoffs": [],
-                "latitude": 45.5053,
-                "longitude": 12.3519,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": "VCE",
-                "provider_code": null
-            },
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "VCE",
-                "original_name": "Venice Airport",
-                "dropoffs": [],
-                "latitude": 45.5053,
-                "longitude": 12.3519,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -63153,33 +64215,18 @@
         "unified_location_id": 2862865409,
         "name": "Venice Train Station",
         "aliases": [
-            "Venice Mestre Station",
-            "Venice",
-            "Venice railway station"
+            "Venice railway station",
+            "Venice"
         ],
         "city": "Venice",
-        "country": "Italy",
+        "country": "IT",
         "country_code": "IT",
-        "latitude": 45.4932,
-        "longitude": 12.2436,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "VMS",
-                "original_name": "Venice Mestre Station",
-                "dropoffs": [],
-                "latitude": 45.4932,
-                "longitude": 12.2436,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "renteon",
                 "pickup_id": "IT-VEN-RS",
@@ -63198,51 +64245,17 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 4014090586,
-        "name": "Verona Airport (VRA)",
-        "aliases": [
-            "Verona Airport",
-            "Verona",
-            "VRA"
-        ],
-        "city": "Verona",
-        "country": "Italy",
-        "country_code": "IT",
-        "latitude": 45.3944,
-        "longitude": 10.8967,
-        "location_type": "airport",
-        "iata": "VRA",
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "locauto_rent",
-                "pickup_id": "VRA",
-                "original_name": "Verona Airport",
-                "dropoffs": [],
-                "latitude": 45.3944,
-                "longitude": 10.8967,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IT",
-                "iata": "VRA",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 102953664,
         "name": "Verona Train Station",
         "aliases": [
-            "Verona Station",
+            "Verona Porta Nuova Station",
             "Verona"
         ],
         "city": "Verona",
         "country": "Italy",
         "country_code": "IT",
-        "latitude": 45.4286,
-        "longitude": 10.9857,
+        "latitude": 45.42955,
+        "longitude": 10.98393,
         "location_type": "train_station",
         "iata": null,
         "provider_count": 1,
@@ -63250,10 +64263,10 @@
             {
                 "provider": "locauto_rent",
                 "pickup_id": "VRS",
-                "original_name": "Verona Station",
+                "original_name": "Verona Porta Nuova Station",
                 "dropoffs": [],
-                "latitude": 45.4286,
-                "longitude": 10.9857,
+                "latitude": 45.42955,
+                "longitude": 10.98393,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,

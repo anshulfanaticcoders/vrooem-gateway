@@ -204,6 +204,41 @@ class LocationUnificationServiceTest(unittest.TestCase):
         pickup_ids = {provider["pickup_id"] for provider in cmn["providers"]}
         self.assertEqual(pickup_ids, {"155", "CMN:CMNA01"})
 
+    def test_it_keeps_known_static_airport_coordinates_when_other_rows_have_zero_coords(self) -> None:
+        locations = [
+            {
+                "provider": "recordgo",
+                "provider_location_id": "34903",
+                "name": "Lanzarote Airport",
+                "city": "Arrecife",
+                "country": "Spain",
+                "country_code": "IC",
+                "location_type": "airport",
+                "iata": "ACE",
+                "latitude": 28.9462,
+                "longitude": -13.6052,
+            },
+            {
+                "provider": "other_provider",
+                "provider_location_id": "ACE-legacy",
+                "name": "Lanzarote Airport",
+                "city": "Arrecife",
+                "country": "Spain",
+                "country_code": "IC",
+                "location_type": "airport",
+                "iata": "ACE",
+                "latitude": 0.0,
+                "longitude": 0.0,
+            },
+        ]
+
+        unified = self.service.build_unified_locations(locations)
+
+        self.assertEqual(len(unified), 1)
+        self.assertEqual(unified[0]["iata"], "ACE")
+        self.assertAlmostEqual(unified[0]["latitude"], 28.9462, places=4)
+        self.assertAlmostEqual(unified[0]["longitude"], -13.6052, places=4)
+
     def test_it_maps_generic_no_coord_city_airports_to_the_primary_iata(self) -> None:
         locations = [
             {

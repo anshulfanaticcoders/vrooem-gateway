@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from app.api.v1.search import VehicleSearchBody, _do_search
+from app.api.v1.locations import location_status
 from app.services.circuit_breaker import CircuitBreakerRegistry
 from app.schemas.search import ProviderFailure, SearchResponse
 
@@ -71,6 +72,23 @@ class SearchApiTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(payload.provider_status[0].provider, "surprice")
         self.assertEqual(payload.provider_status[0].failure_type, "provider_error")
         self.assertEqual(payload.provider_status[0].http_status, 422)
+
+    async def test_location_status_exposes_loaded_location_metadata(self) -> None:
+        fake_metadata = {
+            "location_count": 1666,
+            "location_data_loaded_at": "2026-03-30T12:00:00+00:00",
+            "location_data_version": "abc123",
+            "location_data_mtime": 1711780800.0,
+            "location_data_size": 1024,
+            "location_data_path": "/app/data/unified_locations.json",
+        }
+
+        with patch("app.api.v1.locations._repository.metadata", return_value=fake_metadata):
+            payload = await location_status(_api_key="dev-key")
+
+        self.assertEqual(payload["location_count"], 1666)
+        self.assertEqual(payload["location_data_version"], "abc123")
+        self.assertEqual(payload["location_data_path"], "/app/data/unified_locations.json")
 
 
 if __name__ == '__main__':

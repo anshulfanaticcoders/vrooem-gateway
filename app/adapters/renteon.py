@@ -375,6 +375,7 @@ class RenteonAdapter(BaseAdapter):
             "pickup_instructions": office.get("OfficePickupInstructions") or office.get("PickupInstructions") or "",
             "dropoff_instructions": office.get("OfficeDropOffInstructions") or office.get("DropOffInstructions") or "",
             "location_type": (office.get("LocationType") or "other").lower(),
+            "is_shuttle": office.get("IsShuttle", False),
         }
 
     async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
@@ -485,6 +486,30 @@ class RenteonAdapter(BaseAdapter):
             supplier_cancellation_id=supplier_booking_id,
         )
 
+    async def get_booking_pdf(
+        self, connector_id: int, booking_id: int, culture: str = "en"
+    ) -> bytes | None:
+        """Download booking voucher PDF from Renteon."""
+        settings = get_settings()
+        base_url = settings.renteon_api_url.rstrip("/")
+
+        response = await self._request(
+            "GET",
+            f"{base_url}/api/bookings/getPdf",
+            params={
+                "connectorId": connector_id,
+                "id": booking_id,
+                "culture": culture,
+                "printHeader": True,
+                "printFooter": True,
+            },
+            headers=self._auth_headers(),
+        )
+
+        if response.status_code == 200 and response.content:
+            return response.content
+        return None
+
     async def get_locations(self) -> list[dict]:
         settings = get_settings()
         base_url = settings.renteon_api_url.rstrip("/")
@@ -504,10 +529,14 @@ class RenteonAdapter(BaseAdapter):
             # Only use locations with Category "PickupDropoff"
             if loc.get("Category") != "PickupDropoff":
                 continue
+            # Extract city from Path (e.g. "Athens > Athens airport" → "Athens")
+            path = loc.get("Path") or ""
+            city = path.split(">")[0].strip() if ">" in path else ""
             locations.append({
                 "provider": self.supplier_id,
                 "provider_location_id": loc.get("Code", ""),
                 "name": loc.get("Name", ""),
+                "city": city,
                 "country_code": loc.get("CountryCode", ""),
                 "location_type": (loc.get("Type") or "other").lower(),
             })

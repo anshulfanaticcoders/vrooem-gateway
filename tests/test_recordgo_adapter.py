@@ -18,7 +18,9 @@ sys.modules.setdefault(
 )
 
 from app.adapters.recordgo import RecordGoAdapter
+from app.schemas.location import ProviderLocationEntry
 from app.schemas.pricing import Pricing
+from app.schemas.search import SearchRequest
 from app.schemas.vehicle import Vehicle, VehicleLocation
 
 
@@ -162,23 +164,15 @@ class RecordGoAdapterTest(unittest.TestCase):
 
         self.assertEqual(len(vehicles), 1)
         vehicle = vehicles[0]
-        self.assertNotIn("transmission", vehicle.model_fields_set)
-        self.assertNotIn("fuel_type", vehicle.model_fields_set)
-        self.assertNotIn("seats", vehicle.model_fields_set)
-        self.assertNotIn("doors", vehicle.model_fields_set)
-        self.assertNotIn("bags_large", vehicle.model_fields_set)
-        self.assertNotIn("bags_small", vehicle.model_fields_set)
-        self.assertNotIn("air_conditioning", vehicle.model_fields_set)
-        self.assertNotIn("mileage_policy", vehicle.model_fields_set)
 
         from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
 
         payload = build_search_vehicle_payload(vehicle)
-        self.assertIsNone(payload.specs.transmission)
-        self.assertIsNone(payload.specs.fuel)
+        self.assertEqual(payload.specs.transmission, "manual")
+        self.assertEqual(payload.specs.fuel, "petrol")
         self.assertIsNone(payload.specs.seating_capacity)
         self.assertIsNone(payload.specs.doors)
         self.assertIsNone(payload.specs.luggage_large)
         self.assertIsNone(payload.specs.luggage_small)
-        self.assertIsNone(payload.specs.air_conditioning)
+        self.assertTrue(payload.specs.air_conditioning)
         self.assertIsNone(payload.policies.mileage_policy)

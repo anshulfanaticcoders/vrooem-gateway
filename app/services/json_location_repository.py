@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+from datetime import datetime, timezone
 from pathlib import Path
 
 from app.services.location_unification_service import LocationUnificationService
@@ -39,16 +40,23 @@ class JsonLocationRepository:
         self._by_unified_id: dict[int, dict] = {}
         self._by_provider: dict[str, dict] = {}
         self._loaded = False
-        self._file_signature: str | None = None
+        self._file_signature: dict[str, str | int | float] | None = None
+        self._loaded_at: str | None = None
         self._search_service = LocationUnificationService()
 
-    def _read_file(self) -> tuple[str | None, str | None]:
+    def _read_file(self) -> tuple[dict[str, str | int | float] | None, str | None]:
         path = _DATA_PATH
         if not path.exists():
             return None, None
 
+        stat = path.stat()
         raw_text = path.read_text(encoding="utf-8")
-        signature = hashlib.sha1(raw_text.encode("utf-8")).hexdigest()
+        signature = {
+            "path": str(path),
+            "size": stat.st_size,
+            "mtime": stat.st_mtime,
+            "sha1": hashlib.sha1(raw_text.encode("utf-8")).hexdigest(),
+        }
         return signature, raw_text
 
     def _ensure_loaded(self) -> None:
@@ -64,6 +72,7 @@ class JsonLocationRepository:
         if current_signature is None:
             logger.warning("unified_locations.json not found at %s", path)
             self._file_signature = None
+            self._loaded_at = datetime.now(timezone.utc).isoformat()
             self._loaded = True
             return
 
@@ -72,6 +81,7 @@ class JsonLocationRepository:
         except Exception:
             logger.error("Failed to read unified_locations.json", exc_info=True)
             self._file_signature = current_signature
+            self._loaded_at = datetime.now(timezone.utc).isoformat()
             self._loaded = True
             return
 
@@ -98,6 +108,7 @@ class JsonLocationRepository:
                 self._by_provider[key] = entry
 
         self._file_signature = current_signature
+        self._loaded_at = datetime.now(timezone.utc).isoformat()
         self._loaded = True
         logger.info("Loaded %d locations from JSON file", len(self._locations))
 
@@ -127,3 +138,30 @@ class JsonLocationRepository:
         self._loaded = False
         self._ensure_loaded()
         return len(self._locations)
+
+    def metadata(self) -> dict[str, str | int | float | None]:
+        self._ensure_loaded()
+        return {
+            "location_count": len(self._locations),
+            "location_data_loaded_at": self._loaded_at,
+            "location_data_version": (
+                (self._file_signature or {}).get("sha1")
+                if self._file_signature
+                else None
+            ),
+            "location_data_mtime": (
+                (self._file_signature or {}).get("mtime")
+                if self._file_signature
+                else None
+            ),
+            "location_data_size": (
+                (self._file_signature or {}).get("size")
+                if self._file_signature
+                else None
+            ),
+            "location_data_path": (
+                (self._file_signature or {}).get("path")
+                if self._file_signature
+                else str(_DATA_PATH)
+            ),
+        }

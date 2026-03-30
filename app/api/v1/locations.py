@@ -50,6 +50,13 @@ async def search_locations(
     )
 
 
+@router.get("/status")
+async def location_status(
+    _api_key: str = Depends(verify_api_key),
+) -> dict[str, str | int | float | None]:
+    return _repository.metadata()
+
+
 @router.get("/by-provider", response_model=Location)
 async def get_location_by_provider(
     provider: str = Query(..., min_length=1),

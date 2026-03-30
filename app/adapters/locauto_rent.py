@@ -4,6 +4,10 @@ import logging
 import uuid
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from pathlib import Path
+import re
+
+import yaml
 
 from app.adapters.base import BaseAdapter
 from app.adapters.registry import register_adapter
@@ -30,15 +34,17 @@ from app.schemas.vehicle import (
 )
 
 logger = logging.getLogger(__name__)
+_GATEWAY_ROOT = Path(__file__).resolve().parents[2]
+_LOCAUTO_LOCATIONS_YAML = _GATEWAY_ROOT / "config" / "suppliers" / "locauto_rent_locations.yaml"
 
 # ─── OTA XML namespace constants ───
 NS_SOAP = "http://schemas.xmlsoap.org/soap/envelope/"
 NS_OTA = "http://www.opentravel.org/OTA/2003/05"
 NS_LOCAUTO = "https://nextrent.locautorent.com"
 
-# ─── Predefined Italian locations (API returns empty) ───
+# ─── Legacy predefined Italian locations (fallback if YAML is unavailable) ───
 # Location codes follow IATA convention or Locauto-specific codes.
-_PREDEFINED_LOCATIONS: list[dict] = [
+_LEGACY_PREDEFINED_LOCATIONS: list[dict] = [
     # Major Airports
     {"code": "AHO", "name": "Alghero Airport", "city": "Alghero", "lat": 40.6321, "lng": 8.2908},
     {"code": "BGY", "name": "Bergamo Orio al Serio Airport", "city": "Bergamo", "lat": 45.6745, "lng": 9.7046},
@@ -122,14 +128,125 @@ _PREDEFINED_LOCATIONS: list[dict] = [
 
 # OTA equipment type code → human-readable name mapping
 _EQUIP_TYPE_NAMES: dict[str, str] = {
+    "6": "Injury Protection",
     "7": "Infant Child Seat",
     "8": "Child Toddler Seat",
-    "9": "Child Booster Seat",
+    "9": "Additional Driver",
     "13": "GPS Navigation",
     "14": "Ski Rack",
+    "19": "GPS Navigation",
     "23": "One-Way Fee",
     "35": "One-Way Fee (Sardinia)",
+    "43": "Roadside Assistance Plus",
     "46": "Additional Driver",
+    "55": "Snow Chains",
+    "78": "Child Seat",
+    "89": "Pet Transport (Bau the Way)",
+    "136": "Don't Worry Protection",
+    "137": "Additional Driver",
+    "138": "Pool Driving (3+ Drivers)",
+    "139": "Young Driver Surcharge (19-24)",
+    "140": "Glass & Wheels Protection",
+    "145": "Body Protection",
+    "146": "Super Theft Protection",
+    "147": "Smart Cover",
+}
+
+
+def _titleize(value: str) -> str:
+    """Normalize vendor all-caps strings into readable title case."""
+    return " ".join(part.capitalize() for part in value.strip().split())
+
+
+def _normalize_phone(value: str) -> str | None:
+    """Normalize vendor phone numbers into a dialable Italian format."""
+    digits = " ".join(value.split())
+    if not digits:
+        return None
+    return digits if digits.startswith("+39") else f"+39 {digits}"
+
+
+def _normalize_hours(value: str | None) -> str | None:
+    """Convert vendor hour strings like 7.00 - 24.00 into 07:00 - 24:00."""
+    if not value:
+        return None
+    cleaned = " ".join(str(value).split())
+    if not cleaned:
+        return None
+
+    def repl(match: re.Match[str]) -> str:
+        return f"{int(match.group(1)):02d}:{int(match.group(2)):02d}"
+
+    return re.sub(r"(\d{1,2})\.(\d{2})", repl, cleaned)
+
+
+def _infer_location_type(name: str) -> str:
+    """Infer a canonical location type from the official station label."""
+    lowered = name.lower()
+    if "airport" in lowered:
+        return "airport"
+    if "station" in lowered:
+        return "train_station"
+    return "downtown"
+
+
+def _infer_iata(code: str, location_type: str) -> str | None:
+    """Infer IATA only when the code itself is clearly an airport code."""
+    if location_type != "airport":
+        return None
+    normalized = code.strip().upper()
+    return normalized if len(normalized) == 3 and normalized.isalpha() else None
+
+
+def _normalize_legacy_location(location: dict) -> dict:
+    """Preserve existing fallback behavior when the YAML file is unavailable."""
+    name = location["name"]
+    location_type = _infer_location_type(name)
+    return {
+        "code": location["code"],
+        "name": name,
+        "city": location["city"],
+        "province": "",
+        "country": "Italy",
+        "country_code": "IT",
+        "location_type": location_type,
+        "is_airport": location_type == "airport",
+        "iata": _infer_iata(location["code"], location_type),
+        "latitude": location["lat"],
+        "longitude": location["lng"],
+        "address": None,
+        "postal_code": None,
+        "phone": None,
+        "email": None,
+        "operating_hours": None,
+        "pickup_instructions": None,
+        "dropoff_instructions": None,
+        "out_of_hours": None,
+    }
+
+
+def _load_locations() -> list[dict]:
+    """Load Locauto locations from the generated YAML file, falling back to legacy data."""
+    if _LOCAUTO_LOCATIONS_YAML.exists():
+        with _LOCAUTO_LOCATIONS_YAML.open("r", encoding="utf-8") as handle:
+            data = yaml.safe_load(handle) or {}
+        loaded = data.get("locations", [])
+        if loaded:
+            logger.info("[locauto_rent] Loaded %d locations from %s", len(loaded), _LOCAUTO_LOCATIONS_YAML)
+            return loaded
+
+    logger.warning(
+        "[locauto_rent] Falling back to legacy predefined locations because %s is missing or empty",
+        _LOCAUTO_LOCATIONS_YAML,
+    )
+    return [_normalize_legacy_location(location) for location in _LEGACY_PREDEFINED_LOCATIONS]
+
+
+_LOCATIONS: list[dict] = _load_locations()
+_LOCATION_BY_CODE: dict[str, dict] = {
+    str(location.get("code", "")).strip().upper(): location
+    for location in _LOCATIONS
+    if location.get("code")
 }
 
 
@@ -201,6 +318,50 @@ class LocautoRentAdapter(BaseAdapter):
         """
         return f"{d.isoformat()}T{t.strftime('%H:%M')}:00+02:00"
 
+    def _location_metadata(self, code: str) -> dict:
+        """Return the enriched Locauto location payload for a provider code."""
+        return _LOCATION_BY_CODE.get(code.strip().upper(), {})
+
+    def _build_vehicle_location(
+        self,
+        entry: ProviderLocationEntry | None,
+        fallback_country_code: str = "IT",
+    ) -> VehicleLocation | None:
+        """Attach enriched Locauto location metadata to a vehicle endpoint payload."""
+        if entry is None:
+            return None
+
+        metadata = self._location_metadata(entry.pickup_id)
+        location_type = metadata.get("location_type", "other")
+        address = metadata.get("address")
+        phone = metadata.get("phone")
+        email = metadata.get("email")
+        operating_hours = metadata.get("operating_hours")
+        pickup_instructions = metadata.get("pickup_instructions")
+        dropoff_instructions = metadata.get("dropoff_instructions")
+        out_of_hours = metadata.get("out_of_hours")
+        is_airport = bool(metadata.get("is_airport"))
+        airport_code = metadata.get("iata")
+
+        return VehicleLocation(
+            supplier_location_id=entry.pickup_id,
+            name=metadata.get("name") or entry.original_name or "",
+            city=metadata.get("city") or "",
+            country_code=metadata.get("country_code") or fallback_country_code,
+            latitude=metadata.get("latitude") if metadata.get("latitude") is not None else entry.latitude,
+            longitude=metadata.get("longitude") if metadata.get("longitude") is not None else entry.longitude,
+            location_type=location_type,
+            airport_code=airport_code,
+            address=address,
+            phone=phone,
+            email=email,
+            is_airport=is_airport,
+            operating_hours=operating_hours,
+            pickup_instructions=pickup_instructions,
+            dropoff_instructions=dropoff_instructions,
+            out_of_hours=out_of_hours,
+        )
+
     def _build_availability_request(
         self,
         pickup_code: str,
@@ -246,20 +407,18 @@ class LocautoRentAdapter(BaseAdapter):
         timestamp = datetime.utcnow().isoformat() + "Z"
         echo_token = uuid.uuid4().hex[:12]
 
-        extras_xml = ""
+        extras_xml = "<ns1:SpecialEquipPrefs>"
         if extras:
-            extras_xml = "<ns1:SpecialEquipPrefs>"
             for ext in extras:
                 extras_xml += (
                     f'<ns1:SpecialEquipPref Code="{ext["code"]}"'
                     f' Quantity="{ext.get("quantity", 1)}"/>'
                 )
-            extras_xml += "</ns1:SpecialEquipPrefs>"
+        extras_xml += "</ns1:SpecialEquipPrefs>"
 
         inner = (
             "<ns2:OTA_VehResRS>"
-            f'<ns1:OTA_VehResRQ EchoToken="{echo_token}"'
-            f' TimeStamp="{timestamp}" Target="Production" Version="1.0">'
+            '<ns1:OTA_VehResRQ>'
             f"{self._build_pos_element()}"
             "<ns1:VehResRQCore>"
             f'<ns1:VehRentalCore PickUpDateTime="{pickup_dt}" ReturnDateTime="{return_dt}">'
@@ -272,18 +431,16 @@ class LocautoRentAdapter(BaseAdapter):
             f"<ns1:GivenName>{_xml_escape(first_name)}</ns1:GivenName>"
             f"<ns1:Surname>{_xml_escape(last_name)}</ns1:Surname>"
             "</ns1:PersonName>"
-            f"<ns1:Email>{_xml_escape(email)}</ns1:Email>"
-            f"<ns1:Telephone PhoneNumber=\"{_xml_escape(phone)}\"/>"
             "</ns1:Primary>"
             "</ns1:Customer>"
             f'<ns1:VehPref Code="{sipp_code}" CodeContext="SIPP"/>'
             f"{extras_xml}"
             "</ns1:VehResRQCore>"
             "<ns1:VehResRQInfo>"
-            f'<ns1:RentalPaymentPref>'
-            f'<ns1:Voucher SeriesCode="VROOEM"'
-            f' BillingNumber="{_xml_escape(booking_ref)}"/>'
-            f'</ns1:RentalPaymentPref>'
+            "<ns1:SpecialReqPref></ns1:SpecialReqPref>"
+            "<ns1:RentalPaymentPref>"
+            f'<ns1:Voucher Identifier="{_xml_escape(booking_ref)}"/>'
+            "</ns1:RentalPaymentPref>"
             f'{f"""<ns1:ArrivalDetails TransportationCode="14"><ns1:OperatingCompany Code="{_xml_escape(flight_number)}"/></ns1:ArrivalDetails>""" if flight_number else ""}'
             "</ns1:VehResRQInfo>"
             "</ns1:OTA_VehResRQ>"
@@ -603,23 +760,18 @@ class LocautoRentAdapter(BaseAdapter):
         model = name_parts[1].strip() if len(name_parts) > 1 else ""
 
         # ── Pickup / Dropoff locations ──
-        pickup_loc = VehicleLocation(
-            supplier_location_id=pickup_entry.pickup_id,
-            name=pickup_entry.original_name,
-            latitude=pickup_entry.latitude,
-            longitude=pickup_entry.longitude,
-            country_code="IT",
-        )
+        pickup_loc = self._build_vehicle_location(pickup_entry)
 
         dropoff_loc = None
         if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
-            dropoff_loc = VehicleLocation(
-                supplier_location_id=dropoff_entry.pickup_id,
-                name=dropoff_entry.original_name,
-                latitude=dropoff_entry.latitude,
-                longitude=dropoff_entry.longitude,
-                country_code="IT",
-            )
+            dropoff_loc = self._build_vehicle_location(dropoff_entry)
+
+        pickup_metadata = self._location_metadata(pickup_entry.pickup_id)
+        dropoff_metadata = (
+            self._location_metadata(dropoff_entry.pickup_id)
+            if dropoff_entry
+            else pickup_metadata
+        )
 
         vehicle_kwargs = {
             "id": f"gw_{uuid.uuid4().hex[:16]}",
@@ -658,6 +810,27 @@ class LocautoRentAdapter(BaseAdapter):
                 "estimated_total": estimated_total,
                 "pickup_datetime": self._format_datetime(request.pickup_date, request.pickup_time),
                 "return_datetime": self._format_datetime(request.dropoff_date, request.dropoff_time),
+                "pickup_address": pickup_metadata.get("address"),
+                "dropoff_address": dropoff_metadata.get("address"),
+                "pickup_phone": pickup_metadata.get("phone"),
+                "dropoff_phone": dropoff_metadata.get("phone"),
+                "pickup_email": pickup_metadata.get("email"),
+                "dropoff_email": dropoff_metadata.get("email"),
+                "pickup_hours": pickup_metadata.get("operating_hours"),
+                "dropoff_hours": dropoff_metadata.get("operating_hours"),
+                "pickup_instructions": pickup_metadata.get("pickup_instructions"),
+                "dropoff_instructions": dropoff_metadata.get("dropoff_instructions"),
+                "pickup_out_of_hours": pickup_metadata.get("out_of_hours"),
+                "dropoff_out_of_hours": dropoff_metadata.get("out_of_hours"),
+                "pickup_station_name": pickup_metadata.get("name") or pickup_entry.original_name,
+                "dropoff_station_name": (
+                    dropoff_metadata.get("name")
+                    or (dropoff_entry.original_name if dropoff_entry else pickup_entry.original_name)
+                ),
+                "office_address": pickup_metadata.get("address"),
+                "office_phone": pickup_metadata.get("phone"),
+                "office_schedule": pickup_metadata.get("operating_hours"),
+                "at_airport": bool(pickup_metadata.get("is_airport")),
             },
         }
 
@@ -754,7 +927,11 @@ class LocautoRentAdapter(BaseAdapter):
         for elem in root.iter():
             local_name = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
             if local_name == "ConfID":
-                confirmation_id = elem.get("ID", "") or elem.get("id", "")
+                confirmation_id = (
+                    elem.get("ID_Context", "")
+                    or elem.get("ID", "")
+                    or elem.get("id", "")
+                )
                 if confirmation_id:
                     status = BookingStatus.CONFIRMED
                     break
@@ -846,25 +1023,32 @@ class LocautoRentAdapter(BaseAdapter):
         )
 
     async def get_locations(self) -> list[dict]:
-        """Return predefined Italian locations.
-
-        Locauto's getLocations() API returns empty, so we use the
-        hardcoded list that mirrors the PHP service implementation.
-        """
+        """Return Locauto locations from the generated YAML source of truth."""
         locations: list[dict] = []
-        for loc in _PREDEFINED_LOCATIONS:
+        for loc in _LOCATIONS:
             locations.append({
                 "provider": self.supplier_id,
                 "provider_location_id": loc["code"],
                 "name": loc["name"],
                 "city": loc["city"],
-                "country": "Italy",
-                "country_code": "IT",
-                "latitude": loc["lat"],
-                "longitude": loc["lng"],
+                "country": loc.get("country", "Italy"),
+                "country_code": loc.get("country_code", "IT"),
+                "latitude": loc["latitude"],
+                "longitude": loc["longitude"],
+                "location_type": loc.get("location_type", "other"),
+                "iata": loc.get("iata"),
+                "is_airport": bool(loc.get("is_airport")),
+                "address": loc.get("address"),
+                "postal_code": loc.get("postal_code"),
+                "phone": loc.get("phone"),
+                "email": loc.get("email"),
+                "operating_hours": loc.get("operating_hours"),
+                "pickup_instructions": loc.get("pickup_instructions"),
+                "dropoff_instructions": loc.get("dropoff_instructions"),
+                "out_of_hours": loc.get("out_of_hours"),
             })
 
-        logger.info("[%s] Returning %d predefined locations", self.supplier_id, len(locations))
+        logger.info("[%s] Returning %d configured locations", self.supplier_id, len(locations))
         return locations
 
 
