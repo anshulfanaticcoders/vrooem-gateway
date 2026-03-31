@@ -613,31 +613,37 @@ class SurpriceAdapter(BaseAdapter):
                 "quantity": extra.quantity,
             })
 
+        # Build pickup/dropoff datetimes
+        pickup_dt = ""
+        return_dt = ""
+        if request.pickup_date and request.dropoff_date:
+            pickup_time = request.pickup_time or "09:00"
+            dropoff_time = request.dropoff_time or "09:00"
+            pickup_dt = f"{request.pickup_date.isoformat()}T{pickup_time}:00"
+            return_dt = f"{request.dropoff_date.isoformat()}T{dropoff_time}:00"
+
+        customer_name = f"{request.driver.first_name} {request.driver.last_name}".strip()
+
         payload = {
-            "pickUpLocationCode": sd.get("pickup_code"),
-            "pickUpExtendedLocationCode": sd.get("pickup_ext_code"),
-            "returnLocationCode": sd.get("dropoff_code"),
-            "returnExtendedLocationCode": sd.get("dropoff_ext_code"),
             "vendorRateID": sd.get("vendor_rate_id"),
             "rateCode": sd.get("rate_code"),
-            "vehicleCode": sd.get("sipp_code"),
-            "customer": {
-                "firstName": request.driver.first_name,
-                "lastName": request.driver.last_name,
-                "email": request.driver.email,
-                "phone": request.driver.phone,
+            "pickUpLocationCode": sd.get("pickup_code"),
+            "pickUpExtendedLocationCode": sd.get("pickup_ext_code") or "",
+            "returnLocationCode": sd.get("dropoff_code"),
+            "returnExtendedLocationCode": sd.get("dropoff_ext_code") or "",
+            "pickUpDateTime": pickup_dt,
+            "returnDateTime": return_dt,
+            "customerInfo": {
+                "customer": {
+                    "name": customer_name,
+                    "email": request.driver.email,
+                    "phone": request.driver.phone or "",
+                },
             },
-            "extras": extras_payload,
         }
 
-        if request.driver.date_of_birth:
-            payload["customer"]["dateOfBirth"] = request.driver.date_of_birth
-        if request.driver.driving_license_number:
-            payload["customer"]["drivingLicenseNumber"] = request.driver.driving_license_number
-        if request.flight_number:
-            payload["flightNumber"] = request.flight_number
         if request.special_requests:
-            payload["specialRequests"] = request.special_requests
+            payload["customerInfo"]["customer"]["specialRequests"] = request.special_requests
 
         response = await self._request(
             "POST",
@@ -659,7 +665,15 @@ class SurpriceAdapter(BaseAdapter):
                 supplier_data={"error": "Invalid response from Surprice"},
             )
 
-        order_id = str(data.get("orderId") or data.get("reservationId") or data.get("id") or "")
+        order_info = data.get("orderInfo") or {}
+        order_id = str(
+            order_info.get("corporateOrderId")
+            or order_info.get("id")
+            or data.get("orderId")
+            or data.get("reservationId")
+            or data.get("id")
+            or ""
+        )
         is_success = bool(order_id) and response.status_code in (200, 201)
 
         return BookingResponse(

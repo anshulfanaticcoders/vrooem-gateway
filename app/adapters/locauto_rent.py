@@ -737,11 +737,12 @@ class LocautoRentAdapter(BaseAdapter):
                 if equip_type in ("23", "35") or "one way" in extra_name.lower():
                     extra_type = ExtraType.FEE
 
+                # Locauto API returns extra Amount as per-day rate
                 extras.append(Extra(
                     id=f"ext_{self.supplier_id}_{equip_type}",
                     name=extra_name,
-                    daily_rate=round(extra_amount / rental_days, 2) if rental_days > 0 else extra_amount,
-                    total_price=extra_amount,
+                    daily_rate=extra_amount,
+                    total_price=round(extra_amount * rental_days, 2),
                     currency=extra_currency,
                     max_quantity=1,
                     type=extra_type,
@@ -886,7 +887,7 @@ class LocautoRentAdapter(BaseAdapter):
             email=request.driver.email,
             phone=request.driver.phone,
             extras=booking_extras if booking_extras else None,
-            booking_ref=str(request.laravel_booking_id or ""),
+            booking_ref=request.laravel_booking_number or str(request.laravel_booking_id or ""),
             flight_number=request.flight_number or "",
         )
 

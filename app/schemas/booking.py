@@ -48,6 +48,9 @@ class CreateBookingRequest(BaseModel):
     laravel_booking_id: int | None = Field(
         default=None, description="Laravel's booking ID for cross-reference"
     )
+    laravel_booking_number: str | None = Field(
+        default=None, description="Laravel's booking number (e.g. BK2026035725) for voucher reference"
+    )
 
 
 class BookingResponse(BaseModel):

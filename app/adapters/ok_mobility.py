@@ -759,7 +759,7 @@ class OkMobilityAdapter(BaseAdapter):
             try:
                 root = ET.fromstring(response_text)
                 # Look for reservation number / confirmation
-                for tag in ("reservationNumber", "ReservationNumber", "confirmationNumber", "ConfirmationNumber", "bookingReference"):
+                for tag in ("Reservation_Nr", "reservationNumber", "ReservationNumber", "confirmationNumber", "ConfirmationNumber", "bookingReference"):
                     elements = _find_elements(root, tag)
                     if elements and elements[0].text:
                         booking_ref = elements[0].text.strip()
