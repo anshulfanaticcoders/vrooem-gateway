@@ -7,7 +7,7 @@ services:
       - "carrental.test:host-gateway"
     environment:
       - GATEWAY_ENV=production
-      - GATEWAY_DEBUG=false
+      - GATEWAY_DEBUG=true
       - GATEWAY_API_KEYS=${GATEWAY_API_KEYS}
       - GATEWAY_SECRET=${GATEWAY_SECRET}
       - DATABASE_URL=${DATABASE_URL}

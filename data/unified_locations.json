@@ -9461,7 +9461,7 @@
         "longitude": 15.0664,
         "location_type": "airport",
         "iata": "CTA",
-        "provider_count": 5,
+        "provider_count": 6,
         "providers": [
             {
                 "provider": "locauto_rent",
@@ -9526,6 +9526,20 @@
                 "dropoffs": [],
                 "latitude": 37.469879,
                 "longitude": 15.069987,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "CTA",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT094",
+                "original_name": "Catania Airport",
+                "dropoffs": [],
+                "latitude": 37.4668,
+                "longitude": 15.0664,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -13338,7 +13352,7 @@
         "longitude": 18.259086,
         "location_type": "airport",
         "iata": "DBV",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "okmobility",
@@ -13375,6 +13389,20 @@
                 "dropoffs": [],
                 "latitude": 42.5588452,
                 "longitude": 18.2581729,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "HR",
+                "iata": "DBV",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "HRDBVT01",
+                "original_name": "Dubrovnik Airport",
+                "dropoffs": [],
+                "latitude": 42.5598,
+                "longitude": 18.2607,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -27452,7 +27480,7 @@
         "longitude": 9.2774,
         "location_type": "airport",
         "iata": "LIN",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "locauto_rent",
@@ -27475,6 +27503,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "LIN",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT014",
+                "original_name": "Milano Linate Airport",
+                "dropoffs": [],
+                "latitude": 45.4465,
+                "longitude": 9.2774,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -27505,7 +27547,7 @@
         "longitude": 8.7261,
         "location_type": "airport",
         "iata": "MXP",
-        "provider_count": 5,
+        "provider_count": 6,
         "providers": [
             {
                 "provider": "locauto_rent",
@@ -27570,6 +27612,20 @@
                 "dropoffs": [],
                 "latitude": 45.65358,
                 "longitude": 8.722647,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "MXP",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT015",
+                "original_name": "Milano Malpensa Airport T1",
+                "dropoffs": [],
+                "latitude": 45.6326,
+                "longitude": 8.7261,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -32080,7 +32136,7 @@
         "longitude": 0.0,
         "location_type": "airport",
         "iata": "PMO",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "recordgo",
@@ -32103,6 +32159,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "PMO",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT091",
+                "original_name": "Palermo Airport",
+                "dropoffs": [],
+                "latitude": 38.176,
+                "longitude": 13.091,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -33575,7 +33645,7 @@
         "longitude": 10.4,
         "location_type": "airport",
         "iata": "PSA",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "locauto_rent",
@@ -33612,6 +33682,20 @@
                 "dropoffs": [],
                 "latitude": 43.697833,
                 "longitude": 10.403972,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "PSA",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT020",
+                "original_name": "Pisa Airport",
+                "dropoffs": [],
+                "latitude": 43.6839,
+                "longitude": 10.3928,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -37473,7 +37557,7 @@
         "longitude": 12.25,
         "location_type": "airport",
         "iata": "FCO",
-        "provider_count": 4,
+        "provider_count": 5,
         "providers": [
             {
                 "provider": "locauto_rent",
@@ -37524,6 +37608,20 @@
                 "dropoffs": [],
                 "latitude": 41.795153,
                 "longitude": 12.250562,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "IT",
+                "iata": "FCO",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "IT011",
+                "original_name": "Rome Fiumicino Airport",
+                "dropoffs": [],
+                "latitude": 41.8003,
+                "longitude": 12.2389,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -42069,7 +42167,7 @@
         "longitude": 16.296526,
         "location_type": "airport",
         "iata": "SPU",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "okmobility",
@@ -42106,6 +42204,20 @@
                 "dropoffs": [],
                 "latitude": 43.536798,
                 "longitude": 16.303051,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "HR",
+                "iata": "SPU",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "HRSPUT01",
+                "original_name": "Split Airport",
+                "dropoffs": [],
+                "latitude": 43.5339,
+                "longitude": 16.3004,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -47373,7 +47485,7 @@
         "longitude": 16.590116,
         "location_type": "airport",
         "iata": "VIE",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "renteon",
@@ -47396,6 +47508,20 @@
                 "dropoffs": [],
                 "latitude": 48.123614,
                 "longitude": 16.5901159,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AT",
+                "iata": "VIE",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "ATVIE",
+                "original_name": "Vienna Airport",
+                "dropoffs": [],
+                "latitude": 48.1103,
+                "longitude": 16.5697,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -48718,7 +48844,7 @@
         "longitude": 31.0877,
         "location_type": "airport",
         "iata": "ZAG",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "okmobility",
@@ -48755,6 +48881,20 @@
                 "dropoffs": [],
                 "latitude": 45.75139,
                 "longitude": 16.0954,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "HR",
+                "iata": "ZAG",
+                "provider_code": null
+            },
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "HRZAGT01",
+                "original_name": "Zagreb Airport",
+                "dropoffs": [],
+                "latitude": 45.7418,
+                "longitude": 16.0807,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -49510,6 +49650,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "PL",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 269408718,
+        "name": "Le Thillay",
+        "aliases": [
+            "Le Thillay"
+        ],
+        "city": "Le Thillay",
+        "country": "FR",
+        "country_code": "FR",
+        "latitude": 49.00449,
+        "longitude": 2.48596,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "sicily_by_car",
+                "pickup_id": "FR0060",
+                "original_name": "Le Thillay",
+                "dropoffs": [],
+                "latitude": 49.00449,
+                "longitude": 2.48596,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FR",
                 "iata": null,
                 "provider_code": null
             }

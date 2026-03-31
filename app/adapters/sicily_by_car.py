@@ -233,6 +233,7 @@ class SicilyByCarAdapter(BaseAdapter):
                 availability_id=availability_id,
                 request_id=request_id,
                 pickup_entry=pickup_entry,
+                dropoff_entry=dropoff_entry,
             )
             if vehicle is not None:
                 vehicles.append(vehicle)
@@ -248,6 +249,7 @@ class SicilyByCarAdapter(BaseAdapter):
         availability_id: str,
         request_id: str,
         pickup_entry: ProviderLocationEntry,
+        dropoff_entry: ProviderLocationEntry | None = None,
     ) -> Vehicle | None:
         veh = offer.get("vehicle") or {}
         rate = offer.get("rate") or {}
@@ -353,6 +355,8 @@ class SicilyByCarAdapter(BaseAdapter):
                 "deposit": deposit,
                 "total_prices": total_prices,
                 "services_raw": offer.get("services") or [],
+                "pickup_location_id": pickup_entry.pickup_id,
+                "dropoff_location_id": (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
             },
         }
 
@@ -429,29 +433,43 @@ class SicilyByCarAdapter(BaseAdapter):
         """Two-phase booking: createReservation then commitReservation."""
         sd = vehicle.supplier_data
 
+        # Build pickup/dropoff datetimes
+        pickup_dt = ""
+        dropoff_dt = ""
+        if request.pickup_date and request.dropoff_date:
+            pickup_time = request.pickup_time or "10:00"
+            dropoff_time = request.dropoff_time or "10:00"
+            pickup_dt = f"{request.pickup_date.isoformat()}T{pickup_time}:00"
+            dropoff_dt = f"{request.dropoff_date.isoformat()}T{dropoff_time}:00"
+
         # Phase 1: Create reservation (hold inventory)
         create_payload = {
             "availabilityId": sd.get("availability_id", ""),
             "vehicleCategoryId": sd.get("vehicle_category_id", ""),
             "rateId": sd.get("rate_id", ""),
+            "pickupDatetime": pickup_dt,
+            "dropoffDatetime": dropoff_dt,
+            "pickupLocationId": sd.get("pickup_location_id", ""),
+            "dropoffLocationId": sd.get("dropoff_location_id", sd.get("pickup_location_id", "")),
             "customer": {
                 "firstName": request.driver.first_name,
                 "lastName": request.driver.last_name,
                 "email": request.driver.email,
-                "phone": request.driver.phone,
-                "address": request.driver.address,
-                "city": request.driver.city,
-                "country": request.driver.country,
-                "postalCode": request.driver.postal_code,
+                "phone": request.driver.phone or "",
+                "address": request.driver.address or "",
+                "city": request.driver.city or "",
+                "country": request.driver.country or "",
+                "postalCode": request.driver.postal_code or "",
             },
             "flightNumber": request.flight_number or "",
             "specialRequests": request.special_requests or "",
         }
 
-        # Attach selected extras
+        # Attach selected extras (strip gateway prefix)
         if request.extras:
+            prefix = f"ext_{self.supplier_id}_"
             create_payload["services"] = [
-                {"serviceId": e.extra_id, "quantity": e.quantity}
+                {"serviceId": e.extra_id.replace(prefix, ""), "quantity": e.quantity}
                 for e in request.extras
             ]
 
