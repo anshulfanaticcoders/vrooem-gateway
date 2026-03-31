@@ -264,6 +264,10 @@ class AdobeCarAdapter(BaseAdapter):
         pickup_code = pickup_entry.pickup_id
         dropoff_code = dropoff_entry.pickup_id if dropoff_entry else pickup_code
 
+        # Fetch office details for pickup/dropoff
+        office_details = await self._fetch_office_details(base_url, token, pickup_code)
+        dropoff_office_details = office_details if pickup_code == dropoff_code else await self._fetch_office_details(base_url, token, dropoff_code)
+
         # Adobe requires "YYYY-MM-DD HH:MM" format (date + time combined)
         start_date = f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}"
         end_date = f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}"
@@ -311,7 +315,10 @@ class AdobeCarAdapter(BaseAdapter):
         return [
             v
             for raw in vehicles_raw
-            if (v := self._parse_vehicle(raw, request, rental_days, pickup_entry, dropoff_entry, category_extras)) is not None
+            if (v := self._parse_vehicle(
+                raw, request, rental_days, pickup_entry, dropoff_entry,
+                category_extras, office_details, dropoff_office_details,
+            )) is not None
         ]
 
     def _parse_vehicle(
@@ -322,6 +329,8 @@ class AdobeCarAdapter(BaseAdapter):
         pickup_entry: ProviderLocationEntry,
         dropoff_entry: ProviderLocationEntry | None = None,
         category_extras: dict | None = None,
+        pickup_office_details: dict | None = None,
+        dropoff_office_details: dict | None = None,
     ) -> Vehicle | None:
         category_code = raw.get("category", "")
         model_name = raw.get("model", "")
@@ -480,6 +489,11 @@ class AdobeCarAdapter(BaseAdapter):
                 "return_office": (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
                 "pickup_datetime": f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}",
                 "dropoff_datetime": f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}",
+                "office_address": (pickup_office_details or {}).get("address"),
+                "office_phone": ", ".join((pickup_office_details or {}).get("telephones") or []) or None,
+                "office_schedule": (pickup_office_details or {}).get("schedule"),
+                "at_airport": (pickup_office_details or {}).get("atAirport", False),
+                "office_name": (pickup_office_details or {}).get("deploymentName") or (pickup_office_details or {}).get("name"),
             },
         }
 
@@ -503,16 +517,50 @@ class AdobeCarAdapter(BaseAdapter):
         sd = vehicle.supplier_data
 
         payload = {
-            "pickupOffice": sd.get("pickup_office", ""),
-            "returnOffice": sd.get("return_office", sd.get("pickup_office", "")),
-            "pickupDate": sd.get("pickup_datetime", ""),
-            "returnDate": sd.get("dropoff_datetime", ""),
+            "bookingNumber": 0,
             "category": sd.get("category", ""),
+            "startdate": sd.get("pickup_datetime", ""),
+            "placeofdelivery": "",
+            "pickupoffice": sd.get("pickup_office", ""),
+            "enddate": sd.get("dropoff_datetime", ""),
+            "placeOfReturn": "",
+            "returnoffice": sd.get("return_office", sd.get("pickup_office", "")),
             "customerCode": settings.adobe_username,
-            "customerName": f"{request.driver.first_name} {request.driver.last_name}",
+            "customerComment": request.special_requests or "",
+            "reference": request.laravel_booking_number or str(request.laravel_booking_id or ""),
             "flightNumber": request.flight_number or "",
-            "comment": request.special_requests or "",
+            "language": "ENG",
+            "name": request.driver.first_name,
+            "lastName": request.driver.last_name,
+            "fullName": f"{request.driver.first_name} {request.driver.last_name}",
+            "iDcard": request.driver.driving_license_number or "",
+            "email": request.driver.email,
+            "direction": request.driver.address or "",
+            "phone": request.driver.phone or "",
+            "country": request.driver.country or "",
+            "items": [],
         }
+
+        # Build items array from selected extras
+        for extra in request.extras:
+            raw_code = extra.extra_id
+            # Strip gateway prefix: ext_adobe_car_BOO → BOO, adobe_protection_LDW → LDW
+            if raw_code.startswith(f"ext_{self.supplier_id}_"):
+                raw_code = raw_code[len(f"ext_{self.supplier_id}_"):]
+            elif raw_code.startswith("adobe_protection_"):
+                raw_code = raw_code[len("adobe_protection_"):]
+            payload["items"].append({
+                "code": raw_code,
+                "quantity": extra.quantity,
+                "total": 0,
+                "order": 0,
+                "type": "",
+                "included": True,
+                "description": "",
+                "information": "",
+                "name": "",
+                "required": False,
+            })
 
         response = await self._request(
             "POST",
@@ -574,6 +622,22 @@ class AdobeCarAdapter(BaseAdapter):
         )
 
     # ─── Locations ───
+
+    async def _fetch_office_details(self, base_url: str, token: str, office_code: str) -> dict | None:
+        """Fetch office details (address, phone, hours) from /Offices/list."""
+        if not hasattr(self, "_offices_cache"):
+            try:
+                response = await self._request(
+                    "GET",
+                    f"{base_url}/Offices",
+                    headers=self._auth_headers(token),
+                )
+                data = response.json()
+                offices = data if isinstance(data, list) else (data.get("data") or [])
+                self._offices_cache = {o.get("code", ""): o for o in offices if isinstance(o, dict)}
+            except Exception:
+                self._offices_cache = {}
+        return self._offices_cache.get(office_code)
 
     async def get_locations(self) -> list[dict]:
         settings = get_settings()

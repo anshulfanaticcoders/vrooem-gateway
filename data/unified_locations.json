@@ -278,6 +278,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1323396842,
+        "name": "Adana Otogar",
+        "aliases": [
+            "Adana Otogarı"
+        ],
+        "city": "Adana Otogar",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.997437,
+        "longitude": 35.263529,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "15",
+                "original_name": "Adana Otogarı",
+                "dropoffs": [],
+                "latitude": 36.997437,
+                "longitude": 35.263529,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 407808459,
+        "name": "Adana Sehir Merkezi",
+        "aliases": [
+            "Adana Şehir Merkezi"
+        ],
+        "city": "Adana Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.991268,
+        "longitude": 35.330624,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "14",
+                "original_name": "Adana Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 36.991268,
+                "longitude": 35.330624,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1168129905,
         "name": "Adana Sehir Ofis",
         "aliases": [
@@ -350,6 +414,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 757987027,
+        "name": "Adyaman Havaliman",
+        "aliases": [
+            "Adıyaman Havalimanı (ADF)"
+        ],
+        "city": "Adyaman Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.736927,
+        "longitude": 38.471262,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "47",
+                "original_name": "Adıyaman Havalimanı (ADF)",
+                "dropoffs": [],
+                "latitude": 37.736927,
+                "longitude": 38.471262,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -698,6 +794,103 @@
                 "extended_dropoff_code": null,
                 "country_code": "AE",
                 "iata": "DWC",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1638027570,
+        "name": "Al Nador Downtown",
+        "aliases": [
+            "Rue el Hijaz, 34000 Nador, Al Nador, Oriental, Morocco",
+            "Al Nador"
+        ],
+        "city": "Al Nador",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 35.173351,
+        "longitude": -2.937423,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "102",
+                "original_name": "Rue el Hijaz, 34000 Nador, Al Nador, Oriental, Morocco",
+                "dropoffs": [],
+                "latitude": 35.173351,
+                "longitude": -2.937423,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_98634602ac5aa9974a25616803569304"
+    },
+    {
+        "unified_location_id": 4291964051,
+        "name": "Alanya Gazipasa Havaliman",
+        "aliases": [
+            "Alanya Gazipaşa Havalimanı (GZP)"
+        ],
+        "city": "Alanya Gazipasa Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.296908,
+        "longitude": 32.300987,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "51",
+                "original_name": "Alanya Gazipaşa Havalimanı (GZP)",
+                "dropoffs": [],
+                "latitude": 36.296908,
+                "longitude": 32.300987,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4060785094,
+        "name": "Alanya Sehir Merkezi",
+        "aliases": [
+            "Alanya Şehir Merkezi"
+        ],
+        "city": "Alanya Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.544398,
+        "longitude": 31.995287,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "23",
+                "original_name": "Alanya Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 36.544398,
+                "longitude": 31.995287,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -1922,6 +2115,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 249689587,
+        "name": "Ankara Esenboga Havaliman",
+        "aliases": [
+            "Ankara Esenboğa Havalimanı (ESB)"
+        ],
+        "city": "Ankara Esenboga Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.115093,
+        "longitude": 32.992716,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "2",
+                "original_name": "Ankara Esenboğa Havalimanı (ESB)",
+                "dropoffs": [],
+                "latitude": 40.115093,
+                "longitude": 32.992716,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 140669648,
+        "name": "Ankara Sehir Merkezi",
+        "aliases": [
+            "Ankara Şehir Merkezi"
+        ],
+        "city": "Ankara Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.933473,
+        "longitude": 32.859381,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "24",
+                "original_name": "Ankara Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 39.933473,
+                "longitude": 32.859381,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3445689114,
         "name": "Antakya Airport (HTY)",
         "aliases": [
@@ -2070,6 +2327,103 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1642760370,
+        "name": "Antalya Havaliman",
+        "aliases": [
+            "Antalya Havalimanı (AYT)"
+        ],
+        "city": "Antalya Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.90953,
+        "longitude": 30.798137,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "17",
+                "original_name": "Antalya Havalimanı (AYT)",
+                "dropoffs": [],
+                "latitude": 36.90953,
+                "longitude": 30.798137,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3972607672,
+        "name": "Antalya Havaliman Antalya Turkey Downtown",
+        "aliases": [
+            "Antalya Havalimanı, Antalya, Turkey",
+            "Antalya Havaliman Antalya Turkey"
+        ],
+        "city": "Antalya Havaliman Antalya Turkey",
+        "country": "Turkey",
+        "country_code": "TR",
+        "latitude": 36.877744,
+        "longitude": 30.791311,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "27",
+                "original_name": "Antalya Havalimanı, Antalya, Turkey",
+                "dropoffs": [],
+                "latitude": 36.877744,
+                "longitude": 30.791311,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_8e3f483598153f63b173924ad21f4fe6"
+    },
+    {
+        "unified_location_id": 2004262235,
+        "name": "Antalya Sehir Merkezi",
+        "aliases": [
+            "Antalya Şehir Merkezi"
+        ],
+        "city": "Antalya Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.897014,
+        "longitude": 30.714023,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "25",
+                "original_name": "Antalya Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 36.897014,
+                "longitude": 30.714023,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2928248786,
         "name": "Antiparos Port",
         "aliases": [
@@ -2140,19 +2494,49 @@
         "unified_location_id": 3038777513,
         "name": "Antwerp Downtown",
         "aliases": [
-            "Antwerpen downtown",
+            "70 nijverheidsstraat, Antwerp, Antwerpen, Belgium",
             "Antwerpen",
-            "Antwerp"
+            "Antwerp",
+            "Bosschaert de Bouwellei, Antwerp, Antwerpen, Belgium",
+            "Antwerpen downtown"
         ],
         "city": "Antwerp",
         "country": "Belgium",
         "country_code": "BE",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 51.210998,
+        "longitude": 4.45074,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 3,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "2",
+                "original_name": "70 nijverheidsstraat, Antwerp, Antwerpen, Belgium",
+                "dropoffs": [],
+                "latitude": 51.199993,
+                "longitude": 4.431101,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "BE",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "4",
+                "original_name": "Bosschaert de Bouwellei, Antwerp, Antwerpen, Belgium",
+                "dropoffs": [],
+                "latitude": 51.222003,
+                "longitude": 4.470379,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "BE",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "BE-ANT-DT",
@@ -2168,7 +2552,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_317e002afc63269b03028d6b10b46378"
     },
     {
         "unified_location_id": 3063869917,
@@ -2715,6 +3099,68 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1248629995,
+        "name": "Artvin Hopa",
+        "aliases": [],
+        "city": "Artvin Hopa",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.389926,
+        "longitude": 41.415184,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "65",
+                "original_name": "Artvin Hopa",
+                "dropoffs": [],
+                "latitude": 41.389926,
+                "longitude": 41.415184,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4236415557,
+        "name": "Artvin Sehir Merkezi",
+        "aliases": [
+            "Artvin Şehir Merkezi"
+        ],
+        "city": "Artvin Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.18001,
+        "longitude": 41.819215,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "60",
+                "original_name": "Artvin Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 41.18001,
+                "longitude": 41.819215,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2130554532,
         "name": "Asti Downtown",
         "aliases": [
@@ -3186,6 +3632,69 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3284230586,
+        "name": "Azilal Downtown",
+        "aliases": [
+            "Tidili Fetouaka, Azilal, Béni Mellal-Khénifra",
+            "Azilal",
+            "40000 Tidili Fetouaka, Azilal, Béni Mellal-Khénifra",
+            "Tidili Fetouaka, Azilal, Béni Mellal-Khénifra, Morocco"
+        ],
+        "city": "Azilal",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 31.657061,
+        "longitude": -7.182618,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 3,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "23",
+                "original_name": "Tidili Fetouaka, Azilal, Béni Mellal-Khénifra",
+                "dropoffs": [],
+                "latitude": 31.657061,
+                "longitude": -7.182618,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "28",
+                "original_name": "40000 Tidili Fetouaka, Azilal, Béni Mellal-Khénifra",
+                "dropoffs": [],
+                "latitude": 31.657061,
+                "longitude": -7.182618,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "32",
+                "original_name": "Tidili Fetouaka, Azilal, Béni Mellal-Khénifra, Morocco",
+                "dropoffs": [],
+                "latitude": 31.657061,
+                "longitude": -7.182618,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_1e5a14c5a21db6cbdd5a41d27d79c9b0"
+    },
+    {
         "unified_location_id": 3561378613,
         "name": "Bacau Airport George Enescu Airport (BCM)",
         "aliases": [
@@ -3597,6 +4106,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "BG",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2738806362,
+        "name": "Balkesir Koca Seyit Havaliman",
+        "aliases": [
+            "Balıkesir Koca Seyit Havalimanı (EDO)"
+        ],
+        "city": "Balkesir Koca Seyit Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.550838,
+        "longitude": 27.011554,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "36",
+                "original_name": "Balıkesir Koca Seyit Havalimanı (EDO)",
+                "dropoffs": [],
+                "latitude": 39.550838,
+                "longitude": 27.011554,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -4341,6 +4882,70 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 857704367,
+        "name": "Batman Havaliman",
+        "aliases": [
+            "Batman Havalimanı (BAL)"
+        ],
+        "city": "Batman Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.946665,
+        "longitude": 41.119675,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "52",
+                "original_name": "Batman Havalimanı (BAL)",
+                "dropoffs": [],
+                "latitude": 37.946665,
+                "longitude": 41.119675,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 855076868,
+        "name": "Batman Sehir Merkezi",
+        "aliases": [
+            "Batman Şehir Merkezi"
+        ],
+        "city": "Batman Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.889682,
+        "longitude": 41.136277,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "61",
+                "original_name": "Batman Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 37.889682,
+                "longitude": 41.136277,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -5734,6 +6339,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3782931425,
+        "name": "Bodrum Milas Havaliman",
+        "aliases": [
+            "Bodrum Milas Havalimanı (BJV)"
+        ],
+        "city": "Bodrum Milas Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.25324,
+        "longitude": 27.666093,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "7",
+                "original_name": "Bodrum Milas Havalimanı (BJV)",
+                "dropoffs": [],
+                "latitude": 37.25324,
+                "longitude": 27.666093,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2056357954,
+        "name": "Bodrum Sehir Merkezi",
+        "aliases": [
+            "Bodrum Şehir Merkezi"
+        ],
+        "city": "Bodrum Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.034416,
+        "longitude": 27.430702,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "43",
+                "original_name": "Bodrum Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 37.034416,
+                "longitude": 27.430702,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1033571661,
         "name": "Bologna Airport (BLQ)",
         "aliases": [
@@ -5872,6 +6541,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "IT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3647197723,
+        "name": "Bolu Sehir Merkezi",
+        "aliases": [
+            "Bolu Şehir Merkezi"
+        ],
+        "city": "Bolu Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.732577,
+        "longitude": 31.608719,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "32",
+                "original_name": "Bolu Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 40.732577,
+                "longitude": 31.608719,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -7356,6 +8057,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 460556486,
+        "name": "Budva Sehir Merkezi",
+        "aliases": [
+            "Budva Şehir Merkezi"
+        ],
+        "city": "Budva Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 42.285441,
+        "longitude": 18.840075,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "66",
+                "original_name": "Budva Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 42.285441,
+                "longitude": 18.840075,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 270174405,
         "name": "Burjassot Downtown",
         "aliases": [
@@ -8275,8 +9008,9 @@
         "unified_location_id": 416203036,
         "name": "Casablanca Airport (CMN)",
         "aliases": [
-            "Casablanca airport",
+            "Mohamed V airport, Casablanca, Morocco",
             "Casablanca",
+            "Casablanca airport",
             "Casablanca Airport",
             "Nouaceur",
             "CMN"
@@ -8284,12 +9018,26 @@
         "city": "Casablanca",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 33.381853,
-        "longitude": -7.545275,
+        "latitude": 33.377403,
+        "longitude": -7.561333,
         "location_type": "airport",
         "iata": "CMN",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "155",
+                "original_name": "Mohamed V airport, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.372954,
+                "longitude": -7.577391,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "CMN",
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MA-CAS-CMN",
@@ -8319,24 +9067,171 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_641e4a7fa6e3c4841a7839f231a161ed"
     },
     {
         "unified_location_id": 1610385418,
         "name": "Casablanca Downtown",
         "aliases": [
-            "Casablanca downtown",
-            "Casablanca"
+            "Boulevard Oued Oum Rabia, 20202, Casablanca, Morocco",
+            "Casablanca",
+            "Boulevard Emile Zola, 20310, Casablanca, Morocco",
+            "Casa Hay El Oulfa, Casablanca, Morocco",
+            "Main Street 20202, Casablanca, Morocco",
+            "20202, Casablanca, Morocco",
+            "casa, Casablanca, Morocco",
+            "El Oulfa, Casablanca, Casablanca-Settat, Morocco",
+            "Casablanca downtown"
         ],
         "city": "Casablanca",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 33.599771,
-        "longitude": -7.581777,
+        "latitude": 33.55431,
+        "longitude": -7.679296,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 12,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "30",
+                "original_name": "Boulevard Oued Oum Rabia, 20202, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.557563,
+                "longitude": -7.680777,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "33",
+                "original_name": "Boulevard Emile Zola, 20310, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.590627,
+                "longitude": -7.603352,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "38",
+                "original_name": "Casa Hay El Oulfa, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.557563,
+                "longitude": -7.680777,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "54",
+                "original_name": "Main Street 20202, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.55431,
+                "longitude": -7.66228,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "63",
+                "original_name": "20202, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.55431,
+                "longitude": -7.66228,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "169",
+                "original_name": "casa, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.590627,
+                "longitude": -7.603352,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "179",
+                "original_name": "El Oulfa, Casablanca, Casablanca-Settat, Morocco",
+                "dropoffs": [],
+                "latitude": 33.539866,
+                "longitude": -7.679301,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "180",
+                "original_name": "El Oulfa, Casablanca, Casablanca-Settat, Morocco",
+                "dropoffs": [],
+                "latitude": 33.53983,
+                "longitude": -7.679296,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "181",
+                "original_name": "El Oulfa, Casablanca, Casablanca-Settat, Morocco",
+                "dropoffs": [],
+                "latitude": 33.539842,
+                "longitude": -7.679299,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "182",
+                "original_name": "El Oulfa, Casablanca, Casablanca-Settat, Morocco",
+                "dropoffs": [],
+                "latitude": 33.53979,
+                "longitude": -7.679318,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MA-CAS-DT",
@@ -8366,7 +9261,55 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_4a8b956fbf751d675a6838a2d50f3d23"
+    },
+    {
+        "unified_location_id": 422696563,
+        "name": "Casablanca-Anfa Airport",
+        "aliases": [
+            "Casablanca-Anfa Airport, Casablanca, Morocco",
+            "Casablanca",
+            "Airport, Casablanca, Morocco"
+        ],
+        "city": "Casablanca",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 33.55431,
+        "longitude": -7.66228,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "72",
+                "original_name": "Casablanca-Anfa Airport, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.55431,
+                "longitude": -7.66228,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "168",
+                "original_name": "Airport, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.55431,
+                "longitude": -7.66228,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_170888802bfd2982fc9b67f1e5d96641"
     },
     {
         "unified_location_id": 112817494,
@@ -8984,6 +9927,39 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 1605743069,
+        "name": "Chichaoua Province Downtown",
+        "aliases": [
+            "Lamzoudia, Chichaoua Province, Morocco",
+            "Chichaoua Province"
+        ],
+        "city": "Chichaoua Province",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 31.612743,
+        "longitude": -8.484438,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "110",
+                "original_name": "Lamzoudia, Chichaoua Province, Morocco",
+                "dropoffs": [],
+                "latitude": 31.612743,
+                "longitude": -8.484438,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_694932505655b0ebb754401a2820ad5b"
     },
     {
         "unified_location_id": 237975312,
@@ -10576,6 +11552,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 167807246,
+        "name": "Cukurova Havaliman",
+        "aliases": [
+            "Çukurova Havalimanı (COV)"
+        ],
+        "city": "Cukurova Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.89933,
+        "longitude": 35.068236,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "8",
+                "original_name": "Çukurova Havalimanı (COV)",
+                "dropoffs": [],
+                "latitude": 36.89933,
+                "longitude": 35.068236,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 613043109,
         "name": "Cuneo Airport (CUF)",
         "aliases": [
@@ -10821,6 +11829,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3560957581,
+        "name": "Dalaman Havaliman",
+        "aliases": [
+            "Dalaman Havalimanı (DLM)"
+        ],
+        "city": "Dalaman Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.711526,
+        "longitude": 28.787344,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "3",
+                "original_name": "Dalaman Havalimanı (DLM)",
+                "dropoffs": [],
+                "latitude": 36.711526,
+                "longitude": 28.787344,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1242945021,
         "name": "Dammam Downtown",
         "aliases": [
@@ -10954,6 +11994,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2764933470,
+        "name": "Denizli Cardak Havaliman",
+        "aliases": [
+            "Denizli Çardak Havalimanı (DNZ)"
+        ],
+        "city": "Denizli Cardak Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.773424,
+        "longitude": 29.689277,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "38",
+                "original_name": "Denizli Çardak Havalimanı (DNZ)",
+                "dropoffs": [],
+                "latitude": 37.773424,
+                "longitude": 29.689277,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 4043994485,
         "name": "Denizli Downtown",
         "aliases": [
@@ -10987,6 +12059,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 116961739,
+        "name": "Deurne Downtown",
+        "aliases": [
+            "deurne",
+            "bosschaert de bouwellei 8, deurne, Antwerpen, Belgium",
+            "Deurne"
+        ],
+        "city": "Deurne",
+        "country": "Belgium",
+        "country_code": "BE",
+        "latitude": 51.22134,
+        "longitude": 4.46595,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "10",
+                "original_name": "bosschaert de bouwellei 8, deurne, Antwerpen, Belgium",
+                "dropoffs": [],
+                "latitude": 51.22134,
+                "longitude": 4.46595,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "BE",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_242b85fb6ca472fe897d6369f3dcac1e"
+    },
+    {
         "unified_location_id": 109702184,
         "name": "Deusto Downtown",
         "aliases": [
@@ -11012,6 +12118,70 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 580485844,
+        "name": "Diyarbakr Havaliman",
+        "aliases": [
+            "Diyarbakır Havalimanı (DIY)"
+        ],
+        "city": "Diyarbakr Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.903521,
+        "longitude": 40.186717,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "6",
+                "original_name": "Diyarbakır Havalimanı (DIY)",
+                "dropoffs": [],
+                "latitude": 37.903521,
+                "longitude": 40.186717,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2406189645,
+        "name": "Diyarbakr Sehir Merkezi",
+        "aliases": [
+            "Diyarbakır Şehir Merkezi"
+        ],
+        "city": "Diyarbakr Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.937079,
+        "longitude": 40.181577,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "57",
+                "original_name": "Diyarbakır Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 37.937079,
+                "longitude": 40.181577,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -11784,21 +12954,51 @@
         "unified_location_id": 3385755165,
         "name": "Dubai Airport (DXB)",
         "aliases": [
-            "OK DXB - Airport",
+            "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
             "Dubai",
+            "airport st, Dubai, Dubai, United Arab Emirates",
+            "OK DXB - Airport",
             "Dubai Airport",
             "Dubai International Airport (DXB)",
             "DXB"
         ],
         "city": "Dubai",
-        "country": "United Arab Emirates",
+        "country": "Verenigde Arabische Emiraten",
         "country_code": "AE",
-        "latitude": 25.25278,
-        "longitude": 55.351948,
+        "latitude": 25.250291,
+        "longitude": 55.35,
         "location_type": "airport",
         "iata": "DXB",
-        "provider_count": 4,
+        "provider_count": 6,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "266",
+                "original_name": "airport st, Dubai, Dubai, Verenigde Arabische Emiraten",
+                "dropoffs": [],
+                "latitude": 25.250291,
+                "longitude": 55.345171,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AE",
+                "iata": "DXB",
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "269",
+                "original_name": "airport st, Dubai, Dubai, United Arab Emirates",
+                "dropoffs": [],
+                "latitude": 25.250291,
+                "longitude": 55.345171,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AE",
+                "iata": "DXB",
+                "provider_code": null
+            },
             {
                 "provider": "okmobility",
                 "pickup_id": "641",
@@ -11856,7 +13056,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_f4b540ad4d4770e198bbc615bc5ad997"
     },
     {
         "unified_location_id": 2752498137,
@@ -12880,6 +14080,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3028765979,
+        "name": "Elazg Havaliman",
+        "aliases": [
+            "Elazığ Havalimanı (EZS)"
+        ],
+        "city": "Elazg Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.600824,
+        "longitude": 39.267837,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "20",
+                "original_name": "Elazığ Havalimanı (EZS)",
+                "dropoffs": [],
+                "latitude": 38.600824,
+                "longitude": 39.267837,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1266672156,
         "name": "Elenite Downtown",
         "aliases": [
@@ -13045,6 +14277,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3955850064,
+        "name": "Erzincan Yldrm Akbulut Havaliman",
+        "aliases": [
+            "Erzincan Yıldırım Akbulut Havalimanı (ERC)"
+        ],
+        "city": "Erzincan Yldrm Akbulut Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.718344,
+        "longitude": 39.522363,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "48",
+                "original_name": "Erzincan Yıldırım Akbulut Havalimanı (ERC)",
+                "dropoffs": [],
+                "latitude": 39.718344,
+                "longitude": 39.522363,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 183135861,
         "name": "Erzurum Airport (ERZ)",
         "aliases": [
@@ -13112,6 +14376,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2155584517,
+        "name": "Erzurum Havaliman",
+        "aliases": [
+            "Erzurum Havalimanı (ERZ)"
+        ],
+        "city": "Erzurum Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.962159,
+        "longitude": 41.178995,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "26",
+                "original_name": "Erzurum Havalimanı (ERZ)",
+                "dropoffs": [],
+                "latitude": 39.962159,
+                "longitude": 41.178995,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1403750753,
+        "name": "Erzurum Sehir Merkezi",
+        "aliases": [
+            "Erzurum Şehir Merkezi"
+        ],
+        "city": "Erzurum Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.907885,
+        "longitude": 41.267735,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "62",
+                "original_name": "Erzurum Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 39.907885,
+                "longitude": 41.267735,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2034335686,
         "name": "Eskisehir Airport (ESK)",
         "aliases": [
@@ -13168,6 +14496,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 81902315,
+        "name": "Eskisehir Hasan Polatkan Havaliman",
+        "aliases": [
+            "Eskişehir Hasan Polatkan Havalimanı (AOE)"
+        ],
+        "city": "Eskisehir Hasan Polatkan Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.813625,
+        "longitude": 30.528266,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "27",
+                "original_name": "Eskişehir Hasan Polatkan Havalimanı (AOE)",
+                "dropoffs": [],
+                "latitude": 39.813625,
+                "longitude": 30.528266,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -13530,6 +14890,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2855407993,
+        "name": "Fethiye Sehir Merkezi",
+        "aliases": [
+            "Fethiye Şehir Merkezi"
+        ],
+        "city": "Fethiye Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.659264,
+        "longitude": 29.126481,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "33",
+                "original_name": "Fethiye Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 36.659264,
+                "longitude": 29.126481,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -14330,6 +15722,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3515381175,
+        "name": "Gaziantep Havaliman",
+        "aliases": [
+            "Gaziantep Havalimanı (GZT)"
+        ],
+        "city": "Gaziantep Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.943837,
+        "longitude": 37.476376,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "28",
+                "original_name": "Gaziantep Havalimanı (GZT)",
+                "dropoffs": [],
+                "latitude": 36.943837,
+                "longitude": 37.476376,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -16417,6 +17841,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 515761982,
+        "name": "Hakkari Yuksekova Selahaddin Eyyubi Havaliman",
+        "aliases": [
+            "Hakkari Yüksekova Selahaddin Eyyûbî Havalimanı (YKO)"
+        ],
+        "city": "Hakkari Yuksekova Selahaddin Eyyubi Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.546128,
+        "longitude": 44.254935,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "53",
+                "original_name": "Hakkari Yüksekova Selahaddin Eyyûbî Havalimanı (YKO)",
+                "dropoffs": [],
+                "latitude": 37.546128,
+                "longitude": 44.254935,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2324938095,
         "name": "Hamad Airport (DOH)",
         "aliases": [
@@ -16733,6 +18189,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3612474554,
+        "name": "Hatay Havaliman",
+        "aliases": [
+            "Hatay Havalimanı (HTY)"
+        ],
+        "city": "Hatay Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.366232,
+        "longitude": 36.282745,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "29",
+                "original_name": "Hatay Havalimanı (HTY)",
+                "dropoffs": [],
+                "latitude": 36.366232,
+                "longitude": 36.282745,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 662121817,
         "name": "Helsinki Airport (HEL)",
         "aliases": [
@@ -17041,6 +18529,39 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 636732569,
+        "name": "Hoceima Downtown",
+        "aliases": [
+            "Cimetiere juif Beit Haalmin Hayehoudi, Hoceima, Morocco",
+            "Hoceima"
+        ],
+        "city": "Hoceima",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 35.57845,
+        "longitude": -5.36837,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "73",
+                "original_name": "Cimetiere juif Beit Haalmin Hayehoudi, Hoceima, Morocco",
+                "dropoffs": [],
+                "latitude": 35.57845,
+                "longitude": -5.36837,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_528c6a7c2a8c43de00ad31dc01af795c"
     },
     {
         "unified_location_id": 1050776402,
@@ -17804,6 +19325,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 236791767,
+        "name": "Istanbul Besiktas",
+        "aliases": [
+            "İstanbul Beşiktaş"
+        ],
+        "city": "Istanbul Besiktas",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.041875,
+        "longitude": 29.005154,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "40",
+                "original_name": "İstanbul Beşiktaş",
+                "dropoffs": [],
+                "latitude": 41.041875,
+                "longitude": 29.005154,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2285644734,
         "name": "Istanbul Downtown",
         "aliases": [
@@ -17855,6 +19408,166 @@
                 "dropoffs": [],
                 "latitude": 40.9971997,
                 "longitude": 29.0991084,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2919434953,
+        "name": "Istanbul Havaliman",
+        "aliases": [
+            "İstanbul Havalimanı (IST)"
+        ],
+        "city": "Istanbul Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.277994,
+        "longitude": 28.730065,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "4",
+                "original_name": "İstanbul Havalimanı (IST)",
+                "dropoffs": [],
+                "latitude": 41.277994,
+                "longitude": 28.730065,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 228139360,
+        "name": "Istanbul Sabiha Gokcen Havaliman",
+        "aliases": [
+            "İstanbul Sabiha Gökçen Havalimanı (SAW)"
+        ],
+        "city": "Istanbul Sabiha Gokcen Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.897041,
+        "longitude": 29.313089,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "5",
+                "original_name": "İstanbul Sabiha Gökçen Havalimanı (SAW)",
+                "dropoffs": [],
+                "latitude": 40.897041,
+                "longitude": 29.313089,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1480024715,
+        "name": "Istanbul Sisli",
+        "aliases": [
+            "İstanbul Şişli"
+        ],
+        "city": "Istanbul Sisli",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.061358,
+        "longitude": 28.989329,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "41",
+                "original_name": "İstanbul Şişli",
+                "dropoffs": [],
+                "latitude": 41.061358,
+                "longitude": 28.989329,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 881950694,
+        "name": "Istanbul Taksim",
+        "aliases": [
+            "İstanbul Taksim"
+        ],
+        "city": "Istanbul Taksim",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.035762,
+        "longitude": 28.987257,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "42",
+                "original_name": "İstanbul Taksim",
+                "dropoffs": [],
+                "latitude": 41.035762,
+                "longitude": 28.987257,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 97218254,
+        "name": "Izmir Adnan Menderes Havaliman",
+        "aliases": [
+            "İzmir Adnan Menderes Havalimanı (ADB)"
+        ],
+        "city": "Izmir Adnan Menderes Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.292073,
+        "longitude": 27.14895,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "1",
+                "original_name": "İzmir Adnan Menderes Havalimanı (ADB)",
+                "dropoffs": [],
+                "latitude": 38.292073,
+                "longitude": 27.14895,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -17937,6 +19650,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 463445965,
+        "name": "Izmir Sehir Merkezi",
+        "aliases": [
+            "İzmir Şehir Merkezi"
+        ],
+        "city": "Izmir Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.423532,
+        "longitude": 27.142875,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "37",
+                "original_name": "İzmir Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 38.423532,
+                "longitude": 27.142875,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -18108,6 +19853,38 @@
                 "extended_dropoff_code": null,
                 "country_code": "KE",
                 "iata": "NBO",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1962306968,
+        "name": "Kahramanmaras Havaliman",
+        "aliases": [
+            "Kahramanmaraş Havalimanı (KCM)"
+        ],
+        "city": "Kahramanmaras Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.535872,
+        "longitude": 36.960024,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "35",
+                "original_name": "Kahramanmaraş Havalimanı (KCM)",
+                "dropoffs": [],
+                "latitude": 37.535872,
+                "longitude": 36.960024,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -18506,6 +20283,55 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 4116438368,
+        "name": "Karmelava Airport",
+        "aliases": [
+            "Karmėlava",
+            "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
+            "Karmelava",
+            "4 Oro uosto gatvė, Karmėlava, Lithuania"
+        ],
+        "city": "Karmelava",
+        "country": "Lithuania",
+        "country_code": "LT",
+        "latitude": 54.967017,
+        "longitude": 24.073847,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "211",
+                "original_name": "4 Oro uosto gatvė, Karmėlava, Karmėlava, Lithuania",
+                "dropoffs": [],
+                "latitude": 54.967017,
+                "longitude": 24.073847,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "LT",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "212",
+                "original_name": "4 Oro uosto gatvė, Karmėlava, Lithuania",
+                "dropoffs": [],
+                "latitude": 54.967017,
+                "longitude": 24.073847,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "LT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_223bea8a10660470bdac0a3024dad34a"
+    },
+    {
         "unified_location_id": 2196542448,
         "name": "Karpathos Airport (AOK)",
         "aliases": [
@@ -18573,6 +20399,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 76813997,
+        "name": "Kars Harakani Havaliman",
+        "aliases": [
+            "Kars Harakani Havalimanı (KSY)"
+        ],
+        "city": "Kars Harakani Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.565175,
+        "longitude": 43.111061,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "50",
+                "original_name": "Kars Harakani Havalimanı (KSY)",
+                "dropoffs": [],
+                "latitude": 40.565175,
+                "longitude": 43.111061,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2476417395,
         "name": "Kassandreia Downtown",
         "aliases": [
@@ -18604,6 +20462,39 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 2692975021,
+        "name": "Kassita Downtown",
+        "aliases": [
+            "Avenue Hassan II, 34000, Kassita, Oriental, Morocco",
+            "Kassita"
+        ],
+        "city": "Kassita",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 34.890251,
+        "longitude": -3.72657,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "100",
+                "original_name": "Avenue Hassan II, 34000, Kassita, Oriental, Morocco",
+                "dropoffs": [],
+                "latitude": 34.890251,
+                "longitude": -3.72657,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_400da25d27159b05e709fbe2c8b84282"
     },
     {
         "unified_location_id": 2956352969,
@@ -19135,6 +21026,134 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3929732543,
+        "name": "Kayseri Havaliman",
+        "aliases": [
+            "Kayseri Havalimanı (ASR)"
+        ],
+        "city": "Kayseri Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.765225,
+        "longitude": 35.484348,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "12",
+                "original_name": "Kayseri Havalimanı (ASR)",
+                "dropoffs": [],
+                "latitude": 38.765225,
+                "longitude": 35.484348,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 577184050,
+        "name": "Kayseri Sehir Merkezi",
+        "aliases": [
+            "Kayseri Şehir Merkezi"
+        ],
+        "city": "Kayseri Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.720625,
+        "longitude": 35.481963,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "18",
+                "original_name": "Kayseri Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 38.720625,
+                "longitude": 35.481963,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4202765641,
+        "name": "Kbrs Ercan Havaliman",
+        "aliases": [
+            "Kıbrıs Ercan Havalimanı (ECN)"
+        ],
+        "city": "Kbrs Ercan Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 35.147043,
+        "longitude": 33.505683,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "39",
+                "original_name": "Kıbrıs Ercan Havalimanı (ECN)",
+                "dropoffs": [],
+                "latitude": 35.147043,
+                "longitude": 33.505683,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 901968853,
+        "name": "Kbrs Girne",
+        "aliases": [
+            "Kıbrıs Girne"
+        ],
+        "city": "Kbrs Girne",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 35.337291,
+        "longitude": 33.3107,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "63",
+                "original_name": "Kıbrıs Girne",
+                "dropoffs": [],
+                "latitude": 35.337291,
+                "longitude": 33.3107,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3393394118,
         "name": "Kefalonia Airport (EFL)",
         "aliases": [
@@ -19313,6 +21332,39 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 3731011798,
+        "name": "Kenitra Downtown",
+        "aliases": [
+            "14000 Ben Mansour, Kenitra, Rabat-Salé-Kénitra, Morocco",
+            "Kenitra"
+        ],
+        "city": "Kenitra",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 34.583328,
+        "longitude": -6.33333,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "149",
+                "original_name": "14000 Ben Mansour, Kenitra, Rabat-Salé-Kénitra, Morocco",
+                "dropoffs": [],
+                "latitude": 34.583328,
+                "longitude": -6.33333,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_73322c9cea99a16814addfd666976c6e"
     },
     {
         "unified_location_id": 139211055,
@@ -19813,6 +21865,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2647571763,
+        "name": "Konya Havaliman",
+        "aliases": [
+            "Konya Havalimanı (KYA)"
+        ],
+        "city": "Konya Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.985193,
+        "longitude": 32.576757,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "30",
+                "original_name": "Konya Havalimanı (KYA)",
+                "dropoffs": [],
+                "latitude": 37.985193,
+                "longitude": 32.576757,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2350860407,
         "name": "Koper Downtown",
         "aliases": [
@@ -20120,6 +22204,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ME",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2147799175,
+        "name": "Kotor Sehir Merkezi",
+        "aliases": [
+            "Kotor Şehir Merkezi"
+        ],
+        "city": "Kotor Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 42.422413,
+        "longitude": 18.770328,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "67",
+                "original_name": "Kotor Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 42.422413,
+                "longitude": 18.770328,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -22132,6 +24248,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3102003541,
+        "name": "Lommel Downtown",
+        "aliases": [
+            "stationsstraat 223, Lommel, Limburg, Belgium",
+            "Lommel"
+        ],
+        "city": "Lommel",
+        "country": "Belgium",
+        "country_code": "BE",
+        "latitude": 51.230407,
+        "longitude": 5.307285,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "174",
+                "original_name": "stationsstraat 223, Lommel, Limburg, Belgium",
+                "dropoffs": [],
+                "latitude": 51.230407,
+                "longitude": 5.307285,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "BE",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_8aee9356deaf99b9493e0a162ba8ca10"
+    },
+    {
         "unified_location_id": 353998974,
         "name": "London Airport (LHR)",
         "aliases": [
@@ -23347,6 +25496,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 536322470,
+        "name": "Malatya Havaliman",
+        "aliases": [
+            "Malatya Havalimanı (MLX)"
+        ],
+        "city": "Malatya Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.439842,
+        "longitude": 38.10462,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "21",
+                "original_name": "Malatya Havalimanı (MLX)",
+                "dropoffs": [],
+                "latitude": 38.439842,
+                "longitude": 38.10462,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 101856691,
         "name": "Malia Downtown",
         "aliases": [
@@ -23884,6 +26065,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3299792693,
+        "name": "Mardin Havaliman",
+        "aliases": [
+            "Mardin Havalimanı (MQM)"
+        ],
+        "city": "Mardin Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.234667,
+        "longitude": 40.637432,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "9",
+                "original_name": "Mardin Havalimanı (MQM)",
+                "dropoffs": [],
+                "latitude": 37.234667,
+                "longitude": 40.637432,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1387374386,
+        "name": "Mardin Sehir Merkezi",
+        "aliases": [
+            "Mardin Şehir Merkezi"
+        ],
+        "city": "Mardin Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.327925,
+        "longitude": 40.715391,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "58",
+                "original_name": "Mardin Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 37.327925,
+                "longitude": 40.715391,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2520186633,
         "name": "Maribor Airport (MBX)",
         "aliases": [
@@ -23987,9 +26232,11 @@
         "unified_location_id": 3656758232,
         "name": "Marrakech Airport (RAK)",
         "aliases": [
-            "OK RAK",
+            "Menara Airport, Marrakech, Morocco",
             "Marrakesh",
             "Marrakech",
+            "Aéroport, Marrakech, Morocco",
+            "OK RAK",
             "Marrakesh airport",
             "Marrakesh Airport",
             "Marrakech-Menara Airport (RAK)",
@@ -23999,12 +26246,54 @@
         "city": "Marrakech",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 31.6069,
-        "longitude": -8.009716,
+        "latitude": 31.604813,
+        "longitude": -8.023519,
         "location_type": "airport",
         "iata": "RAK",
-        "provider_count": 4,
+        "provider_count": 7,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "41",
+                "original_name": "Menara Airport, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.60689,
+                "longitude": -8.0363,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "RAK",
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "163",
+                "original_name": "Aéroport, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.597451,
+                "longitude": -8.024015,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "RAK",
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "167",
+                "original_name": "Aéroport, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.602735,
+                "longitude": -8.023024,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "RAK",
+                "provider_code": null
+            },
             {
                 "provider": "okmobility",
                 "pickup_id": "350",
@@ -24062,26 +26351,146 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_7c40a5b7a8c3838acf790769f431dac9"
     },
     {
         "unified_location_id": 3802111773,
         "name": "Marrakech Downtown",
         "aliases": [
-            "Marrakesh downtown",
+            "Avenue Houman el Fetouaki, Marrakech, Morocco",
             "Marrakesh",
             "Marrakech",
+            "Avenue Houman el Fetouaki, 40008, Marrakech, Morocco",
+            "Dépose Rapide 40054, Marrakech, Morocco",
+            "Avenue des Nations Unies, 40030, Marrakech, Morocco",
+            "Avenue Mohammed VI 157, 40170, Marrakech, Morocco",
+            "40140 Lamzoudia, Marrakech, Morocco",
+            "Hivernage, Marrakech, Morocco",
+            "Afaq 2, Marrakech, Morocco",
+            "Marrakesh downtown",
             "Marrakesh Downtown"
         ],
         "city": "Marrakech",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 31.635595,
+        "latitude": 31.630594,
         "longitude": -8.01005,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 2,
+        "provider_count": 10,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "15",
+                "original_name": "Avenue Houman el Fetouaki, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.622189,
+                "longitude": -7.991634,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "19",
+                "original_name": "Avenue Houman el Fetouaki, 40008, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.622189,
+                "longitude": -7.991634,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "43",
+                "original_name": "Dépose Rapide 40054, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.6014,
+                "longitude": -8.026893,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "104",
+                "original_name": "Avenue des Nations Unies, 40030, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.634159,
+                "longitude": -7.99994,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "105",
+                "original_name": "Avenue Mohammed VI 157, 40170, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.630594,
+                "longitude": -8.017131,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "129",
+                "original_name": "40140 Lamzoudia, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.612743,
+                "longitude": -8.484438,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "158",
+                "original_name": "Hivernage, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.634159,
+                "longitude": -7.99994,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "166",
+                "original_name": "Afaq 2, Marrakech, Morocco",
+                "dropoffs": [],
+                "latitude": 31.639352,
+                "longitude": -8.107717,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MA-MAR-DT",
@@ -24111,7 +26520,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_05a8cae334517548a0bfcb93274c6726"
     },
     {
         "unified_location_id": 4210655144,
@@ -24212,6 +26621,54 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 4274499340,
+        "name": "Martil Downtown",
+        "aliases": [
+            "Tétouan, Martil, tetouan, Morocco",
+            "Martil",
+            "Tétouan, Martil, Tetouan, Maroc"
+        ],
+        "city": "Martil",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 35.619626,
+        "longitude": -5.284118,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "194",
+                "original_name": "Tétouan, Martil, tetouan, Morocco",
+                "dropoffs": [],
+                "latitude": 35.619626,
+                "longitude": -5.284118,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "197",
+                "original_name": "Tétouan, Martil, Tetouan, Maroc",
+                "dropoffs": [],
+                "latitude": 35.619626,
+                "longitude": -5.284118,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_f59d388f75477b037aa99bf51130b277"
     },
     {
         "unified_location_id": 2604923403,
@@ -24474,6 +26931,54 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 375027078,
+        "name": "Meknes Downtown",
+        "aliases": [
+            "Meknès",
+            "30070 Aghbalou Aqorar, Meknès, Fès-Meknès, Morocco",
+            "Meknes"
+        ],
+        "city": "Meknes",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 33.912343,
+        "longitude": -4.757109,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "75",
+                "original_name": "30070 Aghbalou Aqorar, Meknès, Fès-Meknès, Morocco",
+                "dropoffs": [],
+                "latitude": 33.912343,
+                "longitude": -4.757109,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "88",
+                "original_name": "30070 Aghbalou Aqorar, Meknès, Fès-Meknès, Morocco",
+                "dropoffs": [],
+                "latitude": 33.912343,
+                "longitude": -4.757109,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_10b6c024c55c9d28bdb056fcb1256a90"
+    },
+    {
         "unified_location_id": 1791777363,
         "name": "Melbourne Airport (MEL)",
         "aliases": [
@@ -24694,6 +27199,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2350534630,
+        "name": "Mersin Sehir Merkezi",
+        "aliases": [
+            "Mersin Şehir Merkezi"
+        ],
+        "city": "Mersin Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 36.812081,
+        "longitude": 34.642021,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "13",
+                "original_name": "Mersin Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 36.812081,
+                "longitude": 34.642021,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -26256,6 +28793,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2685497053,
+        "name": "Mus Sultan Alparslan Havaliman",
+        "aliases": [
+            "Muş Sultan Alparslan Havalimanı (MSR)"
+        ],
+        "city": "Mus Sultan Alparslan Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.759672,
+        "longitude": 41.646803,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "54",
+                "original_name": "Muş Sultan Alparslan Havalimanı (MSR)",
+                "dropoffs": [],
+                "latitude": 38.759672,
+                "longitude": 41.646803,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 174409140,
         "name": "Muscat Airport (MCT)",
         "aliases": [
@@ -27297,6 +29866,134 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3274047562,
+        "name": "Nevsehir Goreme",
+        "aliases": [
+            "Nevşehir Göreme"
+        ],
+        "city": "Nevsehir Goreme",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.643081,
+        "longitude": 34.829082,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "34",
+                "original_name": "Nevşehir Göreme",
+                "dropoffs": [],
+                "latitude": 38.643081,
+                "longitude": 34.829082,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2643464363,
+        "name": "Nevsehir Kapadokya Havaliman",
+        "aliases": [
+            "Nevşehir Kapadokya Havalimanı (NAV)"
+        ],
+        "city": "Nevsehir Kapadokya Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.772695,
+        "longitude": 34.524602,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "16",
+                "original_name": "Nevşehir Kapadokya Havalimanı (NAV)",
+                "dropoffs": [],
+                "latitude": 38.772695,
+                "longitude": 34.524602,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4282992362,
+        "name": "Nevsehir Sehir Merkezi",
+        "aliases": [
+            "Nevşehir Şehir Merkezi"
+        ],
+        "city": "Nevsehir Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.624733,
+        "longitude": 34.713915,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "19",
+                "original_name": "Nevşehir Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 38.624733,
+                "longitude": 34.713915,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2929643277,
+        "name": "Nevsehir Urgup",
+        "aliases": [
+            "Nevşehir Ürgüp"
+        ],
+        "city": "Nevsehir Urgup",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.630879,
+        "longitude": 34.909862,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "44",
+                "original_name": "Nevşehir Ürgüp",
+                "dropoffs": [],
+                "latitude": 38.630879,
+                "longitude": 34.909862,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 258386104,
         "name": "Newcastle Airport (NCL)",
         "aliases": [
@@ -28043,6 +30740,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2573509659,
+        "name": "Ohri Aziz Pavlus Havaliman",
+        "aliases": [
+            "Ohri Aziz Pavlus Havalimanı (OHD)"
+        ],
+        "city": "Ohri Aziz Pavlus Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.181232,
+        "longitude": 20.745,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "74",
+                "original_name": "Ohri Aziz Pavlus Havalimanı (OHD)",
+                "dropoffs": [],
+                "latitude": 41.18123219420189,
+                "longitude": 20.745,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1123939924,
         "name": "Ohrid Airport (OHR)",
         "aliases": [
@@ -28512,24 +31241,71 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3360865896,
+        "name": "Ordu Giresun Havaliman",
+        "aliases": [
+            "Ordu Giresun Havalimanı (OGU)"
+        ],
+        "city": "Ordu Giresun Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.964395,
+        "longitude": 38.07996,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "45",
+                "original_name": "Ordu Giresun Havalimanı (OGU)",
+                "dropoffs": [],
+                "latitude": 40.964395,
+                "longitude": 38.07996,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2053423301,
         "name": "Orlando Airport (MCO)",
         "aliases": [
-            "Orlando airport",
+            "Orlando International Airport, Orlando, Florida, United States",
             "Orlando",
+            "Orlando airport",
             "Orlando Airport",
             "Orlando International Airport (MCO)",
             "MCO"
         ],
         "city": "Orlando",
-        "country": "US",
+        "country": "United States",
         "country_code": "US",
-        "latitude": 28.444394,
-        "longitude": -81.291334,
+        "latitude": 28.429444,
+        "longitude": -81.308889,
         "location_type": "airport",
         "iata": "MCO",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "202",
+                "original_name": "Orlando International Airport, Orlando, Florida, United States",
+                "dropoffs": [],
+                "latitude": 28.424442,
+                "longitude": -81.310459,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "US",
+                "iata": "MCO",
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "US-ORL-MCO",
@@ -28573,7 +31349,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_3b48a0452e36e4410be22116b4a65cc5"
     },
     {
         "unified_location_id": 1351580171,
@@ -31356,6 +34132,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 896830788,
+        "name": "Podgorica Havaliman",
+        "aliases": [
+            "Podgorica Havalimanı (TGD)"
+        ],
+        "city": "Podgorica Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 42.367805,
+        "longitude": 19.246885,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "64",
+                "original_name": "Podgorica Havalimanı (TGD)",
+                "dropoffs": [],
+                "latitude": 42.367805,
+                "longitude": 19.246885,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 203729454,
         "name": "Podgorica Train Station",
         "aliases": [
@@ -32798,6 +35606,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2835872069,
+        "name": "Pristine Havaliman",
+        "aliases": [
+            "Priştine Havalimanı (PRN)"
+        ],
+        "city": "Pristine Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 42.584216,
+        "longitude": 21.026481,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "71",
+                "original_name": "Priştine Havalimanı (PRN)",
+                "dropoffs": [],
+                "latitude": 42.584216,
+                "longitude": 21.026481,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3224903612,
         "name": "Protaras Downtown",
         "aliases": [
@@ -33344,18 +36184,48 @@
         "unified_location_id": 3069911868,
         "name": "Rabat Downtown",
         "aliases": [
-            "Rabat downtown",
-            "Rabat"
+            "14000 M'Qam Tolba, Rabat, Rabat-Salé-Kénitra, Morocco",
+            "Rabat",
+            "Rue Smaala 2, Rabat, Rabat-Salé-Kénitra, Morocco",
+            "Rabat downtown"
         ],
         "city": "Rabat",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 33.948229,
+        "longitude": -6.569441,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 3,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "74",
+                "original_name": "14000 M'Qam Tolba, Rabat, Rabat-Salé-Kénitra, Morocco",
+                "dropoffs": [],
+                "latitude": 33.925674,
+                "longitude": -6.296147,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "137",
+                "original_name": "Rue Smaala 2, Rabat, Rabat-Salé-Kénitra, Morocco",
+                "dropoffs": [],
+                "latitude": 33.970785,
+                "longitude": -6.842736,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MA-RAB-DT",
@@ -33371,7 +36241,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_34c3f946f0a58a3d3234dfab228acffb"
     },
     {
         "unified_location_id": 1147055388,
@@ -34326,6 +37196,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 4093182335,
+        "name": "Rize Artvin Havaliman",
+        "aliases": [
+            "Rize Artvin Havalimanı (RZV)"
+        ],
+        "city": "Rize Artvin Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.172735,
+        "longitude": 40.843638,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "46",
+                "original_name": "Rize Artvin Havalimanı (RZV)",
+                "dropoffs": [],
+                "latitude": 41.172735,
+                "longitude": 40.843638,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2703290686,
+        "name": "Rize Sehir Merkezi",
+        "aliases": [
+            "Rize Şehir Merkezi"
+        ],
+        "city": "Rize Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.024184,
+        "longitude": 40.521596,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "59",
+                "original_name": "Rize Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 41.024184,
+                "longitude": 40.521596,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1815762161,
         "name": "Road Bay Marina Port",
         "aliases": [
@@ -34352,6 +37286,40 @@
                 "extended_dropoff_code": null,
                 "country_code": "AI",
                 "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3250872827,
+        "name": "Roland Garros Airport (RUN)",
+        "aliases": [
+            "Roland Garros Airport",
+            "Roland Garros",
+            "RUN"
+        ],
+        "city": "Roland Garros",
+        "country": "FR",
+        "country_code": "FR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "airport",
+        "iata": "RUN",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "renteon",
+                "pickup_id": "FR-SAM-RUN",
+                "original_name": "Roland Garros Airport",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FR",
+                "iata": "RUN",
                 "provider_code": null
             }
         ],
@@ -34911,6 +37879,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 4028312518,
+        "name": "Saint Denis Downtown",
+        "aliases": [
+            "Saint-Denis downtown",
+            "Saint Denis"
+        ],
+        "city": "Saint Denis",
+        "country": "FR",
+        "country_code": "FR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "renteon",
+                "pickup_id": "FR-SAD-DT",
+                "original_name": "Saint-Denis downtown",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 855975866,
         "name": "Saint Tropez Airport (LTT)",
         "aliases": [
@@ -34997,6 +37998,39 @@
                 "provider": "renteon",
                 "pickup_id": "FR-SAT-DT",
                 "original_name": "Saint-Tropez downtown",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3617257869,
+        "name": "Sainte Marie Downtown",
+        "aliases": [
+            "Sainte-Marie downtown",
+            "Sainte Marie"
+        ],
+        "city": "Sainte Marie",
+        "country": "FR",
+        "country_code": "FR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "renteon",
+                "pickup_id": "FR-SAM-DT",
+                "original_name": "Sainte-Marie downtown",
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
@@ -35288,6 +38322,38 @@
                 "extended_dropoff_code": null,
                 "country_code": "TR",
                 "iata": "SZF",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2964160988,
+        "name": "Samsun Carsamba Havaliman",
+        "aliases": [
+            "Samsun Çarşamba Havalimanı (SZF)"
+        ],
+        "city": "Samsun Carsamba Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.260503,
+        "longitude": 36.554611,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "10",
+                "original_name": "Samsun Çarşamba Havalimanı (SZF)",
+                "dropoffs": [],
+                "latitude": 41.260503,
+                "longitude": 36.554611,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -35738,6 +38804,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 609030451,
+        "name": "Sanlurfa Gap Havaliman",
+        "aliases": [
+            "Şanlıurfa GAP Havalimanı (GNY)"
+        ],
+        "city": "Sanlurfa Gap Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.445659,
+        "longitude": 38.904477,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "31",
+                "original_name": "Şanlıurfa GAP Havalimanı (GNY)",
+                "dropoffs": [],
+                "latitude": 37.445659,
+                "longitude": 38.904477,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3109640476,
         "name": "Sant Antimo Downtown",
         "aliases": [
@@ -35940,21 +39038,37 @@
         "unified_location_id": 1717029980,
         "name": "Santa Cruz De Tenerife Airport (TFS)",
         "aliases": [
-            "Santa Cruz de Tenerife Airport",
+            "Santa Cruz de Tenerife",
+            "Aeropuerto de Tenerife Sur (TFS), Santa Cruz de Tenerife, España",
             "Santa Cruz De Tenerife",
+            "Santa Cruz de Tenerife Airport",
             "Tenerife Airport",
             "Aeropuerto Reina Sofia",
             "TFS"
         ],
         "city": "Santa Cruz De Tenerife",
-        "country": "ES",
+        "country": "España",
         "country_code": "ES",
-        "latitude": 28.046625,
-        "longitude": -16.573947,
+        "latitude": 28.046691,
+        "longitude": -16.573239,
         "location_type": "airport",
         "iata": "TFS",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "261",
+                "original_name": "Aeropuerto de Tenerife Sur (TFS), Santa Cruz de Tenerife, España",
+                "dropoffs": [],
+                "latitude": 28.046757,
+                "longitude": -16.57253,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "TFS",
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "ES-SCT-TFS",
@@ -35984,7 +39098,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_53282502efcea484e71931ef9f0b733d"
     },
     {
         "unified_location_id": 2385937058,
@@ -37556,6 +40670,38 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1034383250,
+        "name": "Siirt Havaliman",
+        "aliases": [
+            "Siirt Havalimanı (SXZ)"
+        ],
+        "city": "Siirt Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.978903,
+        "longitude": 41.846613,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "55",
+                "original_name": "Siirt Havalimanı (SXZ)",
+                "dropoffs": [],
+                "latitude": 37.978903,
+                "longitude": 41.846613,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3297955108,
         "name": "Sillot Downtown",
         "aliases": [
@@ -38022,6 +41168,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4040932661,
+        "name": "Sivas Nuri Demirag Havaliman",
+        "aliases": [
+            "Sivas Nuri Demirağ Havalimanı (VAS)"
+        ],
+        "city": "Sivas Nuri Demirag Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 39.803487,
+        "longitude": 36.892518,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "22",
+                "original_name": "Sivas Nuri Demirağ Havalimanı (VAS)",
+                "dropoffs": [],
+                "latitude": 39.803487,
+                "longitude": 36.892518,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -39064,6 +42242,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "HR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 364545018,
+        "name": "Srnak Serafettin Elci Havaliman",
+        "aliases": [
+            "Şırnak Şerafettin Elçi Havalimanı (NKT)"
+        ],
+        "city": "Srnak Serafettin Elci Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.365178,
+        "longitude": 42.055354,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "56",
+                "original_name": "Şırnak Şerafettin Elçi Havalimanı (NKT)",
+                "dropoffs": [],
+                "latitude": 37.365178,
+                "longitude": 42.055354,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -40264,18 +43474,77 @@
         "unified_location_id": 2709099711,
         "name": "Tangier Downtown",
         "aliases": [
-            "Tangier downtown",
-            "Tangier"
+            "90080 Laaouama, Tangier, Morocco",
+            "Tangier",
+            "Rue Zallaka, 90010, Tangier, Morocco",
+            "Tangier, Tangier, Morocco",
+            "Tangier downtown"
         ],
         "city": "Tangier",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 35.742863,
+        "longitude": -5.79168,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 5,
         "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "16",
+                "original_name": "90080 Laaouama, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.726261,
+                "longitude": -5.774,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "77",
+                "original_name": "Rue Zallaka, 90010, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.771309,
+                "longitude": -5.80936,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "79",
+                "original_name": "Rue Zallaka, 90010, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.726261,
+                "longitude": -5.774,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "191",
+                "original_name": "Tangier, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.759465,
+                "longitude": -5.833954,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MA-TAN-DT",
@@ -40291,7 +43560,55 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": null
+        "our_location_id": "internal_771b36c757ba990998cc1ea7be8c0967"
+    },
+    {
+        "unified_location_id": 1247599220,
+        "name": "Tangier-Ibn Battouta Intl. Airport",
+        "aliases": [
+            "Aeroport Tanger Ibn Battouta, Tangier, Morocco",
+            "Tangier",
+            "Tangier-Ibn Battouta Intl. Airport, Tangier, Morocco"
+        ],
+        "city": "Tangier",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 35.726658,
+        "longitude": -5.914211,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 2,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "71",
+                "original_name": "Aeroport Tanger Ibn Battouta, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.727213,
+                "longitude": -5.915489,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "internal",
+                "pickup_id": "185",
+                "original_name": "Tangier-Ibn Battouta Intl. Airport, Tangier, Morocco",
+                "dropoffs": [],
+                "latitude": 35.726104,
+                "longitude": -5.912933,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_ae9add97b26c8e9bbbef7059a5f5880b"
     },
     {
         "unified_location_id": 2827045363,
@@ -41098,6 +44415,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3266828978,
+        "name": "Tiran Havaliman",
+        "aliases": [
+            "Tiran Havalimanı (TIA)"
+        ],
+        "city": "Tiran Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.417561,
+        "longitude": 19.71264,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "69",
+                "original_name": "Tiran Havalimanı (TIA)",
+                "dropoffs": [],
+                "latitude": 41.417561,
+                "longitude": 19.71264,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1485092558,
+        "name": "Tiran Sehir Merkezi",
+        "aliases": [
+            "Tiran Şehir Merkezi"
+        ],
+        "city": "Tiran Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.322552,
+        "longitude": 19.813799,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "70",
+                "original_name": "Tiran Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 41.322552,
+                "longitude": 19.813799,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2561498415,
         "name": "Tirana Airport (TIA)",
         "aliases": [
@@ -41258,6 +44639,39 @@
             }
         ],
         "our_location_id": null
+    },
+    {
+        "unified_location_id": 4031935302,
+        "name": "Tit Mellil Airport",
+        "aliases": [
+            "Tit Mellil Airport, Casablanca, Morocco",
+            "Casablanca"
+        ],
+        "city": "Casablanca",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 33.594703,
+        "longitude": -7.462264,
+        "location_type": "airport",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "internal",
+                "pickup_id": "66",
+                "original_name": "Tit Mellil Airport, Casablanca, Morocco",
+                "dropoffs": [],
+                "latitude": 33.594703,
+                "longitude": -7.462264,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": "internal_e28f40de018fd6fba9f307ac06a3e84c"
     },
     {
         "unified_location_id": 3055436589,
@@ -41448,6 +44862,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "ME",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 148992856,
+        "name": "Tivat Sehir Merkezi",
+        "aliases": [
+            "Tivat Şehir Merkezi"
+        ],
+        "city": "Tivat Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 42.430114,
+        "longitude": 18.695779,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "68",
+                "original_name": "Tivat Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 42.430114,
+                "longitude": 18.695779,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
@@ -41957,6 +45403,38 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2896941527,
+        "name": "Trabzon Havaliman",
+        "aliases": [
+            "Trabzon Havalimanı (TZX)"
+        ],
+        "city": "Trabzon Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 40.995316,
+        "longitude": 39.780041,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "11",
+                "original_name": "Trabzon Havalimanı (TZX)",
+                "dropoffs": [],
+                "latitude": 40.995316,
+                "longitude": 39.780041,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -42754,6 +46232,70 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1587562370,
+        "name": "Uskup Sehir Merkezi",
+        "aliases": [
+            "Üsküp Şehir Merkezi"
+        ],
+        "city": "Uskup Sehir Merkezi",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.995332,
+        "longitude": 21.426867,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "72",
+                "original_name": "Üsküp Şehir Merkezi",
+                "dropoffs": [],
+                "latitude": 41.995332,
+                "longitude": 21.426867,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1797482571,
+        "name": "Uskup Uluslararas Havaliman",
+        "aliases": [
+            "Üsküp Uluslararası Havalimanı (SKP)"
+        ],
+        "city": "Uskup Uluslararas Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 41.960886,
+        "longitude": 21.627,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "73",
+                "original_name": "Üsküp Uluslararası Havalimanı (SKP)",
+                "dropoffs": [],
+                "latitude": 41.96088593799346,
+                "longitude": 21.627,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2841292297,
         "name": "Uvita",
         "aliases": [],
@@ -43155,6 +46697,38 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "MT",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3724668386,
+        "name": "Van Ferit Melen Havaliman",
+        "aliases": [
+            "Van Ferit Melen Havalimanı (VAN)"
+        ],
+        "city": "Van Ferit Melen Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 38.468405,
+        "longitude": 43.336854,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "favrica",
+                "pickup_id": "49",
+                "original_name": "Van Ferit Melen Havalimanı (VAN)",
+                "dropoffs": [],
+                "latitude": 38.468405,
+                "longitude": 43.336854,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
                 "iata": null,
                 "provider_code": null
             }
