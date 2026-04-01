@@ -37,6 +37,17 @@ logger = logging.getLogger(__name__)
 _GATEWAY_ROOT = Path(__file__).resolve().parents[2]
 _LOCAUTO_LOCATIONS_YAML = _GATEWAY_ROOT / "config" / "suppliers" / "locauto_rent_locations.yaml"
 
+# ─── Load rental conditions from YAML ───
+def _load_conditions() -> dict:
+    yaml_path = Path(__file__).parent.parent.parent / "config" / "suppliers" / "locauto_rent_conditions.yaml"
+    try:
+        with open(yaml_path) as f:
+            return yaml.safe_load(f) or {}
+    except Exception:
+        return {}
+
+_CONDITIONS = _load_conditions()
+
 # ─── OTA XML namespace constants ───
 NS_SOAP = "http://schemas.xmlsoap.org/soap/envelope/"
 NS_OTA = "http://www.opentravel.org/OTA/2003/05"
@@ -150,6 +161,26 @@ _EQUIP_TYPE_NAMES: dict[str, str] = {
     "145": "Body Protection",
     "146": "Super Theft Protection",
     "147": "Smart Cover",
+}
+
+# Only these extras can be pre-booked (per Locauto T&Cs).
+# All others (winter tires, young driver, etc.) are counter-only.
+_PREBOOKABLE_EXTRAS: set[str] = {
+    "7",    # Infant Child Seat
+    "8",    # Child Toddler Seat
+    "9",    # Additional Driver
+    "19",   # GPS Navigation
+    "23",   # One-Way Fee
+    "35",   # One-Way Fee (Sardinia)
+    "55",   # Snow Chains
+    "78",   # Child Seat
+    "137",  # Additional Driver
+    # Protection plans (pre-bookable)
+    "136",  # Don't Worry Protection
+    "140",  # Glass & Wheels Protection
+    "145",  # Body Protection
+    "146",  # Super Theft Protection
+    "147",  # Smart Cover
 }
 
 
@@ -296,6 +327,31 @@ class LocautoRentAdapter(BaseAdapter):
             "</SOAP-ENV:Envelope>"
         )
 
+    @staticmethod
+    def _get_vehicle_conditions(sipp_code: str) -> dict:
+        """Get rental conditions for a SIPP code from the conditions YAML."""
+        general = _CONDITIONS.get("general", {})
+        vehicles = _CONDITIONS.get("vehicles", {})
+        vehicle_conds = vehicles.get(sipp_code, {})
+
+        return {
+            "min_age": vehicle_conds.get("min_age"),
+            "damage_excess": vehicle_conds.get("damage_excess"),
+            "theft_excess": vehicle_conds.get("theft_excess"),
+            "deposit": vehicle_conds.get("deposit_without_protection"),
+            "credit_cards_required": vehicle_conds.get("credit_cards_required"),
+            "driving_license": general.get("driving_license"),
+            "payment_methods": general.get("payment_methods"),
+            "mileage_policy_text": general.get("mileage_policy"),
+            "fuel_policy": general.get("fuel_policy"),
+            "grace_period_pickup": general.get("grace_period_pickup"),
+            "grace_period_dropoff": general.get("grace_period_dropoff"),
+            "out_of_hours_fee": general.get("out_of_hours_fee"),
+            "cross_border": general.get("cross_border"),
+            "vat_rate": general.get("vat"),
+            "airport_surcharge": general.get("airport_surcharge"),
+        }
+
     def _build_pos_element(self) -> str:
         """Build the OTA POS (Point of Sale) authentication element."""
         settings = get_settings()
@@ -411,7 +467,7 @@ class LocautoRentAdapter(BaseAdapter):
         if extras:
             for ext in extras:
                 extras_xml += (
-                    f'<ns1:SpecialEquipPref Code="{ext["code"]}"'
+                    f'<ns1:SpecialEquipPref EquipType="{ext["code"]}"'
                     f' Quantity="{ext.get("quantity", 1)}"/>'
                 )
         extras_xml += "</ns1:SpecialEquipPrefs>"
@@ -647,11 +703,12 @@ class LocautoRentAdapter(BaseAdapter):
         veh_make_model = self._find_child(vehicle_el, "VehMakeModel")
         vehicle_name = _safe_attr(veh_make_model, "ModelYear", "Unknown Vehicle")
 
-        # VehIdentity > VehicleAssetNumber is the more accurate ACRISS code
+        # VehIdentity > VehicleAssetNumber is an alternative ACRISS code
         veh_identity = self._find_child(vehicle_el, "VehIdentity")
         acriss_code = _safe_attr(veh_identity, "VehicleAssetNumber", "")
-        # Prefer VehicleAssetNumber as the canonical SIPP code if available
-        effective_sipp = acriss_code or sipp_code
+        # Use Vehicle Code as the primary SIPP (confirmed by Locauto)
+        # VehicleAssetNumber is kept as reference only
+        effective_sipp = sipp_code or acriss_code
 
         # PictureURL
         picture_el = self._find_child(vehicle_el, "PictureURL")
@@ -731,6 +788,10 @@ class LocautoRentAdapter(BaseAdapter):
                     _safe_attr(charge, "IncludedInRate", "false").lower() == "true"
                     if charge else False
                 )
+
+                # Skip non-prebookable extras (counter-only per Locauto T&Cs)
+                if equip_type not in _PREBOOKABLE_EXTRAS and not included_in_rate:
+                    continue
 
                 # Determine extra type: one-way fees are FEE, rest are EQUIPMENT
                 extra_type = ExtraType.EQUIPMENT
@@ -865,10 +926,13 @@ class LocautoRentAdapter(BaseAdapter):
         sipp_code = sd.get("sipp_code") or sd.get("acriss_code") or vehicle.sipp_code or ""
 
         # Build extras list for the SOAP request
+        # Protection plans (locauto_protection_*) are pricing options, not OTA equipment — skip them
         booking_extras: list[dict] = []
         for ext in request.extras:
-            # Extract the OTA equip type code from our extra ID (ext_locauto_rent_<code>)
-            code = ext.extra_id.replace(f"ext_{self.supplier_id}_", "")
+            raw_id = ext.extra_id
+            if raw_id.startswith("locauto_protection_"):
+                continue  # Not a bookable equipment code
+            code = raw_id.replace(f"ext_{self.supplier_id}_", "")
             booking_extras.append({"code": code, "quantity": ext.quantity})
 
         # Pickup/dropoff datetimes are stored in supplier_data by the search

@@ -1,0 +1,164 @@
+# Locauto Rent — Rental Conditions (from LOCAUTO RENT CONDITIONS.xlsx)
+# These are static T&Cs that don't come from the API.
+# Displayed on booking extras page and booking details/voucher.
+
+general:
+  driving_license: "A valid driving license, held for a minimum of one year, is mandatory. For non-EU licenses, an International Driving Permit (IDP) is required. Digital licenses are not accepted."
+  personal_documents: "At the time of rental, the Customer must show a valid ID card or passport. Digital documents are not accepted."
+  payment_methods: "Credit Cards or Debit Cards are accepted for all car groups. The card must be in the main driver's name."
+  mileage_policy: "Unlimited mileage for rentals of 1-27 days."
+  fuel_policy: "Full to Full. The vehicle is provided with a full tank of fuel. It must be returned with a full tank. Refuelling surcharge: €35.00."
+  cross_border: "Vehicles can be driven in all EU countries including Norway and Switzerland. Prior authorisation required."
+  grace_period_pickup: "59 minutes from the booked pickup time. After that, the reservation may be cancelled."
+  grace_period_dropoff: "59 minutes from the pickup time on the rental agreement."
+  out_of_hours_fee: "€30.00 per rental (available on request, max 90 minutes after branch closing)."
+  display_model: "We cannot guarantee a specific make and model. The vehicle category (SIPP code) is guaranteed."
+  vat: "22%"
+  airport_surcharge: "18%"
+  railway_surcharge: "15%"
+
+# Per SIPP code conditions
+vehicles:
+  MBMR:
+    min_age: 19
+    damage_excess: 1200
+    theft_excess: 1800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  MDMR:
+    min_age: 19
+    damage_excess: 1200
+    theft_excess: 1800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  EDMR:
+    min_age: 19
+    damage_excess: 1200
+    theft_excess: 1800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CDMR:
+    min_age: 21
+    damage_excess: 1500
+    theft_excess: 2000
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CXMR:
+    min_age: 21
+    damage_excess: 1500
+    theft_excess: 2000
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  IDAR:
+    min_age: 21
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CDAR:
+    min_age: 21
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  LWAR:
+    min_age: 27
+    damage_excess: 2000
+    theft_excess: 2800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  FVMR:
+    min_age: 25
+    damage_excess: 2000
+    theft_excess: 2800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  SWAR:
+    min_age: 25
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CWAR:
+    min_age: 25
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  SWMR:
+    min_age: 25
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  IFAR:
+    min_age: 25
+    damage_excess: 1700
+    theft_excess: 2200
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CFAR:
+    min_age: 21
+    damage_excess: 1500
+    theft_excess: 2000
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  CFMR:
+    min_age: 21
+    damage_excess: 1500
+    theft_excess: 2000
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  EDAR:
+    min_age: 21
+    damage_excess: 1500
+    theft_excess: 2000
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+  PWAR:
+    min_age: 27
+    damage_excess: 2000
+    theft_excess: 2800
+    deposit_without_protection: 0.01
+    deposit_with_protection: 0.01
+    deposit_with_smart_cover: 0.01
+    credit_cards_required: 1
+
+one_way_fees:
+  within_italy_mainland: 60.00
+  within_sicily: 60.00
+  within_sardinia: 60.00
+  mainland_to_sardinia: 500.00
+  to_eu_countries: 2000.00
