@@ -15,6 +15,7 @@ import app.adapters.usave  # noqa: F401
 import app.adapters.renteon  # noqa: F401
 import app.adapters.favrica  # noqa: F401
 import app.adapters.xdrive  # noqa: F401
+import app.adapters.emr  # noqa: F401
 import app.adapters.adobe_car  # noqa: F401
 import app.adapters.ok_mobility  # noqa: F401
 import app.adapters.locauto_rent  # noqa: F401

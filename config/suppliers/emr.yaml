@@ -1,0 +1,10 @@
+id: emr
+name: EMR Car Rental
+enabled: true
+protocol: rest_json
+auth_type: query_params
+supports_one_way: false
+default_currency: TRY
+timeout: 30
+countries: ["TR", "AL", "BA", "CY", "HR", "MA", "ME", "MK", "XK"]
+notes: "REST JSON (GET). Turev platform (same as Favrica/XDrive). Query params auth."

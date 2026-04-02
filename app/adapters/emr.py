@@ -1,19 +1,17 @@
-"""Favrica adapter — REST JSON GET with query params auth.
+"""EMR Car Rental adapter — same Turev platform as XDrive/Favrica.
 
-Quirks:
-- HTTP (not HTTPS), SSL verification disabled
-- Comma-decimal prices ("254,78" → 254.78)
-- Non-standard currency codes: "EURO" (not EUR), "TL" (not TRY)
-- All response fields are strings
-- String booleans ("True"/"False")
+Differences from XDrive:
+- Different base URL (emrjson.turevrent.com)
+- Different image base URL (t1.trvcar.com/EmrDzn)
+- Different credentials (token + username + password)
 """
 
 import logging
 import uuid
 
-import httpx
-
 logger = logging.getLogger(__name__)
+
+import httpx
 
 from app.adapters.base import BaseAdapter
 from app.adapters.registry import register_adapter
@@ -37,12 +35,10 @@ from app.schemas.pricing import Pricing
 from app.schemas.search import SearchRequest
 from app.schemas.vehicle import Extra, Vehicle, VehicleLocation
 
-# Currency code mapping: standard → Favrica
-CURRENCY_TO_FAVRICA = {"EUR": "EURO", "TRY": "TL"}
-# Reverse: Favrica → standard
-CURRENCY_FROM_FAVRICA = {"EURO": "EUR", "TL": "TRY", "EUR": "EUR"}
+# Currency code mapping: standard → Turev
+CURRENCY_TO_TUREV = {"EUR": "EURO", "TRY": "TL"}
+CURRENCY_FROM_TUREV = {"EURO": "EUR", "TL": "TRY", "EUR": "EUR"}
 
-# Fuel type mapping: Turkish → enum
 FUEL_MAP = {
     "benzin": FuelType.PETROL,
     "dizel": FuelType.DIESEL,
@@ -52,22 +48,22 @@ FUEL_MAP = {
     "lpg": FuelType.LPG,
 }
 
-# Category mapping: Turkish group_str → English
-CATEGORY_MAP = {
-    "ekonomik": "economy",
-    "orta": "compact",
-    "suv": "suv",
-    "lux": "luxury",
-    "premium": "premium",
-    "ticari": "van",
-    "ust": "fullsize",
+IMAGE_BASE_URL = "https://t1.trvcar.com/EmrDzn"
+
+# Turkish → English service name translations
+SERVICE_NAME_EN = {
+    "LCF Güvencesi": "Loss & Damage Coverage (LCF)",
+    "SCDW Güvencesi": "Super Collision Damage Waiver (SCDW)",
+    "CDW Güvencesi": "Collision Damage Waiver (CDW)",
+    "Ek Sürücü": "Additional Driver",
+    "Bebek Koltuğu": "Baby Seat",
+    "Navigasyon": "GPS Navigation",
+    "Zincir": "Snow Chains",
+    "Kış Lastiği": "Winter Tyres",
 }
 
-IMAGE_BASE_URL = "https://www.favricarental.com/Files/img/Car-Images"
 
-
-def _parse_comma_decimal(value: str, default: float = 0.0) -> float:
-    """Parse comma-decimal string: '254,78' → 254.78."""
+def _parse_decimal(value: str, default: float = 0.0) -> float:
     if not value:
         return default
     try:
@@ -77,7 +73,6 @@ def _parse_comma_decimal(value: str, default: float = 0.0) -> float:
 
 
 def _safe_int_str(value: str, default: int = 0) -> int:
-    """Parse string integer."""
     if not value:
         return default
     try:
@@ -87,14 +82,13 @@ def _safe_int_str(value: str, default: int = 0) -> int:
 
 
 @register_adapter
-class FavricaAdapter(BaseAdapter):
-    supplier_id = "favrica"
-    supplier_name = "Favrica"
+class EmrAdapter(BaseAdapter):
+    supplier_id = "emr"
+    supplier_name = "EMR Car Rental"
     supports_one_way = False
     default_timeout = 30.0
 
     def __init__(self, http_client: httpx.AsyncClient | None = None):
-        # SSL verification disabled + browser User-Agent (Turev platform blocks python-httpx)
         self.http_client = http_client or httpx.AsyncClient(
             timeout=self.default_timeout,
             verify=False,
@@ -105,19 +99,15 @@ class FavricaAdapter(BaseAdapter):
         )
 
     def _base_params(self) -> dict:
-        """Params for unauthenticated endpoints (locations, groups)."""
         settings = get_settings()
-        return {
-            "Key_Hack": settings.favrica_token,
-        }
+        return {"Key_Hack": settings.emr_token}
 
     def _auth_params(self) -> dict:
-        """Params for authenticated endpoints (search, booking, cancel)."""
         settings = get_settings()
         return {
-            "Key_Hack": settings.favrica_token,
-            "User_Name": settings.favrica_username,
-            "User_Pass": settings.favrica_password,
+            "Key_Hack": settings.emr_token,
+            "User_Name": settings.emr_username,
+            "User_Pass": settings.emr_password,
         }
 
     async def search_vehicles(
@@ -127,10 +117,9 @@ class FavricaAdapter(BaseAdapter):
         dropoff_entry: ProviderLocationEntry | None = None,
     ) -> list[Vehicle]:
         settings = get_settings()
-        base_url = settings.favrica_api_url.rstrip("/")
+        base_url = settings.emr_api_url.rstrip("/")
 
-        # Map currency to Favrica format
-        favrica_currency = CURRENCY_TO_FAVRICA.get(request.currency, "EURO")
+        turev_currency = CURRENCY_TO_TUREV.get(request.currency, "EURO")
 
         params = {
             **self._auth_params(),
@@ -146,7 +135,7 @@ class FavricaAdapter(BaseAdapter):
             "Drop_Off_Year": str(request.dropoff_date.year),
             "Drop_Off_Hour": request.dropoff_time.strftime("%H"),
             "Drop_Off_Min": request.dropoff_time.strftime("%M"),
-            "Currency": favrica_currency,
+            "Currency": turev_currency,
         }
 
         response = await self._request("GET", f"{base_url}/JsonRez.aspx", params=params)
@@ -157,24 +146,25 @@ class FavricaAdapter(BaseAdapter):
             success = str(data.get("success", "")).lower()
             if success == "false":
                 error_msg = data.get("error", "Unknown error")
-                logger.warning("[favrica] API error: %s", error_msg)
+                logger.warning("[emr] API error: %s", error_msg)
                 return []
 
-        # USD fallback: retry with USD if initial currency returns empty (same as XDrive/PHP)
-        if (not isinstance(data, list) or len(data) == 0) and favrica_currency != "USD":
-            logger.info("[favrica] Empty response for %s, retrying with USD", favrica_currency)
+        # USD fallback: retry with USD if initial currency returns empty
+        if (not isinstance(data, list) or len(data) == 0) and turev_currency != "USD":
+            logger.info("[emr] Empty response for %s, retrying with USD", turev_currency)
             params["Currency"] = "USD"
             response = await self._request("GET", f"{base_url}/JsonRez.aspx", params=params)
             data = response.json()
 
         if not isinstance(data, list):
-            logger.warning("[favrica] Response is not a list: %s", str(data)[:300])
+            logger.warning("[emr] Response is not a list: %s", str(data)[:300])
             return []
 
-        logger.info("[favrica] Got %d raw vehicles from API", len(data))
+        logger.info("[emr] Got %d raw vehicles from API", len(data))
         rental_days = (request.dropoff_date - request.pickup_date).days or 1
         return [
-            v for raw in data
+            v
+            for raw in data
             if (v := self._parse_vehicle(raw, request, rental_days, pickup_entry)) is not None
         ]
 
@@ -193,17 +183,14 @@ class FavricaAdapter(BaseAdapter):
         model = (raw.get("type") or "").title()
         name = f"{brand} {model}".strip() or raw.get("car_name", "")
 
-        # Parse comma-decimal prices
-        total_price = _parse_comma_decimal(raw.get("total_rental", ""))
-        daily_rate = _parse_comma_decimal(raw.get("daily_rental", ""))
+        total_price = _parse_decimal(raw.get("total_rental", ""))
+        daily_rate = _parse_decimal(raw.get("daily_rental", ""))
 
-        # Map currency from Favrica format
         raw_currency = raw.get("currency_symbol") or raw.get("currency", "EURO")
-        currency = CURRENCY_FROM_FAVRICA.get(raw_currency, raw_currency)
+        currency = CURRENCY_FROM_TUREV.get(raw_currency, raw_currency)
 
         sipp = raw.get("sipp", "")
 
-        # Transmission: Turkish
         transmission_str = (raw.get("transmission") or "").lower()
         transmission = None
         if transmission_str:
@@ -212,23 +199,26 @@ class FavricaAdapter(BaseAdapter):
             elif "manual" in transmission_str or "manuel" in transmission_str:
                 transmission = TransmissionType.MANUAL
 
-        # Fuel type: Turkish
         fuel_str = (raw.get("fuel") or "").lower()
         fuel_type = FUEL_MAP.get(fuel_str) if fuel_str else None
 
-        # Image URL
         image_path = raw.get("image_path", "")
-        image_url = f"{IMAGE_BASE_URL}/{image_path}" if image_path else ""
+        if image_path.startswith("http"):
+            image_url = image_path
+        else:
+            image_url = f"{IMAGE_BASE_URL}/{image_path}" if image_path else ""
 
-        # Mileage
         km_limit_raw = raw.get("km_limit", "")
         km_limit = _safe_int_str(km_limit_raw) if km_limit_raw else 0
         mileage_policy = MileagePolicy.LIMITED if km_limit > 0 else None
 
-        # Deposit
-        deposit = _parse_comma_decimal(raw.get("provision", ""))
+        deposit = _parse_decimal(raw.get("provision", ""))
 
-        # Parse extras/services
+        # Excess (car_exemption) is in TRY — convert to booking currency via cross_rate
+        car_exemption_try = _parse_decimal(raw.get("car_exemption", ""))
+        cross_rate = _parse_decimal(raw.get("cross_rate", ""))
+        excess_amount = round(car_exemption_try / cross_rate, 2) if car_exemption_try > 0 and cross_rate > 0 else None
+
         extras = self._parse_services(raw.get("Services") or [], rental_days)
 
         pickup_loc = VehicleLocation(
@@ -259,17 +249,21 @@ class FavricaAdapter(BaseAdapter):
                 deposit_currency=currency if deposit > 0 else None,
             ),
             "extras": extras,
-            "cancellation_policy": None,  # API does not return cancellation terms
+            "cancellation_policy": None,
             "supplier_data": {
                 "rez_id": rez_id,
                 "cars_park_id": raw.get("cars_park_id"),
                 "group_id": raw.get("group_id"),
+                "car_web_id": raw.get("car_web_id"),
                 "reservation_source": raw.get("reservation_source"),
                 "reservation_source_id": raw.get("reservation_source_id"),
                 "drop_fee": raw.get("drop", "0"),
                 "drop_fee_raw": raw.get("drop", "0,00"),
                 "provision": raw.get("provision", "0"),
                 "car_exemption": raw.get("car_exemption", "0"),
+                "excess_amount": excess_amount,
+                "min_driver_age": _safe_int_str(raw.get("driver_age", "")) or None,
+                "driving_license_age": _safe_int_str(raw.get("driving_license_age", "")) or None,
                 "pickup_station_id": pickup_entry.pickup_id,
                 "dropoff_station_id": pickup_entry.pickup_id,
                 "pickup_date": request.pickup_date.isoformat(),
@@ -303,52 +297,57 @@ class FavricaAdapter(BaseAdapter):
         extras = []
         for svc in services:
             svc_name = svc.get("service_name", "")
-            title = svc.get("service_title", "")
+            raw_title = svc.get("service_title", "")
+            title = SERVICE_NAME_EN.get(raw_title, raw_title)
             total_str = svc.get("service_total_price", "")
 
             if not svc_name:
                 continue
 
-            total_price = _parse_comma_decimal(total_str)
+            total_price = _parse_decimal(total_str)
             daily_rate = round(total_price / rental_days, 2) if rental_days > 0 else total_price
 
-            # Map service type
             extra_type = ExtraType.EQUIPMENT
             if svc_name in ("LCF", "SCDW", "CDW"):
                 extra_type = ExtraType.INSURANCE
             elif svc_name == "Addition_Drive":
                 extra_type = ExtraType.FEE
 
-            extras.append(Extra(
-                id=f"ext_{self.supplier_id}_{svc_name}",
-                name=title or svc_name,
-                daily_rate=daily_rate,
-                total_price=total_price,
-                max_quantity=1,
-                type=extra_type,
-            ))
+            extras.append(
+                Extra(
+                    id=f"ext_{self.supplier_id}_{svc_name}",
+                    name=title or svc_name,
+                    daily_rate=daily_rate,
+                    total_price=total_price,
+                    max_quantity=1,
+                    type=extra_type,
+                )
+            )
         return extras
 
-    async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
+    async def create_booking(
+        self, request: CreateBookingRequest, vehicle: Vehicle
+    ) -> BookingResponse:
         settings = get_settings()
-        base_url = settings.favrica_api_url.rstrip("/")
+        base_url = settings.emr_api_url.rstrip("/")
         sd = vehicle.supplier_data
 
-        favrica_currency = CURRENCY_TO_FAVRICA.get(vehicle.pricing.currency, "EURO")
+        turev_currency = CURRENCY_TO_TUREV.get(vehicle.pricing.currency, "EURO")
 
         # Build extras flags
-        extras_flags = {
-            "Baby_Seat": "OFF", "Navigation": "OFF", "Additional_Driver": "OFF",
-            "CDW": "OFF", "SCDW": "OFF", "LCF": "OFF", "PAI": "OFF",
-        }
+        extras_flags = {"Baby_Seat": "OFF", "Navigation": "OFF", "Addition_Drive": "OFF"}
         for extra in request.extras:
             raw_name = extra.extra_id.replace(f"ext_{self.supplier_id}_", "")
             if raw_name in extras_flags:
                 extras_flags[raw_name] = "ON"
 
         # Format amounts with comma-decimal (Turev format)
+        drop_fee = _parse_decimal(sd.get("drop_fee", "0"))
         rent_price = str(vehicle.pricing.total_price).replace(".", ",")
         extra_price = "0,00"
+        drop_price_str = sd.get("drop_fee_raw", "0,00")
+        total = vehicle.pricing.total_price + drop_fee
+        total_price = str(total).replace(".", ",")
 
         params = {
             **self._auth_params(),
@@ -364,20 +363,24 @@ class FavricaAdapter(BaseAdapter):
             "Drop_Off_Year": sd.get("dropoff_date", "")[:4],
             "Drop_Off_Hour": sd.get("dropoff_time", "")[:2],
             "Drop_Off_Min": sd.get("dropoff_time", "")[3:5],
-            "Currency": favrica_currency,
+            "Currency": turev_currency,
+            "Car_Web_ID": sd.get("car_web_id", ""),
             "Rez_ID": sd.get("rez_id", ""),
             "Cars_Park_ID": sd.get("cars_park_id", ""),
             "Group_ID": sd.get("group_id", ""),
+            "Reservation_Source_ID": sd.get("reservation_source_id", ""),
             "Name": request.driver.first_name,
             "SurName": request.driver.last_name,
-            "MobilePhone": request.driver.phone,
             "Mail_Adress": request.driver.email,
-            "Flight_Number": request.flight_number or "",
-            **{k: v for k, v in extras_flags.items()},
-            "Your_Rez_ID": request.laravel_booking_id or "",
+            "MobilePhone": request.driver.phone,
+            "Fly_No": request.flight_number or "",
+            "Baby_Seat": extras_flags["Baby_Seat"],
+            "Navigation": extras_flags["Navigation"],
+            "Addition_Drive": extras_flags["Addition_Drive"],
             "Your_Rent_Price": rent_price,
             "Your_Extra_Price": extra_price,
-            "Your_Drop_Price": sd.get("drop_fee_raw", "0,00"),
+            "Your_Drop_Price": drop_price_str,
+            "Your_Total_Price": total_price,
             "Payment_Type": "1",
         }
 
@@ -387,8 +390,8 @@ class FavricaAdapter(BaseAdapter):
         booking_ref = ""
         if isinstance(data, list) and data:
             first = data[0] if isinstance(data[0], dict) else {}
-            # TurevRent returns {"success":"True","rez_id":"XML-...","id":"4276"}
-            # "id" is the actual booking number in the provider's system
+            # EMR returns {"success":"True","rez_id":"XML-...","id":"4276"}
+            # "id" is the actual booking number in EMR's system
             booking_ref = str(first.get("id", first.get("booking_ref", first.get("rez_id", ""))))
         elif isinstance(data, dict):
             booking_ref = str(data.get("id", data.get("booking_ref", data.get("rez_id", ""))))
@@ -408,12 +411,9 @@ class FavricaAdapter(BaseAdapter):
         self, supplier_booking_id: str, request: CancelBookingRequest
     ) -> CancelBookingResponse:
         settings = get_settings()
-        base_url = settings.favrica_api_url.rstrip("/")
+        base_url = settings.emr_api_url.rstrip("/")
 
-        params = {
-            **self._auth_params(),
-            "Rez_ID": supplier_booking_id,
-        }
+        params = {**self._auth_params(), "Rez_ID": supplier_booking_id}
 
         await self._request("GET", f"{base_url}/JsonCancel.aspx", params=params)
 
@@ -425,7 +425,7 @@ class FavricaAdapter(BaseAdapter):
 
     async def get_locations(self) -> list[dict]:
         settings = get_settings()
-        base_url = settings.favrica_api_url.rstrip("/")
+        base_url = settings.emr_api_url.rstrip("/")
 
         response = await self._request(
             "GET", f"{base_url}/JsonLocations.aspx", params=self._base_params()
@@ -437,7 +437,6 @@ class FavricaAdapter(BaseAdapter):
 
         locations = []
         for loc in data:
-            # Parse maps_point: "36.909530, 30.798137"
             maps_point = loc.get("maps_point", "")
             lat, lng = None, None
             if maps_point and "," in maps_point:
@@ -448,19 +447,20 @@ class FavricaAdapter(BaseAdapter):
                 except ValueError:
                     pass
 
-            # Detect location type
-            is_airport = loc.get("isairport", "").lower() == "true"
-            iata = loc.get("iata", "")
+            iata = (loc.get("iata") or "").strip()
+            is_airport = bool(iata)
 
-            locations.append({
-                "provider": self.supplier_id,
-                "provider_location_id": loc.get("location_id", ""),
-                "name": loc.get("location_name", ""),
-                "country_code": loc.get("country", ""),
-                "latitude": lat,
-                "longitude": lng,
-                "location_type": "airport" if is_airport else "other",
-                "iata": iata if iata else None,
-            })
+            locations.append(
+                {
+                    "provider": self.supplier_id,
+                    "provider_location_id": loc.get("location_id", ""),
+                    "name": (loc.get("location_name") or "").strip(),
+                    "country_code": loc.get("country", ""),
+                    "latitude": lat,
+                    "longitude": lng,
+                    "location_type": "airport" if is_airport else "other",
+                    "iata": iata if iata else None,
+                }
+            )
 
         return locations

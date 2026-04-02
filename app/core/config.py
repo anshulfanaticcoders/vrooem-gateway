@@ -52,6 +52,12 @@ class Settings(BaseSettings):
     xdrive_username: str = ""
     xdrive_password: str = ""
 
+    # ─── EMR Car Rental ───
+    emr_api_url: str = ""
+    emr_username: str = ""
+    emr_password: str = ""
+    emr_token: str = ""
+
     # ─── Adobe Car ───
     adobe_api_url: str = ""
     adobe_username: str = ""
