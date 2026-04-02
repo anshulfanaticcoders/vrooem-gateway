@@ -605,6 +605,8 @@ class SicilyByCarAdapter(BaseAdapter):
                 "latitude": lat if lat != 0 else None,
                 "longitude": lng if lng != 0 else None,
                 "address": address.get("addressLineOne", ""),
+                "phone": loc.get("phone", ""),
+                "email": loc.get("email", ""),
             })
 
         return locations

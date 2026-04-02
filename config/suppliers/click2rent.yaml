@@ -1,0 +1,10 @@
+id: click2rent
+name: Click2Rent
+enabled: true
+protocol: rest_json
+auth_type: bearer_token
+supports_one_way: true
+default_currency: EUR
+timeout: 30
+countries: ["MU"]
+notes: "REST JSON API. Bearer token auth via /api/session/login. Mauritius only."

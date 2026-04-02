@@ -18495,6 +18495,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1809340207,
+        "name": "Flic En Flac Downtown",
+        "aliases": [
+            "Flic en Flac",
+            "Flic En Flac"
+        ],
+        "city": "Flic En Flac",
+        "country": "Mauritius",
+        "country_code": "MU",
+        "latitude": -20.279123,
+        "longitude": 57.368342,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "click2rent",
+                "pickup_id": "2",
+                "original_name": "Flic en Flac",
+                "dropoffs": [],
+                "latitude": -20.279123,
+                "longitude": 57.368342,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 4274986930,
         "name": "Florence Downtown",
         "aliases": [
@@ -43704,9 +43737,44 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 567404328,
-        "name": "Plaine Magnien Airport (MRU)",
+        "unified_location_id": 3355469916,
+        "name": "Plaine Magnien Downtown",
         "aliases": [
+            "Plaine Magnien downtown",
+            "Plaine Magnien"
+        ],
+        "city": "Plaine Magnien",
+        "country": "MU",
+        "country_code": "MU",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "renteon",
+                "pickup_id": "MU-PLM-DT",
+                "original_name": "Plaine Magnien downtown",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 567404328,
+        "name": "Plaisance Airport (MRU)",
+        "aliases": [
+            "Airport of Mauritius",
+            "Plaisance",
             "Plaine Magnien airport",
             "Plaine Magnien",
             "Port Louis airport",
@@ -43716,15 +43784,29 @@
             "Mauritius",
             "MRU"
         ],
-        "city": "Plaine Magnien",
-        "country": "MU",
+        "city": "Plaisance",
+        "country": "Mauritius",
         "country_code": "MU",
-        "latitude": -20.428589,
-        "longitude": 57.676566,
+        "latitude": -20.4302,
+        "longitude": 57.6836,
         "location_type": "airport",
         "iata": "MRU",
-        "provider_count": 4,
+        "provider_count": 5,
         "providers": [
+            {
+                "provider": "click2rent",
+                "pickup_id": "1",
+                "original_name": "Airport of Mauritius",
+                "dropoffs": [],
+                "latitude": -20.430235,
+                "longitude": 57.6836,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": "MRU",
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MU-PLM-MRU",
@@ -43779,39 +43861,6 @@
                 "extended_dropoff_code": null,
                 "country_code": "MU",
                 "iata": "MRU",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3355469916,
-        "name": "Plaine Magnien Downtown",
-        "aliases": [
-            "Plaine Magnien downtown",
-            "Plaine Magnien"
-        ],
-        "city": "Plaine Magnien",
-        "country": "MU",
-        "country_code": "MU",
-        "latitude": 0.0,
-        "longitude": 0.0,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "renteon",
-                "pickup_id": "MU-PLM-DT",
-                "original_name": "Plaine Magnien downtown",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MU",
-                "iata": null,
                 "provider_code": null
             }
         ],

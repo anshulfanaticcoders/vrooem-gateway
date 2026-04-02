@@ -24,6 +24,7 @@ import app.adapters.surprice  # noqa: F401
 import app.adapters.sicily_by_car  # noqa: F401
 import app.adapters.recordgo  # noqa: F401
 import app.adapters.internal  # noqa: F401
+import app.adapters.click2rent  # noqa: F401
 from app.core.config import get_settings
 from app.core.exceptions import GatewayError, gateway_error_handler
 from app.db.session import close_db

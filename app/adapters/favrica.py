@@ -387,11 +387,10 @@ class FavricaAdapter(BaseAdapter):
         booking_ref = ""
         if isinstance(data, list) and data:
             first = data[0] if isinstance(data[0], dict) else {}
-            # TurevRent returns {"success":"True","rez_id":"XML-...","id":"4276"}
-            # "id" is the actual booking number in the provider's system
-            booking_ref = str(first.get("id", first.get("booking_ref", first.get("rez_id", ""))))
+            # TurevRent uses rez_id (XML-XXXXXXXX) as booking reference
+            booking_ref = str(first.get("rez_id", first.get("booking_ref", "")))
         elif isinstance(data, dict):
-            booking_ref = str(data.get("id", data.get("booking_ref", data.get("rez_id", ""))))
+            booking_ref = str(data.get("rez_id", data.get("booking_ref", "")))
 
         return BookingResponse(
             id=f"bk_{uuid.uuid4().hex[:16]}",

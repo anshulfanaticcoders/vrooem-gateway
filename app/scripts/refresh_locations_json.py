@@ -22,6 +22,7 @@ import app.adapters.usave  # noqa: F401
 import app.adapters.wheelsys  # noqa: F401
 import app.adapters.xdrive  # noqa: F401
 import app.adapters.emr  # noqa: F401
+import app.adapters.click2rent  # noqa: F401
 from app.services.location_json_refresh_service import LocationJsonRefreshService
 
 

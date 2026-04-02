@@ -58,6 +58,10 @@ class Settings(BaseSettings):
     emr_password: str = ""
     emr_token: str = ""
 
+    # ─── Click2Rent ───
+    click2rent_email: str = ""
+    click2rent_password: str = ""
+
     # ─── Adobe Car ───
     adobe_api_url: str = ""
     adobe_username: str = ""
