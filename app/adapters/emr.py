@@ -214,10 +214,15 @@ class EmrAdapter(BaseAdapter):
 
         deposit = _parse_decimal(raw.get("provision", ""))
 
-        # Excess (car_exemption) is in TRY — convert to booking currency via cross_rate
-        car_exemption_try = _parse_decimal(raw.get("car_exemption", ""))
+        # Excess (car_exemption) — convert via cross_rate if available, otherwise use as-is
+        car_exemption_raw = _parse_decimal(raw.get("car_exemption", ""))
         cross_rate = _parse_decimal(raw.get("cross_rate", ""))
-        excess_amount = round(car_exemption_try / cross_rate, 2) if car_exemption_try > 0 and cross_rate > 0 else None
+        if car_exemption_raw > 0 and cross_rate > 1:
+            excess_amount = round(car_exemption_raw / cross_rate, 2)
+        elif car_exemption_raw > 0:
+            excess_amount = car_exemption_raw
+        else:
+            excess_amount = None
 
         extras = self._parse_services(raw.get("Services") or [], rental_days)
 

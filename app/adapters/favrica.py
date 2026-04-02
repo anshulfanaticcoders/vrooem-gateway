@@ -52,6 +52,17 @@ FUEL_MAP = {
     "lpg": FuelType.LPG,
 }
 
+SERVICE_NAME_EN = {
+    "LCF Güvencesi": "Loss & Damage Coverage (LCF)",
+    "SCDW Güvencesi": "Super Collision Damage Waiver (SCDW)",
+    "CDW Güvencesi": "Collision Damage Waiver (CDW)",
+    "Ek Sürücü": "Additional Driver",
+    "Bebek Koltuğu": "Baby Seat",
+    "Navigasyon": "GPS Navigation",
+    "Zincir": "Snow Chains",
+    "Kış Lastiği": "Winter Tyres",
+}
+
 # Category mapping: Turkish group_str → English
 CATEGORY_MAP = {
     "ekonomik": "economy",
@@ -228,6 +239,16 @@ class FavricaAdapter(BaseAdapter):
         # Deposit
         deposit = _parse_comma_decimal(raw.get("provision", ""))
 
+        # Excess (car_exemption) — convert via cross_rate if available, otherwise use as-is
+        car_exemption_raw = _parse_comma_decimal(raw.get("car_exemption", ""))
+        cross_rate = _parse_comma_decimal(raw.get("cross_rate", ""))
+        if car_exemption_raw > 0 and cross_rate > 1:
+            excess_amount = round(car_exemption_raw / cross_rate, 2)
+        elif car_exemption_raw > 0:
+            excess_amount = car_exemption_raw
+        else:
+            excess_amount = None
+
         # Parse extras/services
         extras = self._parse_services(raw.get("Services") or [], rental_days)
 
@@ -270,6 +291,9 @@ class FavricaAdapter(BaseAdapter):
                 "drop_fee_raw": raw.get("drop", "0,00"),
                 "provision": raw.get("provision", "0"),
                 "car_exemption": raw.get("car_exemption", "0"),
+                "excess_amount": excess_amount,
+                "min_driver_age": _safe_int_str(raw.get("driver_age", "")) or None,
+                "driving_license_age": _safe_int_str(raw.get("driving_license_age", "")) or None,
                 "pickup_station_id": pickup_entry.pickup_id,
                 "dropoff_station_id": pickup_entry.pickup_id,
                 "pickup_date": request.pickup_date.isoformat(),
@@ -303,7 +327,8 @@ class FavricaAdapter(BaseAdapter):
         extras = []
         for svc in services:
             svc_name = svc.get("service_name", "")
-            title = svc.get("service_title", "")
+            raw_title = svc.get("service_title", "")
+            title = SERVICE_NAME_EN.get(raw_title, raw_title)
             total_str = svc.get("service_total_price", "")
 
             if not svc_name:
