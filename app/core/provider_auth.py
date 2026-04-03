@@ -28,6 +28,10 @@ class ProviderAuthContext:
         self.consumer = consumer
         self.api_key = api_key
 
+    @property
+    def is_sandbox(self) -> bool:
+        return self.consumer.mode == "sandbox"
+
 
 async def verify_provider_api_key(
     request: Request,

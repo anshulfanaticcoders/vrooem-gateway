@@ -32,6 +32,7 @@ class ApiConsumer(MySQLBase):
     contact_phone = Column(String(50), nullable=True)
     company_url = Column(String(255), nullable=True)
     status = Column(String(20), default="active", nullable=False)
+    mode = Column(String(10), default="sandbox", nullable=False)
     plan = Column(String(20), default="basic", nullable=False)
     rate_limit = Column(Integer, default=60, nullable=False)
     notes = Column(Text, nullable=True)
