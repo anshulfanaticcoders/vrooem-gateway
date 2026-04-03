@@ -51,16 +51,42 @@ class ProviderCancelBookingRequest(BaseModel):
 # Response schemas for Swagger docs
 
 
-class ProviderVehiclePricing(BaseModel):
-    daily_rate: float
-    total_price: float
-    currency: str
-    total_days: int
+class ProviderMileagePolicy(BaseModel):
+    type: str = "unlimited"  # unlimited or limited
+    km_per_day: float | None = None
+    price_per_extra_km: float | None = None
 
 
-class ProviderVehicleVendor(BaseModel):
+class ProviderCancellationPolicy(BaseModel):
+    free_cancellation: bool = False
+    cancel_before_days: int = 0
+    cancellation_fee: float = 0
+
+
+class ProviderOperatingHour(BaseModel):
+    day: int  # 0=Sunday, 1=Monday, etc.
+    is_open: bool = True
+    open_time: str | None = None
+    close_time: str | None = None
+
+
+class ProviderInsurancePlan(BaseModel):
+    id: int
     name: str
-    rating: float | None = None
+    daily_rate: float
+    total_price: float | None = None
+    description: str | None = None
+    features: list[str] = []
+
+
+class ProviderExtraOption(BaseModel):
+    id: int
+    name: str
+    type: str | None = None
+    daily_rate: float
+    total_price: float | None = None
+    description: str | None = None
+    max_quantity: int = 1
 
 
 class ProviderVehicle(BaseModel):
@@ -70,24 +96,44 @@ class ProviderVehicle(BaseModel):
     model: str | None = None
     year: int | None = None
     category: str | None = None
+    color: str | None = None
     transmission: str | None = None
     fuel_type: str | None = None
+    fuel_policy: str | None = None
     seats: int | None = None
     doors: int | None = None
     bags: int | None = None
     air_conditioning: bool | None = None
     image: str | None = None
     images: list[str] = []
-    # Pricing — flat fields from Laravel
+    # Pricing
     daily_rate: float | None = None
     total_price: float | None = None
     currency: str | None = None
     total_days: int | None = None
+    security_deposit: float | None = None
+    # Location
     pickup_location: str | None = None
     dropoff_location: str | None = None
+    location_type: str | None = None
+    location_phone: str | None = None
+    pickup_instructions: str | None = None
+    dropoff_instructions: str | None = None
+    # Vendor
     vendor_name: str | None = None
+    # Policies
     features: list[str] = []
-    mileage_policy: str | None = None
+    mileage_policy: ProviderMileagePolicy | None = None
+    cancellation_policy: ProviderCancellationPolicy | None = None
+    minimum_driver_age: int | None = None
+    operating_hours: list[ProviderOperatingHour] = []
+    payment_methods: list[str] = []
+    # Plans & extras
+    insurance_plans: list[ProviderInsurancePlan] = []
+    extras: list[ProviderExtraOption] = []
+    # Terms
+    guidelines: str | None = None
+    terms_policy: str | None = None
 
 
 class ProviderSearchResponse(BaseModel):
