@@ -11,8 +11,10 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     Integer,
+    SmallInteger,
     String,
     Text,
+    func,
 )
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.orm import DeclarativeBase, relationship
@@ -189,3 +191,8 @@ class ApiLog(Base):
         Index("ix_api_log_supplier", "supplier_id", "created_at"),
         Index("ix_api_log_search", "search_id"),
     )
+
+
+
+# Provider API models (ApiConsumer, ApiKey, ProviderApiLog) are in
+# app/db/provider_models.py — they use MySQL (Laravel's database).

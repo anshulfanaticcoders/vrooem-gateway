@@ -12,8 +12,11 @@ class Settings(BaseSettings):
     gateway_api_keys: str = "dev_key_change_me"
     gateway_secret: str = "hmac_secret_change_me"
 
-    # ─── Database ───
+    # ─── Database (PostgreSQL — gateway tables) ───
     database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/vrooem_gateway"
+
+    # ─── MySQL (Laravel — provider API tables) ───
+    mysql_url: str = "mysql+aiomysql://root@localhost:3306/carrental"
 
     # ─── Redis ───
     redis_url: str = "redis://localhost:6379/0"
