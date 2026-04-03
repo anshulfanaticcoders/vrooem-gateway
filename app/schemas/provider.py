@@ -78,10 +78,14 @@ class ProviderVehicle(BaseModel):
     air_conditioning: bool | None = None
     image: str | None = None
     images: list[str] = []
-    pricing: ProviderVehiclePricing
+    # Pricing — flat fields from Laravel
+    daily_rate: float | None = None
+    total_price: float | None = None
+    currency: str | None = None
+    total_days: int | None = None
     pickup_location: str | None = None
     dropoff_location: str | None = None
-    vendor: ProviderVehicleVendor | None = None
+    vendor_name: str | None = None
     features: list[str] = []
     mileage_policy: str | None = None
 
@@ -123,25 +127,30 @@ class ProviderDriverResponse(BaseModel):
 
 
 class ProviderBookingResponse(BaseModel):
-    booking_id: str
+    booking_number: str
     status: str
-    vehicle_name: str
+    vehicle_name: str | None = None
+    vehicle_id: int | None = None
+    vehicle_image: str | None = None
     pickup_date: str | None = None
     pickup_time: str | None = None
     dropoff_date: str | None = None
     dropoff_time: str | None = None
     pickup_location: str | None = None
-    dropoff_location: str | None = None
+    return_location: str | None = None
     total_days: int | None = None
-    total_price: float
+    daily_rate: float | None = None
+    base_price: float | None = None
+    extras_total: float | None = None
+    total_amount: float | None = None
     currency: str = "EUR"
-    driver: ProviderDriverResponse
+    driver: ProviderDriverResponse | None = None
     extras: list[dict] = []
     created_at: str | None = None
 
 
 class ProviderCancelResponse(BaseModel):
-    booking_id: str
+    booking_number: str | None = None
     status: str
     cancellation_fee: float = 0
     refund_amount: float = 0
