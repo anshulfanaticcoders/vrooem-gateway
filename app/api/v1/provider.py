@@ -9,7 +9,7 @@ External companies authenticate via X-Api-Key header and can:
 
 import logging
 import time
-from datetime import date
+from datetime import date, datetime
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
@@ -63,6 +63,7 @@ async def _log_request(
             ip_address=request.client.host if request.client else "unknown",
             user_agent=(request.headers.get("user-agent") or "")[:500],
             processing_time_ms=int((time.time() - start_time) * 1000),
+            created_at=datetime.utcnow(),
         )
         db.add(log)
         await db.commit()
