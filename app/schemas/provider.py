@@ -6,46 +6,106 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class ProviderSearchRequest(BaseModel):
-    pickup_location_id: int
-    dropoff_location_id: int
-    pickup_date: date
-    pickup_time: time = time(10, 0)
-    dropoff_date: date
-    dropoff_time: time = time(10, 0)
-    driver_age: int = Field(default=30, ge=18, le=99)
-    currency: str = Field(default="EUR", min_length=3, max_length=3)
+    pickup_location_id: int = Field(description="Vehicle/location ID from the /locations endpoint")
+    dropoff_location_id: int = Field(description="Same as pickup for same-location rental")
+    pickup_date: date = Field(description="Pickup date (YYYY-MM-DD)")
+    pickup_time: time = Field(default=time(10, 0), description="Pickup time (HH:MM)")
+    dropoff_date: date = Field(description="Return date (YYYY-MM-DD), must be after pickup_date")
+    dropoff_time: time = Field(default=time(10, 0), description="Return time (HH:MM)")
+    driver_age: int = Field(default=30, ge=18, le=99, description="Driver's age (18-99)")
+    currency: str = Field(default="EUR", min_length=3, max_length=3, description="3-letter currency code")
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [{
+                "pickup_location_id": 326,
+                "dropoff_location_id": 326,
+                "pickup_date": "2026-04-15",
+                "pickup_time": "10:00:00",
+                "dropoff_date": "2026-04-20",
+                "dropoff_time": "10:00:00",
+                "driver_age": 30,
+                "currency": "EUR",
+            }]
+        }
+    }
 
 
 class ProviderDriverInfo(BaseModel):
-    first_name: str = Field(max_length=100)
-    last_name: str = Field(max_length=100)
-    email: EmailStr
-    phone: str = Field(max_length=50)
-    age: int = Field(ge=18, le=99)
-    driving_license_number: str = Field(max_length=50)
-    driving_license_country: str = Field(min_length=2, max_length=2)
+    first_name: str = Field(max_length=100, description="Driver's first name")
+    last_name: str = Field(max_length=100, description="Driver's last name")
+    email: EmailStr = Field(description="Driver's email for booking confirmation")
+    phone: str = Field(max_length=50, description="Driver's phone number with country code")
+    age: int = Field(ge=18, le=99, description="Driver's age")
+    driving_license_number: str = Field(max_length=50, description="Driving license number")
+    driving_license_country: str = Field(min_length=2, max_length=2, description="2-letter country code of license (e.g. US, GB, DE)")
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [{
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john.doe@example.com",
+                "phone": "+44 7911 123456",
+                "age": 30,
+                "driving_license_number": "DOEJ7610056",
+                "driving_license_country": "GB",
+            }]
+        }
+    }
 
 
 class ProviderBookingExtra(BaseModel):
-    extra_id: int
-    quantity: int = Field(default=1, ge=1)
+    extra_id: int = Field(description="Extra ID from the /vehicles/{id}/extras endpoint")
+    quantity: int = Field(default=1, ge=1, description="Number of this extra to add")
 
 
 class ProviderCreateBookingRequest(BaseModel):
-    vehicle_id: int
-    pickup_date: date
-    pickup_time: time = time(10, 0)
-    dropoff_date: date
-    dropoff_time: time = time(10, 0)
-    driver: ProviderDriverInfo
-    extras: list[ProviderBookingExtra] = []
-    insurance_id: int | None = None
-    flight_number: str | None = Field(default=None, max_length=20)
-    special_requests: str | None = Field(default=None, max_length=500)
+    vehicle_id: int = Field(description="Vehicle ID from search results")
+    pickup_date: date = Field(description="Pickup date (YYYY-MM-DD)")
+    pickup_time: time = Field(default=time(10, 0), description="Pickup time (HH:MM)")
+    dropoff_date: date = Field(description="Return date (YYYY-MM-DD)")
+    dropoff_time: time = Field(default=time(10, 0), description="Return time (HH:MM)")
+    driver: ProviderDriverInfo = Field(description="Driver/customer details")
+    extras: list[ProviderBookingExtra] = Field(default=[], description="Optional extras from /vehicles/{id}/extras")
+    insurance_id: int | None = Field(default=None, description="Insurance plan ID from /vehicles/{id}/extras")
+    flight_number: str | None = Field(default=None, max_length=20, description="Flight number for airport pickups")
+    special_requests: str | None = Field(default=None, max_length=500, description="Any special requests")
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [{
+                "vehicle_id": 326,
+                "pickup_date": "2026-04-15",
+                "pickup_time": "10:00:00",
+                "dropoff_date": "2026-04-20",
+                "dropoff_time": "10:00:00",
+                "driver": {
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "email": "john.doe@example.com",
+                    "phone": "+44 7911 123456",
+                    "age": 30,
+                    "driving_license_number": "DOEJ7610056",
+                    "driving_license_country": "GB",
+                },
+                "extras": [{"extra_id": 1, "quantity": 1}],
+                "insurance_id": 2,
+                "flight_number": "FR1234",
+                "special_requests": "Late pickup around 11:00",
+            }]
+        }
+    }
 
 
 class ProviderCancelBookingRequest(BaseModel):
-    reason: str = Field(default="", max_length=500)
+    reason: str = Field(default="", max_length=500, description="Reason for cancellation")
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [{"reason": "Customer changed travel plans"}]
+        }
+    }
 
 
 # Response schemas for Swagger docs
@@ -134,6 +194,7 @@ class ProviderVehicle(BaseModel):
     # Terms
     guidelines: str | None = None
     terms_policy: str | None = None
+    rental_policy: str | None = None
 
 
 class ProviderSearchResponse(BaseModel):

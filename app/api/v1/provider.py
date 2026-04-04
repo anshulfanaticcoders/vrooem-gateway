@@ -9,9 +9,10 @@ External companies authenticate via X-Api-Key header and can:
 
 import logging
 import time
+from datetime import date
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Path, Request
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.provider_auth import ProviderAuthContext, require_scope
@@ -96,7 +97,7 @@ async def list_locations(
         raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
 
 
-@router.post(
+@router.get(
     "/vehicles/search",
     response_model=ProviderSearchResponse,
     tags=["Vehicles"],
@@ -104,8 +105,15 @@ async def list_locations(
     description="Search internal vehicles by location and dates. Returns available vehicles with pricing.",
 )
 async def search_vehicles(
-    body: ProviderSearchRequest,
     request: Request,
+    pickup_location_id: int = Query(..., description="Location ID from /locations endpoint", example=326),
+    dropoff_location_id: int = Query(..., description="Same as pickup for same-location rental", example=326),
+    pickup_date: date = Query(..., description="Pickup date (YYYY-MM-DD)", example="2026-04-15"),
+    dropoff_date: date = Query(..., description="Return date, must be after pickup", example="2026-04-20"),
+    pickup_time: str = Query("10:00", description="Pickup time (HH:MM)", example="10:00"),
+    dropoff_time: str = Query("10:00", description="Return time (HH:MM)", example="10:00"),
+    driver_age: int = Query(30, ge=18, le=99, description="Driver age (18-99)", example=30),
+    currency: str = Query("EUR", min_length=3, max_length=3, description="3-letter currency code", example="EUR"),
     auth: ProviderAuthContext = Depends(require_scope("vehicles:search")),
     db: AsyncSession = Depends(get_db),
 ):
@@ -113,14 +121,14 @@ async def search_vehicles(
     service = get_provider_api_service()
 
     params = {
-        "pickup_location_id": body.pickup_location_id,
-        "dropoff_location_id": body.dropoff_location_id,
-        "pickup_date": body.pickup_date.isoformat(),
-        "pickup_time": body.pickup_time.strftime("%H:%M"),
-        "dropoff_date": body.dropoff_date.isoformat(),
-        "dropoff_time": body.dropoff_time.strftime("%H:%M"),
-        "driver_age": body.driver_age,
-        "currency": body.currency,
+        "pickup_location_id": pickup_location_id,
+        "dropoff_location_id": dropoff_location_id,
+        "pickup_date": pickup_date.isoformat(),
+        "pickup_time": pickup_time,
+        "dropoff_date": dropoff_date.isoformat(),
+        "dropoff_time": dropoff_time,
+        "driver_age": driver_age,
+        "currency": currency,
     }
 
     try:

@@ -191,6 +191,11 @@ async def search_vehicles(
         if request.providers and provider_id not in request.providers:
             continue
 
+        # Skip internal adapter — internal vehicles are already queried
+        # directly from MySQL by Laravel's SearchController
+        if provider_id == "internal":
+            continue
+
         adapter = get_adapter(provider_id)
         if adapter is None:
             logger.warning("No adapter found for provider '%s' — skipping", provider_id)
