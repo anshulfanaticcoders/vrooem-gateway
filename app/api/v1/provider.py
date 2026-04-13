@@ -107,8 +107,8 @@ async def list_locations(
 )
 async def search_vehicles(
     request: Request,
-    pickup_location_id: int = Query(..., description="Location ID from /locations endpoint", example=326),
-    dropoff_location_id: int = Query(..., description="Same as pickup for same-location rental", example=326),
+    pickup_location_id: int = Query(..., description="Location ID from /locations endpoint", example=62),
+    dropoff_location_id: int = Query(..., description="Same as pickup for same-location rental", example=62),
     pickup_date: date = Query(..., description="Pickup date (YYYY-MM-DD)", example="2026-04-15"),
     dropoff_date: date = Query(..., description="Return date, must be after pickup", example="2026-04-20"),
     pickup_time: str = Query("10:00", description="Pickup time (HH:MM)", example="10:00"),

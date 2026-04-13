@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 class ProviderApiService:
     """Calls Laravel's /api/internal/provider/* endpoints."""
 
+    BOOKING_TIMEOUT_SECONDS = 90.0
+
     def __init__(self):
         settings = get_settings()
         self.base_url = settings.laravel_base_url.rstrip("/")
@@ -60,6 +62,7 @@ class ProviderApiService:
             f"{self.base_url}/api/internal/provider/bookings",
             json=payload,
             headers=self._headers(),
+            timeout=self.BOOKING_TIMEOUT_SECONDS,
         )
         response.raise_for_status()
         return response.json()
@@ -81,6 +84,7 @@ class ProviderApiService:
             params={"api_consumer_id": consumer_id},
             json={"reason": reason},
             headers=self._headers(),
+            timeout=self.BOOKING_TIMEOUT_SECONDS,
         )
         response.raise_for_status()
         return response.json()

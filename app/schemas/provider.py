@@ -2,7 +2,7 @@
 
 from datetime import date, time
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import AliasChoices, BaseModel, EmailStr, Field
 
 
 class ProviderSearchRequest(BaseModel):
@@ -18,8 +18,8 @@ class ProviderSearchRequest(BaseModel):
     model_config = {
         "json_schema_extra": {
             "examples": [{
-                "pickup_location_id": 326,
-                "dropoff_location_id": 326,
+                "pickup_location_id": 62,
+                "dropoff_location_id": 62,
                 "pickup_date": "2026-04-15",
                 "pickup_time": "10:00:00",
                 "dropoff_date": "2026-04-20",
@@ -173,12 +173,16 @@ class ProviderVehicle(BaseModel):
     total_days: int | None = None
     security_deposit: float | None = None
     # Location
+    pickup_location_id: int | None = None
+    dropoff_location_id: int | None = None
     pickup_location: str | None = None
     dropoff_location: str | None = None
     location_type: str | None = None
     location_phone: str | None = None
     pickup_instructions: str | None = None
     dropoff_instructions: str | None = None
+    pickup_location_details: dict | None = None
+    dropoff_location_details: dict | None = None
     # Vendor
     vendor_name: str | None = None
     # Policies
@@ -243,8 +247,12 @@ class ProviderBookingResponse(BaseModel):
     pickup_time: str | None = None
     dropoff_date: str | None = None
     dropoff_time: str | None = None
+    pickup_location_id: int | None = None
+    dropoff_location_id: int | None = None
     pickup_location: str | None = None
     return_location: str | None = None
+    pickup_location_details: dict | None = None
+    dropoff_location_details: dict | None = None
     total_days: int | None = None
     daily_rate: float | None = None
     base_price: float | None = None
@@ -273,7 +281,8 @@ class ProviderLocationItem(BaseModel):
     country_code: str | None = None
     latitude: float | None = None
     longitude: float | None = None
-    location_type: str = "other"
+    iata: str | None = None
+    location_type: str = Field(default="other", validation_alias=AliasChoices("location_type", "type"))
 
 
 class ProviderLocationsResponse(BaseModel):
