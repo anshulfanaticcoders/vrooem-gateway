@@ -242,6 +242,7 @@ class LocationSyncService:
     def export_unified_json(self, unified_locations: list[dict], output_path: Path | None = None) -> Path:
         """Write unified locations to the JSON file used by the gateway at runtime."""
         json_path = output_path or (Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json")
+        json_path.parent.mkdir(parents=True, exist_ok=True)
         exportable = []
         for loc in unified_locations:
             exportable.append({
@@ -275,7 +276,10 @@ class LocationSyncService:
                 ],
                 "our_location_id": loc.get("our_location_id"),
             })
-        json_path.write_text(json.dumps(exportable, indent=4, ensure_ascii=False), encoding="utf-8")
+
+        tmp_path = json_path.with_suffix(json_path.suffix + ".tmp")
+        tmp_path.write_text(json.dumps(exportable, indent=4, ensure_ascii=False), encoding="utf-8")
+        tmp_path.replace(json_path)
         logger.info("Exported %d unified locations to %s", len(exportable), json_path)
         return json_path
 

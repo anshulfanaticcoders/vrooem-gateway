@@ -6,6 +6,8 @@ from base64 import b64encode
 
 logger = logging.getLogger(__name__)
 
+_DEFAULT_PROVIDER_CODES = ["LetsDrive", "CapitalCarRental", "LuxGoo", "Alquicoche"]
+
 from app.adapters.base import BaseAdapter
 from app.adapters.registry import register_adapter
 from app.core.config import get_settings
@@ -121,7 +123,7 @@ class RenteonAdapter(BaseAdapter):
             p.strip() for p in settings.renteon_allowed_providers.split(",") if p.strip()
         ]
         if not provider_codes:
-            provider_codes = ["LetsDrive"]
+            provider_codes = list(_DEFAULT_PROVIDER_CODES)
 
         all_vehicles: list[Vehicle] = []
         rental_days = (request.dropoff_date - request.pickup_date).days or 1

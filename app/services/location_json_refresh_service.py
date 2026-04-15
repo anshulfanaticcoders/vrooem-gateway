@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from pathlib import Path
 
@@ -34,7 +35,10 @@ class LocationJsonRefreshService:
             public_provider = get_public_supplier_id(provider)
             try:
                 logger.info("[%s] Fetching locations...", provider)
-                locations = await adapter.get_locations() or []
+                locations = await asyncio.wait_for(
+                    adapter.get_locations(),
+                    timeout=self._provider_timeout_seconds(adapter),
+                ) or []
                 logger.info("[%s] Got %d locations", provider, len(locations))
                 summary["providers_succeeded"] += 1
                 summary["locations_received"] += len(locations)
@@ -47,3 +51,16 @@ class LocationJsonRefreshService:
         self.sync_service.export_unified_json(unified_locations, output_path=self.output_path)
         summary["unified_locations"] = len(unified_locations)
         return summary
+
+    def _provider_timeout_seconds(self, adapter) -> float:
+        default_timeout = getattr(adapter, "default_timeout", 30.0)
+
+        try:
+            default_timeout = float(default_timeout)
+        except (TypeError, ValueError):
+            default_timeout = 30.0
+
+        # Give location refresh a small cushion over the adapter timeout,
+        # but keep individual providers bounded so one slow supplier cannot
+        # stall or kill the entire unified JSON refresh.
+        return max(15.0, min(default_timeout + 10.0, 60.0))
