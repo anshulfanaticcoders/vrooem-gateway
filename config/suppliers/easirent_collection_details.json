@@ -1,0 +1,101 @@
+{
+  "US": {
+    "AUS": {
+      "station_name": "Austin Bergstrom Airport",
+      "airport": "Collection procedure (Free shuttle bus service) After collecting your luggage follow the signs to the rental center. Without entering the rental center you will find a set of elevators that will bring you to the ground level. Once on the ground level follow the yellow arrows located to the top left of the taxi line, for offsite operator pickup and drop off and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at,115 Industrial Blvd Austin TX 78745"
+    },
+    "DAL": {
+      "station_name": "Dallas Love Field",
+      "airport": "Collection procedure (Free shuttle bus service) After collecting your luggage, please proceed outside to the transportation lower level, where you will see signs for rental car shuttles and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 7224 Harry Hines Blvd, Dallas, TX 75235"
+    },
+    "HOU": {
+      "station_name": "Houston Hobby -",
+      "airport": "Collection procedure (Free shuttle bus service) After collecting your luggage, please proceed outside where you will see signs for rental car shuttles at shuttle pickup zone 1, and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 7803 Hansen Road, Houston, TX 77061"
+    },
+    "IAH": {
+      "station_name": "George Bush Houston Intercontinental Airport -",
+      "airport": "Collection procedure (Free shuttle bus service) Take the free Hotel Shuttle to Spring Hill Suites by Marriott Hotel. Terminal A – Door 115 Terminal B – Door 103 Terminal C – Door 105 Note the shuttle does not collect from terminals D & E. Please make your way to the above closest pickup point. When at the hotel shuttle pickup area await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the shuttle to the Easirent office, located in the Courtyard by Marriott Hotel.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, c/o Springhill suites, 15840 John F Kennedy Blvd, Houston, TX 77032"
+    },
+    "DFW": {
+      "station_name": "Dallas Fort Worth International Airport",
+      "airport": "After collecting your bags, please proceed to the rental car center for the Easirent shuttle. After arriving at the rental car center, please wait for the Easirent shuttle across the crosswalk in the inner car loop near the rental car parking (off airport car rental pickup). and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 635 Robbie Drive, Irving, TX 75061"
+    },
+    "CLT": {
+      "station_name": "Charlotte-Douglas International Airport",
+      "airport": "Collection procedure (Free shuttle bus service) When you have arrive at Charlotte-Douglas international airport, please follow the signs to the shuttle pick-up area located outside of baggage claim and proceed to Zone 1. When at Zone 1 await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 2230 Boyer Street, Charlotte, North Carolina, 28208"
+    },
+    "MCO": {
+      "station_name": "Orlando Airport",
+      "airport": "Collection procedure (Free shuttle bus service) \nPlease proceed to level 1 ground transportation on A or B side. Once on level 1, proceed to the rental car pick-up area. The Easirent shuttle picks up at spaces A11, A12, A13 or B13. Terminal C - Please proceed to level 1 ground transportation to the designated car rental pick up area spaces 276 and 277. Easirent shuttle bus loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 1777 McCoy Road, Orlando , Florida 32809"
+    },
+    "TPA": {
+      "station_name": "Tampa Airport",
+      "airport": "Collection procedure (Free shuttle bus service) Take the SkyConnect people mover to the Rental Car Center. When at the Rental Car Center, follow the signs to Off Airport Car Rental and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 5124 West Cypress Street, Tampa, Florida, 33609"
+    },
+    "RSW": {
+      "station_name": "Fort Myers Airport",
+      "airport": "Collection procedure (Free shuttle bus service): Please walk to the car rental centre and follows signs for “Off airport pickup area”. Follow the off airport / shuttle signs to the covered bench pickup area. Once at the pickup area, please and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 14500 Global Parkway, Fort Myers, \nFL 33913"
+    },
+    "JAX": {
+      "station_name": "Jacksonville Airport",
+      "airport": "Tempory pick up location. After collecting baggage please proceed upstairs to level 2 follow signs to the United counter exit the building and head left to the frontier United signage and the off airport pick up and drop off area.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at the Windsor Inn Hotel 1351 Airport Road, Jacksonville, Florida , 32218"
+    },
+    "PBI": {
+      "station_name": "Palm Beach International Airport",
+      "airport": "Collection procedure (Free shuttle bus service) please follow the signs to car rental shuttle pickup area and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, Hilton Palm Beach Airport, 150 Australian Avenue, West Palm Beach, Florida 33406"
+    },
+    "MIA": {
+      "station_name": "Miami Airport",
+      "airport": "Collection procedure (Free shuttle bus service) Please follow signs to the rental car center. At the rental car center follow signs to shuttles and proceed outside to pickup area 1 or 2 and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 2101 NW 34th Ave, Miami, Florida 33142,"
+    },
+    "FLL": {
+      "station_name": "Fort Lauderdale Airport",
+      "airport": "Collection procedure (Free shuttle bus service) Terminal 1: Please  walk to the car rental centre and follows signs for “Offsite rental car and county bus”. Proceed to bus stop 7 and await the Easirent Shuttle bus. Terminals 2,3,4: Please take the airport shuttle to the car rental centre. Please follows signs for “Offsite rental car and county bus”. Proceed to bus stop 7 and await the Easirent Shuttle bus. Easirent shuttle bus loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 3234 6th Ave, Fort Lauderdale, Florida 33316"
+    },
+    "LAS": {
+      "station_name": "Harry Reid Airport - Las Vegas",
+      "airport": "Please proceed to the Car Rental Center. When at the Car Rental Center, follow signs for Off Airport Rental Car Shuttle and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, Las Vegas Blvd, Las Vegas, NV 89123"
+    },
+    "SLC": {
+      "station_name": "Salt Lake City",
+      "airport": "\"Collection procedure (Free shuttle bus service) Please proceed to the Car Rental Center. When at the Car Rental Center, follow signs for Off Airport\nRental Car Shuttles. Once at the shuttle bus stop, and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 756 S Redwood Rd, Salt Lake City, UT 84104"
+    },
+    "PHX": {
+      "station_name": "Phoenix Sky Harbor International Airport",
+      "airport": "\"Collection procedure (Free shuttle bus service) Please proceed to the Car Rental Center. When at the Car Rental Center, take the visitor parking elevator to level P and  follow signs for visitor parking lot and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+      "non_airport": "Non-Airport Collection - Please collect from our office located at, 2410 South Central Avenue, Phoenix, AZ 85004"
+    }
+  },
+  "ROI": {
+    "ORK": {
+      "station_name": "Cork / Ballygarvan",
+      "airport": "Please call +353 (0)21 2363163 on arrival to arrange a shuttle transfer to the branch. The collection point is outside Arrivals, across the Two Zebra crossings next to a Blue Bike Statue.",
+      "non_airport": "Non Airport Collection - Please collect from our office located at, Oak House,  Airport East Business & Technology Park, Rathmacullig W, Rathmacullig East, Ballygarvan, Co. Cork, Ireland Eir Code T12 HD5Y"
+    },
+    "DUB": {
+      "station_name": "Dublin / Cloghran",
+      "airport": "Shuttle: Easirent operate a Courtesy shuttle from Dublin Airport from Zone 17 at Terminal 1 - Please call our Dublin Branch on arrival ( 00353 1 695 0324 ) to arrange a Shuttle to our office",
+      "non_airport": "Non Airport Collection - Please collect from our office located at, Unit 02, North Ring Business Park,Swords Road,  Dublin 9, Ireland Eir Code D09 Y383"
+    },
+    "SNN": {
+      "station_name": "Shannon / Ballycasey",
+      "airport": "When you arrive at Shannon Airport please call us on  +353 61 260 090  or \nMobile/Whats App  00353 85 8616180 to arrange a Courtesy Pick up Shuttle to our office.\nOur pick up location is in the set down area of the car park by A Large White Flag Pole with the Irish Flag on it, you should see this at your 2 o'clock position exiting arrivals.",
+      "non_airport": "Non-Airport Collection: Please collect from our office located at, 1st Floor Car Park Management Office, Sky Court Shopping Centre .Shannon, Co. Clare"
+    }
+  }
+}

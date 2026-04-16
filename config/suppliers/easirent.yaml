@@ -1,0 +1,10 @@
+id: easirent
+name: Easirent
+enabled: true
+protocol: quotereact_json
+auth_type: account_code
+supports_one_way: true
+default_currency: USD
+timeout: 30
+countries: ["US", "ROI"]
+notes: "Direct quote integration via quotereact JSON. Account-code eligibility rules are enforced for US domestic, US inbound and ROI restrictions while preserving Easirent package tokens for checkout."

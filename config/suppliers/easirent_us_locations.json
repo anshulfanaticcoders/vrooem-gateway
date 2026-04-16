@@ -1,0 +1,162 @@
+{
+  "AUS": {
+    "station_name": "Austin Bergstrom Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Austin",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) After collecting your luggage follow the signs to the rental center. Without entering the rental center you will find a set of elevators that will bring you to the ground level. Once on the ground level follow the yellow arrows located to the top left of the taxi line, for offsite operator pickup and drop off and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at,115 Industrial Blvd Austin TX 78745",
+    "non_airport_address": "115 Industrial Blvd Austin TX 78745",
+    "phone": null
+  },
+  "DAL": {
+    "station_name": "Dallas Love Field",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Dallas",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) After collecting your luggage, please proceed outside to the transportation lower level, where you will see signs for rental car shuttles and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 7224 Harry Hines Blvd, Dallas, TX 75235",
+    "non_airport_address": "7224 Harry Hines Blvd, Dallas, TX 75235",
+    "phone": null
+  },
+  "HOU": {
+    "station_name": "Houston Hobby",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Houston",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) After collecting your luggage, please proceed outside where you will see signs for rental car shuttles at shuttle pickup zone 1, and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the short journey to the rental office.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 7803 Hansen Road, Houston, TX 77061",
+    "non_airport_address": "7803 Hansen Road, Houston, TX 77061",
+    "phone": null
+  },
+  "IAH": {
+    "station_name": "George Bush Houston Intercontinental Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Houston",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Take the free Hotel Shuttle to Spring Hill Suites by Marriott Hotel. Terminal A - Door 115 Terminal B - Door 103 Terminal C - Door 105. The shuttle does not collect from terminals D and E. Please make your way to the nearest pickup point above and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes for the shuttle to the Easirent office located in the Courtyard by Marriott Hotel.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, c/o Springhill Suites, 15840 John F Kennedy Blvd, Houston, TX 77032",
+    "non_airport_address": "c/o Springhill Suites, 15840 John F Kennedy Blvd, Houston, TX 77032",
+    "phone": null
+  },
+  "DFW": {
+    "station_name": "Dallas Fort Worth International Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Dallas",
+    "pickup_instructions": "After collecting your bags, proceed to the rental car center for the Easirent shuttle. After arriving at the rental car center, wait for the Easirent shuttle across the crosswalk in the inner car loop near the rental car parking for off-airport car rental pickup.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 635 Robbie Drive, Irving, TX 75061",
+    "non_airport_address": "635 Robbie Drive, Irving, TX 75061",
+    "phone": null
+  },
+  "CLT": {
+    "station_name": "Charlotte-Douglas International Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Charlotte",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Follow the signs to the shuttle pick-up area located outside baggage claim and proceed to Zone 1. When at Zone 1 await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 2230 Boyer Street, Charlotte, North Carolina, 28208",
+    "non_airport_address": "2230 Boyer Street, Charlotte, North Carolina, 28208",
+    "phone": null
+  },
+  "MCO": {
+    "station_name": "Orlando Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Orlando",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Proceed to level 1 ground transportation on A or B side. Then proceed to the rental car pick-up area. The Easirent shuttle picks up at spaces A11, A12, A13 or B13. Terminal C passengers should proceed to level 1 ground transportation to the designated car rental pick up area spaces 276 and 277.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 1777 McCoy Road, Orlando, Florida 32809",
+    "non_airport_address": "1777 McCoy Road, Orlando, Florida 32809",
+    "phone": null
+  },
+  "TPA": {
+    "station_name": "Tampa Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Tampa",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Take the SkyConnect people mover to the Rental Car Center. When at the Rental Car Center, follow the signs to Off Airport Car Rental and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 5124 West Cypress Street, Tampa, Florida, 33609",
+    "non_airport_address": "5124 West Cypress Street, Tampa, Florida, 33609",
+    "phone": null
+  },
+  "RSW": {
+    "station_name": "Fort Myers Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Fort Myers",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Walk to the car rental centre and follow signs for off-airport pickup area. Follow the off-airport shuttle signs to the covered bench pickup area and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 14500 Global Parkway, Fort Myers, FL 33913",
+    "non_airport_address": "14500 Global Parkway, Fort Myers, FL 33913",
+    "phone": null
+  },
+  "JAX": {
+    "station_name": "Jacksonville Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Jacksonville",
+    "pickup_instructions": "Temporary pick up location. After collecting baggage please proceed upstairs to level 2, follow signs to the United counter, exit the building and head left to the Frontier / United signage and the off-airport pick up and drop off area. Board the Easirent shuttle at bus stop 1. Shuttle service runs every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at the Windsor Inn Hotel, 1351 Airport Road, Jacksonville, Florida 32218",
+    "non_airport_address": "Windsor Inn Hotel, 1351 Airport Road, Jacksonville, Florida 32218",
+    "phone": null
+  },
+  "PBI": {
+    "station_name": "Palm Beach International Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "West Palm Beach",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Please follow the signs to the car rental shuttle pickup area and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, Hilton Palm Beach Airport, 150 Australian Avenue, West Palm Beach, Florida 33406",
+    "non_airport_address": "Hilton Palm Beach Airport, 150 Australian Avenue, West Palm Beach, Florida 33406",
+    "phone": null
+  },
+  "MIA": {
+    "station_name": "Miami Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Miami",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Please follow signs to the rental car center. At the rental car center follow signs to shuttles and proceed outside to pickup area 1 or 2 and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 2101 NW 34th Ave, Miami, Florida 33142",
+    "non_airport_address": "2101 NW 34th Ave, Miami, Florida 33142",
+    "phone": null
+  },
+  "FLL": {
+    "station_name": "Fort Lauderdale Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Fort Lauderdale",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Terminal 1: walk to the car rental centre and follow signs for Offsite rental car and county bus. Proceed to bus stop 7 and await the Easirent shuttle bus. Terminals 2, 3 and 4: take the airport shuttle to the car rental centre, follow signs for Offsite rental car and county bus, proceed to bus stop 7 and await the Easirent shuttle bus.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 3234 6th Ave, Fort Lauderdale, Florida 33316",
+    "non_airport_address": "3234 6th Ave, Fort Lauderdale, Florida 33316",
+    "phone": null
+  },
+  "LAS": {
+    "station_name": "Harry Reid Airport - Las Vegas",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Las Vegas",
+    "pickup_instructions": "Please proceed to the Car Rental Center. When at the Car Rental Center, follow signs for Off Airport Rental Car Shuttle and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, Las Vegas Blvd, Las Vegas, NV 89123",
+    "non_airport_address": "Las Vegas Blvd, Las Vegas, NV 89123",
+    "phone": null
+  },
+  "SLC": {
+    "station_name": "Salt Lake City Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Salt Lake City",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Please proceed to the Car Rental Center. When at the Car Rental Center, follow signs for Off Airport Rental Car Shuttles. Once at the shuttle bus stop, await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 756 S Redwood Rd, Salt Lake City, UT 84104",
+    "non_airport_address": "756 S Redwood Rd, Salt Lake City, UT 84104",
+    "phone": null
+  },
+  "PHX": {
+    "station_name": "Phoenix Sky Harbor International Airport",
+    "country_code": "US",
+    "country": "United States",
+    "city": "Phoenix",
+    "pickup_instructions": "Collection procedure (Free shuttle bus service) Please proceed to the Car Rental Center. When at the Car Rental Center, take the visitor parking elevator to level P, follow signs for visitor parking lot and await the courtesy Easirent shuttle bus which loops the airport every 20-30 minutes.",
+    "dropoff_instructions": "Non-Airport Collection - Please collect from our office located at, 2410 South Central Avenue, Phoenix, AZ 85004",
+    "non_airport_address": "2410 South Central Avenue, Phoenix, AZ 85004",
+    "phone": null
+  }
+}

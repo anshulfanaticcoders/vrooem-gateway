@@ -106,6 +106,12 @@ class Settings(BaseSettings):
     recordgo_partner_user: str = ""
     recordgo_sell_codes: str = ""  # JSON override for sell codes, e.g. {"ES":95,"IC":96}
 
+    # ─── Easirent ───
+    easirent_api_url: str = "https://easirent.com/broker/Vrooem/Livefeed.asp"
+    easirent_account_us_domestic: str = "$USA202"
+    easirent_account_us_inbound: str = "$USA202A"
+    easirent_account_roi: str = "$ROI202"
+
     @property
     def api_keys_list(self) -> list[str]:
         """Parse comma-separated API keys."""

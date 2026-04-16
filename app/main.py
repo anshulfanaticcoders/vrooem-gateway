@@ -25,6 +25,7 @@ import app.adapters.sicily_by_car  # noqa: F401
 import app.adapters.recordgo  # noqa: F401
 import app.adapters.internal  # noqa: F401
 import app.adapters.click2rent  # noqa: F401
+import app.adapters.easirent  # noqa: F401
 from app.core.config import get_settings
 from app.core.exceptions import GatewayError, gateway_error_handler
 from app.db.mysql_session import close_mysql
