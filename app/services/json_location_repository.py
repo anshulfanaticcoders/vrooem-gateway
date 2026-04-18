@@ -129,6 +129,56 @@ class JsonLocationRepository:
         key = f"{provider}:{provider_location_id}"
         return self._by_provider.get(key)
 
+    def find_dropoff_candidates(
+        self,
+        provider: str,
+        pickup_unified_id: int | None = None,
+        country_code: str | None = None,
+        limit: int = 100,
+    ) -> list[dict]:
+        """Return locations where the given provider has presence, usable as one-way dropoffs.
+
+        Filtering rules:
+        - Provider must appear in the location's `providers[]`.
+        - If `country_code` is given, location.country_code must match (case-insensitive).
+          If omitted but `pickup_unified_id` is given, the pickup's country is used.
+        - The pickup location itself is excluded.
+        - Results capped by `limit`.
+        """
+        self._ensure_loaded()
+
+        provider_key = provider.strip().lower()
+        if not provider_key:
+            return []
+
+        resolved_country = (country_code or "").strip().upper()
+        if not resolved_country and pickup_unified_id is not None:
+            pickup = self._by_unified_id.get(pickup_unified_id)
+            if pickup:
+                resolved_country = str(pickup.get("country_code") or "").strip().upper()
+
+        results: list[dict] = []
+        for location in self._locations:
+            if pickup_unified_id is not None and location.get("unified_location_id") == pickup_unified_id:
+                continue
+
+            loc_country = str(location.get("country_code") or "").strip().upper()
+            if resolved_country and loc_country != resolved_country:
+                continue
+
+            has_provider = any(
+                str(entry.get("provider", "")).strip().lower() == provider_key
+                for entry in (location.get("providers") or [])
+            )
+            if not has_provider:
+                continue
+
+            results.append(location)
+            if len(results) >= limit:
+                break
+
+        return results
+
     def reload(self) -> int:
         """Force reload from disk. Returns new location count."""
         self._locations = []

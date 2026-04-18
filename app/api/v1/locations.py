@@ -70,6 +70,28 @@ async def get_location_by_provider(
     return Location.model_validate(location)
 
 
+@router.get("/dropoffs", response_model=list[Location])
+async def list_dropoff_candidates(
+    provider: str = Query(..., min_length=1, description="Provider public ID (e.g. 'greenmotion')"),
+    pickup_unified_id: int = Query(..., description="Pickup location unified_location_id"),
+    country_code: str | None = Query(None, min_length=2, max_length=2, description="Override country filter (ISO-2)"),
+    limit: int = Query(100, ge=1, le=500),
+    _api_key: str = Depends(verify_api_key),
+) -> list[Location]:
+    """List one-way dropoff candidates for a given provider + pickup.
+
+    Returns locations where the provider has a presence, filtered to the same
+    country as the pickup (unless overridden). The pickup itself is excluded.
+    """
+    candidates = _repository.find_dropoff_candidates(
+        provider=provider,
+        pickup_unified_id=pickup_unified_id,
+        country_code=country_code,
+        limit=limit,
+    )
+    return [Location.model_validate(location) for location in candidates]
+
+
 @router.post("/sync")
 async def sync_locations(
     _api_key: str = Depends(verify_api_key),
