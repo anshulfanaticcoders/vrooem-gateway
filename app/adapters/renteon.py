@@ -230,6 +230,26 @@ class RenteonAdapter(BaseAdapter):
             airport_code=office.get("OfficeCode"),
         )
 
+        # Populate dropoff_location whenever the provider payload includes a
+        # DropOffOffice distinct from the pickup. The adapter owns this contract
+        # because downstream UIs (map pins, dropoff instructions) need coords.
+        dropoff_loc = None
+        dropoff_office_id = str(raw.get("DropOffOfficeId", "") or "")
+        pickup_office_id = str(raw.get("PickupOfficeId", "") or "")
+        if dropoff_office_raw and (
+            dropoff_office_id and dropoff_office_id != pickup_office_id
+            or (dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id)
+        ):
+            dropoff_loc = VehicleLocation(
+                supplier_location_id=dropoff_office_id or (dropoff_entry.pickup_id if dropoff_entry else ""),
+                name=dropoff_office_raw.get("Name") or (dropoff_entry.original_name if dropoff_entry else None),
+                city=dropoff_office_raw.get("Town", ""),
+                latitude=_safe_float(dropoff_office_raw.get("Latitude")),
+                longitude=_safe_float(dropoff_office_raw.get("Longitude")),
+                location_type=dropoff_office_raw.get("LocationType", "other").lower(),
+                airport_code=dropoff_office_raw.get("OfficeCode"),
+            )
+
         # Payment option
         is_prepaid = raw.get("Prepaid", False) or raw.get("IsPrepaid", False)
         payment = PaymentOption.PAY_NOW if is_prepaid else PaymentOption.PAY_AT_PICKUP
@@ -264,6 +284,7 @@ class RenteonAdapter(BaseAdapter):
             "model": model,
             "image_url": raw.get("CarModelImageURL", ""),
             "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
             "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,

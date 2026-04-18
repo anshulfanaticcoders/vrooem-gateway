@@ -249,6 +249,7 @@ class RecordGoAdapter(BaseAdapter):
                 request=request,
                 rental_days=rental_days,
                 pickup_entry=pickup_entry,
+                dropoff_entry=dropoff_entry,
                 sell_code_ver=sell_code_ver,
                 sell_code=sell_code,
                 country_code=country_code,
@@ -312,6 +313,7 @@ class RecordGoAdapter(BaseAdapter):
         country_code: str,
         pickup_branch: int,
         dropoff_branch: int,
+        dropoff_entry: ProviderLocationEntry | None = None,
     ) -> list[Vehicle]:
         """Parse an ACRISS group into one Vehicle per product (rate tier)."""
         acriss_code = acriss.get("acrissCode", "")
@@ -443,6 +445,16 @@ class RecordGoAdapter(BaseAdapter):
                 longitude=pickup_entry.longitude,
             )
 
+            dropoff_loc = None
+            if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
+                dropoff_loc = VehicleLocation(
+                    supplier_location_id=str(dropoff_branch),
+                    name=dropoff_entry.original_name,
+                    country_code=country_code,
+                    latitude=dropoff_entry.latitude,
+                    longitude=dropoff_entry.longitude,
+                )
+
             full_name = f"{vehicle_name} - {product_name}" if product_name else vehicle_name
 
             vehicle_kwargs = {
@@ -457,6 +469,7 @@ class RecordGoAdapter(BaseAdapter):
                 "model": model,
                 "image_url": image_url,
                 "pickup_location": pickup_loc,
+                "dropoff_location": dropoff_loc,
                 "pricing": Pricing(
                     currency="EUR",
                     total_price=total_price,

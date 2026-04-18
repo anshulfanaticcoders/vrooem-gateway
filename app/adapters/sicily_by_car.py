@@ -303,6 +303,20 @@ class SicilyByCarAdapter(BaseAdapter):
             longitude=pickup_entry.longitude,
         )
 
+        # Dropoff location — populate only when the caller asked for a distinct
+        # dropoff. Downstream UIs (map pin, booking views) rely on this object
+        # existing to render the drop-off address / coords.
+        dropoff_loc = None
+        offer_dropoff = offer.get("dropoffLocation") or offer.get("returnLocation") or {}
+        if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
+            dropoff_loc = VehicleLocation(
+                supplier_location_id=offer_dropoff.get("id", dropoff_entry.pickup_id),
+                name=offer_dropoff.get("name", dropoff_entry.original_name),
+                airport_code=offer_dropoff.get("airportCode"),
+                latitude=dropoff_entry.latitude,
+                longitude=dropoff_entry.longitude,
+            )
+
         # Insurance based on rate coverage level
         insurance_options: list[InsuranceOption] = []
         coverage_type = _map_coverage_type(rate_id)
@@ -333,6 +347,7 @@ class SicilyByCarAdapter(BaseAdapter):
             "image_url": veh.get("imageUrl", ""),
             "availability_status": offer.get("availability") or None,
             "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
             "pricing": Pricing(
                 currency=currency,
                 total_price=total_price,

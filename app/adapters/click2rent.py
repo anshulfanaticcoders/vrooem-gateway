@@ -233,7 +233,8 @@ class Click2RentAdapter(BaseAdapter):
         for car_id, entries in car_groups.items():
             v = self._build_vehicle(
                 car_id, entries, raw_extras, rental_days, car_details,
-                pickup_entry, hire_point_id, drop_hp_id, hp_data, payload,
+                pickup_entry, hire_point_id, drop_hp_id, hp_data,
+                drop_hp_data, dropoff_entry, payload,
             )
             if v:
                 vehicles.append(v)
@@ -251,6 +252,8 @@ class Click2RentAdapter(BaseAdapter):
         pickup_hp_id: str,
         dropoff_hp_id: str,
         hp_data: dict,
+        drop_hp_data: dict,
+        dropoff_entry: ProviderLocationEntry | None,
         search_payload: dict,
     ) -> Vehicle | None:
         # Use first entry as base vehicle info
@@ -340,6 +343,15 @@ class Click2RentAdapter(BaseAdapter):
             longitude=pickup_entry.longitude,
         )
 
+        dropoff_loc = None
+        if dropoff_hp_id and dropoff_hp_id != pickup_hp_id:
+            dropoff_loc = VehicleLocation(
+                supplier_location_id=dropoff_hp_id,
+                name=(dropoff_entry.original_name if dropoff_entry else base.get("drop_off_location_name")),
+                latitude=(dropoff_entry.latitude if dropoff_entry else None),
+                longitude=(dropoff_entry.longitude if dropoff_entry else None),
+            )
+
         vehicle_kwargs = {
             "id": f"gw_{uuid.uuid4().hex[:16]}",
             "supplier_id": self.supplier_id,
@@ -359,6 +371,7 @@ class Click2RentAdapter(BaseAdapter):
             "air_conditioning": str(base.get("air_conditioning", "0")) == "1",
             "mileage_policy": MileagePolicy.UNLIMITED,
             "pickup_location": pickup_loc,
+            "dropoff_location": dropoff_loc,
             "pricing": Pricing(
                 currency=currency,
                 total_price=primary["total"],
@@ -382,7 +395,7 @@ class Click2RentAdapter(BaseAdapter):
                 "excess_amount": 650.0,
                 "deposit_amount": 625.0,
                 "pickup_instructions": hp_data.get("instruction_1", ""),
-                "dropoff_instructions": hp_data.get("instruction_2", ""),
+                "dropoff_instructions": (drop_hp_data or hp_data).get("instruction_2", ""),
                 "pickup_station_name": base.get("pickup_location_name", ""),
                 "pickup_address": hp_data.get("address", "") or (base.get("pickup_hire_point", {}).get("name", "") if isinstance(base.get("pickup_hire_point"), dict) else ""),
                 "office_address": hp_data.get("address", ""),

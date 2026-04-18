@@ -197,10 +197,19 @@ class GreenMotionAdapter(BaseAdapter):
             content=xml_payload, headers={"Content-Type": "application/xml"},
         )
 
-        # Fetch location info (pickup instructions, phone, hours) after vehicles
+        # Fetch location info (pickup instructions, phone, hours) after vehicles.
+        # When one-way, also fetch the dropoff location info so downstream UIs
+        # can show dropoff instructions / hours rather than reusing pickup data.
         location_info = await self._fetch_location_info(pickup_entry.pickup_id)
+        dropoff_info: dict | None = None
+        if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
+            try:
+                dropoff_info = await self._fetch_location_info(dropoff_entry.pickup_id)
+            except Exception:
+                logger.debug("[%s] dropoff location info fetch failed", self.supplier_id)
+                dropoff_info = None
 
-        return self._parse_vehicles(response.text, request, pickup_entry, dropoff_entry, location_info)
+        return self._parse_vehicles(response.text, request, pickup_entry, dropoff_entry, location_info, dropoff_info)
 
     def _parse_vehicles(
         self,
@@ -209,6 +218,7 @@ class GreenMotionAdapter(BaseAdapter):
         pickup_entry: ProviderLocationEntry,
         dropoff_entry: ProviderLocationEntry | None,
         location_info: dict | None = None,
+        dropoff_info: dict | None = None,
     ) -> list[Vehicle]:
         try:
             root = ET.fromstring(xml_text)
@@ -249,7 +259,7 @@ class GreenMotionAdapter(BaseAdapter):
         for veh in vehicle_elems:
             try:
                 vehicle = self._parse_single_vehicle(
-                    veh, quote_id, rental_days, shared_extras, request, pickup_entry, dropoff_entry, location_info
+                    veh, quote_id, rental_days, shared_extras, request, pickup_entry, dropoff_entry, location_info, dropoff_info
                 )
                 if vehicle:
                     vehicles.append(vehicle)
@@ -269,6 +279,7 @@ class GreenMotionAdapter(BaseAdapter):
         pickup_entry: ProviderLocationEntry,
         dropoff_entry: ProviderLocationEntry | None,
         location_info: dict | None = None,
+        dropoff_info: dict | None = None,
     ) -> Vehicle | None:
         # name, id, image are XML ATTRIBUTES on <vehicle>, not child elements
         name = veh.get("name", "")
@@ -467,6 +478,19 @@ class GreenMotionAdapter(BaseAdapter):
                 "end_time": request.dropoff_time.strftime("%H:%M"),
                 "products": all_products,
                 **(location_info or {}),
+                # Dropoff-specific fields — only present when one-way + fetched.
+                # Prefixed "dropoff_" so downstream normalizers can tell them apart
+                # from pickup fields and render both blocks independently.
+                **({
+                    "dropoff_instructions": (dropoff_info or {}).get("pickup_instructions"),
+                    "dropoff_station_name": (dropoff_info or {}).get("pickup_station_name"),
+                    "dropoff_address": (dropoff_info or {}).get("pickup_address"),
+                    "dropoff_office_phone": (dropoff_info or {}).get("office_phone"),
+                    "dropoff_office_email": (dropoff_info or {}).get("office_email"),
+                    "dropoff_office_opening_hours": (dropoff_info or {}).get("office_opening_hours"),
+                    "dropoff_out_of_hours_charge": (dropoff_info or {}).get("out_of_hours_charge"),
+                    "dropoff_iata": (dropoff_info or {}).get("iata"),
+                } if dropoff_info else {}),
             },
             "min_driver_age": minage or None,
         }

@@ -494,6 +494,15 @@ class AdobeCarAdapter(BaseAdapter):
                 "office_schedule": (pickup_office_details or {}).get("schedule"),
                 "at_airport": (pickup_office_details or {}).get("atAirport", False),
                 "office_name": (pickup_office_details or {}).get("deploymentName") or (pickup_office_details or {}).get("name"),
+                # Dropoff-specific office details, only when one-way and distinct.
+                **({
+                    "dropoff_station_name": (dropoff_office_details or {}).get("deploymentName") or (dropoff_office_details or {}).get("name"),
+                    "dropoff_address": (dropoff_office_details or {}).get("address"),
+                    "dropoff_office_phone": ", ".join((dropoff_office_details or {}).get("telephones") or []) or None,
+                    "dropoff_office_schedule": (dropoff_office_details or {}).get("schedule"),
+                    "dropoff_at_airport": (dropoff_office_details or {}).get("atAirport", False),
+                    "dropoff_instructions": (dropoff_office_details or {}).get("instructions") or (dropoff_office_details or {}).get("dropoff_instructions"),
+                } if (dropoff_office_details and dropoff_office_details is not pickup_office_details) else {}),
             },
         }
 
