@@ -3,8 +3,10 @@
 import logging
 
 from fastapi import APIRouter, Depends, HTTPException, Path, Query
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import verify_api_key
+from app.db.session import get_db
 from app.schemas.booking import (
     BookingResponse,
     CancelBookingRequest,
@@ -23,6 +25,7 @@ router = APIRouter(prefix="/api/v1/bookings", tags=["bookings"])
 async def create_booking_endpoint(
     request: CreateBookingRequest,
     _api_key: str = Depends(verify_api_key),
+    db: AsyncSession = Depends(get_db),
 ) -> BookingResponse:
     """Create a booking for a vehicle from search results."""
 
@@ -30,7 +33,7 @@ async def create_booking_endpoint(
     cache = CacheService(redis)
 
     try:
-        return await create_booking(request, cache)
+        return await create_booking(request, cache, db)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
