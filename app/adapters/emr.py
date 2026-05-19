@@ -89,9 +89,10 @@ class EmrAdapter(BaseAdapter):
     default_timeout = 30.0
 
     def __init__(self, http_client: httpx.AsyncClient | None = None):
+        settings = get_settings()
         self.http_client = http_client or httpx.AsyncClient(
             timeout=self.default_timeout,
-            verify=False,
+            verify=settings.supplier_tls_verify,
             headers={
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
                 "Accept": "application/json",

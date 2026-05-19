@@ -178,9 +178,10 @@ class OkMobilityAdapter(BaseAdapter):
     default_timeout = 30.0
 
     def __init__(self, http_client: httpx.AsyncClient | None = None):
+        settings = get_settings()
         # OK Mobility's SSL cert sometimes causes issues; disable verification
         self.http_client = http_client or httpx.AsyncClient(
-            timeout=self.default_timeout, verify=False
+            timeout=self.default_timeout, verify=settings.supplier_tls_verify
         )
 
     # ─── SOAP Envelope Builders ───

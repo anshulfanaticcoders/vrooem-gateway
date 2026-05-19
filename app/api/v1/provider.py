@@ -9,6 +9,7 @@ External companies authenticate via X-Api-Key header and can:
 
 import logging
 import time
+import uuid
 from datetime import date, datetime
 
 import httpx
@@ -26,12 +27,27 @@ from app.schemas.provider import (
     ProviderErrorResponse,
     ProviderExtrasResponse,
     ProviderLocationsResponse,
-    ProviderSearchRequest,
     ProviderSearchResponse,
 )
 from app.services.provider_api_service import get_provider_api_service
 
 logger = logging.getLogger(__name__)
+
+
+def _internal_error(request: Request, exc: Exception) -> HTTPException:
+    request_id = request.headers.get("x-request-id") or str(uuid.uuid4())
+    logger.exception("Provider API request failed (%s): %s", request_id, exc)
+    return HTTPException(
+        status_code=500,
+        detail={
+            "error": {
+                "code": "INTERNAL_ERROR",
+                "message": "Provider API request failed. Please try again later.",
+                "status": 500,
+                "request_id": request_id,
+            }
+        },
+    )
 
 router = APIRouter(
     prefix="/v1",
@@ -95,7 +111,7 @@ async def list_locations(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start)
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)
 
 
 @router.get(
@@ -141,7 +157,7 @@ async def search_vehicles(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start, params)
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)
 
 
 @router.get(
@@ -169,7 +185,7 @@ async def get_vehicle_extras(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start)
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)
 
 
 @router.post(
@@ -214,7 +230,7 @@ async def create_booking(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start, {"vehicle_id": body.vehicle_id})
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)
 
 
 @router.get(
@@ -243,7 +259,7 @@ async def get_booking(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start)
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)
 
 
 @router.post(
@@ -273,4 +289,4 @@ async def cancel_booking(
         raise HTTPException(status_code=e.response.status_code, detail=e.response.json())
     except Exception as e:
         await _log_request(db, auth, request, 500, start)
-        raise HTTPException(status_code=500, detail={"error": {"code": "INTERNAL_ERROR", "message": str(e), "status": 500}})
+        raise _internal_error(request, e)

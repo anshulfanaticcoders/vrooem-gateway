@@ -9,7 +9,7 @@ Quirks:
 - Pricing in USD: tdr = total daily rate (includes PLI + LDW + SPP + base)
 - Vehicle category is a single letter (n, b, c, d, e, ...)
 - Auth endpoint: POST /Auth/Login with userName/password → { token: "..." }
-- SSL verification disabled (custom port, self-signed cert)
+- TLS verification follows supplier_tls_verify; local/dev may opt into insecure TLS for this custom-port API.
 """
 
 import logging
@@ -115,9 +115,10 @@ class AdobeCarAdapter(BaseAdapter):
     default_timeout = 30.0
 
     def __init__(self, http_client: httpx.AsyncClient | None = None):
-        # SSL verification disabled — Adobe uses a custom port with self-signed cert
+        settings = get_settings()
+        # Adobe uses a custom port; TLS verification is configurable for local supplier compatibility.
         self.http_client = http_client or httpx.AsyncClient(
-            timeout=self.default_timeout, verify=False
+            timeout=self.default_timeout, verify=settings.supplier_tls_verify
         )
 
     async def _get_token(self) -> str:

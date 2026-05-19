@@ -2,15 +2,16 @@
 
 import logging
 import time
-from datetime import datetime, timezone
+from datetime import datetime
 
-from fastapi import Depends, HTTPException, Request, Security, status
+from fastapi import Depends, HTTPException, Request, Response, Security, status
 from fastapi.security import APIKeyHeader
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.provider_models import ApiConsumer, ApiKey
 from app.db.mysql_session import get_mysql_db as get_db
 from app.services.provider_key_service import find_by_plaintext
+from app.services.cache_service import get_redis
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +36,7 @@ class ProviderAuthContext:
 
 async def verify_provider_api_key(
     request: Request,
+    response: Response,
     api_key_value: str | None = Security(provider_api_key_header),
     db: AsyncSession = Depends(get_db),
 ) -> ProviderAuthContext:
@@ -59,6 +61,8 @@ async def verify_provider_api_key(
             detail={"error": {"code": "CONSUMER_SUSPENDED", "message": "Your API access has been suspended. Contact support.", "status": 403}},
         )
 
+    await _enforce_rate_limit(response, consumer, api_key)
+
     # Debounce last_used_at (update at most every 60s)
     now = time.time()
     if not api_key.last_used_at or (now - api_key.last_used_at.timestamp()) > 60:
@@ -66,6 +70,43 @@ async def verify_provider_api_key(
         await db.commit()
 
     return ProviderAuthContext(consumer=consumer, api_key=api_key)
+
+
+async def _enforce_rate_limit(
+    response: Response,
+    consumer: ApiConsumer,
+    api_key: ApiKey,
+) -> None:
+    limit = max(1, int(consumer.rate_limit or 60))
+    window = int(time.time() // 60)
+    reset = (window + 1) * 60
+    key = f"provider_api_rate:{api_key.id}:{window}"
+
+    try:
+        redis = await get_redis()
+        count = await redis.incr(key)
+        if count == 1:
+            await redis.expire(key, 65)
+    except Exception:
+        logger.warning("Provider API rate limit check failed; allowing request.", exc_info=True)
+        response.headers["X-RateLimit-Limit"] = str(limit)
+        response.headers["X-RateLimit-Remaining"] = str(limit)
+        return
+
+    remaining = max(0, limit - int(count))
+    headers = {
+        "X-RateLimit-Limit": str(limit),
+        "X-RateLimit-Remaining": str(remaining),
+        "X-RateLimit-Reset": str(reset),
+    }
+    response.headers.update(headers)
+
+    if int(count) > limit:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail={"error": {"code": "RATE_LIMIT_EXCEEDED", "message": "Rate limit exceeded. Try again shortly.", "status": 429}},
+            headers=headers,
+        )
 
 
 def require_scope(scope: str):

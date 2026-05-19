@@ -19,8 +19,10 @@ async def get_redis() -> redis.Redis:
     if _redis_pool is None:
         settings = get_settings()
         url = settings.redis_url
-        # Coolify's managed Redis uses self-signed TLS certs — skip verification
-        ssl_kwargs = {"ssl_cert_reqs": None} if url.startswith("rediss://") else {}
+        ssl_kwargs = {}
+        if url.startswith("rediss://") and (settings.is_local_env or settings.allow_insecure_redis_tls):
+            # Preserve local/self-signed Redis compatibility only when explicitly allowed.
+            ssl_kwargs = {"ssl_cert_reqs": None}
         _redis_pool = redis.from_url(url, decode_responses=True, **ssl_kwargs)
     return _redis_pool
 

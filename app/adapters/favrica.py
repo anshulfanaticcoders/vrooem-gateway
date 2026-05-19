@@ -1,7 +1,7 @@
 """Favrica adapter — REST JSON GET with query params auth.
 
 Quirks:
-- HTTP (not HTTPS), SSL verification disabled
+- HTTP/HTTPS varies by endpoint; TLS verification follows supplier_tls_verify when HTTPS is used.
 - Comma-decimal prices ("254,78" → 254.78)
 - Non-standard currency codes: "EURO" (not EUR), "TL" (not TRY)
 - All response fields are strings
@@ -105,10 +105,11 @@ class FavricaAdapter(BaseAdapter):
     default_timeout = 30.0
 
     def __init__(self, http_client: httpx.AsyncClient | None = None):
-        # SSL verification disabled + browser User-Agent (Turev platform blocks python-httpx)
+        settings = get_settings()
+        # Browser User-Agent keeps compatibility with the Turev platform, which blocks python-httpx defaults.
         self.http_client = http_client or httpx.AsyncClient(
             timeout=self.default_timeout,
-            verify=False,
+            verify=settings.supplier_tls_verify,
             headers={
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
                 "Accept": "application/json",

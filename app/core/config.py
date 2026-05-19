@@ -4,6 +4,8 @@ from functools import lru_cache
 
 from pydantic_settings import BaseSettings
 
+LOCAL_ENVS = {"local", "dev", "development", "test", "testing"}
+
 
 class Settings(BaseSettings):
     # ─── Gateway ───
@@ -11,6 +13,11 @@ class Settings(BaseSettings):
     gateway_debug: bool = False
     gateway_api_keys: str = "dev_key_change_me"
     gateway_secret: str = "hmac_secret_change_me"
+    cors_allowed_origins: str = ""
+    provider_cors_allowed_origins: str = ""
+    allow_insecure_supplier_tls: bool = False
+    allow_insecure_database_tls: bool = False
+    allow_insecure_redis_tls: bool = False
 
     # ─── Database (PostgreSQL — gateway tables) ───
     database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/vrooem_gateway"
@@ -117,9 +124,46 @@ class Settings(BaseSettings):
         """Parse comma-separated API keys."""
         return [k.strip() for k in self.gateway_api_keys.split(",") if k.strip()]
 
+    @property
+    def is_local_env(self) -> bool:
+        return self.gateway_env.lower() in LOCAL_ENVS
+
+    @property
+    def internal_cors_origins(self) -> list[str]:
+        if self.cors_allowed_origins.strip():
+            return [origin.strip() for origin in self.cors_allowed_origins.split(",") if origin.strip()]
+        if self.gateway_debug or self.is_local_env:
+            return ["*"]
+        return [self.laravel_base_url]
+
+    @property
+    def provider_cors_origins(self) -> list[str]:
+        if self.provider_cors_allowed_origins.strip():
+            return [origin.strip() for origin in self.provider_cors_allowed_origins.split(",") if origin.strip()]
+        if self.gateway_debug or self.is_local_env:
+            return ["*"]
+        return [self.laravel_base_url]
+
+    @property
+    def supplier_tls_verify(self) -> bool:
+        return not (self.is_local_env or self.allow_insecure_supplier_tls)
+
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
 
 
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+
+def validate_runtime_settings(settings: Settings | None = None) -> None:
+    settings = settings or get_settings()
+    if settings.is_local_env:
+        return
+
+    if not settings.api_keys_list or "dev_key_change_me" in settings.api_keys_list:
+        raise RuntimeError("GATEWAY_API_KEYS must be configured with non-default values outside local/dev.")
+    if settings.gateway_secret == "hmac_secret_change_me":
+        raise RuntimeError("GATEWAY_SECRET must be configured with a non-default value outside local/dev.")
+    if not settings.laravel_api_token:
+        raise RuntimeError("LARAVEL_API_TOKEN must be configured outside local/dev.")

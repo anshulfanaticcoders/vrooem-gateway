@@ -1,5 +1,7 @@
 """API key authentication middleware."""
 
+import hmac
+
 from fastapi import Depends, HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 
@@ -18,7 +20,7 @@ async def verify_api_key(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Missing API key. Provide X-API-Key header.",
         )
-    if api_key not in settings.api_keys_list:
+    if not any(hmac.compare_digest(api_key, candidate) for candidate in settings.api_keys_list):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Invalid API key.",

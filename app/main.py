@@ -26,7 +26,7 @@ import app.adapters.recordgo  # noqa: F401
 import app.adapters.internal  # noqa: F401
 import app.adapters.click2rent  # noqa: F401
 import app.adapters.easirent  # noqa: F401
-from app.core.config import get_settings
+from app.core.config import get_settings, validate_runtime_settings
 from app.core.exceptions import GatewayError, gateway_error_handler
 from app.db.mysql_session import close_mysql
 from app.db.session import close_db
@@ -71,6 +71,7 @@ async def lifespan(app: FastAPI):
 
 def create_provider_app() -> FastAPI:
     """Separate FastAPI app for the Provider API — external companies see ONLY this."""
+    settings = get_settings()
     provider_app = FastAPI(
         title="Vrooem Provider API",
         description=(
@@ -111,7 +112,7 @@ def create_provider_app() -> FastAPI:
 
     provider_app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=settings.provider_cors_origins,
         allow_methods=["*"],
         allow_headers=["*"],
     )
@@ -123,6 +124,7 @@ def create_provider_app() -> FastAPI:
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    validate_runtime_settings(settings)
 
     app = FastAPI(
         title="Vrooem Gateway",
@@ -136,7 +138,7 @@ def create_app() -> FastAPI:
     # CORS
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"] if settings.gateway_debug else [settings.laravel_base_url],
+        allow_origins=settings.internal_cors_origins,
         allow_methods=["*"],
         allow_headers=["*"],
     )

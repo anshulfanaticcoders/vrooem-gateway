@@ -20,7 +20,10 @@ def get_engine():
     if _engine is None:
         settings = get_settings()
         db_url = clean_database_url(settings.database_url)
-        connect_args = build_connect_args(settings.database_url)
+        connect_args = build_connect_args(
+            settings.database_url,
+            allow_insecure_tls=settings.is_local_env or settings.allow_insecure_database_tls,
+        )
         _engine = create_async_engine(
             db_url,
             echo=settings.gateway_debug,
