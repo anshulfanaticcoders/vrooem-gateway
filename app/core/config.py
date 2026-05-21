@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     # ─── Redis ───
     redis_url: str = "redis://localhost:6379/0"
     search_cache_ttl: int = 60
+    location_refresh_provider_timeout_seconds: float = 180.0
 
     # ─── Laravel ───
     laravel_base_url: str = "http://localhost:8000"

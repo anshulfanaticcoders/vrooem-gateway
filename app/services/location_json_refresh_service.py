@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 
 from app.adapters.registry import get_all_adapters, get_public_supplier_id
+from app.core.config import get_settings
 from app.services.location_sync_service import LocationSyncService
 from app.services.location_unification_service import LocationUnificationService
 
@@ -53,14 +54,13 @@ class LocationJsonRefreshService:
         return summary
 
     def _provider_timeout_seconds(self, adapter) -> float:
-        default_timeout = getattr(adapter, "default_timeout", 30.0)
+        timeout = getattr(adapter, "location_refresh_timeout_seconds", None)
+        if timeout is None:
+            timeout = get_settings().location_refresh_provider_timeout_seconds
 
         try:
-            default_timeout = float(default_timeout)
+            timeout = float(timeout)
         except (TypeError, ValueError):
-            default_timeout = 30.0
+            timeout = 180.0
 
-        # Give location refresh a small cushion over the adapter timeout,
-        # but keep individual providers bounded so one slow supplier cannot
-        # stall or kill the entire unified JSON refresh.
-        return max(15.0, min(default_timeout + 10.0, 60.0))
+        return max(15.0, timeout)

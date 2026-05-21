@@ -40,6 +40,10 @@ class LocationUnificationService:
         if len(normalized_query) < 2:
             return []
 
+        exact_iata_matches = self._exact_iata_matches(unified_locations, normalized_query)
+        if exact_iata_matches:
+            return exact_iata_matches[:limit]
+
         scored: list[tuple[int, dict]] = []
         for location in unified_locations:
             score = self._score_location(location, normalized_query)
@@ -52,6 +56,20 @@ class LocationUnificationService:
         filtered = self._filter_generic_city_rows(ranked)
         filtered = self._filter_by_query_location_type(filtered, normalized_query)
         return filtered[:limit]
+
+    def _exact_iata_matches(self, unified_locations: list[dict], query: str) -> list[dict]:
+        if len(query) != 3 or not query.isalpha():
+            return []
+
+        matches = [
+            location
+            for location in unified_locations
+            if normalize_string(location.get("iata")) == query
+        ]
+        return sorted(
+            matches,
+            key=lambda location: (-int(location.get("provider_count", 0)), location["name"]),
+        )
 
     def _canonicalize_location(self, location: dict) -> dict:
         latitude = _safe_float(location.get("latitude"))

@@ -2,6 +2,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from app.services.location_json_refresh_service import LocationJsonRefreshService
 
@@ -25,6 +27,20 @@ class FailingAdapter:
 
 
 class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
+    def test_provider_timeout_uses_configured_location_refresh_window(self) -> None:
+        service = LocationJsonRefreshService(adapters=[])
+
+        with patch('app.services.location_json_refresh_service.get_settings') as get_settings:
+            get_settings.return_value.location_refresh_provider_timeout_seconds = 180.0
+
+            self.assertEqual(service._provider_timeout_seconds(SimpleNamespace()), 180.0)
+
+    def test_provider_timeout_allows_adapter_specific_override(self) -> None:
+        service = LocationJsonRefreshService(adapters=[])
+        adapter = SimpleNamespace(location_refresh_timeout_seconds=240.0)
+
+        self.assertEqual(service._provider_timeout_seconds(adapter), 240.0)
+
     async def test_refresh_exports_current_cmn_codes_with_public_provider_ids(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_path = Path(tmp_dir) / 'unified_locations.json'

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import logging
@@ -11,7 +12,8 @@ from pathlib import Path
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.adapters.registry import get_all_adapters
+from app.adapters.registry import get_all_adapters, get_public_supplier_id
+from app.core.config import get_settings
 from app.db.models import LocationSyncRun, ProviderLocation, UnifiedLocation, UnifiedLocationMapping
 from app.services.location_normalization import (
     canonicalize_city,
@@ -21,7 +23,6 @@ from app.services.location_normalization import (
     extract_iata_code,
     normalize_string,
 )
-from app.adapters.registry import get_public_supplier_id
 from app.services.location_unification_service import LocationUnificationService
 
 logger = logging.getLogger(__name__)
@@ -45,7 +46,10 @@ class LocationSyncService:
             started_at = datetime.utcnow()
 
             try:
-                raw_locations = await adapter.get_locations()
+                raw_locations = await asyncio.wait_for(
+                    adapter.get_locations(),
+                    timeout=self._provider_timeout_seconds(adapter),
+                )
                 received = len(raw_locations or [])
                 summary["locations_received"] += received
 
@@ -79,6 +83,18 @@ class LocationSyncService:
             await db.rollback()
 
         return summary
+
+    def _provider_timeout_seconds(self, adapter) -> float:
+        timeout = getattr(adapter, "location_refresh_timeout_seconds", None)
+        if timeout is None:
+            timeout = get_settings().location_refresh_provider_timeout_seconds
+
+        try:
+            timeout = float(timeout)
+        except (TypeError, ValueError):
+            timeout = 180.0
+
+        return max(15.0, timeout)
 
     async def _record_failed_sync_run(
         self,

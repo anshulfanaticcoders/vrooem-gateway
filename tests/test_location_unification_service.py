@@ -458,6 +458,50 @@ class LocationUnificationServiceTest(unittest.TestCase):
 
         self.assertEqual([item["name"] for item in results], ["Dubai Airport (DXB)"])
 
+    def test_exact_iata_search_does_not_return_provider_branch_aliases(self) -> None:
+        unified_locations = self.service.build_unified_locations(
+            [
+                {
+                    "provider": "okmobility",
+                    "provider_location_id": "641",
+                    "name": "OK DXB - Airport",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "airport",
+                    "latitude": 25.24,
+                    "longitude": 55.35,
+                    "iata": "DXB",
+                },
+                {
+                    "provider": "okmobility",
+                    "provider_location_id": "642",
+                    "name": "OK DXB - City Centre Deir",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "office",
+                    "latitude": 25.25,
+                    "longitude": 55.33,
+                },
+                {
+                    "provider": "okmobility",
+                    "provider_location_id": "643",
+                    "name": "OK DXB - Metro Station",
+                    "city": "Dubai",
+                    "country": "United Arab Emirates",
+                    "country_code": "AE",
+                    "location_type": "train_station",
+                    "latitude": 25.22,
+                    "longitude": 55.39,
+                },
+            ]
+        )
+
+        results = self.service.search_locations(unified_locations, "DXB", limit=10)
+
+        self.assertEqual([item["name"] for item in results], ["Dubai Airport (DXB)"])
+
     def test_it_merges_terminal_airport_rows_into_nearby_iata_airport(self) -> None:
         locations = [
             {

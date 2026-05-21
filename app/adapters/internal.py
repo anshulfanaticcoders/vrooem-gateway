@@ -509,6 +509,7 @@ class InternalAdapter(BaseAdapter):
                 "latitude": _safe_float(loc.get("latitude")) or None,
                 "longitude": _safe_float(loc.get("longitude")) or None,
                 "location_type": (loc.get("type") or "other").lower(),
+                "iata": loc.get("iata") or loc.get("iata_code"),
                 "our_location_id": _build_internal_location_id(loc),
             })
 

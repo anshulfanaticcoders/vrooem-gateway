@@ -45,6 +45,42 @@ def test_extract_image_url_falls_back_to_first_laravel_internal_image():
     assert _extract_image_url(raw) == "https://example.com/internal-gallery.jpg"
 
 
+async def test_get_locations_preserves_laravel_internal_iata_code(monkeypatch):
+    adapter = InternalAdapter()
+
+    class Response:
+        status_code = 200
+
+        def json(self):
+            return {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "Dubai Airport (DXB)",
+                        "location": "Dubai Airport (DXB)",
+                        "type": "airport",
+                        "city": "Dubai",
+                        "country": "United Arab Emirates",
+                        "country_code": "AE",
+                        "latitude": 25.248081,
+                        "longitude": 55.345093,
+                        "iata": "DXB",
+                    }
+                ]
+            }
+
+    async def fake_request(method, url, headers):
+        return Response()
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+
+    locations = await adapter.get_locations()
+
+    assert locations[0]["provider"] == "internal"
+    assert locations[0]["provider_location_id"] == "1"
+    assert locations[0]["iata"] == "DXB"
+
+
 def test_parse_vehicle_preserves_gallery_images_and_vendor_payload():
     adapter = InternalAdapter()
     request = SearchRequest(
