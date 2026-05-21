@@ -153,6 +153,99 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(adapter.last_dropoff_entry.original_name, "Casablanca Downtown")
         self.assertEqual(adapter.last_dropoff_entry.extended_location_code, "CMNC01")
 
+    async def test_skips_one_way_provider_when_dropoff_mapping_is_missing(self) -> None:
+        adapter = _FakeAdapter()
+        request = SearchRequest(
+            unified_location_id=111,
+            pickup_date=date(2026, 6, 25),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 6, 28),
+            dropoff_time=time(9, 0),
+            dropoff_unified_location_id=222,
+            currency="EUR",
+            driver_age=35,
+            country_code="AE",
+        )
+        provider_entries = [
+            {
+                "provider": "surprice",
+                "pickup_id": "DXB:DXBA01",
+                "original_name": "Dubai Airport",
+                "supports_one_way": True,
+            }
+        ]
+        dropoff_repository = MagicMock()
+        dropoff_repository.get_location_by_unified_id.return_value = {
+            "unified_location_id": 222,
+            "providers": [
+                {
+                    "provider": "green_motion",
+                    "pickup_id": "60160",
+                    "original_name": "Dubai Downtown",
+                }
+            ],
+        }
+
+        with patch("app.services.search_service.get_adapter", return_value=adapter), \
+             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+            response = await search_vehicles(
+                request=request,
+                provider_entries=provider_entries,
+                cache=_RecordingCache(),
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertIsNone(adapter.last_pickup_entry)
+        self.assertEqual(response.suppliers_queried, 0)
+        self.assertEqual(response.provider_status[0].provider, "surprice")
+        self.assertEqual(response.provider_status[0].failure_type, "missing_dropoff_mapping")
+
+    async def test_skips_one_way_provider_when_dropoff_mapping_matches_pickup(self) -> None:
+        adapter = _FakeAdapter()
+        request = SearchRequest(
+            unified_location_id=111,
+            pickup_date=date(2026, 6, 25),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 6, 28),
+            dropoff_time=time(9, 0),
+            dropoff_unified_location_id=222,
+            currency="EUR",
+            driver_age=35,
+            country_code="AE",
+        )
+        provider_entries = [
+            {
+                "provider": "surprice",
+                "pickup_id": "DXB:DXBA01",
+                "original_name": "Dubai Airport",
+                "supports_one_way": True,
+            }
+        ]
+        dropoff_repository = MagicMock()
+        dropoff_repository.get_location_by_unified_id.return_value = {
+            "unified_location_id": 222,
+            "providers": [
+                {
+                    "provider": "surprice",
+                    "pickup_id": "DXB:DXBA01",
+                    "original_name": "Dubai Downtown",
+                }
+            ],
+        }
+
+        with patch("app.services.search_service.get_adapter", return_value=adapter), \
+             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+            response = await search_vehicles(
+                request=request,
+                provider_entries=provider_entries,
+                cache=_RecordingCache(),
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertIsNone(adapter.last_pickup_entry)
+        self.assertEqual(response.suppliers_queried, 0)
+        self.assertEqual(response.provider_status[0].failure_type, "invalid_dropoff_mapping")
+
     async def test_cache_lookup_varies_when_provider_entries_change(self) -> None:
         request = SearchRequest(
             unified_location_id=1191543869,

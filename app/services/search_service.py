@@ -66,6 +66,10 @@ def _resolve_dropoff_entry(
     return None
 
 
+def _same_provider_location(left: str | None, right: str | None) -> bool:
+    return (left or "").strip().lower() == (right or "").strip().lower()
+
+
 async def _search_single_supplier(
     adapter: BaseAdapter,
     request: SearchRequest,
@@ -184,6 +188,7 @@ async def search_vehicles(
 
     # Build list of (adapter, pickup_entry, dropoff_entry) tuples
     tasks = []
+    skipped_provider_status: list[ProviderFailure] = []
     for entry in provider_entries:
         provider_id = entry.get("provider", "")
 
@@ -207,6 +212,36 @@ async def search_vehicles(
 
         pickup = _build_provider_location_entry(entry, provider_id)
         dropoff = _resolve_dropoff_entry(dropoff_location, provider_id)
+        if is_one_way:
+            if dropoff is None:
+                skipped_provider_status.append(
+                    ProviderFailure(
+                        provider=adapter.supplier_id,
+                        stage="location_mapping",
+                        failure_type="missing_dropoff_mapping",
+                        message=(
+                            "Provider skipped because the selected one-way dropoff "
+                            "location has no provider mapping."
+                        ),
+                        retryable=False,
+                    )
+                )
+                continue
+
+            if _same_provider_location(dropoff.pickup_id, pickup.pickup_id):
+                skipped_provider_status.append(
+                    ProviderFailure(
+                        provider=adapter.supplier_id,
+                        stage="location_mapping",
+                        failure_type="invalid_dropoff_mapping",
+                        message=(
+                            "Provider skipped because pickup and one-way dropoff "
+                            "resolve to the same provider location."
+                        ),
+                        retryable=False,
+                    )
+                )
+                continue
 
         tasks.append(
             _search_single_supplier(adapter, request, pickup, dropoff, cb_registry)
@@ -218,6 +253,7 @@ async def search_vehicles(
             search_id=search_id,
             suppliers_queried=0,
             response_time_ms=int((time.time() - start) * 1000),
+            provider_status=skipped_provider_status,
         )
 
     # Dispatch all suppliers in parallel with global timeout.
@@ -249,7 +285,7 @@ async def search_vehicles(
     # Merge all vehicles
     all_vehicles: list[Vehicle] = []
     suppliers_responded = 0
-    provider_status: list[ProviderFailure] = []
+    provider_status: list[ProviderFailure] = [*skipped_provider_status]
     for result in supplier_results:
         if result.error is None:
             suppliers_responded += 1

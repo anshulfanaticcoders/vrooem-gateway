@@ -95,6 +95,31 @@ def _split_vehicle_name(description: str) -> tuple[str, str]:
     return make, model
 
 
+def _station_identity(station: dict | None) -> str:
+    if not station:
+        return ""
+    address = station.get("address") or {}
+    address_lines = address.get("addressLine") or []
+    address_line = address_lines[0] if address_lines else ""
+    parts = [
+        station.get("name") or "",
+        address_line,
+        address.get("city") or "",
+        address.get("postalCode") or "",
+    ]
+    normalized_parts = [str(part).strip().lower() for part in parts]
+    if not any(normalized_parts):
+        return ""
+
+    return "|".join(normalized_parts)
+
+
+def _same_station(left: dict | None, right: dict | None) -> bool:
+    left_key = _station_identity(left)
+    right_key = _station_identity(right)
+    return bool(left_key and right_key and left_key == right_key)
+
+
 def _extract_coordinates(address: dict) -> tuple[float | None, float | None]:
     """Extract lat/lon from Surprice address, handling both coordinate formats.
 
@@ -346,19 +371,29 @@ class SurpriceAdapter(BaseAdapter):
             airport_code=pickup_code if len(pickup_code) == 3 else None,
         )
 
+        is_one_way = bool(dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id)
+        return_station_repeats_pickup = is_one_way and _same_station(pickup_station, return_station)
+        display_return_station = {} if return_station_repeats_pickup else return_station
+
         # Dropoff location
         dropoff_loc = None
-        if dropoff_entry and dropoff_entry.pickup_id != pickup_entry.pickup_id:
-            return_address = return_station.get("address") or {}
+        if is_one_way and dropoff_entry:
+            return_address = display_return_station.get("address") or {}
             ret_lat, ret_lon = _extract_coordinates(return_address)
+            if ret_lat is None or ret_lat == 0:
+                ret_lat = dropoff_entry.latitude
+            if ret_lon is None or ret_lon == 0:
+                ret_lon = dropoff_entry.longitude
             dropoff_loc = VehicleLocation(
                 supplier_location_id=dropoff_entry.pickup_id,
-                name=return_station.get("name") or dropoff_entry.original_name,
+                name=display_return_station.get("name") or dropoff_entry.original_name,
                 city=(return_address.get("city") or "").title(),
                 country_code=(return_address.get("country") or {}).get("code", ""),
                 latitude=ret_lat,
                 longitude=ret_lon,
-                location_type="airport" if (return_station.get("stationType") or "").lower() == "airport" else "other",
+                location_type="airport"
+                if (display_return_station.get("stationType") or "").lower() == "airport"
+                else "other",
             )
 
         # Deposit and excess from CDW vehicle data
@@ -475,9 +510,12 @@ class SurpriceAdapter(BaseAdapter):
                 "theft_excess": _safe_float(vehicle_data.get("theftExcess")),
                 "pickup_station_name": pickup_station.get("name"),
                 "pickup_additional_info": (pickup_station.get("additionalInfo") or {}).get("text"),
-                "return_station_name": return_station.get("name"),
+                "return_station_name": (
+                    display_return_station.get("name")
+                    or (dropoff_entry.original_name if is_one_way and dropoff_entry else return_station.get("name"))
+                ),
                 "pickup_office": self._normalize_station(pickup_station),
-                "dropoff_office": self._normalize_station(return_station),
+                "dropoff_office": self._normalize_station(display_return_station),
                 "office_phone": pickup_station.get("telephone", ""),
                 "pickup_address": ((pickup_station.get("address") or {}).get("addressLine") or [""])[0],
                 "pickup_instructions": (pickup_station.get("additionalInfo") or {}).get("text", ""),

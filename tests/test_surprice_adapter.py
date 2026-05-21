@@ -76,6 +76,79 @@ def test_surprice_parse_vehicle_keeps_missing_specs_missing() -> None:
     assert payload.policies.mileage_policy is None
 
 
+def test_surprice_parse_vehicle_uses_dropoff_entry_when_supplier_repeats_pickup_station() -> None:
+    adapter = SurpriceAdapter()
+    request = SearchRequest(
+        unified_location_id=1,
+        dropoff_unified_location_id=2,
+        pickup_date=date(2026, 6, 24),
+        pickup_time=time(9, 0),
+        dropoff_date=date(2026, 6, 28),
+        dropoff_time=time(9, 0),
+        currency="EUR",
+        driver_age=35,
+    )
+    pickup = ProviderLocationEntry(
+        provider="surprice",
+        pickup_id="DXB:DXBA01",
+        original_name="Dubai Airport",
+        latitude=25.2815459,
+        longitude=55.3519485,
+    )
+    dropoff = ProviderLocationEntry(
+        provider="surprice",
+        pickup_id="60160:60160",
+        original_name="Dubai Downtown",
+        latitude=25.25406,
+        longitude=55.30957,
+    )
+    station = {
+        "name": "Dubai Airport",
+        "stationType": "airport",
+        "address": {
+            "addressLine": ["34 24 St - Hor Al Anz East - Dubai - United Arab Emirates"],
+            "city": "Dubai",
+            "postalCode": "99070",
+            "country": {"code": "AE"},
+        },
+    }
+    offering = {
+        "vehicle": {
+            "description": "Hyundai Creta Automatic or similar",
+            "pictureURL": "https://example.com/surprice/creta.jpg",
+        },
+        "rentalDetails": [
+            {
+                "rentalRate": {"rateQualifier": {"vendorRateID": "vr-1", "rateCode": "VROOEM"}},
+                "totalCharge": {"estimatedTotalAmount": 113.43, "currencyCode": "EUR"},
+            }
+        ],
+    }
+
+    vehicle = adapter._parse_vehicle(
+        offering=offering,
+        rental_days=4,
+        request=request,
+        pickup_entry=pickup,
+        dropoff_entry=dropoff,
+        pickup_station=station,
+        return_station=station,
+        pickup_code="DXB",
+        pickup_ext_code="DXBA01",
+        dropoff_code="60160",
+        dropoff_ext_code="60160",
+        fdw_offering=None,
+    )
+
+    assert vehicle is not None
+    assert vehicle.dropoff_location is not None
+    assert vehicle.dropoff_location.supplier_location_id == "60160:60160"
+    assert vehicle.dropoff_location.name == "Dubai Downtown"
+    assert vehicle.dropoff_location.latitude == 25.25406
+    assert vehicle.supplier_data["return_station_name"] == "Dubai Downtown"
+    assert vehicle.supplier_data["dropoff_office"] is None
+
+
 class SurpriceAdapterFetchAvailabilityTest(unittest.IsolatedAsyncioTestCase):
     async def test_fetch_availability_raises_for_known_one_way_restriction(self) -> None:
         adapter = SurpriceAdapter()
