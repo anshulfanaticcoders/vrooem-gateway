@@ -4,8 +4,6 @@ __pycache__/
 dist/
 .venv/
 .env
-.codex-venv/
-.codex-tmp/
 .ruff_cache/
 .pytest_cache/
 *.log
