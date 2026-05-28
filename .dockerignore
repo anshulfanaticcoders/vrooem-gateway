@@ -1,3 +1,5 @@
 .venv
 .venv2
+.codex-venv
+.codex-tmp
 __pycache__
