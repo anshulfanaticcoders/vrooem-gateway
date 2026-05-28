@@ -16,11 +16,7 @@ class Settings(BaseSettings):
     cors_allowed_origins: str = ""
     provider_cors_allowed_origins: str = ""
     allow_insecure_supplier_tls: bool = False
-    allow_insecure_database_tls: bool = False
     allow_insecure_redis_tls: bool = False
-
-    # ─── Database (PostgreSQL — gateway tables) ───
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/vrooem_gateway"
 
     # ─── MySQL (Laravel — provider API tables) ───
     mysql_url: str = "mysql+aiomysql://root@localhost:3306/carrental"

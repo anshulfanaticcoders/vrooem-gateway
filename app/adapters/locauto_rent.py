@@ -151,11 +151,13 @@ _EQUIP_TYPE_NAMES: dict[str, str] = {
     "43": "Roadside Assistance Plus",
     "46": "Additional Driver",
     "55": "Snow Chains",
+    "77": "No Stress Return",
     "78": "Child Seat",
     "89": "Pet Transport (Bau the Way)",
     "136": "Don't Worry Protection",
     "137": "Additional Driver",
     "138": "Pool Driving (3+ Drivers)",
+    "166": "Tollpass Device",
     "139": "Young Driver Surcharge (19-24)",
     "140": "Glass & Wheels Protection",
     "145": "Body Protection",
@@ -170,11 +172,12 @@ _PREBOOKABLE_EXTRAS: set[str] = {
     "8",    # Child Toddler Seat
     "9",    # Additional Driver
     "19",   # GPS Navigation
-    "23",   # One-Way Fee
-    "35",   # One-Way Fee (Sardinia)
-    "55",   # Snow Chains
+    "77",   # No Stress Return
     "78",   # Child Seat
+    "89",   # Pet Transport
     "137",  # Additional Driver
+    "138",  # Pool Driving (3+ Drivers)
+    "166",  # Tollpass Device
     # Protection plans (pre-bookable)
     "136",  # Don't Worry Protection
     "140",  # Glass & Wheels Protection
@@ -298,6 +301,11 @@ def _safe_float(value: str, default: float = 0.0) -> float:
         return default
 
 
+def _is_locauto_one_way_fee(equip_type: str, name: str) -> bool:
+    normalized_name = name.lower().replace("-", " ")
+    return equip_type in {"23", "35"} or "one way" in normalized_name
+
+
 @register_adapter
 class LocautoRentAdapter(BaseAdapter):
     """Adapter for Locauto Rent (NextRent) OTA SOAP/XML API.
@@ -333,12 +341,27 @@ class LocautoRentAdapter(BaseAdapter):
         general = _CONDITIONS.get("general", {})
         vehicles = _CONDITIONS.get("vehicles", {})
         vehicle_conds = vehicles.get(sipp_code, {})
+        raw_deposit_without_protection = vehicle_conds.get("deposit_without_protection")
+        customer_deposit = (
+            0.0
+            if raw_deposit_without_protection is not None
+            and float(raw_deposit_without_protection) <= 0.01
+            else raw_deposit_without_protection
+        )
 
         return {
             "min_age": vehicle_conds.get("min_age"),
             "damage_excess": vehicle_conds.get("damage_excess"),
             "theft_excess": vehicle_conds.get("theft_excess"),
-            "deposit": vehicle_conds.get("deposit_without_protection"),
+            "deposit": customer_deposit,
+            "deposit_policy": {
+                "customer_display_amount": customer_deposit,
+                "without_protection": raw_deposit_without_protection,
+                "with_protection": vehicle_conds.get("deposit_with_protection"),
+                "with_smart_cover": vehicle_conds.get("deposit_with_smart_cover"),
+                "with_dont_worry": vehicle_conds.get("deposit_with_dont_worry"),
+                "display_text": "No car deposit required",
+            },
             "credit_cards_required": vehicle_conds.get("credit_cards_required"),
             "driving_license": general.get("driving_license"),
             "payment_methods": general.get("payment_methods"),
@@ -788,31 +811,62 @@ class LocautoRentAdapter(BaseAdapter):
                     _safe_attr(charge, "IncludedInRate", "false").lower() == "true"
                     if charge else False
                 )
+                is_one_way_fee = _is_locauto_one_way_fee(equip_type, extra_name)
+
+                # Locauto confirmed one-way charges are mandatory and already reflected
+                # in EstimatedTotalAmount. They must not be shown or sent as optional extras.
+                if is_one_way_fee:
+                    continue
 
                 # Skip non-prebookable extras (counter-only per Locauto T&Cs)
                 if equip_type not in _PREBOOKABLE_EXTRAS and not included_in_rate:
                     continue
 
-                # Determine extra type: one-way fees are FEE, rest are EQUIPMENT
-                extra_type = ExtraType.EQUIPMENT
-                if equip_type in ("23", "35") or "one way" in extra_name.lower():
-                    extra_type = ExtraType.FEE
+                calculation = self._find_child(charge, "Calculation") if charge else None
+                min_max = self._find_child(charge, "MinMax") if charge else None
+                charge_unit = _safe_attr(calculation, "UnitName", "Day").strip().lower()
+                charge_quantity = _safe_float(_safe_attr(calculation, "Quantity"), 0.0)
+                max_charge = _safe_float(_safe_attr(min_max, "MaxCharge"), 0.0)
+                max_charge_days = int(_safe_float(_safe_attr(min_max, "MaxChargeDays"), 0.0))
 
-                # Locauto API returns extra Amount as per-day rate
+                pricing_type = "per_day"
+                chargeable_days = rental_days
+                if charge_unit in {"rent", "rental", "booking", "contract"}:
+                    pricing_type = "per_rental"
+                    total_price = extra_amount
+                    daily_rate_for_display = 0.0
+                else:
+                    if charge_quantity > 0:
+                        chargeable_days = int(charge_quantity)
+                    if max_charge_days > 0:
+                        chargeable_days = min(chargeable_days, max_charge_days)
+                    total_price = extra_amount * max(1, chargeable_days)
+                    if max_charge > 0:
+                        total_price = min(total_price, max_charge)
+                    daily_rate_for_display = extra_amount
+
+                total_price = round(total_price, 2)
+
                 extras.append(Extra(
                     id=f"ext_{self.supplier_id}_{equip_type}",
                     name=extra_name,
-                    daily_rate=extra_amount,
-                    total_price=round(extra_amount * rental_days, 2),
+                    daily_rate=daily_rate_for_display,
+                    total_price=total_price,
                     currency=extra_currency,
                     max_quantity=1,
-                    type=extra_type,
+                    type=ExtraType.EQUIPMENT,
                     mandatory=included_in_rate,
                     description=description or None,
                     supplier_data={
                         "code": equip_type,
                         "amount": extra_amount,
                         "included_in_rate": included_in_rate,
+                        "pricing_type": pricing_type,
+                        "charge_unit": charge_unit or None,
+                        "charge_quantity": charge_quantity or None,
+                        "chargeable_days": chargeable_days if pricing_type == "per_day" else None,
+                        "max_charge": max_charge or None,
+                        "max_charge_days": max_charge_days or None,
                     },
                 ))
 
@@ -834,6 +888,7 @@ class LocautoRentAdapter(BaseAdapter):
             if dropoff_entry
             else pickup_metadata
         )
+        conditions = self._get_vehicle_conditions(effective_sipp)
 
         vehicle_kwargs = {
             "id": f"gw_{uuid.uuid4().hex[:16]}",
@@ -855,6 +910,8 @@ class LocautoRentAdapter(BaseAdapter):
                 daily_rate=daily_rate,
                 price_includes_tax=True,
                 fees=fees,
+                deposit_amount=conditions.get("deposit"),
+                deposit_currency=currency if conditions.get("deposit") is not None else None,
             ),
             "extras": extras,
             "cancellation_policy": None,  # API does not return cancellation terms
@@ -889,6 +946,9 @@ class LocautoRentAdapter(BaseAdapter):
                     dropoff_metadata.get("name")
                     or (dropoff_entry.original_name if dropoff_entry else pickup_entry.original_name)
                 ),
+                "deposit_amount": conditions.get("deposit"),
+                "deposit_currency": currency if conditions.get("deposit") is not None else None,
+                "deposit_policy": conditions.get("deposit_policy"),
                 "office_address": pickup_metadata.get("address"),
                 "office_phone": pickup_metadata.get("phone"),
                 "office_schedule": pickup_metadata.get("operating_hours"),

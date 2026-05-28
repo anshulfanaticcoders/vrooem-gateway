@@ -1,16 +1,16 @@
-"""Create Provider API tables in PostgreSQL."""
+"""Create Provider API tables in MySQL."""
 
 import asyncio
 
-from app.db.models import ApiConsumer, ApiKey, Base, ProviderApiLog
-from app.db.session import get_engine
+from app.db.mysql_session import get_mysql_engine
+from app.db.provider_models import ApiConsumer, ApiKey, MySQLBase, ProviderApiLog
 
 
 async def create_tables():
-    engine = get_engine()
+    engine = get_mysql_engine()
     async with engine.begin() as conn:
         await conn.run_sync(
-            Base.metadata.create_all,
+            MySQLBase.metadata.create_all,
             tables=[
                 ApiConsumer.__table__,
                 ApiKey.__table__,

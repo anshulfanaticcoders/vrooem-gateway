@@ -136,15 +136,20 @@ def _build_policies(vehicle: Vehicle) -> SearchVehiclePoliciesPayload:
 def _build_extras_preview(extras: list[Extra]) -> list[dict]:
     preview: list[dict] = []
     for extra in extras:
+        supplier_data = extra.supplier_data or {}
         preview.append(
             {
                 "id": extra.id,
                 "name": extra.name,
+                "description": extra.description,
+                "code": supplier_data.get("code"),
                 "type": extra.type.value,
                 "currency": extra.currency,
+                "amount": supplier_data.get("amount"),
                 "daily_rate": extra.daily_rate,
                 "total_price": extra.total_price,
                 "mandatory": extra.mandatory,
+                "pricing_type": supplier_data.get("pricing_type"),
             }
         )
     return preview

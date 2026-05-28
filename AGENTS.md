@@ -7,7 +7,7 @@ This repo is the FastAPI supplier gateway for Vrooem Car Rentals.
 - Mobile app: `C:\laragon\www\vrooem-mobile`
 
 ## Stack
-- Python 3.11, FastAPI, Pydantic v2, httpx, Redis, SQLAlchemy async, asyncpg, aiomysql, Alembic, PyYAML, pytest, ruff.
+- Python 3.11, FastAPI, Pydantic v2, httpx, Redis, SQLAlchemy async, aiomysql, PyYAML, pytest, ruff.
 
 ## Architecture
 - Entry point: `app/main.py`.
@@ -22,7 +22,7 @@ This repo is the FastAPI supplier gateway for Vrooem Car Rentals.
 - Read `C:\laragon\www\CarRental\CLAUDE.md` for the overall project workflow.
 - Use Codex as the primary agent for this repo. Gateway work is backend/API/provider logic and should get Codex implementation/review by default.
 - Use `fastapi-templates` for Python/FastAPI changes.
-- Use `redis-best-practices` for cache changes and `supabase-postgres-best-practices` for PostgreSQL/query work when relevant.
+- Use `redis-best-practices` for cache changes and `mysql` for database/query work when relevant.
 - Keep adapters isolated by supplier. Follow the shape of existing adapters before adding new abstractions.
 - Do not hardcode credentials; use settings/env/config patterns already in place.
 
@@ -32,7 +32,7 @@ This repo is the FastAPI supplier gateway for Vrooem Car Rentals.
 - Supplier/adapter work: inspect `app/adapters/`, `app/adapters/registry.py`, matching `config/suppliers/*.yaml`, then use `fastapi-templates`.
 - Search/booking contract work: inspect Laravel callers in `C:\laragon\www\CarRental` and verify response shapes.
 - Cache work: use `redis-best-practices`.
-- Database/query work: use `supabase-postgres-best-practices` when Postgres/Supabase is involved.
+- Database/query work: use `mysql` because gateway persistence is backed by Laravel's MySQL database.
 - Current library/API uncertainty: use Ref official docs first; use Exa/web only when discovery is needed.
 - Complex provider integrations: use subagents for independent adapter/config/Laravel-contract review.
 

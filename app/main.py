@@ -29,7 +29,6 @@ import app.adapters.easirent  # noqa: F401
 from app.core.config import get_settings, validate_runtime_settings
 from app.core.exceptions import GatewayError, gateway_error_handler
 from app.db.mysql_session import close_mysql
-from app.db.session import close_db
 from app.services.cache_service import close_redis
 from app.services.provider_api_service import close_provider_api_service
 from app.services.circuit_breaker import CircuitBreakerRegistry
@@ -64,7 +63,6 @@ async def lifespan(app: FastAPI):
     await close_provider_api_service()
     await close_all_adapters()
     await close_redis()
-    await close_db()
     await close_mysql()
     logger.info("Shutdown complete.")
 

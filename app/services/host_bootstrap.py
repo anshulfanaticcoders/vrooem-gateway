@@ -27,7 +27,7 @@ def extract_public_hosts(env: Mapping[str, str]) -> list[str]:
         if not value:
             continue
         parsed = urlparse(value)
-        if parsed.scheme not in {"http", "https", "redis", "postgresql", "postgresql+asyncpg"}:
+        if parsed.scheme not in {"http", "https", "redis", "mysql", "mysql+aiomysql"}:
             continue
         host = parsed.hostname
         if not host or host in IGNORED_HOSTS:
