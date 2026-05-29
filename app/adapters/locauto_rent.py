@@ -985,14 +985,20 @@ class LocautoRentAdapter(BaseAdapter):
         dropoff_code = sd.get("dropoff_code", pickup_code)
         sipp_code = sd.get("sipp_code") or sd.get("acriss_code") or vehicle.sipp_code or ""
 
-        # Build extras list for the SOAP request
-        # Protection plans (locauto_protection_*) are pricing options, not OTA equipment — skip them
+        # Build extras list for the SOAP request. Locauto protection products
+        # are OTA equipment codes too, even when Laravel sends them with the
+        # locauto_protection_* UI prefix.
         booking_extras: list[dict] = []
+        seen_extra_codes: set[str] = set()
         for ext in request.extras:
             raw_id = ext.extra_id
             if raw_id.startswith("locauto_protection_"):
-                continue  # Not a bookable equipment code
-            code = raw_id.replace(f"ext_{self.supplier_id}_", "")
+                code = raw_id.replace("locauto_protection_", "", 1)
+            else:
+                code = raw_id.replace(f"ext_{self.supplier_id}_", "", 1)
+            if code not in _PREBOOKABLE_EXTRAS or code in seen_extra_codes:
+                continue
+            seen_extra_codes.add(code)
             booking_extras.append({"code": code, "quantity": ext.quantity})
 
         # Pickup/dropoff datetimes are stored in supplier_data by the search

@@ -3,8 +3,11 @@ import xml.etree.ElementTree as ET
 from datetime import date, time
 
 from app.adapters.locauto_rent import LocautoRentAdapter, _EQUIP_TYPE_NAMES
+from app.schemas.booking import BookingExtra, CreateBookingRequest, DriverInfo
 from app.schemas.location import ProviderLocationEntry
+from app.schemas.pricing import Pricing
 from app.schemas.search import SearchRequest
+from app.schemas.vehicle import Vehicle
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
 
 
@@ -170,6 +173,63 @@ def test_locauto_equipment_mapping_includes_vendor_document_codes() -> None:
     assert _EQUIP_TYPE_NAMES["89"] == "Pet Transport (Bau the Way)"
     assert _EQUIP_TYPE_NAMES["138"] == "Pool Driving (3+ Drivers)"
     assert _EQUIP_TYPE_NAMES["166"] == "Tollpass Device"
+
+
+def test_locauto_booking_sends_selected_protection_as_equipment(monkeypatch) -> None:
+    adapter = LocautoRentAdapter()
+    captured: dict[str, str] = {}
+
+    class Response:
+        text = (
+            "<OTA_VehResRS>"
+            "<VehReservation><VehSegmentCore><ConfID ID_Context=\"LC123\"/>"
+            "</VehSegmentCore></VehReservation>"
+            "</OTA_VehResRS>"
+        )
+
+    async def fake_request(method, url, **kwargs):
+        captured["xml"] = kwargs["content"]
+        return Response()
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+
+    vehicle = Vehicle(
+        id="gw_test",
+        supplier_id="locauto_rent",
+        supplier_vehicle_id="MDMR",
+        name="Fiat Panda or similar",
+        pricing=Pricing(currency="EUR", total_price=698.44, daily_rate=87.31),
+        sipp_code="MDMR",
+        supplier_data={
+            "pickup_code": "MXP2",
+            "dropoff_code": "BDS",
+            "sipp_code": "MDMR",
+            "pickup_datetime": "2027-05-13T09:00:00+02:00",
+            "return_datetime": "2027-05-21T09:00:00+02:00",
+        },
+    )
+    request = CreateBookingRequest(
+        vehicle_id="gw_test",
+        search_id="search_test",
+        driver=DriverInfo(
+            first_name="Vrooem",
+            last_name="Testing",
+            email="anshulmankotia1997@gmail.com",
+            phone="8278825392",
+            age=35,
+        ),
+        extras=[
+            BookingExtra(extra_id="ext_locauto_rent_19", quantity=1),
+            BookingExtra(extra_id="locauto_protection_136", quantity=1),
+        ],
+        laravel_booking_number="BKTEST",
+    )
+
+    response = asyncio.run(adapter.create_booking(request, vehicle))
+
+    assert response.supplier_booking_id == "LC123"
+    assert 'EquipType="19" Quantity="1"' in captured["xml"]
+    assert 'EquipType="136" Quantity="1"' in captured["xml"]
 
 
 def test_locauto_priced_equips_skip_one_way_fee_and_respect_charge_rules() -> None:
