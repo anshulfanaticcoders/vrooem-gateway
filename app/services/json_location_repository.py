@@ -189,10 +189,21 @@ class JsonLocationRepository:
         self._ensure_loaded()
         return len(self._locations)
 
-    def metadata(self) -> dict[str, str | int | float | None]:
+    def metadata(self) -> dict[str, object]:
         self._ensure_loaded()
+        provider_location_counts: dict[str, int] = {}
+        for location in self._locations:
+            for provider in location.get("providers") or []:
+                provider_id = str(provider.get("provider") or "").strip().lower()
+                if not provider_id:
+                    continue
+                provider_location_counts[provider_id] = provider_location_counts.get(provider_id, 0) + 1
+
         return {
             "location_count": len(self._locations),
+            "provider_location_counts": provider_location_counts,
+            "internal_provider_location_count": provider_location_counts.get("internal", 0),
+            "providers_present": sorted(provider_location_counts),
             "location_data_loaded_at": self._loaded_at,
             "location_data_version": (
                 (self._file_signature or {}).get("sha1")

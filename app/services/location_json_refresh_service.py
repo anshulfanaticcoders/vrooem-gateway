@@ -20,13 +20,18 @@ class LocationJsonRefreshService:
         self.output_path = Path(output_path) if output_path else None
         self.unification_service = LocationUnificationService()
 
-    async def refresh(self) -> dict[str, int]:
+    async def refresh(self) -> dict[str, object]:
         adapters = self.adapters if self.adapters is not None else get_all_adapters()
         summary = {
             "providers_succeeded": 0,
             "providers_failed": 0,
+            "providers_succeeded_ids": [],
+            "providers_failed_ids": [],
             "locations_received": 0,
             "unified_locations": 0,
+            "internal_provider_succeeded": False,
+            "internal_provider_failed": False,
+            "internal_locations_received": 0,
         }
         raw_locations: list[dict] = []
 
@@ -41,15 +46,23 @@ class LocationJsonRefreshService:
                 ) or []
                 logger.info("[%s] Got %d locations", provider, len(locations))
                 summary["providers_succeeded"] += 1
+                summary["providers_succeeded_ids"].append(public_provider)
                 summary["locations_received"] += len(locations)
+                if public_provider == "internal":
+                    summary["internal_provider_succeeded"] = True
+                    summary["internal_locations_received"] = len(locations)
                 raw_locations.extend({**location, "provider": public_provider} for location in locations)
             except Exception:
                 logger.exception("[%s] location JSON refresh failed", provider)
                 summary["providers_failed"] += 1
+                summary["providers_failed_ids"].append(public_provider)
+                if public_provider == "internal":
+                    summary["internal_provider_failed"] = True
 
         unified_locations = self.unification_service.build_unified_locations(raw_locations)
         self._export_unified_json(unified_locations)
         summary["unified_locations"] = len(unified_locations)
+        summary["status"] = "completed_with_failures" if summary["providers_failed"] else "completed"
         return summary
 
     def _export_unified_json(self, unified_locations: list[dict]) -> Path:

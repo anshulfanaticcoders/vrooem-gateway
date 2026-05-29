@@ -53,7 +53,7 @@ async def search_locations(
 @router.get("/status")
 async def location_status(
     _api_key: str = Depends(verify_api_key),
-) -> dict[str, str | int | float | None]:
+) -> dict[str, object]:
     return _repository.metadata()
 
 

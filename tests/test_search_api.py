@@ -76,6 +76,9 @@ class SearchApiTest(unittest.IsolatedAsyncioTestCase):
     async def test_location_status_exposes_loaded_location_metadata(self) -> None:
         fake_metadata = {
             "location_count": 1666,
+            "provider_location_counts": {"internal": 12, "surprice": 44},
+            "internal_provider_location_count": 12,
+            "providers_present": ["internal", "surprice"],
             "location_data_loaded_at": "2026-03-30T12:00:00+00:00",
             "location_data_version": "abc123",
             "location_data_mtime": 1711780800.0,
@@ -87,6 +90,8 @@ class SearchApiTest(unittest.IsolatedAsyncioTestCase):
             payload = await location_status(_api_key="dev-key")
 
         self.assertEqual(payload["location_count"], 1666)
+        self.assertEqual(payload["internal_provider_location_count"], 12)
+        self.assertEqual(payload["providers_present"], ["internal", "surprice"])
         self.assertEqual(payload["location_data_version"], "abc123")
         self.assertEqual(payload["location_data_path"], "/app/data/unified_locations.json")
 

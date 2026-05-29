@@ -119,7 +119,9 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(summary['providers_succeeded'], 4)
         self.assertEqual(summary['providers_failed'], 0)
+        self.assertEqual(summary['providers_failed_ids'], [])
         self.assertEqual(summary['locations_received'], 4)
+        self.assertFalse(summary['internal_provider_failed'])
 
         cmn = next(item for item in exported if item.get('iata') == 'CMN')
         providers = {item['provider']: item['pickup_id'] for item in cmn['providers']}
@@ -238,9 +240,46 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
             exported = json.loads(output_path.read_text(encoding='utf-8'))
 
         self.assertEqual(summary['providers_failed'], 1)
+        self.assertEqual(summary['providers_failed_ids'], ['greenmotion'])
+        self.assertFalse(summary['internal_provider_failed'])
         cmn = next(item for item in exported if item.get('iata') == 'CMN')
         providers = {item['provider']: item['pickup_id'] for item in cmn['providers']}
         self.assertEqual(providers, {'surprice': 'CMN:CMNA01'})
+
+    async def test_refresh_reports_internal_adapter_failure_explicitly(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / 'unified_locations.json'
+            service = LocationJsonRefreshService(
+                adapters=[
+                    FailingAdapter('internal', RuntimeError('laravel unavailable')),
+                    FakeAdapter(
+                        'surprice',
+                        [
+                            {
+                                'provider': 'surprice',
+                                'provider_location_id': 'DXB:DXBA01',
+                                'name': 'Dubai Airport',
+                                'city': 'Dubai',
+                                'country': 'United Arab Emirates',
+                                'country_code': 'AE',
+                                'location_type': 'airport',
+                                'latitude': 25.248081,
+                                'longitude': 55.345093,
+                                'iata': 'DXB',
+                            }
+                        ],
+                    ),
+                ],
+                output_path=output_path,
+            )
+
+            summary = await service.refresh()
+
+        self.assertEqual(summary['status'], 'completed_with_failures')
+        self.assertEqual(summary['providers_failed_ids'], ['internal'])
+        self.assertTrue(summary['internal_provider_failed'])
+        self.assertFalse(summary['internal_provider_succeeded'])
+        self.assertEqual(summary['internal_locations_received'], 0)
 
 
     async def test_refresh_discards_stale_existing_rows_when_provider_returns_new_rows(self) -> None:
