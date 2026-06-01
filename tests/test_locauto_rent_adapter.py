@@ -220,6 +220,8 @@ def test_locauto_booking_sends_selected_protection_as_equipment(monkeypatch) -> 
         ),
         extras=[
             BookingExtra(extra_id="ext_locauto_rent_19", quantity=1),
+            BookingExtra(extra_id="ext_locauto_rent_89", quantity=1),
+            BookingExtra(extra_id="ext_locauto_rent_166", quantity=1),
             BookingExtra(extra_id="locauto_protection_136", quantity=1),
         ],
         laravel_booking_number="BKTEST",
@@ -230,6 +232,8 @@ def test_locauto_booking_sends_selected_protection_as_equipment(monkeypatch) -> 
     assert response.supplier_booking_id == "LC123"
     assert 'EquipType="19" Quantity="1"' in captured["xml"]
     assert 'EquipType="136" Quantity="1"' in captured["xml"]
+    assert 'EquipType="89"' not in captured["xml"]
+    assert 'EquipType="166"' not in captured["xml"]
 
 
 def test_locauto_priced_equips_skip_one_way_fee_and_respect_charge_rules() -> None:
@@ -327,15 +331,17 @@ def test_locauto_priced_equips_skip_one_way_fee_and_respect_charge_rules() -> No
     vehicle = adapter._parse_single_vehicle(veh_avail, 7, request, pickup, dropoff)
 
     assert vehicle is not None
-    assert vehicle.pricing.deposit_amount == 0.0
+    assert vehicle.pricing.deposit_amount == 0.01
     assert vehicle.pricing.deposit_currency == "EUR"
-    assert vehicle.supplier_data["deposit_amount"] == 0.0
-    assert vehicle.supplier_data["deposit_policy"]["display_text"] == "No car deposit required"
+    assert vehicle.supplier_data["deposit_amount"] == 0.01
+    assert vehicle.supplier_data["deposit_policy"]["display_text"] == "Security deposit: EUR 0.01"
 
     codes = {extra.supplier_data["code"] for extra in vehicle.extras}
     assert "35" not in codes
     assert "23" not in codes
     assert "55" not in codes
+    assert "89" not in codes
+    assert "166" not in codes
 
     gps = next(extra for extra in vehicle.extras if extra.supplier_data["code"] == "19")
     assert gps.daily_rate == 10.0
@@ -348,14 +354,6 @@ def test_locauto_priced_equips_skip_one_way_fee_and_respect_charge_rules() -> No
     assert infant_seat.total_price == 25.0
     assert infant_seat.supplier_data["pricing_type"] == "per_rental"
 
-    pet_transport = next(extra for extra in vehicle.extras if extra.supplier_data["code"] == "89")
-    assert pet_transport.daily_rate == 12.47
-    assert pet_transport.total_price == 87.29
-
-    tollpass = next(extra for extra in vehicle.extras if extra.supplier_data["code"] == "166")
-    assert tollpass.daily_rate == 25.19
-    assert tollpass.total_price == 176.33
-
     no_stress_return = next(extra for extra in vehicle.extras if extra.supplier_data["code"] == "77")
     assert no_stress_return.daily_rate == 7.2
     assert no_stress_return.total_price == 50.4
@@ -365,9 +363,12 @@ def test_locauto_priced_equips_skip_one_way_fee_and_respect_charge_rules() -> No
     assert car_pooling.total_price == 90.72
 
     payload = build_search_vehicle_payload(vehicle)
-    assert payload.pricing.deposit_amount == 0.0
+    assert payload.pricing.deposit_amount == 0.01
     assert payload.pricing.deposit_currency == "EUR"
     payload_codes = {extra["code"] for extra in payload.extras_preview}
     assert "35" not in payload_codes
     assert "55" not in payload_codes
+    assert "89" not in payload_codes
+    assert "166" not in payload_codes
     assert payload.extras_preview[0]["pricing_type"] in {"per_day", "per_rental"}
+    assert payload.extras_preview[0]["max_charge_days"] == 3

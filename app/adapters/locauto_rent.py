@@ -174,10 +174,8 @@ _PREBOOKABLE_EXTRAS: set[str] = {
     "19",   # GPS Navigation
     "77",   # No Stress Return
     "78",   # Child Seat
-    "89",   # Pet Transport
     "137",  # Additional Driver
     "138",  # Pool Driving (3+ Drivers)
-    "166",  # Tollpass Device
     # Protection plans (pre-bookable)
     "136",  # Don't Worry Protection
     "140",  # Glass & Wheels Protection
@@ -343,10 +341,14 @@ class LocautoRentAdapter(BaseAdapter):
         vehicle_conds = vehicles.get(sipp_code, {})
         raw_deposit_without_protection = vehicle_conds.get("deposit_without_protection")
         customer_deposit = (
-            0.0
+            float(raw_deposit_without_protection)
             if raw_deposit_without_protection is not None
-            and float(raw_deposit_without_protection) <= 0.01
-            else raw_deposit_without_protection
+            else None
+        )
+        deposit_display = (
+            f"Security deposit: EUR {customer_deposit:.2f}"
+            if customer_deposit is not None
+            else None
         )
 
         return {
@@ -360,7 +362,7 @@ class LocautoRentAdapter(BaseAdapter):
                 "with_protection": vehicle_conds.get("deposit_with_protection"),
                 "with_smart_cover": vehicle_conds.get("deposit_with_smart_cover"),
                 "with_dont_worry": vehicle_conds.get("deposit_with_dont_worry"),
-                "display_text": "No car deposit required",
+                "display_text": deposit_display,
             },
             "credit_cards_required": vehicle_conds.get("credit_cards_required"),
             "driving_license": general.get("driving_license"),

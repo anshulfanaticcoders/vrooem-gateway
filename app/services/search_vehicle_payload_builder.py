@@ -150,6 +150,10 @@ def _build_extras_preview(extras: list[Extra]) -> list[dict]:
                 "total_price": extra.total_price,
                 "mandatory": extra.mandatory,
                 "pricing_type": supplier_data.get("pricing_type"),
+                "chargeable_days": supplier_data.get("chargeable_days"),
+                "max_charge_days": supplier_data.get("max_charge_days"),
+                "max_charge": supplier_data.get("max_charge"),
+                "included_in_rate": supplier_data.get("included_in_rate"),
             }
         )
     return preview
