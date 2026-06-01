@@ -1,6 +1,7 @@
 """OK Mobility adapter — SOAP 1.1/1.2 XML API."""
 
 import logging
+import re
 import uuid
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -66,6 +67,14 @@ NS_SOAP11 = "http://schemas.xmlsoap.org/soap/envelope/"
 NS_SOAP12 = "http://www.w3.org/2003/05/soap-envelope"
 NS_OK = "http://www.OKGroup.es/RentaCarWebService/getWSDL"
 NS_TEMPURI = "http://tempuri.org/"
+_HYBRID_NAME_RE = re.compile(
+    r"\b(plug[- ]?in hybrid|phev|hybrid|mhev|hev)\b",
+    re.IGNORECASE,
+)
+_ELECTRIC_NAME_RE = re.compile(
+    r"\b(electric|ev|500e|leaf|e-?tron|zoe|ioniq|taycan|eqa|eqb|eqc|eqe|eqs)\b",
+    re.IGNORECASE,
+)
 
 
 def _parse_transmission_from_sipp(sipp: str) -> TransmissionType | None:
@@ -84,7 +93,7 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
     if len(sipp) < 4:
         return None
     ch = sipp[3].upper()
-    if ch in ("R", "N", "S"):
+    if ch in ("R", "N"):
         return FuelType.PETROL
     if ch in ("D", "Q"):
         return FuelType.DIESEL
@@ -92,6 +101,16 @@ def _parse_fuel_from_sipp(sipp: str) -> FuelType | None:
         return FuelType.ELECTRIC
     if ch in ("H", "I"):
         return FuelType.HYBRID
+    return None
+
+
+def _parse_fuel_from_vehicle_name(name: str) -> FuelType | None:
+    if not name:
+        return None
+    if _HYBRID_NAME_RE.search(name):
+        return FuelType.HYBRID
+    if _ELECTRIC_NAME_RE.search(name):
+        return FuelType.ELECTRIC
     return None
 
 
@@ -556,7 +575,9 @@ class OkMobilityAdapter(BaseAdapter):
 
         if sipp_for_parse:
             transmission = _parse_transmission_from_sipp(sipp_for_parse)
-            fuel_type = _parse_fuel_from_sipp(sipp_for_parse)
+            fuel_type = _parse_fuel_from_vehicle_name(display_name) or _parse_fuel_from_sipp(
+                sipp_for_parse
+            )
             ac = _parse_ac_from_sipp(sipp_for_parse)
             if transmission is not None:
                 vehicle_kwargs["transmission"] = transmission

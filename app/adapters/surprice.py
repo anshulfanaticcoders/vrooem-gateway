@@ -2,8 +2,8 @@
 
 import asyncio
 import logging
+import re
 import uuid
-from datetime import datetime
 
 from app.adapters.base import BaseAdapter
 from app.adapters.registry import register_adapter
@@ -41,6 +41,16 @@ class SurpriceOneWayNotAllowedError(RuntimeError):
     """Raised when Surprice explicitly rejects a one-way route."""
 
 
+_HYBRID_NAME_RE = re.compile(
+    r"\b(plug[- ]?in hybrid|phev|hybrid|mhev|hev)\b",
+    re.IGNORECASE,
+)
+_ELECTRIC_NAME_RE = re.compile(
+    r"\b(electric|ev|500e|leaf|e-?tron|zoe|ioniq|taycan|eqa|eqb|eqc|eqe|eqs)\b",
+    re.IGNORECASE,
+)
+
+
 def _safe_float(value, default: float = 0.0) -> float:
     if value is None:
         return default
@@ -59,18 +69,30 @@ def _safe_int(value, default: int = 0) -> int:
         return default
 
 
-def _parse_fuel_from_sipp(sipp_code: str | None) -> FuelType:
+def _parse_fuel_from_sipp(sipp_code: str | None) -> FuelType | None:
     """Derive fuel type from the 4th character of the SIPP/ACRISS code."""
     if not sipp_code or len(sipp_code) < 4:
-        return FuelType.PETROL
+        return None
     fuel_char = sipp_code[3].upper()
     return {
+        "R": FuelType.PETROL,
+        "N": FuelType.PETROL,
         "D": FuelType.DIESEL,
         "E": FuelType.ELECTRIC,
         "C": FuelType.ELECTRIC,
         "H": FuelType.HYBRID,
         "Q": FuelType.HYBRID,
-    }.get(fuel_char, FuelType.PETROL)
+    }.get(fuel_char)
+
+
+def _parse_fuel_from_vehicle_name(name: str) -> FuelType | None:
+    if not name:
+        return None
+    if _HYBRID_NAME_RE.search(name):
+        return FuelType.HYBRID
+    if _ELECTRIC_NAME_RE.search(name):
+        return FuelType.ELECTRIC
+    return None
 
 
 def _parse_transmission(transmission_str: str) -> TransmissionType:
@@ -341,11 +363,8 @@ class SurpriceAdapter(BaseAdapter):
             if quantity > 0:
                 mileage_limit_km = quantity
 
-        # Transmission
-        transmission = _parse_transmission(vehicle_data.get("transmissionType") or "Manual")
-
-        # Fuel type from SIPP code
-        fuel_type = _parse_fuel_from_sipp(sipp_code)
+        # Fuel type: prefer clear model text, then deterministic SIPP/ACRISS codes.
+        fuel_type = _parse_fuel_from_vehicle_name(description) or _parse_fuel_from_sipp(sipp_code)
 
         # Image
         image_url = vehicle_data.get("pictureURL") or ""
@@ -529,7 +548,8 @@ class SurpriceAdapter(BaseAdapter):
             vehicle_kwargs["transmission"] = _parse_transmission(vehicle_data.get("transmissionType") or "")
 
         if sipp_code:
-            vehicle_kwargs["fuel_type"] = _parse_fuel_from_sipp(sipp_code)
+            if fuel_type is not None:
+                vehicle_kwargs["fuel_type"] = fuel_type
             vehicle_kwargs["sipp_code"] = sipp_code
 
         if vehicle_data.get("passengerQuantity") not in (None, ""):

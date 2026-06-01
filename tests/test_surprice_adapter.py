@@ -2,9 +2,56 @@ import unittest
 from datetime import date, time
 
 from app.adapters.surprice import SurpriceAdapter, SurpriceOneWayNotAllowedError
+from app.schemas.common import FuelType
 from app.schemas.location import ProviderLocationEntry
 from app.schemas.search import SearchRequest
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
+
+
+def _parse_surprice_vehicle(description: str, sipp_code: str):
+    adapter = SurpriceAdapter()
+    request = SearchRequest(
+        unified_location_id=1,
+        pickup_date=date(2026, 6, 10),
+        pickup_time=time(9, 0),
+        dropoff_date=date(2026, 6, 13),
+        dropoff_time=time(9, 0),
+        currency="EUR",
+        driver_age=35,
+    )
+    pickup = ProviderLocationEntry(
+        provider="surprice",
+        pickup_id="BCN",
+        original_name="Barcelona Airport",
+    )
+    offering = {
+        "vehicle": {
+            "code": sipp_code,
+            "description": description,
+            "pictureURL": "https://example.com/surprice/car.jpg",
+        },
+        "rentalDetails": [
+            {
+                "rentalRate": {"rateQualifier": {"vendorRateID": "vr-1", "rateCode": "VROOEM"}},
+                "totalCharge": {"estimatedTotalAmount": 300.00, "currencyCode": "EUR"},
+            }
+        ],
+    }
+
+    return adapter._parse_vehicle(
+        offering=offering,
+        rental_days=3,
+        request=request,
+        pickup_entry=pickup,
+        dropoff_entry=None,
+        pickup_station={"name": "Barcelona Airport", "address": {}},
+        return_station={"name": "Barcelona Airport", "address": {}},
+        pickup_code="BCN",
+        pickup_ext_code="BCNA01",
+        dropoff_code="BCN",
+        dropoff_ext_code="BCNA01",
+        fdw_offering=None,
+    )
 
 
 def test_surprice_parse_vehicle_keeps_missing_specs_missing() -> None:
@@ -74,6 +121,44 @@ def test_surprice_parse_vehicle_keeps_missing_specs_missing() -> None:
     assert payload.specs.luggage_large is None
     assert payload.specs.air_conditioning is None
     assert payload.policies.mileage_policy is None
+
+
+def test_surprice_does_not_guess_petrol_for_ambiguous_sipp_fuel_code() -> None:
+    vehicle = _parse_surprice_vehicle("Generic City Car or similar", "MTES")
+
+    assert vehicle is not None
+    assert vehicle.fuel_type is None
+
+    payload = build_search_vehicle_payload(vehicle)
+    assert payload.specs.fuel is None
+    assert payload.specs.sipp_code == "MTES"
+
+
+def test_surprice_uses_clear_model_name_for_ev_and_phev_fuel() -> None:
+    examples = [
+        ("Fiat 500e", "MSES", FuelType.ELECTRIC),
+        ("Nissan Leaf or similar", "CMES", FuelType.ELECTRIC),
+        ("Peugeot 3008 Plug-in Hybrid or similar", "SMPS", FuelType.HYBRID),
+    ]
+
+    for model, sipp, expected_fuel in examples:
+        vehicle = _parse_surprice_vehicle(model, sipp)
+        assert vehicle is not None
+        assert vehicle.fuel_type == expected_fuel
+
+        payload = build_search_vehicle_payload(vehicle)
+        assert payload.specs.fuel == expected_fuel.value
+        assert payload.specs.sipp_code == sipp
+
+
+def test_surprice_still_maps_deterministic_petrol_sipp_codes() -> None:
+    vehicle = _parse_surprice_vehicle("Volkswagen Polo or similar", "EDMR")
+
+    assert vehicle is not None
+    assert vehicle.fuel_type == FuelType.PETROL
+
+    payload = build_search_vehicle_payload(vehicle)
+    assert payload.specs.fuel == FuelType.PETROL.value
 
 
 def test_surprice_parse_vehicle_uses_dropoff_entry_when_supplier_repeats_pickup_station() -> None:

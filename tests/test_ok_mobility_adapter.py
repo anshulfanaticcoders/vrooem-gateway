@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from datetime import date, time
 
 from app.adapters.ok_mobility import OkMobilityAdapter
+from app.schemas.common import FuelType
 from app.schemas.location import ProviderLocationEntry
 from app.schemas.search import SearchRequest
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
@@ -57,3 +58,54 @@ def test_okmobility_parse_single_vehicle_keeps_missing_specs_missing() -> None:
     assert payload.specs.luggage_large is None
     assert payload.specs.air_conditioning is None
     assert payload.policies.mileage_policy is None
+
+
+def test_okmobility_uses_model_name_for_ev_and_phev_fuel_when_sipp_s_is_ambiguous() -> None:
+    adapter = OkMobilityAdapter()
+    request = SearchRequest(
+        unified_location_id=1,
+        pickup_date=date(2026, 6, 10),
+        pickup_time=time(9, 0),
+        dropoff_date=date(2026, 6, 13),
+        dropoff_time=time(9, 0),
+        currency="EUR",
+        driver_age=35,
+    )
+    pickup = ProviderLocationEntry(
+        provider="okmobility",
+        pickup_id="BCN",
+        original_name="Barcelona Airport",
+    )
+
+    examples = [
+        ("Smart ForTwo Electric", "MTES", FuelType.ELECTRIC),
+        ("Fiat 500e", "MSES", FuelType.ELECTRIC),
+        ("Peugeot 2008 EV", "SSES", FuelType.ELECTRIC),
+        ("Nissan Leaf", "CMES", FuelType.ELECTRIC),
+        ("Peugeot 3008 Plug-in Hybrid", "SMPS", FuelType.HYBRID),
+    ]
+
+    for model, sipp, expected_fuel in examples:
+        vehicle_xml = ET.fromstring(
+            f"""
+            <getMultiplePrice>
+                <GroupID>{sipp}</GroupID>
+                <SIPP>{sipp}</SIPP>
+                <token>tok-{sipp}</token>
+                <VehicleModel>{model}</VehicleModel>
+                <previewValue>300.00</previewValue>
+                <PrepayValue>300.00</PrepayValue>
+                <rateCode>OK-BASE</rateCode>
+                <stationNamePick>Barcelona Airport</stationNamePick>
+                <stationNameDrop>Barcelona Airport</stationNameDrop>
+            </getMultiplePrice>
+            """
+        )
+
+        vehicle = adapter._parse_single_vehicle(vehicle_xml, 3, request, pickup, None)
+        assert vehicle is not None
+        assert vehicle.fuel_type == expected_fuel
+
+        payload = build_search_vehicle_payload(vehicle)
+        assert payload.specs.fuel == expected_fuel.value
+        assert payload.specs.sipp_code == sipp

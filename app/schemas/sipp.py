@@ -61,7 +61,8 @@ SIPP_FUEL: dict[str, FuelType] = {
     "E": FuelType.ELECTRIC,  # AC + Electric
     "C": FuelType.PETROL,    # AC + Compressed Gas (map to petrol)
     "L": FuelType.LPG,       # AC + LPG/Compressed Gas
-    "S": FuelType.PETROL,    # AC + Petrol (alternative code)
+    # "S" is intentionally not mapped: some suppliers use it on EV/PHEV groups
+    # (for example OK Mobility MTES/MSES/SMPS), so treating it as petrol is unsafe.
     "A": FuelType.HYBRID,    # AC + Hydrogen/Hydrogen fuel cell
     "B": FuelType.ELECTRIC,  # AC + Electric (alternative)
     "M": FuelType.PETROL,    # Multi fuel / No AC
