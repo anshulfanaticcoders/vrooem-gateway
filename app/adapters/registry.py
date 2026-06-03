@@ -6,7 +6,6 @@ from pathlib import Path
 import yaml
 
 from app.adapters.base import BaseAdapter
-from app.core.config import get_settings
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +46,7 @@ def register_adapter(cls: type[BaseAdapter]) -> type[BaseAdapter]:
 def load_supplier_configs(config_dir: str = "config/suppliers") -> dict[str, dict]:
     """Load all supplier YAML configs from the config directory."""
     global _supplier_configs
+    _supplier_configs = {}
     config_path = Path(config_dir)
     if not config_path.exists():
         logger.warning("Supplier config directory not found: %s", config_dir)
@@ -55,7 +55,10 @@ def load_supplier_configs(config_dir: str = "config/suppliers") -> dict[str, dic
     for yaml_file in sorted(config_path.glob("*.yaml")):
         with open(yaml_file) as f:
             config = yaml.safe_load(f) or {}
-        supplier_id = config.get("id", yaml_file.stem)
+        supplier_id = config.get("id")
+        if not supplier_id:
+            logger.info("Skipping non-supplier YAML config: %s", yaml_file)
+            continue
         _supplier_configs[supplier_id] = config
         logger.info("Loaded config for supplier: %s", supplier_id)
 
@@ -131,14 +134,24 @@ def list_suppliers() -> list[dict]:
     suppliers = []
     for supplier_id, config in _supplier_configs.items():
         adapter = _adapter_classes.get(supplier_id)
-        suppliers.append({
-            "id": supplier_id,
-            "name": config.get("name", supplier_id),
-            "enabled": config.get("enabled", True),
-            "has_adapter": adapter is not None,
-            "supports_one_way": config.get("supports_one_way", False),
-            "countries": config.get("countries", []),
-        })
+        configured_one_way = config.get("supports_one_way", False)
+        adapter_one_way = (
+            bool(getattr(adapter, "supports_one_way", False)) if adapter is not None else None
+        )
+        suppliers.append(
+            {
+                "id": supplier_id,
+                "name": config.get("name", supplier_id),
+                "enabled": config.get("enabled", True),
+                "has_adapter": adapter is not None,
+                "supports_one_way": adapter_one_way if adapter is not None else configured_one_way,
+                "configured_supports_one_way": configured_one_way,
+                "adapter_supports_one_way": adapter_one_way,
+                "supports_one_way_mismatch": adapter is not None
+                and adapter_one_way != configured_one_way,
+                "countries": config.get("countries", []),
+            }
+        )
     return suppliers
 
 
