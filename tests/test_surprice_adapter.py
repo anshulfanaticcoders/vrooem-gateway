@@ -2,9 +2,12 @@ import unittest
 from datetime import date, time
 
 from app.adapters.surprice import SurpriceAdapter, SurpriceOneWayNotAllowedError
+from app.schemas.booking import BookingExtra, CreateBookingRequest, DriverInfo
 from app.schemas.common import FuelType
 from app.schemas.location import ProviderLocationEntry
+from app.schemas.pricing import Pricing
 from app.schemas.search import SearchRequest
+from app.schemas.vehicle import Vehicle, VehicleLocation
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
 
 
@@ -265,6 +268,68 @@ class SurpriceAdapterFetchAvailabilityTest(unittest.IsolatedAsyncioTestCase):
                     "rateCode": "Vrooem",
                 },
             )
+
+
+class SurpriceBookingPayloadTest(unittest.IsolatedAsyncioTestCase):
+    async def test_create_booking_sends_fdw_rate_and_selected_extras(self) -> None:
+        adapter = SurpriceAdapter()
+        captured_payload = {}
+
+        class _Resp:
+            status_code = 201
+
+            def json(self):
+                return {"orderInfo": {"corporateOrderId": "SURP-123"}}
+
+        async def fake_request(*args, **kwargs):
+            captured_payload.update(kwargs.get("json") or {})
+            return _Resp()
+
+        adapter._request = fake_request  # type: ignore[method-assign]
+
+        vehicle = Vehicle(
+            id="gw_surprice_1",
+            supplier_id="surprice",
+            supplier_vehicle_id="MBMR",
+            provider_rate_id="bas-rate-1",
+            name="Toyota Aygo or similar",
+            pickup_location=VehicleLocation(name="Cagliari Airport"),
+            pricing=Pricing(total_price=390.91, daily_rate=39.09, currency="EUR"),
+            supplier_data={
+                "vendor_rate_id": "bas-rate-1",
+                "rate_code": "Vrooem",
+                "fdw_vendor_rate_id": "fdw-rate-1",
+                "fdw_rate_code": "Vrooem FDW",
+                "pickup_code": "CAG",
+                "pickup_ext_code": "CAGA01",
+                "dropoff_code": "CAG",
+                "dropoff_ext_code": "CAGA01",
+            },
+        )
+
+        request = CreateBookingRequest(
+            vehicle_id="gw_surprice_1",
+            search_id="search_1",
+            driver=DriverInfo(
+                first_name="Test",
+                last_name="Customer",
+                email="test@example.com",
+                phone="+390000000",
+            ),
+            insurance_id="ins_surprice_fdw",
+            extras=[BookingExtra(extra_id="ext_surprice_ADS", quantity=1)],
+            pickup_date=date(2026, 8, 18),
+            pickup_time="09:00",
+            dropoff_date=date(2026, 8, 28),
+            dropoff_time="09:00",
+        )
+
+        response = await adapter.create_booking(request, vehicle)
+
+        self.assertEqual(response.supplier_booking_id, "SURP-123")
+        self.assertEqual(captured_payload["vendorRateID"], "fdw-rate-1")
+        self.assertEqual(captured_payload["rateCode"], "Vrooem FDW")
+        self.assertEqual(captured_payload["extras"], [{"description": "ADS", "quantity": 1}])
 
 
 class SurpriceOneWayPayloadTest(unittest.IsolatedAsyncioTestCase):

@@ -665,6 +665,39 @@ class SurpriceAdapter(BaseAdapter):
     async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
         base_url = self._base_url()
         sd = vehicle.supplier_data
+        use_fdw = (request.insurance_id or "").lower() in {
+            "fdw",
+            "ins_surprice_fdw",
+            "surprice_fdw",
+            "full_coverage",
+        }
+        vendor_rate_id = sd.get("fdw_vendor_rate_id") if use_fdw else sd.get("vendor_rate_id")
+        rate_code = sd.get("fdw_rate_code") if use_fdw else sd.get("rate_code")
+
+        required_context = {
+            "vendor_rate_id": vendor_rate_id,
+            "rate_code": rate_code,
+            "pickup_code": sd.get("pickup_code"),
+            "dropoff_code": sd.get("dropoff_code"),
+        }
+        missing_context = [key for key, value in required_context.items() if not str(value or "").strip()]
+        if missing_context:
+            logger.error("[surprice] Missing booking context for vehicle %s: %s", vehicle.id, missing_context)
+            return BookingResponse(
+                id=f"bk_{uuid.uuid4().hex[:16]}",
+                supplier_id=self.supplier_id,
+                supplier_booking_id="",
+                status=BookingStatus.FAILED,
+                vehicle_name=vehicle.name,
+                total_price=vehicle.pricing.total_price,
+                currency=vehicle.pricing.currency,
+                supplier_data={
+                    "error": "Missing Surprice booking context",
+                    "missing_fields": missing_context,
+                    "vehicle_id": vehicle.id,
+                    "supplier_vehicle_id": vehicle.supplier_vehicle_id,
+                },
+            )
 
         # Build extras list for reservation payload
         extras_payload = []
@@ -686,8 +719,8 @@ class SurpriceAdapter(BaseAdapter):
         customer_name = f"{request.driver.first_name} {request.driver.last_name}".strip()
 
         payload = {
-            "vendorRateID": sd.get("vendor_rate_id"),
-            "rateCode": sd.get("rate_code"),
+            "vendorRateID": vendor_rate_id,
+            "rateCode": rate_code,
             "pickUpLocationCode": sd.get("pickup_code"),
             "pickUpExtendedLocationCode": sd.get("pickup_ext_code") or "",
             "returnLocationCode": sd.get("dropoff_code"),
@@ -702,6 +735,9 @@ class SurpriceAdapter(BaseAdapter):
                 },
             },
         }
+
+        if extras_payload:
+            payload["extras"] = extras_payload
 
         if request.special_requests:
             payload["customerInfo"]["customer"]["specialRequests"] = request.special_requests
@@ -723,7 +759,10 @@ class SurpriceAdapter(BaseAdapter):
                 vehicle_name=vehicle.name,
                 total_price=vehicle.pricing.total_price,
                 currency=vehicle.pricing.currency,
-                supplier_data={"error": "Invalid response from Surprice"},
+                supplier_data={
+                    "error": "Invalid response from Surprice",
+                    "status_code": response.status_code,
+                },
             )
 
         order_info = data.get("orderInfo") or {}
@@ -736,6 +775,11 @@ class SurpriceAdapter(BaseAdapter):
             or ""
         )
         is_success = bool(order_id) and response.status_code in (200, 201)
+        supplier_data = data if is_success else {
+            "error": "Surprice reservation did not return a booking reference",
+            "status_code": response.status_code,
+            "response": data,
+        }
 
         return BookingResponse(
             id=f"bk_{uuid.uuid4().hex[:16]}",
@@ -745,7 +789,7 @@ class SurpriceAdapter(BaseAdapter):
             vehicle_name=vehicle.name,
             total_price=vehicle.pricing.total_price,
             currency=vehicle.pricing.currency,
-            supplier_data=data,
+            supplier_data=supplier_data,
         )
 
     # ─── Cancel ───────────────────────────────────────────────────────────

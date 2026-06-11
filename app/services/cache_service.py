@@ -20,7 +20,9 @@ async def get_redis() -> redis.Redis:
         settings = get_settings()
         url = settings.redis_url
         ssl_kwargs = {}
-        if url.startswith("rediss://") and (settings.is_local_env or settings.allow_insecure_redis_tls):
+        if url.startswith("rediss://") and (
+            settings.is_local_env or settings.allow_insecure_redis_tls
+        ):
             # Preserve local/self-signed Redis compatibility only when explicitly allowed.
             ssl_kwargs = {"ssl_cert_reqs": None}
         _redis_pool = redis.from_url(url, decode_responses=True, **ssl_kwargs)
@@ -41,7 +43,7 @@ class CacheService:
     # Default TTLs in seconds
     SEARCH_TTL = 60  # 1 minute for search results
     LOCATION_TTL = 21600  # 6 hours for location data
-    VEHICLE_TTL = 600  # 10 minutes for individual vehicle details
+    VEHICLE_TTL = 7200  # 2 hours, aligned with Laravel checkout price verification
 
     def __init__(self, redis_client: redis.Redis):
         self.redis = redis_client

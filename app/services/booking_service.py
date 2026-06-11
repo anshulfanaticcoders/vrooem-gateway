@@ -10,6 +10,7 @@ from app.schemas.booking import (
     CancelBookingResponse,
     CreateBookingRequest,
 )
+from app.schemas.common import BookingStatus
 from app.schemas.vehicle import Vehicle
 from app.services.cache_service import CacheService
 
@@ -35,7 +36,9 @@ async def create_booking(
     try:
         vehicle_data = await cache.get_vehicle(request.vehicle_id)
         if not vehicle_data:
-            raise ValueError(f"Vehicle {request.vehicle_id} not found in cache (expired or invalid)")
+            raise ValueError(
+                f"Vehicle {request.vehicle_id} not found in cache (expired or invalid)"
+            )
 
         vehicle = Vehicle(**vehicle_data)
         adapter = get_adapter(vehicle.supplier_id)
@@ -48,13 +51,39 @@ async def create_booking(
             vehicle.supplier_id,
         )
 
-        return await adapter.create_booking(request, vehicle)
+        response = await adapter.create_booking(request, vehicle)
+
+        return normalize_booking_response(response)
     finally:
         if lock_key and lock_acquired:
             try:
                 await cache.redis.delete(lock_key)
             except Exception:
-                logger.warning("Failed to release gateway booking lock: %s", lock_key, exc_info=True)
+                logger.warning(
+                    "Failed to release gateway booking lock: %s",
+                    lock_key,
+                    exc_info=True,
+                )
+
+
+def normalize_booking_response(response: BookingResponse) -> BookingResponse:
+    """Ensure every adapter follows the same success contract."""
+
+    supplier_booking_id = (response.supplier_booking_id or "").strip()
+    provider_status = response.provider_status or str(response.status.value)
+
+    if response.status == BookingStatus.CONFIRMED and not supplier_booking_id:
+        response.status = BookingStatus.FAILED
+        response.failure_reason = (
+            response.failure_reason or "Confirmed status without supplier booking id"
+        )
+
+    if response.status != BookingStatus.CONFIRMED and not response.failure_reason:
+        response.failure_reason = "Supplier did not return a confirmed reservation"
+
+    response.provider_status = provider_status
+
+    return response
 
 
 async def cancel_booking(

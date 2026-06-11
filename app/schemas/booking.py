@@ -1,14 +1,16 @@
 """Booking schemas for create/modify/cancel operations."""
 
-from datetime import date, datetime, time
+from datetime import date, datetime
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 from app.schemas.common import BookingStatus
 
 
 class DriverInfo(BaseModel):
     """Driver details for a booking."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
 
     first_name: str
     last_name: str
@@ -27,15 +29,25 @@ class DriverInfo(BaseModel):
 class BookingExtra(BaseModel):
     """An extra selected for a booking."""
 
-    extra_id: str
-    quantity: int = 1
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    extra_id: str = Field(min_length=1)
+    quantity: int = Field(default=1, ge=1)
 
 
 class CreateBookingRequest(BaseModel):
     """Request to create a booking through the gateway."""
 
-    vehicle_id: str = Field(description="Gateway vehicle ID from search results")
-    search_id: str = Field(description="Search ID from which this vehicle was selected")
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    vehicle_id: str = Field(
+        min_length=1,
+        description="Gateway vehicle ID from search results",
+    )
+    search_id: str = Field(
+        min_length=1,
+        description="Search ID from which this vehicle was selected",
+    )
     driver: DriverInfo
     extras: list[BookingExtra] = Field(default_factory=list)
     insurance_id: str | None = None
@@ -49,7 +61,8 @@ class CreateBookingRequest(BaseModel):
         default=None, description="Laravel's booking ID for cross-reference"
     )
     laravel_booking_number: str | None = Field(
-        default=None, description="Laravel's booking number (e.g. BK2026035725) for voucher reference"
+        default=None,
+        description="Laravel's booking number (e.g. BK2026035725) for voucher reference",
     )
 
 
@@ -71,6 +84,8 @@ class BookingResponse(BaseModel):
     supplier_data: dict = Field(
         default_factory=dict, description="Raw supplier response for Laravel storage"
     )
+    provider_status: str = ""
+    failure_reason: str = ""
     created_at: datetime | None = None
 
 

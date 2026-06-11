@@ -1,5 +1,8 @@
 from datetime import datetime
 
+import pytest
+from pydantic import ValidationError
+
 from app.schemas.booking import BookingResponse, CreateBookingRequest, DriverInfo
 from app.schemas.common import BookingStatus
 from app.services import booking_service
@@ -83,3 +86,48 @@ async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
     assert len(adapter.calls) == 1
     assert cache.redis.set_calls == [("gateway_booking_lock:104", "1", 90, True)]
     assert cache.redis.deleted_keys == ["gateway_booking_lock:104"]
+
+
+def test_create_booking_request_rejects_blank_gateway_context():
+    with pytest.raises(ValidationError):
+        CreateBookingRequest(
+            vehicle_id=" ",
+            search_id="search_123",
+            driver=DriverInfo(
+                first_name="Vrooem",
+                last_name="Testing",
+                email="anshulmankotia1997@gmail.com",
+                phone="8278825392",
+                age=35,
+            ),
+        )
+
+    with pytest.raises(ValidationError):
+        CreateBookingRequest(
+            vehicle_id="gw_vehicle_1",
+            search_id="",
+            driver=DriverInfo(
+                first_name="Vrooem",
+                last_name="Testing",
+                email="anshulmankotia1997@gmail.com",
+                phone="8278825392",
+                age=35,
+            ),
+        )
+
+
+def test_booking_response_normalizer_fails_confirmed_without_supplier_ref():
+    response = BookingResponse(
+        id="bk_test_123",
+        supplier_id="locauto_rent",
+        supplier_booking_id="",
+        status=BookingStatus.CONFIRMED,
+        vehicle_name="Fiat Panda",
+        total_price=1067,
+        currency="EUR",
+    )
+
+    normalized = booking_service.normalize_booking_response(response)
+
+    assert normalized.status == BookingStatus.FAILED
+    assert normalized.failure_reason == "Confirmed status without supplier booking id"

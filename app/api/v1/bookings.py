@@ -11,7 +11,7 @@ from app.schemas.booking import (
     CancelBookingResponse,
     CreateBookingRequest,
 )
-from app.services.booking_service import create_booking, cancel_booking
+from app.services.booking_service import cancel_booking, create_booking
 from app.services.cache_service import CacheService, get_redis
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,16 @@ async def create_booking_endpoint(
         return await create_booking(request, cache)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.exception(
+            "Booking creation failed for vehicle=%s search=%s",
+            request.vehicle_id,
+            request.search_id,
+        )
+        raise HTTPException(
+            status_code=502,
+            detail="Provider reservation failed. Please retry.",
+        ) from e
 
 
 @router.delete(
