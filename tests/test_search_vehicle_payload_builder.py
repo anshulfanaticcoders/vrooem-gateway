@@ -1,6 +1,6 @@
 from app.schemas.common import FuelType, MileagePolicy, TransmissionType
 from app.schemas.pricing import Pricing
-from app.schemas.vehicle import Vehicle, VehicleLocation
+from app.schemas.vehicle import Extra, Vehicle, VehicleLocation
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
 
 
@@ -123,6 +123,58 @@ def test_build_search_vehicle_payload_maps_greenmotion_products_from_supplier_pa
     assert payload.products[0]["fuel_policy"] == "Same to same"
     assert payload.products[1]["type"] == "PRE"
     assert payload.products[1]["total"] == 150.0
+
+
+def test_build_search_vehicle_payload_preserves_product_benefits() -> None:
+    payload = build_search_vehicle_payload(
+        _make_vehicle(
+            supplier_id="easirent",
+            supplier_data={
+                "booking_token": "opaque-booking-data",
+                "products": [
+                    {
+                        "type": "POA",
+                        "name": "Pay at Pick-up",
+                        "total": 180.0,
+                        "price_per_day": 45.0,
+                        "currency": "EUR",
+                        "benefits": [
+                            "Pay at pickup",
+                            "Credit card required for deposit",
+                        ],
+                    },
+                ],
+            },
+        )
+    )
+
+    assert payload.products[0]["name"] == "Pay at Pick-up"
+    assert payload.products[0]["benefits"] == [
+        "Pay at pickup",
+        "Credit card required for deposit",
+    ]
+
+
+def test_build_search_vehicle_payload_exposes_extra_quantity_limit() -> None:
+    payload = build_search_vehicle_payload(
+        _make_vehicle(
+            extras=[
+                Extra(
+                    id="child-seat",
+                    name="Child seat",
+                    daily_rate=10.0,
+                    total_price=40.0,
+                    currency="EUR",
+                    max_quantity=3,
+                )
+            ]
+        )
+    )
+
+    assert payload.extras_preview[0]["id"] == "child-seat"
+    assert payload.extras_preview[0]["daily_rate"] == 10.0
+    assert payload.extras_preview[0]["total_price"] == 40.0
+    assert payload.extras_preview[0]["max_quantity"] == 3
 
 
 def test_build_search_vehicle_payload_exposes_canonical_product_and_rate_ids() -> None:

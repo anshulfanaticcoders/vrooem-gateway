@@ -1,39 +1,38 @@
 """SIPP/ACRISS code spec deriver — industry-standard source of truth.
 
 SIPP is a 4-character code: [Category][Body][Transmission][Fuel/AC]
-This module derives reliable specs from SIPP and validates provider data against it.
+This module derives fallback specs from SIPP and validates provider door data against it.
 """
 
 from __future__ import annotations
 
 from app.schemas.common import FuelType, TransmissionType
 
-
 # ── Char 2: Body type → door range ──────────────────────────────────────────
 
 # Maps SIPP 2nd character to (min_doors, max_doors).
 # If provider-reported doors falls outside this range, we drop it.
 SIPP_BODY_DOOR_RANGE: dict[str, tuple[int, int]] = {
-    "B": (2, 3),   # 2-3 door
-    "C": (2, 4),   # 2/4 door
-    "D": (4, 5),   # 4-5 door
-    "W": (4, 5),   # Wagon/Estate
-    "V": (3, 9),   # Passenger Van (variable)
-    "L": (4, 4),   # Limousine
-    "S": (2, 3),   # Sport
-    "T": (2, 2),   # Convertible
-    "F": (4, 5),   # SUV
-    "J": (2, 5),   # Open Off-road
-    "X": (2, 9),   # Special
-    "P": (2, 4),   # Pick-up
-    "Q": (2, 4),   # Pick-up Extended cab
-    "E": (2, 3),   # Coupe
-    "M": (5, 5),   # Monospace / MPV
-    "R": (2, 9),   # Recreational Vehicle
-    "H": (2, 9),   # Motor Home
-    "N": (2, 2),   # Roadster
-    "G": (4, 5),   # Crossover
-    "K": (2, 9),   # Commercial Van/Truck
+    "B": (2, 3),  # 2-3 door
+    "C": (2, 4),  # 2/4 door
+    "D": (4, 5),  # 4-5 door
+    "W": (4, 5),  # Wagon/Estate
+    "V": (3, 9),  # Passenger Van (variable)
+    "L": (4, 4),  # Limousine
+    "S": (2, 3),  # Sport
+    "T": (2, 2),  # Convertible
+    "F": (4, 5),  # SUV
+    "J": (2, 5),  # Open Off-road
+    "X": (2, 9),  # Special
+    "P": (2, 4),  # Pick-up
+    "Q": (2, 4),  # Pick-up Extended cab
+    "E": (2, 3),  # Coupe
+    "M": (5, 5),  # Monospace / MPV
+    "R": (2, 9),  # Recreational Vehicle
+    "H": (2, 9),  # Motor Home
+    "N": (2, 2),  # Roadster
+    "G": (4, 5),  # Crossover
+    "K": (2, 9),  # Commercial Van/Truck
 }
 
 
@@ -41,8 +40,8 @@ SIPP_BODY_DOOR_RANGE: dict[str, tuple[int, int]] = {
 
 SIPP_TRANSMISSION: dict[str, TransmissionType] = {
     "M": TransmissionType.MANUAL,
-    "N": TransmissionType.MANUAL,     # Manual AWD
-    "C": TransmissionType.MANUAL,     # Manual 4WD
+    "N": TransmissionType.MANUAL,  # Manual AWD
+    "C": TransmissionType.MANUAL,  # Manual 4WD
     "A": TransmissionType.AUTOMATIC,
     "B": TransmissionType.AUTOMATIC,  # Automatic 4WD
     "D": TransmissionType.AUTOMATIC,  # AWD
@@ -52,34 +51,47 @@ SIPP_TRANSMISSION: dict[str, TransmissionType] = {
 # ── Char 4: Fuel type + AC ─────────────────────────────────────────────────
 
 SIPP_FUEL: dict[str, FuelType] = {
-    "R": FuelType.PETROL,    # AC + Petrol
-    "N": FuelType.PETROL,    # No AC + Petrol
-    "D": FuelType.DIESEL,    # AC + Diesel
-    "Q": FuelType.DIESEL,    # No AC + Diesel
-    "H": FuelType.HYBRID,    # AC + Hybrid
-    "I": FuelType.HYBRID,    # AC + Hybrid Plug-in
+    "R": FuelType.PETROL,  # AC + Petrol
+    "N": FuelType.PETROL,  # No AC + Petrol
+    "D": FuelType.DIESEL,  # AC + Diesel
+    "Q": FuelType.DIESEL,  # No AC + Diesel
+    "H": FuelType.HYBRID,  # AC + Hybrid
+    "I": FuelType.HYBRID,  # AC + Hybrid Plug-in
     "E": FuelType.ELECTRIC,  # AC + Electric
-    "C": FuelType.PETROL,    # AC + Compressed Gas (map to petrol)
-    "L": FuelType.LPG,       # AC + LPG/Compressed Gas
+    "C": FuelType.PETROL,  # AC + Compressed Gas (map to petrol)
+    "L": FuelType.LPG,  # AC + LPG/Compressed Gas
     # "S" is intentionally not mapped: some suppliers use it on EV/PHEV groups
     # (for example OK Mobility MTES/MSES/SMPS), so treating it as petrol is unsafe.
-    "A": FuelType.HYBRID,    # AC + Hydrogen/Hydrogen fuel cell
+    "A": FuelType.HYBRID,  # AC + Hydrogen/Hydrogen fuel cell
     "B": FuelType.ELECTRIC,  # AC + Electric (alternative)
-    "M": FuelType.PETROL,    # Multi fuel / No AC
-    "F": FuelType.PETROL,    # Multi fuel / AC
-    "V": FuelType.PETROL,    # Petrol (alternative)
-    "Z": FuelType.PETROL,    # No AC + LPG
+    "M": FuelType.PETROL,  # Multi fuel / No AC
+    "F": FuelType.PETROL,  # Multi fuel / AC
+    "V": FuelType.PETROL,  # Petrol (alternative)
+    "Z": FuelType.PETROL,  # No AC + LPG
     "U": FuelType.ELECTRIC,  # No AC + Electric
-    "X": FuelType.HYBRID,    # No AC + Hybrid
+    "X": FuelType.HYBRID,  # No AC + Hybrid
 }
 
 # 4th char → AC (True = has AC, False = no AC)
 SIPP_AC: dict[str, bool] = {
-    "R": True, "N": False, "D": True, "Q": False,
-    "H": True, "I": True, "E": True, "C": True,
-    "L": True, "S": True, "A": True, "B": True,
-    "M": False, "F": True, "V": True, "Z": False,
-    "U": False, "X": False,
+    "R": True,
+    "N": False,
+    "D": True,
+    "Q": False,
+    "H": True,
+    "I": True,
+    "E": True,
+    "C": True,
+    "L": True,
+    "S": True,
+    "A": True,
+    "B": True,
+    "M": False,
+    "F": True,
+    "V": True,
+    "Z": False,
+    "U": False,
+    "X": False,
 }
 
 
@@ -137,9 +149,9 @@ def apply_sipp_specs(
     """Apply SIPP-derived specs as validation/fill layer.
 
     Rules:
-    - transmission: SIPP wins if available (most reliable)
-    - fuel_type: SIPP wins if available
-    - air_conditioning: SIPP wins if available
+    - transmission: provider value wins; SIPP fills only when missing
+    - fuel_type: provider value wins; SIPP fills only when missing
+    - air_conditioning: provider value wins; SIPP fills only when missing
     - doors: validate against SIPP body type, drop if contradictory
     - seats: pass through (SIPP doesn't encode seats)
     """
@@ -149,9 +161,9 @@ def apply_sipp_specs(
     validated_doors = validate_doors(sipp, doors)
 
     return {
-        "transmission": sipp_trans if sipp_trans is not None else transmission,
-        "fuel_type": sipp_fuel if sipp_fuel is not None else fuel_type,
-        "air_conditioning": sipp_ac if sipp_ac is not None else air_conditioning,
+        "transmission": transmission if transmission is not None else sipp_trans,
+        "fuel_type": fuel_type if fuel_type is not None else sipp_fuel,
+        "air_conditioning": air_conditioning if air_conditioning is not None else sipp_ac,
         "doors": validated_doors,
         "seats": seats,
     }

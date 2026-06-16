@@ -51,6 +51,11 @@ class FakeAdapter:
         )
 
 
+class FailingAdapter:
+    async def create_booking(self, request, vehicle):
+        raise RuntimeError("Supplier rejected reservation: rate no longer available")
+
+
 async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
     vehicle_data = {
         "id": "gw_vehicle_1",
@@ -85,6 +90,47 @@ async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
     assert response.supplier_booking_id == "LC123"
     assert len(adapter.calls) == 1
     assert cache.redis.set_calls == [("gateway_booking_lock:104", "1", 90, True)]
+    assert cache.redis.deleted_keys == ["gateway_booking_lock:104"]
+
+
+async def test_create_booking_returns_structured_provider_failure(monkeypatch):
+    vehicle_data = {
+        "id": "gw_vehicle_1",
+        "supplier_id": "surprice",
+        "supplier_vehicle_id": "EDMR",
+        "name": "Fiat 500 or similar",
+        "pricing": {"currency": "EUR", "total_price": 202.88, "daily_rate": 28.98},
+    }
+    cache = FakeCache(vehicle_data)
+    request = CreateBookingRequest(
+        vehicle_id="gw_vehicle_1",
+        search_id="search_123",
+        driver=DriverInfo(
+            first_name="Vrooem",
+            last_name="Testing",
+            email="anshulmankotia1997@gmail.com",
+            phone="8278825392",
+            age=35,
+        ),
+        pickup_date="2027-05-13",
+        pickup_time="09:00",
+        dropoff_date="2027-05-21",
+        dropoff_time="09:00",
+        laravel_booking_id=104,
+        laravel_booking_number="BK2026052581",
+    )
+    monkeypatch.setattr(booking_service, "get_adapter", lambda supplier_id: FailingAdapter())
+
+    response = await booking_service.create_booking(request, cache)
+
+    assert response.status == BookingStatus.FAILED
+    assert response.supplier_booking_id == ""
+    assert response.provider_status == "failed"
+    assert response.failure_reason == "Supplier rejected reservation: rate no longer available"
+    assert (
+        response.supplier_data["error"] == "Supplier rejected reservation: rate no longer available"
+    )
+    assert response.supplier_data["exception_type"] == "RuntimeError"
     assert cache.redis.deleted_keys == ["gateway_booking_lock:104"]
 
 

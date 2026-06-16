@@ -53,7 +53,7 @@ class Extra(BaseModel):
 class CancellationPolicy(BaseModel):
     """Cancellation terms for this vehicle offer."""
 
-    free_cancellation: bool = True
+    free_cancellation: bool = False
     free_cancellation_until: datetime | None = None
     cancellation_fee: float | None = None
     cancellation_fee_currency: str = "EUR"
@@ -136,11 +136,11 @@ class Vehicle(BaseModel):
 
     @model_validator(mode="after")
     def _validate_specs_against_sipp(self) -> "Vehicle":
-        """Use SIPP code as source of truth for specs.
+        """Use SIPP code as a fallback/validation layer for specs.
 
         SIPP is an industry standard — more reliable than individual provider APIs.
         - Fills missing transmission/fuel/AC from SIPP when adapter didn't set them.
-        - Overrides transmission/fuel/AC with SIPP values (SIPP is authoritative).
+        - Keeps explicit adapter/provider transmission/fuel/AC values.
         - Validates door count against SIPP body type, drops if contradictory.
         """
         if not self.sipp_code:

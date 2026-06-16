@@ -11,6 +11,7 @@ from app.adapters.easirent_reference import (
     build_static_locations,
     resolve_fleet_metadata,
     resolve_location_metadata,
+    resolve_terms_metadata,
 )
 from app.adapters.easirent_rules import is_placeholder_vehicle_code, select_account_code
 from app.adapters.registry import register_adapter
@@ -23,6 +24,7 @@ from app.schemas.booking import (
 )
 from app.schemas.common import (
     BookingStatus,
+    CoverageType,
     FuelType,
     PaymentOption,
     TransmissionType,
@@ -32,7 +34,7 @@ from app.schemas.common import (
 from app.schemas.location import ProviderLocationEntry
 from app.schemas.pricing import Pricing
 from app.schemas.search import SearchRequest
-from app.schemas.vehicle import CancellationPolicy, Vehicle, VehicleLocation
+from app.schemas.vehicle import CancellationPolicy, InsuranceOption, Vehicle, VehicleLocation
 
 logger = logging.getLogger(__name__)
 
@@ -149,9 +151,27 @@ def _build_products(raw: dict, currency: str) -> tuple[list[dict], str | None]:
 
     if raw.get("postData1"):
         product_specs = [
-            ("BAS", "Super Saver", raw.get("displayprice"), raw.get("dailyrate"), raw.get("postData1")),
-            ("SEC", "Super Secure", raw.get("secpricedisp"), raw.get("secpricedaily"), raw.get("postData2")),
-            ("REL", "Super Relax", raw.get("displayxsprice"), raw.get("xsdailyrate"), raw.get("postData3")),
+            (
+                "BAS",
+                "Super Saver",
+                raw.get("displayprice"),
+                raw.get("dailyrate"),
+                raw.get("postData1"),
+            ),
+            (
+                "SEC",
+                "Super Secure",
+                raw.get("secpricedisp"),
+                raw.get("secpricedaily"),
+                raw.get("postData2"),
+            ),
+            (
+                "REL",
+                "Super Relax",
+                raw.get("displayxsprice"),
+                raw.get("xsdailyrate"),
+                raw.get("postData3"),
+            ),
         ]
         default_token = raw.get("postData1")
     elif raw.get("postDataPOA") or raw.get("postDataPP"):
@@ -159,7 +179,13 @@ def _build_products(raw: dict, currency: str) -> tuple[list[dict], str | None]:
         # Easirent may send an internal PAY_NOW alternative, but we should not
         # expose or book against it through the Vrooem flow.
         product_specs = [
-            ("POA", "Pay at Pick-up", raw.get("displayprice"), raw.get("dailyrate"), raw.get("postDataPOA")),
+            (
+                "POA",
+                "Pay at Pick-up",
+                raw.get("displayprice"),
+                raw.get("dailyrate"),
+                raw.get("postDataPOA"),
+            ),
         ]
         default_token = raw.get("postDataPOA")
     else:
@@ -172,15 +198,17 @@ def _build_products(raw: dict, currency: str) -> tuple[list[dict], str | None]:
         daily = _parse_decimal(daily_value)
         if total <= 0:
             continue
-        products.append({
-            "type": product_type,
-            "name": name,
-            "total": total,
-            "price_per_day": daily if daily > 0 else None,
-            "currency": currency,
-            "checkout_url": _CHECKOUT_URL,
-            "post_data": token,
-        })
+        products.append(
+            {
+                "type": product_type,
+                "name": name,
+                "total": total,
+                "price_per_day": daily if daily > 0 else None,
+                "currency": currency,
+                "checkout_url": _CHECKOUT_URL,
+                "post_data": token,
+            }
+        )
 
     return products, default_token
 
@@ -269,7 +297,9 @@ class EasirentAdapter(BaseAdapter):
 
         country_param = _country_param(pickup_country)
         if not country_param:
-            logger.info("[%s] Unsupported pickup country for Easirent: %s", self.supplier_id, pickup_country)
+            logger.info(
+                "[%s] Unsupported pickup country for Easirent: %s", self.supplier_id, pickup_country
+            )
             return []
 
         raw_results = []
@@ -295,19 +325,34 @@ class EasirentAdapter(BaseAdapter):
             response = await self._request("POST", _QUOTE_URL, data=payload)
             data = response.json()
             if not isinstance(data, dict):
-                logger.warning("[%s] Unexpected Easirent response for VType=%s", self.supplier_id, vehicle_type)
+                logger.warning(
+                    "[%s] Unexpected Easirent response for VType=%s", self.supplier_id, vehicle_type
+                )
                 continue
 
             if data.get("redirect") is True:
-                logger.warning("[%s] Easirent returned redirect payload for VType=%s", self.supplier_id, vehicle_type)
+                logger.warning(
+                    "[%s] Easirent returned redirect payload for VType=%s",
+                    self.supplier_id,
+                    vehicle_type,
+                )
                 continue
 
             if int(data.get("success") or 0) != 1:
                 description = _clean_text((data.get("error") or {}).get("description"))
-                if vehicle_type == "2" and "not available for the location you selected" in description.lower():
-                    logger.info("[%s] Easirent vans unavailable for %s", self.supplier_id, pickup_entry.pickup_id)
+                if (
+                    vehicle_type == "2"
+                    and "not available for the location you selected" in description.lower()
+                ):
+                    logger.info(
+                        "[%s] Easirent vans unavailable for %s",
+                        self.supplier_id,
+                        pickup_entry.pickup_id,
+                    )
                 else:
-                    logger.warning("[%s] Easirent returned unsuccessful search: %s", self.supplier_id, data)
+                    logger.warning(
+                        "[%s] Easirent returned unsuccessful search: %s", self.supplier_id, data
+                    )
                 continue
 
             raw_results.append(data)
@@ -362,9 +407,25 @@ class EasirentAdapter(BaseAdapter):
 
         products, default_post_data = _build_products(raw, request.currency)
         if not default_post_data:
-            logger.info("[%s] Easirent quote skipped because no pay-on-arrival token is available", self.supplier_id)
+            logger.info(
+                "[%s] Easirent quote skipped because no pay-on-arrival token is available",
+                self.supplier_id,
+            )
             return None
         excess_amount = _derive_excess_amount(metadata, account_code)
+        terms_metadata = resolve_terms_metadata(pickup_country, account_code, excess_amount) or {}
+        deposit_amount = terms_metadata.get("deposit_amount")
+        deposit_currency = terms_metadata.get("deposit_currency")
+        excess_currency = (
+            terms_metadata.get("excess_currency") or deposit_currency or request.currency
+        )
+
+        for product in products:
+            product["benefits"] = terms_metadata.get("product_benefits") or []
+            product["deposit"] = deposit_amount
+            product["excess"] = excess_amount
+            product["fuel_policy"] = terms_metadata.get("fuel_policy")
+
         image_url = ""
         if metadata:
             image_url = _clean_text(metadata.get("image_jpg") or metadata.get("image_png"))
@@ -376,42 +437,59 @@ class EasirentAdapter(BaseAdapter):
             or result.get("depotstart")
             or pickup_entry.pickup_id,
             city=(pickup_metadata or {}).get("city") or "",
-            latitude=pickup_entry.latitude if pickup_entry.latitude is not None else (pickup_metadata or {}).get("latitude"),
-            longitude=pickup_entry.longitude if pickup_entry.longitude is not None else (pickup_metadata or {}).get("longitude"),
+            latitude=pickup_entry.latitude
+            if pickup_entry.latitude is not None
+            else (pickup_metadata or {}).get("latitude"),
+            longitude=pickup_entry.longitude
+            if pickup_entry.longitude is not None
+            else (pickup_metadata or {}).get("longitude"),
             country_code=pickup_country,
             airport_code=pickup_entry.iata or pickup_entry.pickup_id,
             is_airport=True,
             address=_clean_text((pickup_metadata or {}).get("address")) or None,
-            phone=_clean_text(result.get("puphone")) or _clean_text((pickup_metadata or {}).get("phone")) or None,
-            pickup_instructions=_clean_text((pickup_metadata or {}).get("pickup_instructions")) or None,
-            dropoff_instructions=_clean_text((pickup_metadata or {}).get("dropoff_instructions")) or None,
+            phone=_clean_text(result.get("puphone"))
+            or _clean_text((pickup_metadata or {}).get("phone"))
+            or None,
+            pickup_instructions=_clean_text((pickup_metadata or {}).get("pickup_instructions"))
+            or None,
+            dropoff_instructions=_clean_text((pickup_metadata or {}).get("dropoff_instructions"))
+            or None,
         )
 
         dropoff_location = VehicleLocation(
-            supplier_location_id=dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id,
+            supplier_location_id=dropoff_entry.pickup_id
+            if dropoff_entry
+            else pickup_entry.pickup_id,
             name=(dropoff_entry.original_name if dropoff_entry else pickup_entry.original_name)
             or (dropoff_metadata or {}).get("name")
             or result.get("depotreturn")
             or (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
             city=(dropoff_metadata or {}).get("city") or "",
             latitude=(
-                dropoff_entry.latitude if dropoff_entry and dropoff_entry.latitude is not None
-                else pickup_entry.latitude if pickup_entry.latitude is not None
+                dropoff_entry.latitude
+                if dropoff_entry and dropoff_entry.latitude is not None
+                else pickup_entry.latitude
+                if pickup_entry.latitude is not None
                 else (dropoff_metadata or {}).get("latitude")
             ),
             longitude=(
-                dropoff_entry.longitude if dropoff_entry and dropoff_entry.longitude is not None
-                else pickup_entry.longitude if pickup_entry.longitude is not None
+                dropoff_entry.longitude
+                if dropoff_entry and dropoff_entry.longitude is not None
+                else pickup_entry.longitude
+                if pickup_entry.longitude is not None
                 else (dropoff_metadata or {}).get("longitude")
             ),
-            country_code=(dropoff_entry.country_code if dropoff_entry else pickup_country) or pickup_country,
+            country_code=(dropoff_entry.country_code if dropoff_entry else pickup_country)
+            or pickup_country,
             airport_code=(dropoff_entry.iata if dropoff_entry else pickup_entry.iata)
             or (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
             is_airport=True,
             address=_clean_text((dropoff_metadata or {}).get("address")) or None,
             phone=_clean_text((dropoff_metadata or {}).get("phone")) or None,
-            pickup_instructions=_clean_text((dropoff_metadata or {}).get("pickup_instructions")) or None,
-            dropoff_instructions=_clean_text((dropoff_metadata or {}).get("dropoff_instructions")) or None,
+            pickup_instructions=_clean_text((dropoff_metadata or {}).get("pickup_instructions"))
+            or None,
+            dropoff_instructions=_clean_text((dropoff_metadata or {}).get("dropoff_instructions"))
+            or None,
         )
 
         supplier_data = {
@@ -427,17 +505,34 @@ class EasirentAdapter(BaseAdapter):
             "pickup_phone": _clean_text(result.get("puphone")) or None,
             "office_name": (pickup_metadata or {}).get("name"),
             "office_address": _clean_text((pickup_metadata or {}).get("address")) or None,
-            "office_phone": _clean_text(result.get("puphone")) or _clean_text((pickup_metadata or {}).get("phone")) or None,
+            "office_phone": _clean_text(result.get("puphone"))
+            or _clean_text((pickup_metadata or {}).get("phone"))
+            or None,
             "pickup_station_name": (pickup_metadata or {}).get("name"),
             "dropoff_station_name": (dropoff_metadata or {}).get("name"),
             "pickup_address": _clean_text((pickup_metadata or {}).get("address")) or None,
             "dropoff_address": _clean_text((dropoff_metadata or {}).get("address")) or None,
-            "pickup_instructions": _clean_text((pickup_metadata or {}).get("pickup_instructions")) or None,
-            "dropoff_instructions": _clean_text((dropoff_metadata or {}).get("dropoff_instructions")) or None,
+            "pickup_instructions": _clean_text((pickup_metadata or {}).get("pickup_instructions"))
+            or None,
+            "dropoff_instructions": _clean_text(
+                (dropoff_metadata or {}).get("dropoff_instructions")
+            )
+            or None,
             "checkout_url": _CHECKOUT_URL,
             "default_post_data": default_post_data,
             "products": products,
             "excess_amount": excess_amount,
+            "excess_currency": excess_currency,
+            "deposit_amount": deposit_amount,
+            "deposit_currency": deposit_currency,
+            "fuel_policy": terms_metadata.get("fuel_policy"),
+            "fuel_policy_label": terms_metadata.get("fuel_policy_label"),
+            "mileage_policy_text": terms_metadata.get("mileage_policy_text"),
+            "counter_only_extras": terms_metadata.get("counter_only_extras") or [],
+            "terms": terms_metadata.get("terms") or [],
+            "driver_requirements": terms_metadata.get("driver_requirements") or {},
+            "rental_policies": terms_metadata.get("rental_policies") or [],
+            "policy_source": terms_metadata.get("source"),
             "availability_status": "available",
             "start_date": request.pickup_date.isoformat(),
             "start_time": request.pickup_time.strftime("%H:%M"),
@@ -453,7 +548,9 @@ class EasirentAdapter(BaseAdapter):
             "provider_rate_id": _clean_text(raw.get("quoteID")) or None,
             "availability_status": "available",
             "name": name,
-            "category": VehicleCategory.VAN if str(raw.get("vtype")) == "2" and not sipp_code else category_from_sipp(sipp_code),
+            "category": VehicleCategory.VAN
+            if str(raw.get("vtype")) == "2" and not sipp_code
+            else category_from_sipp(sipp_code),
             "make": make,
             "model": model,
             "image_url": image_url,
@@ -462,14 +559,40 @@ class EasirentAdapter(BaseAdapter):
             "pricing": Pricing(
                 currency=request.currency,
                 total_price=total_price,
-                daily_rate=daily_rate if daily_rate > 0 else round(total_price / max(int(result.get("hiredays") or 1), 1), 2),
+                daily_rate=daily_rate
+                if daily_rate > 0
+                else round(total_price / max(int(result.get("hiredays") or 1), 1), 2),
                 price_includes_tax=True,
                 payment_options=[PaymentOption.PAY_AT_PICKUP],
+                deposit_amount=deposit_amount,
+                deposit_currency=deposit_currency,
             ),
             "cancellation_policy": CancellationPolicy(
-                free_cancellation=True,
-                description="Checkout token issued by Easirent. Final cancellation terms depend on the selected package on Easirent checkout.",
+                free_cancellation=False,
+                description=(
+                    "Cancellation must be made before pickup by email, telephone or Manage "
+                    "My Booking. No-show fees apply if not cancelled and vehicle is not "
+                    "collected."
+                ),
             ),
+            "insurance_options": [
+                InsuranceOption(
+                    id="ins_easirent_basic",
+                    name="Basic supplier insurance terms",
+                    coverage_type=CoverageType.BASIC,
+                    daily_rate=0,
+                    total_price=0,
+                    currency=excess_currency,
+                    excess_amount=excess_amount,
+                    included=True,
+                    description=(
+                        "Supplier terms require proof of coverage unless local Easirent "
+                        "coverage is purchased at the counter."
+                    ),
+                )
+            ]
+            if excess_amount or deposit_amount
+            else [],
             "supplier_data": supplier_data,
             "raw_payload": raw,
         }
@@ -501,7 +624,12 @@ class EasirentAdapter(BaseAdapter):
         if sipp_code:
             vehicle_kwargs["sipp_code"] = sipp_code
 
-        if raw.get("payload") or raw.get("loadlength") or raw.get("loadwidth") or raw.get("vanspecial"):
+        if (
+            raw.get("payload")
+            or raw.get("loadlength")
+            or raw.get("loadwidth")
+            or raw.get("vanspecial")
+        ):
             supplier_data["van_payload"] = _clean_text(raw.get("payload")) or None
             supplier_data["load_length"] = _clean_text(raw.get("loadlength")) or None
             supplier_data["load_width"] = _clean_text(raw.get("loadwidth")) or None
@@ -529,16 +657,20 @@ class EasirentAdapter(BaseAdapter):
 
         return Vehicle(**vehicle_kwargs)
 
-    async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
+    async def create_booking(
+        self, request: CreateBookingRequest, vehicle: Vehicle
+    ) -> BookingResponse:
         raise NotImplementedError(
-            "Easirent search and checkout-token integration is implemented, but supplier-side booking confirmation is not exposed as an API."
+            "Easirent search and checkout-token integration is implemented, but "
+            "supplier-side booking confirmation is not exposed as an API."
         )
 
     async def cancel_booking(
         self, supplier_booking_id: str, request: CancelBookingRequest
     ) -> CancelBookingResponse:
         raise NotImplementedError(
-            "Easirent cancellation integration is not available because Easirent has not provided a cancellable booking API contract."
+            "Easirent cancellation integration is not available because Easirent has not "
+            "provided a cancellable booking API contract."
         )
 
     async def get_locations(self) -> list[dict]:

@@ -51,7 +51,16 @@ async def create_booking(
             vehicle.supplier_id,
         )
 
-        response = await adapter.create_booking(request, vehicle)
+        try:
+            response = await adapter.create_booking(request, vehicle)
+        except Exception as exc:
+            logger.exception(
+                "Provider booking adapter failed: vehicle=%s supplier=%s",
+                request.vehicle_id,
+                vehicle.supplier_id,
+            )
+
+            return provider_failure_response(request, vehicle, exc)
 
         return normalize_booking_response(response)
     finally:
@@ -84,6 +93,45 @@ def normalize_booking_response(response: BookingResponse) -> BookingResponse:
     response.provider_status = provider_status
 
     return response
+
+
+def provider_failure_response(
+    request: CreateBookingRequest,
+    vehicle: Vehicle,
+    exc: Exception,
+) -> BookingResponse:
+    """Return a structured provider failure instead of losing context behind a 502."""
+
+    reason = safe_failure_reason(exc)
+
+    return BookingResponse(
+        id=f"bk_failed_{request.laravel_booking_id or request.vehicle_id}",
+        supplier_id=vehicle.supplier_id,
+        supplier_booking_id="",
+        status=BookingStatus.FAILED,
+        vehicle_name=vehicle.name,
+        total_price=vehicle.pricing.total_price,
+        currency=vehicle.pricing.currency,
+        provider_status="failed",
+        failure_reason=reason,
+        supplier_data={
+            "error": reason,
+            "exception_type": type(exc).__name__,
+            "vehicle_id": request.vehicle_id,
+            "search_id": request.search_id,
+        },
+    )
+
+
+def safe_failure_reason(exc: Exception) -> str:
+    """Sanitize provider/adapter exceptions for Laravel/admin visibility."""
+
+    message = str(exc).strip() or type(exc).__name__
+    message = " ".join(message.split())
+    if len(message) > 500:
+        return message[:500]
+
+    return message
 
 
 async def cancel_booking(

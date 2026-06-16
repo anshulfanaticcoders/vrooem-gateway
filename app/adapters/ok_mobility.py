@@ -145,7 +145,11 @@ def _elem_to_dict(elem: ET.Element) -> dict:
                 child_dict["#text"] = value
                 value = child_dict
         else:
-            value = child_dict if child_dict else (child.text.strip() if child.text and child.text.strip() else "")
+            value = (
+                child_dict
+                if child_dict
+                else (child.text.strip() if child.text and child.text.strip() else "")
+            )
 
         if key in result:
             existing = result[key]
@@ -269,7 +273,11 @@ class OkMobilityAdapter(BaseAdapter):
                     },
                 )
                 text = response.text
-                if "<VehicleModel>" in text or "<vehicleModel>" in text or "<getMultiplePrice" in text:
+                if (
+                    "<VehicleModel>" in text
+                    or "<vehicleModel>" in text
+                    or "<getMultiplePrice" in text
+                ):
                     return text
             except Exception:
                 logger.debug("[ok_mobility] SOAP 1.2 attempt failed for %s", url)
@@ -307,7 +315,9 @@ class OkMobilityAdapter(BaseAdapter):
         dropoff_code = dropoff_entry.pickup_id if dropoff_entry else pickup_code
 
         pickup_dt = f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}:00"
-        dropoff_dt = f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}:00"
+        dropoff_dt = (
+            f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}:00"
+        )
 
         # Build SOAP 1.2 body for getMultiplePrices
         soap12_body = self._soap12_envelope(
@@ -466,18 +476,20 @@ class OkMobilityAdapter(BaseAdapter):
         if value_without_tax > 0 and tax_rate > 0:
             tax_amount = round(total_price - value_without_tax, 2)
             if tax_amount > 0:
-                fees.append(Fee(
-                    name=f"Tax ({int(tax_rate)}%)",
-                    amount=tax_amount,
-                    currency=currency,
-                    included_in_total=True,
-                ))
+                fees.append(
+                    Fee(
+                        name=f"Tax ({int(tax_rate)}%)",
+                        amount=tax_amount,
+                        currency=currency,
+                        included_in_total=True,
+                    )
+                )
 
         # Deposit from PrepayValue
         deposit = _safe_float(data.get("PrepayValue") or data.get("prepayValue"))
 
         # Mileage
-        kms_included = (data.get("kmsIncluded") or data.get("KmsIncluded") or "false")
+        kms_included = data.get("kmsIncluded") or data.get("KmsIncluded") or "false"
         if isinstance(kms_included, str):
             unlimited = kms_included.lower() in ("true", "1", "yes")
         else:
@@ -497,7 +509,9 @@ class OkMobilityAdapter(BaseAdapter):
 
         # Pickup location
         station_name = data.get("Station") or data.get("station") or ""
-        station_name_pick = data.get("StationNamePick") or data.get("stationNamePick") or station_name
+        station_name_pick = (
+            data.get("StationNamePick") or data.get("stationNamePick") or station_name
+        )
         iata_code = data.get("IataCodePick") or data.get("iataCodePick") or None
 
         pickup_loc = VehicleLocation(
@@ -552,22 +566,37 @@ class OkMobilityAdapter(BaseAdapter):
                 "station_id": data.get("stationID") or data.get("StationID") or "",
                 "station_name": station_name,
                 "pickup_station_id": pickup_entry.pickup_id,
-                "dropoff_station_id": (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
+                "dropoff_station_id": (
+                    dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id
+                ),
                 "preview_value": total_price,
                 "value_without_tax": value_without_tax,
                 "tax_rate": tax_rate,
                 "dynamic_rate": data.get("dynamicRate") or data.get("DynamicRate") or "false",
-                "pickup_datetime": f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}:00",
-                "dropoff_datetime": f"{request.dropoff_date.isoformat()} {request.dropoff_time.strftime('%H:%M')}:00",
+                "pickup_datetime": (
+                    f"{request.pickup_date.isoformat()} {request.pickup_time.strftime('%H:%M')}:00"
+                ),
+                "dropoff_datetime": (
+                    f"{request.dropoff_date.isoformat()} "
+                    f"{request.dropoff_time.strftime('%H:%M')}:00"
+                ),
                 # Frontend display fields
                 "pickup_station_name": station_name_pick,
-                "dropoff_station_name": data.get("StationNameDrop") or data.get("stationNameDrop") or station_name_pick,
-                "pickup_address": data.get("StationAddressPick") or data.get("stationAddressPick") or "",
-                "dropoff_address": data.get("StationAddressDrop") or data.get("stationAddressDrop") or "",
+                "dropoff_station_name": data.get("StationNameDrop")
+                or data.get("stationNameDrop")
+                or station_name_pick,
+                "pickup_address": data.get("StationAddressPick")
+                or data.get("stationAddressPick")
+                or "",
+                "dropoff_address": data.get("StationAddressDrop")
+                or data.get("stationAddressDrop")
+                or "",
                 "fuel_policy": data.get("FuelPolicy") or data.get("fuelPolicy") or None,
                 "extras_included": data.get("ExtrasIncluded") or data.get("extrasIncluded") or "",
                 "extras_required": data.get("ExtrasRequired") or data.get("extrasRequired") or "",
-                "extras_available": data.get("ExtrasAvailable") or data.get("extrasAvailable") or "",
+                "extras_available": data.get("ExtrasAvailable")
+                or data.get("extrasAvailable")
+                or "",
                 "week_day_open": data.get("weekDayOpen") or None,
                 "week_day_close": data.get("weekDayClose") or None,
             },
@@ -593,21 +622,29 @@ class OkMobilityAdapter(BaseAdapter):
 
         return Vehicle(**vehicle_kwargs)
 
-    def _parse_cancellation(self, data: dict) -> CancellationPolicy:
+    def _parse_cancellation(self, data: dict) -> CancellationPolicy | None:
         """Parse cancellation policy from RateRestriction element."""
         rate_restriction = data.get("RateRestriction") or data.get("rateRestriction")
         if not rate_restriction or not isinstance(rate_restriction, dict):
-            return CancellationPolicy(free_cancellation=True)
+            return None
 
         attrs = rate_restriction.get("@attributes", rate_restriction)
 
-        cancellation_available = (attrs.get("CancellationAvailable") or "false").lower() in ("true", "1")
-        cancellation_penalty = (attrs.get("CancellationPenaltyInd") or "false").lower() in ("true", "1")
+        cancellation_available = (attrs.get("CancellationAvailable") or "false").lower() in (
+            "true",
+            "1",
+        )
+        cancellation_penalty = (attrs.get("CancellationPenaltyInd") or "false").lower() in (
+            "true",
+            "1",
+        )
         cancellation_amount = _safe_float(attrs.get("Amount"))
         cancellation_currency = attrs.get("Currency") or "EUR"
         deadline_str = attrs.get("DateTime") or ""
 
-        free_cancellation = cancellation_available and not cancellation_penalty and cancellation_amount == 0
+        free_cancellation = (
+            cancellation_available and not cancellation_penalty and cancellation_amount == 0
+        )
 
         # Parse deadline datetime
         free_until = None
@@ -661,15 +698,15 @@ class OkMobilityAdapter(BaseAdapter):
 
             price = _safe_float(ext.get("value") or ext.get("Value"))
             price_with_tax = _safe_float(ext.get("valueWithTax") or ext.get("ValueWithTax"))
-            is_per_contract = (ext.get("pricePerContract") or ext.get("PricePerContract") or "false")
+            is_per_contract = ext.get("pricePerContract") or ext.get("PricePerContract") or "false"
             if isinstance(is_per_contract, str):
                 is_per_contract = is_per_contract.lower() in ("true", "1")
 
-            is_included = (ext.get("extra_Included") or ext.get("Extra_Included") or "false")
+            is_included = ext.get("extra_Included") or ext.get("Extra_Included") or "false"
             if isinstance(is_included, str):
                 is_included = is_included.lower() in ("true", "1")
 
-            is_required = (ext.get("extra_Required") or ext.get("Extra_Required") or "false")
+            is_required = ext.get("extra_Required") or ext.get("Extra_Required") or "false"
             if isinstance(is_required, str):
                 is_required = is_required.lower() in ("true", "1")
 
@@ -687,32 +724,36 @@ class OkMobilityAdapter(BaseAdapter):
 
             code = ext.get("code") or ext.get("Code") or extra_id
 
-            extras.append(Extra(
-                id=f"ext_{self.supplier_id}_{extra_id}",
-                name=name,
-                daily_rate=daily,
-                total_price=total_price,
-                max_quantity=1,
-                type=_map_extra_type(ext),
-                mandatory=is_included or is_required,
-                description=description,
-                supplier_data={
-                    "extraID": extra_id,
-                    "code": code,
-                    "extra": name,
-                    "value": str(price),
-                    "valueWithTax": str(price_with_tax),
-                    "pricePerContract": "true" if is_per_contract else "false",
-                    "extra_Included": "true" if is_included else "false",
-                    "extra_Required": "true" if is_required else "false",
-                },
-            ))
+            extras.append(
+                Extra(
+                    id=f"ext_{self.supplier_id}_{extra_id}",
+                    name=name,
+                    daily_rate=daily,
+                    total_price=total_price,
+                    max_quantity=1,
+                    type=_map_extra_type(ext),
+                    mandatory=is_included or is_required,
+                    description=description,
+                    supplier_data={
+                        "extraID": extra_id,
+                        "code": code,
+                        "extra": name,
+                        "value": str(price),
+                        "valueWithTax": str(price_with_tax),
+                        "pricePerContract": "true" if is_per_contract else "false",
+                        "extra_Included": "true" if is_included else "false",
+                        "extra_Required": "true" if is_required else "false",
+                    },
+                )
+            )
 
         return extras
 
     # ─── create_booking ───
 
-    async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
+    async def create_booking(
+        self, request: CreateBookingRequest, vehicle: Vehicle
+    ) -> BookingResponse:
         settings = get_settings()
         sd = vehicle.supplier_data
 
@@ -725,7 +766,7 @@ class OkMobilityAdapter(BaseAdapter):
                 raw_id = e.extra_id
                 prefix = f"ext_{self.supplier_id}_"
                 if raw_id.startswith(prefix):
-                    raw_id = raw_id[len(prefix):]
+                    raw_id = raw_id[len(prefix) :]
                 extra_ids.append(raw_id)
             extras_str = ",".join(extra_ids)
 
@@ -750,12 +791,15 @@ class OkMobilityAdapter(BaseAdapter):
             f"<get:rentalStation>{escape(sd.get('dropoff_station_id', ''))}</get:rentalStation>"
             "</get:DropOff>"
             "<get:Driver>"
-            f"<get:Name>{escape(request.driver.first_name)} {escape(request.driver.last_name)}</get:Name>"
+            f"<get:Name>{escape(request.driver.first_name)} "
+            f"{escape(request.driver.last_name)}</get:Name>"
             f"<get:Address>{escape(request.driver.address)}</get:Address>"
             f"<get:City>{escape(request.driver.city)}</get:City>"
             f"<get:Postal_code>{escape(request.driver.postal_code)}</get:Postal_code>"
             f"<get:Phone>{escape(request.driver.phone)}</get:Phone>"
-            f"<get:DriverLicenceNumber>{escape(request.driver.driving_license_number or '')}</get:DriverLicenceNumber>"
+            "<get:DriverLicenceNumber>"
+            f"{escape(request.driver.driving_license_number or '')}"
+            "</get:DriverLicenceNumber>"
             f"<get:EMail>{escape(request.driver.email)}</get:EMail>"
             f"<get:Country>{escape(request.driver.country)}</get:Country>"
             f"<get:Date_of_Birth>{escape(request.driver.date_of_birth or '')}</get:Date_of_Birth>"
@@ -781,7 +825,14 @@ class OkMobilityAdapter(BaseAdapter):
             try:
                 root = ET.fromstring(response_text)
                 # Look for reservation number / confirmation
-                for tag in ("Reservation_Nr", "reservationNumber", "ReservationNumber", "confirmationNumber", "ConfirmationNumber", "bookingReference"):
+                for tag in (
+                    "Reservation_Nr",
+                    "reservationNumber",
+                    "ReservationNumber",
+                    "confirmationNumber",
+                    "ConfirmationNumber",
+                    "bookingReference",
+                ):
                     elements = _find_elements(root, tag)
                     if elements and elements[0].text:
                         booking_ref = elements[0].text.strip()
@@ -911,8 +962,16 @@ class OkMobilityAdapter(BaseAdapter):
         for station in station_elements:
             data = _elem_to_dict(station)
 
-            station_id = data.get("StationID") or data.get("stationID") or data.get("stationId") or ""
-            name = data.get("Name") or data.get("name") or data.get("Station") or data.get("station") or ""
+            station_id = (
+                data.get("StationID") or data.get("stationID") or data.get("stationId") or ""
+            )
+            name = (
+                data.get("Name")
+                or data.get("name")
+                or data.get("Station")
+                or data.get("station")
+                or ""
+            )
             if not station_id or not name:
                 continue
 
@@ -925,21 +984,27 @@ class OkMobilityAdapter(BaseAdapter):
             # Determine location type from station properties
             location_type = "other"
             station_type = data.get("StationType") or data.get("stationType") or ""
-            if str(station_type) == "2" or "airport" in name.lower() or "aeropuerto" in name.lower():
+            if (
+                str(station_type) == "2"
+                or "airport" in name.lower()
+                or "aeropuerto" in name.lower()
+            ):
                 location_type = "airport"
             elif "port" in name.lower() or "puerto" in name.lower():
                 location_type = "port"
 
-            locations.append({
-                "provider": self.supplier_id,
-                "provider_location_id": str(station_id),
-                "name": name,
-                "city": city.title() if city else "",
-                "country": country_name,
-                "country_code": country_code,
-                "latitude": latitude,
-                "longitude": longitude,
-                "location_type": location_type,
-            })
+            locations.append(
+                {
+                    "provider": self.supplier_id,
+                    "provider_location_id": str(station_id),
+                    "name": name,
+                    "city": city.title() if city else "",
+                    "country": country_name,
+                    "country_code": country_code,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "location_type": location_type,
+                }
+            )
 
         return locations

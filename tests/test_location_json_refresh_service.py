@@ -41,6 +41,60 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(service._provider_timeout_seconds(adapter), 240.0)
 
+    async def test_refresh_filters_locations_outside_supplier_country_scope(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / 'unified_locations.json'
+            service = LocationJsonRefreshService(
+                adapters=[
+                    FakeAdapter(
+                        'wheelsys',
+                        [
+                            {
+                                'provider': 'wheelsys',
+                                'provider_location_id': 'ATH',
+                                'name': 'Athens Airport',
+                                'city': 'Athens',
+                                'country': 'Greece',
+                                'country_code': 'GR',
+                                'location_type': 'airport',
+                                'latitude': 37.9364,
+                                'longitude': 23.9445,
+                                'iata': 'ATH',
+                            },
+                            {
+                                'provider': 'wheelsys',
+                                'provider_location_id': 'MAIN',
+                                'name': 'Airport-MCO- Orlando',
+                                'city': 'Orlando',
+                                'country': 'United States',
+                                'country_code': 'US',
+                                'location_type': 'airport',
+                                'latitude': 28.429394,
+                                'longitude': -81.308993,
+                                'iata': 'MCO',
+                            },
+                        ],
+                    ),
+                ],
+                output_path=output_path,
+            )
+
+            with patch(
+                'app.services.location_json_refresh_service.get_supplier_config',
+                return_value={'countries': ['GR']},
+            ):
+                summary = await service.refresh()
+
+            exported = json.loads(output_path.read_text(encoding='utf-8'))
+
+        self.assertEqual(summary['locations_received'], 2)
+        self.assertEqual(summary['locations_filtered_by_country_scope'], 1)
+        self.assertEqual(summary['providers_country_filtered_ids'], ['wheelsys'])
+        self.assertEqual(len(exported), 1)
+        self.assertEqual(exported[0]['iata'], 'ATH')
+        providers = {provider['provider']: provider['pickup_id'] for provider in exported[0]['providers']}
+        self.assertEqual(providers, {'wheelsys': 'ATH'})
+
     async def test_refresh_exports_current_cmn_codes_with_public_provider_ids(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_path = Path(tmp_dir) / 'unified_locations.json'

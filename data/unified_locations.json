@@ -3160,6 +3160,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1187794205,
+        "name": "Ankara Train Station",
+        "aliases": [
+            "Ankara railway station",
+            "Ankara"
+        ],
+        "city": "Ankara",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "renteon",
+                "pickup_id": "TR-ANK-RS",
+                "original_name": "Ankara railway station",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 2367463949,
         "name": "Ankara Tren Gar",
         "aliases": [
@@ -5093,16 +5126,17 @@
         "name": "Avila Train Station",
         "aliases": [
             "Avila Railway station",
-            "Avila"
+            "Avila",
+            "Ávila"
         ],
         "city": "Avila",
         "country": "ES",
         "country_code": "ES",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 40.656699,
+        "longitude": -4.683439,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -5111,6 +5145,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "AVSX01 :AVSX01 ",
+                "original_name": "Avila Train Station",
+                "dropoffs": [],
+                "latitude": 40.6566988,
+                "longitude": -4.6834389,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -5349,6 +5397,86 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2827476959,
+        "name": "Azerbaycan Haydar Aliyev Uluslararas Havaliman Airport (GYD)",
+        "aliases": [
+            "Azerbaycan Haydar Aliyev Uluslararası Havalimanı (GYD)",
+            "Azerbaycan Haydar Aliyev Uluslararas Havaliman",
+            "Baku airport",
+            "Baku",
+            "Baku Airport",
+            "Baku Airport (GYD)",
+            "GYD"
+        ],
+        "city": "Azerbaycan Haydar Aliyev Uluslararas Havaliman",
+        "country": "AZ",
+        "country_code": "AZ",
+        "latitude": 40.464732,
+        "longitude": 50.0467,
+        "location_type": "airport",
+        "iata": "GYD",
+        "provider_count": 4,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "405",
+                "original_name": "Azerbaycan Haydar Aliyev Uluslararası Havalimanı (GYD)",
+                "dropoffs": [],
+                "latitude": 40.462,
+                "longitude": 50.04,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AZ",
+                "iata": "GYD",
+                "provider_code": null
+            },
+            {
+                "provider": "renteon",
+                "pickup_id": "AZ-BAK-GYD",
+                "original_name": "Baku airport",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AZ",
+                "iata": "GYD",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "GYD:GYDA01",
+                "original_name": "Baku Airport",
+                "dropoffs": [],
+                "latitude": 40.464732,
+                "longitude": 50.052753,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AZ",
+                "iata": "GYD",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "57",
+                "original_name": "Baku Airport (GYD)",
+                "dropoffs": [],
+                "latitude": 40.4675,
+                "longitude": 50.0467,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AZ",
+                "iata": "GYD",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3561378613,
         "name": "Bacau Airport (BCM)",
         "aliases": [
@@ -5486,9 +5614,9 @@
         "unified_location_id": 550567920,
         "name": "Baki Downtown",
         "aliases": [
-            "Baku Hotel",
+            "Baku Office",
             "Baki",
-            "Baku Office"
+            "Baku Hotel"
         ],
         "city": "Baki",
         "country": "Azerbaijan",
@@ -5499,20 +5627,6 @@
         "iata": null,
         "provider_count": 2,
         "providers": [
-            {
-                "provider": "surprice",
-                "pickup_id": "GYDH01:GYDH01",
-                "original_name": "Baku Hotel",
-                "dropoffs": [],
-                "latitude": 40.381986,
-                "longitude": 49.876217,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AZ",
-                "iata": null,
-                "provider_code": null
-            },
             {
                 "provider": "surprice",
                 "pickup_id": "GYDC01:GYDC01",
@@ -5526,68 +5640,19 @@
                 "country_code": "AZ",
                 "iata": null,
                 "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 2827476959,
-        "name": "Baku Airport (GYD)",
-        "aliases": [
-            "Baku airport",
-            "Baku",
-            "Baku Airport",
-            "GYD"
-        ],
-        "city": "Baku",
-        "country": "AZ",
-        "country_code": "AZ",
-        "latitude": 40.466116,
-        "longitude": 50.049727,
-        "location_type": "airport",
-        "iata": "GYD",
-        "provider_count": 3,
-        "providers": [
-            {
-                "provider": "renteon",
-                "pickup_id": "AZ-BAK-GYD",
-                "original_name": "Baku airport",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AZ",
-                "iata": "GYD",
-                "provider_code": null
             },
             {
                 "provider": "surprice",
-                "pickup_id": "GYD:GYDA01",
-                "original_name": "Baku Airport",
+                "pickup_id": "GYDH01:GYDH01",
+                "original_name": "Baku Hotel",
                 "dropoffs": [],
-                "latitude": 40.464732,
-                "longitude": 50.052753,
+                "latitude": 40.381986,
+                "longitude": 49.876217,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "AZ",
-                "iata": "GYD",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "57",
-                "original_name": "Baku Airport (GYD)",
-                "dropoffs": [],
-                "latitude": 40.4675,
-                "longitude": 50.0467,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AZ",
-                "iata": "GYD",
+                "iata": null,
                 "provider_code": null
             }
         ],
@@ -5632,10 +5697,10 @@
         "aliases": [
             "The Ravenala Attitude Hotel",
             "Balaclava",
-            "Maritim Resort",
             "The Westin Turtle Bay Resort",
-            "InterContinental Resort",
-            "Angsana Balaclava Hotel"
+            "Maritim Resort",
+            "Angsana Balaclava Hotel",
+            "InterContinental Resort"
         ],
         "city": "Balaclava",
         "country": "Mauritius",
@@ -5662,20 +5727,6 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUR04:MRUR04",
-                "original_name": "Maritim Resort",
-                "dropoffs": [],
-                "latitude": -20.082979,
-                "longitude": 57.309889,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MU",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "surprice",
                 "pickup_id": "MRUR06:MRUR06",
                 "original_name": "The Westin Turtle Bay Resort",
                 "dropoffs": [],
@@ -5690,11 +5741,11 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUR02:MRUR02",
-                "original_name": "InterContinental Resort",
+                "pickup_id": "MRUR04:MRUR04",
+                "original_name": "Maritim Resort",
                 "dropoffs": [],
-                "latitude": -20.4587244,
-                "longitude": 57.35933,
+                "latitude": -20.082979,
+                "longitude": 57.309889,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -5723,6 +5774,20 @@
                 "dropoffs": [],
                 "latitude": -20.10058,
                 "longitude": 57.51396,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "MRUR02:MRUR02",
+                "original_name": "InterContinental Resort",
+                "dropoffs": [],
+                "latitude": -20.4587244,
+                "longitude": 57.35933,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -6596,16 +6661,18 @@
             "OK BCN",
             "Barcelona",
             "Barcelona airport",
+            "Barcelona Airport",
+            "El Prat De Llobregat",
             "BCN"
         ],
         "city": "Barcelona",
         "country": "Spain",
         "country_code": "ES",
-        "latitude": 41.32,
-        "longitude": 2.07,
+        "latitude": 41.315155,
+        "longitude": 2.068317,
         "location_type": "airport",
         "iata": "BCN",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "okmobility",
@@ -6628,6 +6695,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "BCN",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "BCN:BCNA01",
+                "original_name": "Barcelona Airport",
+                "dropoffs": [],
+                "latitude": 41.3103109,
+                "longitude": 2.0666346,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -9010,6 +9091,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 2881895701,
+        "name": "Bosnia Airport (SJJ)",
+        "aliases": [
+            "OK SJJ",
+            "Bosnia",
+            "SJJ"
+        ],
+        "city": "Bosnia",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 43.82,
+        "longitude": 18.33,
+        "location_type": "airport",
+        "iata": "SJJ",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "okmobility",
+                "pickup_id": "756",
+                "original_name": "OK SJJ",
+                "dropoffs": [],
+                "latitude": 43.82,
+                "longitude": 18.33,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "SJJ",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3659949723,
         "name": "Bourgas Airport (BOJ)",
         "aliases": [
@@ -10361,6 +10476,74 @@
                 "extended_dropoff_code": null,
                 "country_code": "TR",
                 "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 4180443620,
+        "name": "Bulgaristan Sofya Havaliman Airport (SOF)",
+        "aliases": [
+            "Bulgaristan Sofya Havalimanı (SOF)",
+            "Bulgaristan Sofya Havaliman",
+            "SOF"
+        ],
+        "city": "Bulgaristan Sofya Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "airport",
+        "iata": "SOF",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "412",
+                "original_name": "Bulgaristan Sofya Havalimanı (SOF)",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "SOF",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2076097276,
+        "name": "Bulgaristan Varna Havaliman Airport (VAR)",
+        "aliases": [
+            "Bulgaristan Varna Havalimanı (VAR)",
+            "Bulgaristan Varna Havaliman",
+            "VAR"
+        ],
+        "city": "Bulgaristan Varna Havaliman",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "airport",
+        "iata": "VAR",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "413",
+                "original_name": "Bulgaristan Varna Havalimanı (VAR)",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "VAR",
                 "provider_code": null
             }
         ],
@@ -11974,6 +12157,39 @@
                 "extended_dropoff_code": null,
                 "country_code": "ES",
                 "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1791348476,
+        "name": "Castries Airport (SLU)",
+        "aliases": [
+            "Castries",
+            "SLU"
+        ],
+        "city": "Castries",
+        "country": "LC",
+        "country_code": "LC",
+        "latitude": 14.0202,
+        "longitude": -60.9929,
+        "location_type": "airport",
+        "iata": "SLU",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "xdrive",
+                "pickup_id": "130",
+                "original_name": "Castries Airport (SLU)",
+                "dropoffs": [],
+                "latitude": 14.0202,
+                "longitude": -60.9929,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "LC",
+                "iata": "SLU",
                 "provider_code": null
             }
         ],
@@ -14798,40 +15014,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1684106392,
-        "name": "Dharamshala Airport (KAD)",
-        "aliases": [
-            "Kareri Airport",
-            "Dharamshala",
-            "KAD"
-        ],
-        "city": "Dharamshala",
-        "country": "India",
-        "country_code": "IN",
-        "latitude": 32.316592,
-        "longitude": 76.305833,
-        "location_type": "airport",
-        "iata": "KAD",
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "internal",
-                "pickup_id": "4",
-                "original_name": "Kareri Airport",
-                "dropoffs": [],
-                "latitude": 32.316592,
-                "longitude": 76.305833,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "IN",
-                "iata": "KAD",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": "internal_0bbe90cf5cfa2164dc00733a06135208"
-    },
-    {
         "unified_location_id": 3177681015,
         "name": "Diyarbakr Ergani",
         "aliases": [
@@ -15310,35 +15492,21 @@
         "unified_location_id": 3385755165,
         "name": "Dubai Airport (DXB)",
         "aliases": [
-            "Dubai Airport",
-            "Dubai",
             "OK DXB - Airport",
+            "Dubai",
+            "Dubai Airport",
             "Dubai International Airport (DXB)",
             "DXB"
         ],
         "city": "Dubai",
         "country": "United Arab Emirates",
         "country_code": "AE",
-        "latitude": 25.251536,
-        "longitude": 55.350974,
+        "latitude": 25.25278,
+        "longitude": 55.351948,
         "location_type": "airport",
         "iata": "DXB",
-        "provider_count": 5,
+        "provider_count": 4,
         "providers": [
-            {
-                "provider": "internal",
-                "pickup_id": "1",
-                "original_name": "Dubai Airport",
-                "dropoffs": [],
-                "latitude": 25.250291,
-                "longitude": 55.345171,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "AE",
-                "iata": "DXB",
-                "provider_code": null
-            },
             {
                 "provider": "okmobility",
                 "pickup_id": "641",
@@ -15396,7 +15564,7 @@
                 "provider_code": null
             }
         ],
-        "our_location_id": "internal_5000a1889c39c3caac49ac3de8423f28"
+        "our_location_id": null
     },
     {
         "unified_location_id": 2752498137,
@@ -16620,6 +16788,39 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3253521711,
+        "name": "El Prat De Llobregat Downtown",
+        "aliases": [
+            "Barcelona El Prat Downtown",
+            "El Prat De Llobregat"
+        ],
+        "city": "El Prat De Llobregat",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 41.310311,
+        "longitude": 2.066635,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "surprice",
+                "pickup_id": "BCNC02 :BCNC02 ",
+                "original_name": "Barcelona El Prat Downtown",
+                "dropoffs": [],
+                "latitude": 41.3103109,
+                "longitude": 2.0666346,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -17866,54 +18067,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 3422969218,
-        "name": "Fes Airport (FEZ)",
-        "aliases": [
-            "Fes airport",
-            "Fes",
-            "FEZ"
-        ],
-        "city": "Fes",
-        "country": "Morocco",
-        "country_code": "MA",
-        "latitude": 33.9273,
-        "longitude": -4.9779,
-        "location_type": "airport",
-        "iata": "FEZ",
-        "provider_count": 2,
-        "providers": [
-            {
-                "provider": "renteon",
-                "pickup_id": "MA-FES-FEZ",
-                "original_name": "Fes airport",
-                "dropoffs": [],
-                "latitude": null,
-                "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MA",
-                "iata": "FEZ",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "120",
-                "original_name": "Fes Airport (FEZ)",
-                "dropoffs": [],
-                "latitude": 33.9273,
-                "longitude": -4.9779,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MA",
-                "iata": "FEZ",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 2892392657,
         "name": "Fes Downtown",
         "aliases": [
@@ -18070,6 +18223,71 @@
                 "extended_dropoff_code": null,
                 "country_code": "AL",
                 "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 340957453,
+        "name": "Fiji Nadi Havaliman Airport (NAN)",
+        "aliases": [
+            "Fiji Nadi Havalimanı(NAN)",
+            "Fiji Nadi Havaliman",
+            "Nadi Airport",
+            "Nadi",
+            "Nadi Airport (NAN)",
+            "NAN"
+        ],
+        "city": "Fiji Nadi Havaliman",
+        "country": "FJ",
+        "country_code": "FJ",
+        "latitude": -17.754108,
+        "longitude": 177.447192,
+        "location_type": "airport",
+        "iata": "NAN",
+        "provider_count": 3,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "399",
+                "original_name": "Fiji Nadi Havalimanı(NAN)",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FJ",
+                "iata": "NAN",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "NAN:NANA01",
+                "original_name": "Nadi Airport",
+                "dropoffs": [],
+                "latitude": -17.7528151,
+                "longitude": 177.4509848,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FJ",
+                "iata": "NAN",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "18",
+                "original_name": "Nadi Airport (NAN)",
+                "dropoffs": [],
+                "latitude": -17.7554,
+                "longitude": 177.4434,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "FJ",
+                "iata": "NAN",
                 "provider_code": null
             }
         ],
@@ -20642,11 +20860,11 @@
         "city": "Granada",
         "country": "ES",
         "country_code": "ES",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 37.18377,
+        "longitude": -3.609242,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -20655,6 +20873,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "GRXX01 :GRXX01 ",
+                "original_name": "Granada Train Station",
+                "dropoffs": [],
+                "latitude": 37.1837699,
+                "longitude": -3.6092418,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -20737,26 +20969,40 @@
         "unified_location_id": 4255159353,
         "name": "Grand Baie Downtown",
         "aliases": [
-            "Grand Baie downtown",
             "Grand Baie",
-            "Royal Palm Beachcomber Hotel",
-            "Cannoniers Beachcomber Resort",
-            "Club Med Hotel",
+            "Grand Baie downtown",
             "Le Mauricia Beachcomber Resort",
+            "Royal Palm Beachcomber Hotel",
             "Veranda Grand Baie Hotel",
             "Domaine des Alizees Hotel",
-            "Grand Baie Office",
-            "20 Degres Sud Hotel"
+            "20 Degres Sud Hotel",
+            "Club Med Hotel",
+            "Cannoniers Beachcomber Resort",
+            "Grand Baie Office"
         ],
         "city": "Grand Baie",
-        "country": "MU",
+        "country": "Mauritius",
         "country_code": "MU",
         "latitude": -20.013107,
         "longitude": 57.584435,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 9,
+        "provider_count": 10,
         "providers": [
+            {
+                "provider": "click2rent",
+                "pickup_id": "3",
+                "original_name": "Grand Baie",
+                "dropoffs": [],
+                "latitude": -20.022003,
+                "longitude": 57.578769,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            },
             {
                 "provider": "renteon",
                 "pickup_id": "MU-GRB-DT",
@@ -20773,8 +21019,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUH09:MRUH09",
-                "original_name": "Royal Palm Beachcomber Hotel",
+                "pickup_id": "MRUR03:MRUR03",
+                "original_name": "Le Mauricia Beachcomber Resort",
                 "dropoffs": [],
                 "latitude": -20.013107,
                 "longitude": 57.584435,
@@ -20787,36 +21033,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUR01:MRUR01",
-                "original_name": "Cannoniers Beachcomber Resort",
-                "dropoffs": [],
-                "latitude": -20.01242,
-                "longitude": 57.57026,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MU",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "surprice",
-                "pickup_id": "MRUH03:MRUH03",
-                "original_name": "Club Med Hotel",
-                "dropoffs": [],
-                "latitude": -20.01242,
-                "longitude": 57.57026,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "MU",
-                "iata": null,
-                "provider_code": null
-            },
-            {
-                "provider": "surprice",
-                "pickup_id": "MRUR03:MRUR03",
-                "original_name": "Le Mauricia Beachcomber Resort",
+                "pickup_id": "MRUH09:MRUH09",
+                "original_name": "Royal Palm Beachcomber Hotel",
                 "dropoffs": [],
                 "latitude": -20.013107,
                 "longitude": 57.584435,
@@ -20857,8 +21075,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUC02:MRUC02",
-                "original_name": "Grand Baie Office",
+                "pickup_id": "MRUH01:MRUH01",
+                "original_name": "20 Degres Sud Hotel",
                 "dropoffs": [],
                 "latitude": -20.013107,
                 "longitude": 57.584435,
@@ -20871,8 +21089,36 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "MRUH01:MRUH01",
-                "original_name": "20 Degres Sud Hotel",
+                "pickup_id": "MRUH03:MRUH03",
+                "original_name": "Club Med Hotel",
+                "dropoffs": [],
+                "latitude": -20.01242,
+                "longitude": 57.57026,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "MRUR01:MRUR01",
+                "original_name": "Cannoniers Beachcomber Resort",
+                "dropoffs": [],
+                "latitude": -20.01242,
+                "longitude": 57.57026,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "MRUC02:MRUC02",
+                "original_name": "Grand Baie Office",
                 "dropoffs": [],
                 "latitude": -20.013107,
                 "longitude": 57.584435,
@@ -22540,6 +22786,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3104660944,
+        "name": "Hontoria Train Station",
+        "aliases": [
+            "Segovia Train Station",
+            "Hontoria"
+        ],
+        "city": "Hontoria",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 40.909092,
+        "longitude": -4.127468,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "surprice",
+                "pickup_id": "MADX01 :MADX01 ",
+                "original_name": "Segovia Train Station",
+                "dropoffs": [],
+                "latitude": 40.9090921,
+                "longitude": -4.1274676,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1050776402,
         "name": "Hora Airport (KBP)",
         "aliases": [
@@ -22634,39 +22913,6 @@
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
                 "country_code": "PT",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 2205623292,
-        "name": "Hotel Napolitano Downtown",
-        "aliases": [
-            "Hotel Napolitano Office",
-            "Hotel Napolitano"
-        ],
-        "city": "Hotel Napolitano",
-        "country": "DO",
-        "country_code": "DO",
-        "latitude": 18.466397,
-        "longitude": -69.891452,
-        "location_type": "downtown",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "95",
-                "original_name": "Hotel Napolitano Office",
-                "dropoffs": [],
-                "latitude": 18.466397,
-                "longitude": -69.8914523,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "DO",
                 "iata": null,
                 "provider_code": null
             }
@@ -25137,16 +25383,17 @@
             "Işiklar",
             "Istanbul New Airport",
             "Isiklar",
+            "İstanbul Airport (IST)",
             "IST"
         ],
         "city": "Istanbul Havaliman",
         "country": "TR",
         "country_code": "TR",
-        "latitude": 41.26,
-        "longitude": 28.74,
+        "latitude": 41.26765,
+        "longitude": 28.74595,
         "location_type": "airport",
         "iata": "IST",
-        "provider_count": 4,
+        "provider_count": 5,
         "providers": [
             {
                 "provider": "emr",
@@ -25197,6 +25444,20 @@
                 "dropoffs": [],
                 "latitude": 41.22824,
                 "longitude": 28.824479,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "IST",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "109",
+                "original_name": "İstanbul Airport (IST)",
+                "dropoffs": [],
+                "latitude": 41.2753,
+                "longitude": 28.7519,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -26112,16 +26373,18 @@
             "Istanbul airport",
             "Istanbul",
             "Istanbul SAW Airport",
+            "Sabiha Gökçen Airport (SAW)",
+            "Sabiha Gokcen",
             "SAW"
         ],
         "city": "Istanbul Sabiha Gokcen Havaliman",
         "country": "TR",
         "country_code": "TR",
-        "latitude": 40.909897,
-        "longitude": 29.318065,
+        "latitude": 40.8986,
+        "longitude": 29.313307,
         "location_type": "airport",
         "iata": "SAW",
-        "provider_count": 3,
+        "provider_count": 4,
         "providers": [
             {
                 "provider": "emr",
@@ -26158,6 +26421,20 @@
                 "dropoffs": [],
                 "latitude": 40.924548,
                 "longitude": 29.3228221,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "SAW",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "110",
+                "original_name": "Sabiha Gökçen Airport (SAW)",
+                "dropoffs": [],
+                "latitude": 40.8986,
+                "longitude": 29.3092,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -32506,6 +32783,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 358369000,
+        "name": "Lebrancon Train Station",
+        "aliases": [
+            "Lebrancón",
+            "Guadalajara Train Station",
+            "Lebrancon"
+        ],
+        "city": "Lebrancon",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 40.786267,
+        "longitude": -2.045553,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "surprice",
+                "pickup_id": "GDUX01 :GDUX01 ",
+                "original_name": "Guadalajara Train Station",
+                "dropoffs": [],
+                "latitude": 40.786267,
+                "longitude": -2.045553,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1350267272,
         "name": "Lecce Downtown",
         "aliases": [
@@ -34186,16 +34497,19 @@
             "OK MAD",
             "Madrid",
             "Madrid airport",
+            "San Sebastián De Los Reyes",
+            "Madrid Airport",
+            "San Sebastian De Los Reyes",
             "MAD"
         ],
         "city": "Madrid",
         "country": "Spain",
         "country_code": "ES",
-        "latitude": 40.45,
-        "longitude": -3.56,
+        "latitude": 40.500068,
+        "longitude": -3.590738,
         "location_type": "airport",
         "iata": "MAD",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "okmobility",
@@ -34218,6 +34532,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "MAD",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "MAD:MADA01",
+                "original_name": "Madrid Airport",
+                "dropoffs": [],
+                "latitude": 40.55013599999999,
+                "longitude": -3.6214756,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -34731,16 +35059,18 @@
             "OK AGP",
             "Malaga",
             "Malaga airport",
+            "Málaga",
+            "Malaga Airport",
             "AGP"
         ],
         "city": "Malaga",
         "country": "Spain",
         "country_code": "ES",
-        "latitude": 36.67,
-        "longitude": -4.47,
+        "latitude": 36.665172,
+        "longitude": -4.482614,
         "location_type": "airport",
         "iata": "AGP",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "okmobility",
@@ -34763,6 +35093,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "AGP",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "AGP:AGPA01",
+                "original_name": "Malaga Airport",
+                "dropoffs": [],
+                "latitude": 36.6603445,
+                "longitude": -4.495228099999999,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -36011,9 +36355,9 @@
         "unified_location_id": 863875676,
         "name": "Maspalomas Downtown",
         "aliases": [
-            "Gran Canaria Office",
+            "Gran Canaria Hotel",
             "Maspalomas",
-            "Gran Canaria Hotel"
+            "Gran Canaria Office"
         ],
         "city": "Maspalomas",
         "country": "Spain",
@@ -36026,8 +36370,8 @@
         "providers": [
             {
                 "provider": "surprice",
-                "pickup_id": "LPAC01:LPAC01",
-                "original_name": "Gran Canaria Office",
+                "pickup_id": "LPAH01:LPAH01",
+                "original_name": "Gran Canaria Hotel",
                 "dropoffs": [],
                 "latitude": 27.761358,
                 "longitude": -15.598898,
@@ -36040,8 +36384,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "LPAH01:LPAH01",
-                "original_name": "Gran Canaria Hotel",
+                "pickup_id": "LPAC01:LPAC01",
+                "original_name": "Gran Canaria Office",
                 "dropoffs": [],
                 "latitude": 27.761358,
                 "longitude": -15.598898,
@@ -37703,6 +38047,71 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3422969218,
+        "name": "Morocco Fes Havaliman Airport (FEZ)",
+        "aliases": [
+            "Morocco Fes Havalimanı (FEZ)",
+            "Morocco Fes Havaliman",
+            "Fes airport",
+            "Fes",
+            "Fes Airport (FEZ)",
+            "FEZ"
+        ],
+        "city": "Morocco Fes Havaliman",
+        "country": "Morocco",
+        "country_code": "MA",
+        "latitude": 33.9273,
+        "longitude": -4.9779,
+        "location_type": "airport",
+        "iata": "FEZ",
+        "provider_count": 3,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "406",
+                "original_name": "Morocco Fes Havalimanı (FEZ)",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "FEZ",
+                "provider_code": null
+            },
+            {
+                "provider": "renteon",
+                "pickup_id": "MA-FES-FEZ",
+                "original_name": "Fes airport",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "FEZ",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "120",
+                "original_name": "Fes Airport (FEZ)",
+                "dropoffs": [],
+                "latitude": 33.9273,
+                "longitude": -4.9779,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "FEZ",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3656758232,
         "name": "Morocco Marakes Menara Havaliman Airport (RAK)",
         "aliases": [
@@ -38112,6 +38521,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 3114523224,
+        "name": "Msr Kahire Uluslararas Havaliman Airport (CAI)",
+        "aliases": [
+            "Mısır Kahire Uluslararası Havalimanı (CAI)",
+            "Msr Kahire Uluslararas Havaliman",
+            "CAI"
+        ],
+        "city": "Msr Kahire Uluslararas Havaliman",
+        "country": "EG",
+        "country_code": "EG",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "airport",
+        "iata": "CAI",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "407",
+                "original_name": "Mısır Kahire Uluslararası Havalimanı (CAI)",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "EG",
+                "iata": "CAI",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 3972899636,
         "name": "Mugla Bodrum Merkez",
         "aliases": [
@@ -38133,6 +38576,166 @@
                 "dropoffs": [],
                 "latitude": 37.040543,
                 "longitude": 27.409077,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2452275556,
+        "name": "Mugla Bodrum Ortakent",
+        "aliases": [
+            "Muğla Bodrum Ortakent"
+        ],
+        "city": "Mugla Bodrum Ortakent",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.038333,
+        "longitude": 27.429167,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "404",
+                "original_name": "Muğla Bodrum Ortakent",
+                "dropoffs": [],
+                "latitude": 37.038333,
+                "longitude": 27.429167,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1977157722,
+        "name": "Mugla Bodrum Torba",
+        "aliases": [
+            "Muğla Bodrum Torba"
+        ],
+        "city": "Mugla Bodrum Torba",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "403",
+                "original_name": "Muğla Bodrum Torba",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2902457322,
+        "name": "Mugla Bodrum Turgutreis",
+        "aliases": [
+            "Muğla Bodrum Turgutreis"
+        ],
+        "city": "Mugla Bodrum Turgutreis",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.038333,
+        "longitude": 27.429167,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "401",
+                "original_name": "Muğla Bodrum Turgutreis",
+                "dropoffs": [],
+                "latitude": 37.038333,
+                "longitude": 27.429167,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2179662082,
+        "name": "Mugla Bodrum Turkbuku",
+        "aliases": [
+            "Muğla Bodrum Türkbükü"
+        ],
+        "city": "Mugla Bodrum Turkbuku",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.038333,
+        "longitude": 27.429167,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "402",
+                "original_name": "Muğla Bodrum Türkbükü",
+                "dropoffs": [],
+                "latitude": 37.038333,
+                "longitude": 27.429167,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2695891899,
+        "name": "Mugla Bodrum Yalkavak",
+        "aliases": [
+            "Muğla Bodrum Yalıkavak"
+        ],
+        "city": "Mugla Bodrum Yalkavak",
+        "country": "TR",
+        "country_code": "TR",
+        "latitude": 37.038333,
+        "longitude": 27.429167,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "400",
+                "original_name": "Muğla Bodrum Yalıkavak",
+                "dropoffs": [],
+                "latitude": 37.038333,
+                "longitude": 27.429167,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -38329,16 +38932,18 @@
             "OK RMU",
             "Murcia",
             "Murcia airport",
+            "Murcia Airport",
+            "Valladolises Y Lo Jurado",
             "RMU"
         ],
         "city": "Murcia",
         "country": "Spain",
         "country_code": "ES",
-        "latitude": 37.82,
-        "longitude": -1.08,
+        "latitude": 37.812238,
+        "longitude": -1.105666,
         "location_type": "airport",
         "iata": "RMU",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "okmobility",
@@ -38361,6 +38966,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": "RMU",
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "RMU:RMUA01",
+                "original_name": "Murcia Airport",
+                "dropoffs": [],
+                "latitude": 37.8044768,
+                "longitude": -1.1313311,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -38504,20 +39123,37 @@
     },
     {
         "unified_location_id": 174409140,
-        "name": "Muscat Airport (MCT)",
+        "name": "Muscat Uluslararas Havaliman Airport (MCT)",
         "aliases": [
+            "Muscat Uluslararası Havalimanı (MCT)",
+            "Muscat Uluslararas Havaliman",
+            "Muscat Airport (MCT)",
             "Muscat",
             "MCT"
         ],
-        "city": "Muscat",
+        "city": "Muscat Uluslararas Havaliman",
         "country": "OM",
         "country_code": "OM",
-        "latitude": 23.5933,
-        "longitude": 58.2844,
+        "latitude": 23.593311,
+        "longitude": 58.284405,
         "location_type": "airport",
         "iata": "MCT",
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "410",
+                "original_name": "Muscat Uluslararası Havalimanı (MCT)",
+                "dropoffs": [],
+                "latitude": 23.593322,
+                "longitude": 58.284411,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "OM",
+                "iata": "MCT",
+                "provider_code": null
+            },
             {
                 "provider": "xdrive",
                 "pickup_id": "25",
@@ -38622,8 +39258,8 @@
         "aliases": [
             "Mykonos downtown",
             "Mykonos",
-            "Mykonos Hotel",
-            "Kounoupas Office"
+            "Kounoupas Office",
+            "Mykonos Hotel"
         ],
         "city": "Mykonos",
         "country": "GR",
@@ -38650,11 +39286,11 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "JMKH03:JMKH03",
-                "original_name": "Mykonos Hotel",
+                "pickup_id": "JMKC01:JMKC01",
+                "original_name": "Kounoupas Office",
                 "dropoffs": [],
-                "latitude": 37.454218,
-                "longitude": 25.332278,
+                "latitude": 37.433953,
+                "longitude": 25.343254,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -38664,11 +39300,11 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "JMKC01:JMKC01",
-                "original_name": "Kounoupas Office",
+                "pickup_id": "JMKH03:JMKH03",
+                "original_name": "Mykonos Hotel",
                 "dropoffs": [],
-                "latitude": 37.433953,
-                "longitude": 25.343254,
+                "latitude": 37.454218,
+                "longitude": 25.332278,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -38774,54 +39410,6 @@
                 "extended_dropoff_code": null,
                 "country_code": "GR",
                 "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 340957453,
-        "name": "Nadi Airport (NAN)",
-        "aliases": [
-            "Nadi Airport",
-            "Nadi",
-            "NAN"
-        ],
-        "city": "Nadi",
-        "country": "Fiji",
-        "country_code": "FJ",
-        "latitude": -17.754108,
-        "longitude": 177.447192,
-        "location_type": "airport",
-        "iata": "NAN",
-        "provider_count": 2,
-        "providers": [
-            {
-                "provider": "surprice",
-                "pickup_id": "NAN:NANA01",
-                "original_name": "Nadi Airport",
-                "dropoffs": [],
-                "latitude": -17.7528151,
-                "longitude": 177.4509848,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "FJ",
-                "iata": "NAN",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "18",
-                "original_name": "Nadi Airport (NAN)",
-                "dropoffs": [],
-                "latitude": -17.7554,
-                "longitude": 177.4434,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "FJ",
-                "iata": "NAN",
                 "provider_code": null
             }
         ],
@@ -43075,9 +43663,9 @@
         "unified_location_id": 627138514,
         "name": "Patra Downtown",
         "aliases": [
-            "Patra Office",
+            "Patra Hotel",
             "Patra",
-            "Patra Hotel"
+            "Patra Office"
         ],
         "city": "Patra",
         "country": "Greece",
@@ -43090,8 +43678,8 @@
         "providers": [
             {
                 "provider": "surprice",
-                "pickup_id": "GPAC01:GPAC01",
-                "original_name": "Patra Office",
+                "pickup_id": "GPAH01:GPAH01",
+                "original_name": "Patra Hotel",
                 "dropoffs": [],
                 "latitude": 38.2548,
                 "longitude": 21.73852,
@@ -43104,8 +43692,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "GPAH01:GPAH01",
-                "original_name": "Patra Hotel",
+                "pickup_id": "GPAC01:GPAC01",
+                "original_name": "Patra Office",
                 "dropoffs": [],
                 "latitude": 38.2548,
                 "longitude": 21.73852,
@@ -43851,6 +44439,8 @@
         "aliases": [
             "Airport of Mauritius",
             "Plaisance",
+            "Mauritius Havalimanı (MRU)",
+            "Mauritius Havaliman",
             "Plaine Magnien airport",
             "Plaine Magnien",
             "Port Louis airport",
@@ -43863,11 +44453,11 @@
         "city": "Plaisance",
         "country": "Mauritius",
         "country_code": "MU",
-        "latitude": -20.4302,
-        "longitude": 57.6836,
+        "latitude": -20.4301,
+        "longitude": 57.6818,
         "location_type": "airport",
         "iata": "MRU",
-        "provider_count": 5,
+        "provider_count": 6,
         "providers": [
             {
                 "provider": "click2rent",
@@ -43876,6 +44466,20 @@
                 "dropoffs": [],
                 "latitude": -20.430235,
                 "longitude": 57.6836,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MU",
+                "iata": "MRU",
+                "provider_code": null
+            },
+            {
+                "provider": "emr",
+                "pickup_id": "409",
+                "original_name": "Mauritius Havalimanı (MRU)",
+                "dropoffs": [],
+                "latitude": -20.43,
+                "longitude": 57.68,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -44280,8 +44884,8 @@
         "aliases": [
             "Podgorica downtown",
             "Podgorica",
-            "Podgorica Office",
-            "Podgorica Hilton Hotel"
+            "Podgorica Hilton Hotel",
+            "Podgorica Office"
         ],
         "city": "Podgorica",
         "country": "ME",
@@ -44308,11 +44912,11 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "TGDC01:TGDC01",
-                "original_name": "Podgorica Office",
+                "pickup_id": "TGDH02:TGDH02",
+                "original_name": "Podgorica Hilton Hotel",
                 "dropoffs": [],
-                "latitude": 42.433208,
-                "longitude": 19.24356,
+                "latitude": 42.439011,
+                "longitude": 19.263254,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -44322,11 +44926,11 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "TGDH02:TGDH02",
-                "original_name": "Podgorica Hilton Hotel",
+                "pickup_id": "TGDC01:TGDC01",
+                "original_name": "Podgorica Office",
                 "dropoffs": [],
-                "latitude": 42.439011,
-                "longitude": 19.263254,
+                "latitude": 42.433208,
+                "longitude": 19.24356,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -46228,11 +46832,11 @@
         "city": "Punta Cana",
         "country": "DO",
         "country_code": "DO",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 18.5674,
+        "longitude": -68.363403,
         "location_type": "airport",
         "iata": "PUJ",
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -46241,6 +46845,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "DO",
+                "iata": "PUJ",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "94",
+                "original_name": "Punta Cana Airport (PUJ)",
+                "dropoffs": [],
+                "latitude": 18.5674,
+                "longitude": -68.3634033,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -46274,39 +46892,6 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "DO",
-                "iata": null,
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
-        "unified_location_id": 3043015508,
-        "name": "Punta Cana Train Station",
-        "aliases": [
-            "Punta Cana Station (PUJ)",
-            "Punta Cana"
-        ],
-        "city": "Punta Cana",
-        "country": "DO",
-        "country_code": "DO",
-        "latitude": 18.5674,
-        "longitude": -68.363403,
-        "location_type": "train_station",
-        "iata": null,
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "94",
-                "original_name": "Punta Cana Station (PUJ)",
-                "dropoffs": [],
-                "latitude": 18.5674,
-                "longitude": -68.3634033,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -46588,11 +47173,11 @@
         "city": "Rabat",
         "country": "Morocco",
         "country_code": "MA",
-        "latitude": 34.050301,
-        "longitude": -6.751698,
+        "latitude": 34.0509,
+        "longitude": -6.751599,
         "location_type": "airport",
         "iata": "RBA",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "renteon",
@@ -46615,6 +47200,20 @@
                 "dropoffs": [],
                 "latitude": 34.050301,
                 "longitude": -6.751698,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "MA",
+                "iata": "RBA",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "131",
+                "original_name": "Rabat Airport (RBA)",
+                "dropoffs": [],
+                "latitude": 34.0515,
+                "longitude": -6.7515,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -49396,16 +49995,18 @@
         "aliases": [
             "San Sebastián de los Reyes",
             "San Sebastián de los Reyes downtown",
-            "San Sebastian De Los Reyes"
+            "San Sebastian De Los Reyes",
+            "San Sebastián De Los Reyes",
+            "Madrid San Sebastian de los Reyes Downtown"
         ],
         "city": "San Sebastian De Los Reyes",
         "country": "ES",
         "country_code": "ES",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 40.550136,
+        "longitude": -3.621476,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -49414,6 +50015,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "MADC02 :MADC02 ",
+                "original_name": "Madrid San Sebastian de los Reyes Downtown",
+                "dropoffs": [],
+                "latitude": 40.55013599999999,
+                "longitude": -3.6214756,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -50204,39 +50819,6 @@
         "our_location_id": null
     },
     {
-        "unified_location_id": 1430039847,
-        "name": "Santiago Airport (STI)",
-        "aliases": [
-            "Santiago",
-            "STI"
-        ],
-        "city": "Santiago",
-        "country": "DO",
-        "country_code": "DO",
-        "latitude": 42.89639,
-        "longitude": -8.41528,
-        "location_type": "airport",
-        "iata": "STI",
-        "provider_count": 1,
-        "providers": [
-            {
-                "provider": "xdrive",
-                "pickup_id": "93",
-                "original_name": "Santiago Airport (STI)",
-                "dropoffs": [],
-                "latitude": 42.89639,
-                "longitude": -8.41528,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "DO",
-                "iata": "STI",
-                "provider_code": null
-            }
-        ],
-        "our_location_id": null
-    },
-    {
         "unified_location_id": 1908902796,
         "name": "Santiago De Compostela Downtown",
         "aliases": [
@@ -50403,18 +50985,16 @@
         "aliases": [
             "Las Americas International Airport",
             "Santo Domingo",
-            "Las Américas International Airport (SDQ)",
-            "Las Americas",
             "SDQ"
         ],
         "city": "Santo Domingo",
         "country": "Dominican Republic",
         "country_code": "DO",
-        "latitude": 18.438106,
-        "longitude": -69.674702,
+        "latitude": 18.446513,
+        "longitude": -69.680505,
         "location_type": "airport",
         "iata": "SDQ",
-        "provider_count": 2,
+        "provider_count": 1,
         "providers": [
             {
                 "provider": "surprice",
@@ -50423,20 +51003,6 @@
                 "dropoffs": [],
                 "latitude": 18.446513,
                 "longitude": -69.680505,
-                "supports_one_way": false,
-                "extended_location_code": null,
-                "extended_dropoff_code": null,
-                "country_code": "DO",
-                "iata": "SDQ",
-                "provider_code": null
-            },
-            {
-                "provider": "xdrive",
-                "pickup_id": "92",
-                "original_name": "Las Américas International Airport (SDQ)",
-                "dropoffs": [],
-                "latitude": 18.4297,
-                "longitude": -69.6689,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -50634,6 +51200,36 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AL",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 3002069166,
+        "name": "Saranda Liman",
+        "aliases": [],
+        "city": "Saranda Liman",
+        "country": "AL",
+        "country_code": "AL",
+        "latitude": 39.87,
+        "longitude": 20.0,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "411",
+                "original_name": "Saranda Liman",
+                "dropoffs": [],
+                "latitude": 39.87,
+                "longitude": 20.0,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -51194,6 +51790,70 @@
                 "dropoffs": [],
                 "latitude": 37.39,
                 "longitude": -5.97,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 1046565173,
+        "name": "Sevilla Downtown",
+        "aliases": [
+            "Sevilla"
+        ],
+        "city": "Sevilla",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 37.372407,
+        "longitude": -5.971601,
+        "location_type": "downtown",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "surprice",
+                "pickup_id": "SVQC01 :SVQC01 ",
+                "original_name": "Sevilla Downtown",
+                "dropoffs": [],
+                "latitude": 37.3724066,
+                "longitude": -5.971600899999999,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
+        "unified_location_id": 2325616854,
+        "name": "Sevilla Train Station",
+        "aliases": [
+            "Sevilla"
+        ],
+        "city": "Sevilla",
+        "country": "Spain",
+        "country_code": "ES",
+        "latitude": 37.372407,
+        "longitude": -5.971601,
+        "location_type": "train_station",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "surprice",
+                "pickup_id": "SVQX01 :SVQX01 ",
+                "original_name": "Sevilla Train Station",
+                "dropoffs": [],
+                "latitude": 37.3724066,
+                "longitude": -5.971600899999999,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -53592,6 +54252,40 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 455588501,
+        "name": "St Georges Airport (GND)",
+        "aliases": [
+            "St. George’s Airport(GND)",
+            "St Georges",
+            "GND"
+        ],
+        "city": "St Georges",
+        "country": "GD",
+        "country_code": "GD",
+        "latitude": 12.007145,
+        "longitude": 0.0,
+        "location_type": "airport",
+        "iata": "GND",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "xdrive",
+                "pickup_id": "127",
+                "original_name": "St. George’s Airport(GND)",
+                "dropoffs": [],
+                "latitude": 12.0071446,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "GD",
+                "iata": "GND",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1017189473,
         "name": "St Konstantin And Elena Downtown",
         "aliases": [
@@ -54558,9 +55252,9 @@
         "name": "T Bilisi Downtown",
         "aliases": [
             "T'Bilisi",
-            "Tbilisi Hotel",
+            "Tbilisi Office",
             "T Bilisi",
-            "Tbilisi Office"
+            "Tbilisi Hotel"
         ],
         "city": "T Bilisi",
         "country": "Georgia",
@@ -54573,8 +55267,8 @@
         "providers": [
             {
                 "provider": "surprice",
-                "pickup_id": "TBSH04:TBSH04",
-                "original_name": "Tbilisi Hotel",
+                "pickup_id": "TBSC01:TBSC01",
+                "original_name": "Tbilisi Office",
                 "dropoffs": [],
                 "latitude": 41.706916,
                 "longitude": 44.788023,
@@ -54587,8 +55281,8 @@
             },
             {
                 "provider": "surprice",
-                "pickup_id": "TBSC01:TBSC01",
-                "original_name": "Tbilisi Office",
+                "pickup_id": "TBSH04:TBSH04",
+                "original_name": "Tbilisi Hotel",
                 "dropoffs": [],
                 "latitude": 41.706916,
                 "longitude": 44.788023,
@@ -55966,6 +56660,36 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 899747637,
+        "name": "Tiran Merkez",
+        "aliases": [],
+        "city": "Tiran Merkez",
+        "country": "AL",
+        "country_code": "AL",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "location_type": "other",
+        "iata": null,
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "emr",
+                "pickup_id": "408",
+                "original_name": "Tiran Merkez",
+                "dropoffs": [],
+                "latitude": null,
+                "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "AL",
+                "iata": null,
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1485092558,
         "name": "Tiran Sehir Merkezi",
         "aliases": [
@@ -56703,11 +57427,11 @@
         "city": "Toledo",
         "country": "ES",
         "country_code": "ES",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 39.861705,
+        "longitude": -4.008439,
         "location_type": "train_station",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -56716,6 +57440,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "XTJX01 :XTJX01 ",
+                "original_name": "Toledo Train Station",
+                "dropoffs": [],
+                "latitude": 39.8617054,
+                "longitude": -4.0084395,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -57209,16 +57947,17 @@
             "Trabzon Havaliman",
             "Trabzon airport",
             "Trabzon",
+            "Trabzon Airport (TZX)",
             "TZX"
         ],
         "city": "Trabzon Havaliman",
         "country": "TR",
         "country_code": "TR",
-        "latitude": 40.995224,
-        "longitude": 39.780034,
+        "latitude": 40.995162,
+        "longitude": 39.784867,
         "location_type": "airport",
         "iata": "TZX",
-        "provider_count": 2,
+        "provider_count": 3,
         "providers": [
             {
                 "provider": "emr",
@@ -57241,6 +57980,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "TR",
+                "iata": "TZX",
+                "provider_code": null
+            },
+            {
+                "provider": "xdrive",
+                "pickup_id": "126",
+                "original_name": "Trabzon Airport (TZX)",
+                "dropoffs": [],
+                "latitude": 40.9951,
+                "longitude": 39.7897,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,
@@ -59659,6 +60412,39 @@
         "our_location_id": null
     },
     {
+        "unified_location_id": 1524304203,
+        "name": "Vieux Fort Hewanorra Airport (UVF)",
+        "aliases": [
+            "Vieux Fort Hewanorra",
+            "UVF"
+        ],
+        "city": "Vieux Fort Hewanorra",
+        "country": "LC",
+        "country_code": "LC",
+        "latitude": 13.7333,
+        "longitude": -60.9526,
+        "location_type": "airport",
+        "iata": "UVF",
+        "provider_count": 1,
+        "providers": [
+            {
+                "provider": "xdrive",
+                "pickup_id": "128",
+                "original_name": "Vieux Fort Hewanorra Airport (UVF)",
+                "dropoffs": [],
+                "latitude": 13.7333,
+                "longitude": -60.9526,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "LC",
+                "iata": "UVF",
+                "provider_code": null
+            }
+        ],
+        "our_location_id": null
+    },
+    {
         "unified_location_id": 1758033212,
         "name": "Vigo Airport (VGO)",
         "aliases": [
@@ -61465,11 +62251,11 @@
         "city": "Zaragoza",
         "country": "ES",
         "country_code": "ES",
-        "latitude": 0.0,
-        "longitude": 0.0,
+        "latitude": 41.655979,
+        "longitude": -0.910974,
         "location_type": "downtown",
         "iata": null,
-        "provider_count": 1,
+        "provider_count": 2,
         "providers": [
             {
                 "provider": "renteon",
@@ -61478,6 +62264,20 @@
                 "dropoffs": [],
                 "latitude": null,
                 "longitude": null,
+                "supports_one_way": false,
+                "extended_location_code": null,
+                "extended_dropoff_code": null,
+                "country_code": "ES",
+                "iata": null,
+                "provider_code": null
+            },
+            {
+                "provider": "surprice",
+                "pickup_id": "ZAZC01 :ZAZC01 ",
+                "original_name": "Zaragoza Downtown",
+                "dropoffs": [],
+                "latitude": 41.6559785,
+                "longitude": -0.9109739,
                 "supports_one_way": false,
                 "extended_location_code": null,
                 "extended_dropoff_code": null,

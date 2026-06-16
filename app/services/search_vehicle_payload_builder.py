@@ -17,7 +17,6 @@ from app.schemas.search_vehicle_payload import (
 )
 from app.schemas.vehicle import Extra, Vehicle, VehicleLocation
 
-
 _SOURCE_MAP = {
     "green_motion": "greenmotion",
     "ok_mobility": "okmobility",
@@ -65,7 +64,11 @@ def _build_specs(vehicle: Vehicle) -> SearchVehicleSpecsPayload:
         transmission = vehicle.transmission.value
 
     fuel = None
-    if _is_explicit(vehicle, "fuel_type") and vehicle.fuel_type is not None and vehicle.fuel_type != FuelType.UNKNOWN:
+    if (
+        _is_explicit(vehicle, "fuel_type")
+        and vehicle.fuel_type is not None
+        and vehicle.fuel_type != FuelType.UNKNOWN
+    ):
         fuel = vehicle.fuel_type.value
 
     return SearchVehicleSpecsPayload(
@@ -149,6 +152,7 @@ def _build_extras_preview(extras: list[Extra]) -> list[dict]:
                 "daily_rate": extra.daily_rate,
                 "total_price": extra.total_price,
                 "mandatory": extra.mandatory,
+                "max_quantity": extra.max_quantity,
                 "pricing_type": supplier_data.get("pricing_type"),
                 "chargeable_days": supplier_data.get("chargeable_days"),
                 "max_charge_days": supplier_data.get("max_charge_days"),
@@ -157,9 +161,6 @@ def _build_extras_preview(extras: list[Extra]) -> list[dict]:
             }
         )
     return preview
-
-
-
 
 
 def _build_data_quality_flags(vehicle: Vehicle) -> list[str]:
@@ -214,21 +215,29 @@ def _build_products(vehicle: Vehicle) -> list[dict]:
         products.append(
             {
                 "type": product_type,
-                "name": raw_product.get("name") or _PRODUCT_NAME_MAP.get(product_type, product_type.title()),
+                "name": raw_product.get("name")
+                or _PRODUCT_NAME_MAP.get(product_type, product_type.title()),
                 "total": total,
                 "price_per_day": float(price_per_day),
                 "currency": raw_product.get("currency") or vehicle.pricing.currency,
                 "deposit": raw_product.get("deposit"),
                 "excess": raw_product.get("excess"),
                 "fuel_policy": raw_product.get("fuelpolicy") or raw_product.get("fuel_policy"),
-                "mileage_limit_km": raw_product.get("mileage") if raw_product.get("mileage") not in (None, "") else None,
-                "cost_per_extra_km": raw_product.get("costperextradistance") or raw_product.get("cost_per_extra_km"),
-                "minimum_driver_age": raw_product.get("minage") if raw_product.get("minage") not in (None, "") else None,
+                "mileage_limit_km": raw_product.get("mileage")
+                if raw_product.get("mileage") not in (None, "")
+                else None,
+                "cost_per_extra_km": raw_product.get("costperextradistance")
+                or raw_product.get("cost_per_extra_km"),
+                "minimum_driver_age": raw_product.get("minage")
+                if raw_product.get("minage") not in (None, "")
+                else None,
                 "debit_card_required": raw_product.get("debitcard") or None,
+                "benefits": raw_product.get("benefits") or [],
             }
         )
 
     return products
+
 
 def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
     source = _normalize_source(vehicle.supplier_id)
@@ -240,8 +249,16 @@ def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
         category = vehicle.category.value
 
     provider_product_id = vehicle.provider_product_id or supplier_data.get("product_id")
-    provider_rate_id = vehicle.provider_rate_id or supplier_data.get("rate_id") or supplier_data.get("vendor_rate_id")
-    availability_status = vehicle.availability_status or supplier_data.get("availability_status") or supplier_data.get("availability")
+    provider_rate_id = (
+        vehicle.provider_rate_id
+        or supplier_data.get("rate_id")
+        or supplier_data.get("vendor_rate_id")
+    )
+    availability_status = (
+        vehicle.availability_status
+        or supplier_data.get("availability_status")
+        or supplier_data.get("availability")
+    )
 
     return SearchVehiclePayload(
         id=vehicle.id,
@@ -306,8 +323,12 @@ def build_search_vehicle_response(response: SearchResponse) -> SearchVehicleResp
         total_vehicles=response.total_vehicles,
         suppliers_queried=response.suppliers_queried,
         suppliers_responded=response.suppliers_responded,
-        supplier_results=[_build_supplier_result_payload(result) for result in response.supplier_results],
-        provider_status=[_build_provider_status_payload(failure) for failure in response.provider_status],
+        supplier_results=[
+            _build_supplier_result_payload(result) for result in response.supplier_results
+        ],
+        provider_status=[
+            _build_provider_status_payload(failure) for failure in response.provider_status
+        ],
         from_cache=response.from_cache,
         response_time_ms=response.response_time_ms,
     )
