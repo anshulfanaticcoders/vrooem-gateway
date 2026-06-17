@@ -21,17 +21,22 @@ class _FakeAdapter:
 
 
 class _RecordingCache:
-    def __init__(self) -> None:
+    def __init__(self, cached_search: dict | None = None) -> None:
         self.get_search_calls = []
+        self.cached_search = cached_search
+        self.set_search_calls = []
+        self.set_vehicle_calls = []
 
     async def get_search(self, **kwargs):
         self.get_search_calls.append(kwargs)
-        return None
+        return self.cached_search
 
     async def set_vehicle(self, vehicle_id, data):
+        self.set_vehicle_calls.append((vehicle_id, data))
         return None
 
     async def set_search(self, data, **kwargs):
+        self.set_search_calls.append((data, kwargs))
         return None
 
 
@@ -283,6 +288,43 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertNotEqual(cache.get_search_calls[0], cache.get_search_calls[1])
         self.assertIn("ploc", cache.get_search_calls[0])
         self.assertIn("ploc", cache.get_search_calls[1])
+
+    async def test_cache_hit_reuses_cached_search_id_for_booking_context(self) -> None:
+        request = SearchRequest(
+            unified_location_id=1191543869,
+            pickup_date=date(2026, 5, 21),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 5, 24),
+            dropoff_time=time(9, 0),
+            currency="EUR",
+            driver_age=35,
+        )
+        cached_search = {
+            "search_id": "search_cached_123",
+            "vehicles": [],
+            "total_vehicles": 0,
+            "suppliers_queried": 1,
+            "suppliers_responded": 1,
+            "supplier_results": [],
+            "provider_status": [],
+            "response_time_ms": 25,
+        }
+
+        response = await search_vehicles(
+            request=request,
+            provider_entries=[
+                {
+                    "provider": "locauto_rent",
+                    "pickup_id": "FCO",
+                    "original_name": "Rome Fiumicino Airport",
+                },
+            ],
+            cache=_RecordingCache(cached_search=cached_search),
+            cb_registry=_FakeCircuitBreakerRegistry(),
+        )
+
+        self.assertEqual(response.search_id, "search_cached_123")
+        self.assertTrue(response.from_cache)
 
     async def test_returns_structured_provider_failure_when_supplier_raises(self) -> None:
         request = SearchRequest(

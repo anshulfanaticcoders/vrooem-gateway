@@ -1,6 +1,7 @@
 """Booking schemas for create/modify/cancel operations."""
 
 from datetime import date, datetime
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
@@ -47,6 +48,10 @@ class CreateBookingRequest(BaseModel):
     search_id: str = Field(
         min_length=1,
         description="Search ID from which this vehicle was selected",
+    )
+    vehicle_context: dict[str, Any] | None = Field(
+        default=None,
+        description="Server-verified vehicle snapshot used only if the gateway cache has expired",
     )
     driver: DriverInfo
     extras: list[BookingExtra] = Field(default_factory=list)

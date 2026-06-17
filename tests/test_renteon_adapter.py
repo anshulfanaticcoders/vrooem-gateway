@@ -32,7 +32,7 @@ def test_renteon_keeps_missing_specs_missing() -> None:
         "Amount": 180,
         "Currency": "EUR",
         "PickupOffice": {"Name": "Casablanca Airport", "Town": "Casablanca"},
-        "DropOffOffice": {},
+        "DropOffOffice": {"Name": "Casablanca Airport", "Town": "Casablanca"},
         "PickupOfficeId": 101,
         "DropOffOfficeId": 101,
         "ConnectorId": 51,
@@ -55,6 +55,7 @@ def test_renteon_keeps_missing_specs_missing() -> None:
     assert "bags_small" not in vehicle.model_fields_set
     assert "air_conditioning" not in vehicle.model_fields_set
     assert "mileage_policy" not in vehicle.model_fields_set
+    assert vehicle.dropoff_location is None
 
     payload = build_search_vehicle_payload(vehicle)
 

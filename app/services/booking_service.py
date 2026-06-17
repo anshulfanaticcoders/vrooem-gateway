@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+from datetime import datetime, timezone
 
 from app.adapters.registry import get_adapter
 from app.schemas.booking import (
@@ -34,13 +35,43 @@ async def create_booking(
             raise ValueError("Booking is already being confirmed. Please retry shortly.")
 
     try:
+        restore_vehicle_cache = False
         vehicle_data = await cache.get_vehicle(request.vehicle_id)
         if not vehicle_data:
+            vehicle_data = vehicle_context_fallback(request)
+            if not vehicle_data:
+                raise ValueError(
+                    f"Vehicle {request.vehicle_id} not found in cache (expired or invalid)"
+                )
+            restore_vehicle_cache = True
+        elif not str(vehicle_data.get("search_id") or "").strip():
+            logger.warning(
+                "Cached vehicle %s is missing search_id; requiring Laravel context fallback",
+                request.vehicle_id,
+            )
+            vehicle_data = vehicle_context_fallback(request)
+            if not vehicle_data:
+                raise ValueError(
+                    f"Vehicle {request.vehicle_id} cache entry is missing search_id "
+                    "and no valid vehicle context was provided"
+                )
+            restore_vehicle_cache = True
+
+        cached_search_id = str(vehicle_data.get("search_id") or "").strip()
+        if cached_search_id and cached_search_id != request.search_id:
             raise ValueError(
-                f"Vehicle {request.vehicle_id} not found in cache (expired or invalid)"
+                f"Vehicle {request.vehicle_id} does not belong to search {request.search_id}"
             )
 
         vehicle = Vehicle(**vehicle_data)
+        if restore_vehicle_cache:
+            logger.warning(
+                "Using Laravel vehicle_context fallback for cache miss: vehicle=%s search=%s",
+                request.vehicle_id,
+                request.search_id,
+            )
+            await cache.set_vehicle(request.vehicle_id, vehicle_data)
+
         adapter = get_adapter(vehicle.supplier_id)
         if adapter is None:
             raise ValueError(f"No adapter for supplier: {vehicle.supplier_id}")
@@ -73,6 +104,52 @@ async def create_booking(
                     lock_key,
                     exc_info=True,
                 )
+
+
+def vehicle_context_fallback(request: CreateBookingRequest) -> dict | None:
+    """Return guarded Laravel vehicle context when Redis lost the cached vehicle."""
+
+    context = request.vehicle_context
+    if not isinstance(context, dict) or not context:
+        return None
+
+    context_vehicle_id = str(context.get("id") or context.get("gateway_vehicle_id") or "").strip()
+    if context_vehicle_id != request.vehicle_id:
+        raise ValueError(f"Vehicle context does not match vehicle {request.vehicle_id}")
+
+    context_search_id = str(
+        context.get("search_id") or context.get("gateway_search_id") or ""
+    ).strip()
+    if context_search_id != request.search_id:
+        raise ValueError(
+            f"Vehicle context for {request.vehicle_id} does not belong to "
+            f"search {request.search_id}"
+        )
+
+    expires_at = str(context.get("context_valid_until") or "").strip()
+    if not expires_at:
+        raise ValueError(f"Vehicle context for {request.vehicle_id} is missing expiry")
+
+    if vehicle_context_expired(expires_at):
+        raise ValueError(f"Vehicle context for {request.vehicle_id} has expired")
+
+    vehicle_data = dict(context)
+    vehicle_data["id"] = request.vehicle_id
+    vehicle_data["search_id"] = request.search_id
+
+    return vehicle_data
+
+
+def vehicle_context_expired(value: str) -> bool:
+    try:
+        expires_at = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError("Vehicle context expiry is invalid") from exc
+
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+
+    return expires_at <= datetime.now(timezone.utc)
 
 
 def normalize_booking_response(response: BookingResponse) -> BookingResponse:

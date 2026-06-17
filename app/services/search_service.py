@@ -183,8 +183,11 @@ async def search_vehicles(
     }
     cached = await cache.get_search(**cache_key_params)
     if cached:
-        logger.info("Cache hit for search %s", search_id)
-        return SearchResponse(**cached, search_id=search_id, from_cache=True)
+        cached = dict(cached)
+        cached["search_id"] = cached.get("search_id") or search_id
+        cached.pop("from_cache", None)
+        logger.info("Cache hit for search %s", cached["search_id"])
+        return SearchResponse(**cached, from_cache=True)
 
     # Build list of (adapter, pickup_entry, dropoff_entry) tuples
     tasks = []
@@ -298,7 +301,9 @@ async def search_vehicles(
 
     # Cache individual vehicles for booking retrieval
     for vehicle in all_vehicles:
-        await cache.set_vehicle(vehicle.id, vehicle.model_dump(mode="json"))
+        vehicle_cache_data = vehicle.model_dump(mode="json")
+        vehicle_cache_data["search_id"] = search_id
+        await cache.set_vehicle(vehicle.id, vehicle_cache_data)
 
     elapsed_ms = int((time.time() - start) * 1000)
 
@@ -314,7 +319,7 @@ async def search_vehicles(
     )
 
     # Cache the response (without individual vehicles to save memory)
-    cache_data = response.model_dump(mode="json", exclude={"search_id", "from_cache"})
+    cache_data = response.model_dump(mode="json", exclude={"from_cache"})
     await cache.set_search(cache_data, **cache_key_params)
 
     logger.info(

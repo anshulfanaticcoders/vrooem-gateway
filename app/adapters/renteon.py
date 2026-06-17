@@ -185,7 +185,9 @@ class RenteonAdapter(BaseAdapter):
                 logger.info("[renteon] Provider %s returned %d raw vehicles", provider_code, len(vehicles_raw))
 
                 for raw in vehicles_raw:
-                    v = self._parse_vehicle(raw, request, rental_days, pickup_entry, provider_code)
+                    v = self._parse_vehicle(
+                        raw, request, rental_days, pickup_entry, dropoff_entry, provider_code
+                    )
                     if v is not None:
                         all_vehicles.append(v)
 
@@ -201,6 +203,7 @@ class RenteonAdapter(BaseAdapter):
         request: SearchRequest,
         rental_days: int,
         pickup_entry: ProviderLocationEntry,
+        dropoff_entry: ProviderLocationEntry | None = None,
         provider_code: str = "",
     ) -> Vehicle | None:
         model_name = raw.get("ModelName", "")
