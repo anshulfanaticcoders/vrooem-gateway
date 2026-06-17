@@ -54,7 +54,9 @@ class SearchVehicleBookingContextPayload(BaseModel):
     version: int = 1
     provider_payload: dict[str, Any] = Field(
         default_factory=dict,
-        description="Temporary opaque booking compatibility payload; not for search-card rendering.",
+        description=(
+            "Temporary opaque booking compatibility payload; not for search-card rendering."
+        ),
     )
 
 
@@ -77,6 +79,7 @@ class SearchVehiclePayload(BaseModel):
     policies: SearchVehiclePoliciesPayload
     products: list[dict[str, Any]] = Field(default_factory=list)
     extras_preview: list[dict[str, Any]] = Field(default_factory=list)
+    insurance_options: list[dict[str, Any]] = Field(default_factory=list)
     location: SearchVehicleLocationPayload
     data_quality_flags: list[str] = Field(default_factory=list)
     pricing_transparency_flags: list[str] = Field(default_factory=list)

@@ -163,6 +163,10 @@ def _build_extras_preview(extras: list[Extra]) -> list[dict]:
     return preview
 
 
+def _build_insurance_options(vehicle: Vehicle) -> list[dict]:
+    return [option.model_dump(mode="json") for option in vehicle.insurance_options]
+
+
 def _build_data_quality_flags(vehicle: Vehicle) -> list[str]:
     flags: list[str] = []
 
@@ -279,6 +283,7 @@ def build_search_vehicle_payload(vehicle: Vehicle) -> SearchVehiclePayload:
         policies=_build_policies(vehicle),
         products=_build_products(vehicle),
         extras_preview=_build_extras_preview(vehicle.extras),
+        insurance_options=_build_insurance_options(vehicle),
         location=SearchVehicleLocationPayload(
             pickup=_build_location_point(vehicle.pickup_location),
             dropoff=_build_location_point(vehicle.dropoff_location),

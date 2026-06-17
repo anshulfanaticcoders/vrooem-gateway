@@ -201,6 +201,13 @@
         "additionalProperties": true
       }
     },
+    "insurance_options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
     "location": {
       "type": "object",
       "additionalProperties": false,

@@ -1,6 +1,6 @@
-from app.schemas.common import FuelType, MileagePolicy, TransmissionType
+from app.schemas.common import CoverageType, FuelType, MileagePolicy, TransmissionType
 from app.schemas.pricing import Pricing
-from app.schemas.vehicle import Extra, Vehicle, VehicleLocation
+from app.schemas.vehicle import Extra, InsuranceOption, Vehicle, VehicleLocation
 from app.services.search_vehicle_payload_builder import build_search_vehicle_payload
 
 
@@ -175,6 +175,42 @@ def test_build_search_vehicle_payload_exposes_extra_quantity_limit() -> None:
     assert payload.extras_preview[0]["daily_rate"] == 10.0
     assert payload.extras_preview[0]["total_price"] == 40.0
     assert payload.extras_preview[0]["max_quantity"] == 3
+
+
+def test_build_search_vehicle_payload_exposes_canonical_insurance_options() -> None:
+    payload = build_search_vehicle_payload(
+        _make_vehicle(
+            insurance_options=[
+                InsuranceOption(
+                    id="ins_basic",
+                    coverage_type=CoverageType.BASIC,
+                    name="Basic supplier insurance",
+                    daily_rate=0.0,
+                    total_price=0.0,
+                    currency="USD",
+                    excess_amount=500.0,
+                    included=True,
+                    description="Included supplier collision cover.",
+                )
+            ]
+        )
+    )
+
+    assert payload.insurance_options == [
+        {
+            "id": "ins_basic",
+            "coverage_type": "basic",
+            "name": "Basic supplier insurance",
+            "daily_rate": 0.0,
+            "total_price": 0.0,
+            "currency": "USD",
+            "excess_amount": 500.0,
+            "included": True,
+            "description": "Included supplier collision cover.",
+        }
+    ]
+    assert "insurance_options" in payload.model_dump()
+    assert "insurance_options" not in payload.booking_context.provider_payload
 
 
 def test_build_search_vehicle_payload_exposes_canonical_product_and_rate_ids() -> None:
