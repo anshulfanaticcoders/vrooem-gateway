@@ -80,8 +80,8 @@ async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
         driver=DriverInfo(
             first_name="Vrooem",
             last_name="Testing",
-            email="anshulmankotia1997@gmail.com",
-            phone="8278825392",
+            email="customer@example.com",
+            phone="1000000000",
             age=35,
         ),
         pickup_date="2027-05-13",
@@ -99,6 +99,143 @@ async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
     assert len(adapter.calls) == 1
     assert cache.redis.set_calls == [("gateway_booking_lock:104", "1", 90, True)]
     assert cache.redis.deleted_keys == ["gateway_booking_lock:104"]
+
+
+async def test_create_booking_applies_selected_supplier_package_before_adapter(monkeypatch):
+    vehicle_data = {
+        "id": "gw_vehicle_1",
+        "search_id": "search_123",
+        "supplier_id": "green_motion",
+        "supplier_vehicle_id": "85512",
+        "name": "Mitsubishi Attrage, Automatic or similar",
+        "category": "economy",
+        "pricing": {"currency": "EUR", "total_price": 57.88, "daily_rate": 19.29},
+        "supplier_data": {
+            "quote_id": "10939053957",
+            "vehicle_id": "85512",
+            "location_id": "59610",
+            "products": [
+                {
+                    "type": "BAS",
+                    "total": 57.88,
+                    "price_per_day": 19.29,
+                    "currency": "EUR",
+                    "deposit": 473.37,
+                    "fuelpolicy": "SL",
+                    "minage": 21,
+                },
+                {
+                    "type": "PMP",
+                    "total": 109.96,
+                    "price_per_day": 36.65,
+                    "currency": "EUR",
+                    "deposit": 473.37,
+                    "fuelpolicy": "FF",
+                    "minage": 21,
+                },
+            ],
+        },
+    }
+    adapter = FakeAdapter()
+    cache = FakeCache(vehicle_data)
+    request = CreateBookingRequest(
+        vehicle_id="gw_vehicle_1",
+        search_id="search_123",
+        package="PMP",
+        driver=DriverInfo(
+            first_name="Vrooem",
+            last_name="Testing",
+            email="customer@example.com",
+            phone="1000000000",
+            age=35,
+        ),
+    )
+    monkeypatch.setattr(booking_service, "get_adapter", lambda supplier_id: adapter)
+
+    response = await booking_service.create_booking(request, cache)
+
+    assert response.supplier_booking_id == "LC123"
+    assert len(adapter.calls) == 1
+    vehicle = adapter.calls[0][1]
+    assert vehicle.pricing.total_price == 109.96
+    assert vehicle.pricing.daily_rate == 36.65
+    assert vehicle.pricing.deposit_amount == 473.37
+    assert vehicle.supplier_data["fuel_policy"] == "FF"
+    assert vehicle.supplier_data["selected_package"] == "PMP"
+    assert vehicle.supplier_data["selected_product"]["type"] == "PMP"
+
+
+async def test_create_booking_applies_selected_recordgo_product_ids_before_adapter(monkeypatch):
+    vehicle_data = {
+        "id": "gw_vehicle_1",
+        "search_id": "search_123",
+        "supplier_id": "recordgo",
+        "supplier_vehicle_id": "EDMR",
+        "name": "Fiat 500 or similar",
+        "category": "mini",
+        "pricing": {"currency": "EUR", "total_price": 100.0, "daily_rate": 25.0},
+        "supplier_data": {
+            "product_id": 10,
+            "product_ver": 1,
+            "rate_prod_ver": "A",
+            "booking_total": 100.0,
+            "automatic_complements": [{"complementId": 1}],
+            "products": [
+                {
+                    "type": "RG_10_A",
+                    "name": "Basic",
+                    "total": 100.0,
+                    "price_per_day": 25.0,
+                    "currency": "EUR",
+                    "product_id": 10,
+                    "product_ver": 1,
+                    "rate_prod_ver": "A",
+                    "complements_autom": [{"complementId": 1}],
+                },
+                {
+                    "type": "RG_20_B",
+                    "name": "Premium",
+                    "total": 160.0,
+                    "price_per_day": 40.0,
+                    "currency": "EUR",
+                    "product_id": 20,
+                    "product_ver": 2,
+                    "rate_prod_ver": "B",
+                    "complements_autom": [{"complementId": 2}],
+                    "complements_included": [{"complementId": 3}],
+                },
+            ],
+        },
+    }
+    adapter = FakeAdapter()
+    cache = FakeCache(vehicle_data)
+    request = CreateBookingRequest(
+        vehicle_id="gw_vehicle_1",
+        search_id="search_123",
+        package="RG_20_B",
+        driver=DriverInfo(
+            first_name="Vrooem",
+            last_name="Testing",
+            email="customer@example.com",
+            phone="1000000000",
+            age=35,
+        ),
+    )
+    monkeypatch.setattr(booking_service, "get_adapter", lambda supplier_id: adapter)
+
+    response = await booking_service.create_booking(request, cache)
+
+    assert response.supplier_booking_id == "LC123"
+    vehicle = adapter.calls[0][1]
+    assert vehicle.pricing.total_price == 160.0
+    assert vehicle.pricing.daily_rate == 40.0
+    assert vehicle.supplier_data["product_id"] == 20
+    assert vehicle.supplier_data["product_ver"] == 2
+    assert vehicle.supplier_data["rate_prod_ver"] == "B"
+    assert vehicle.supplier_data["booking_total"] == 160.0
+    assert vehicle.supplier_data["automatic_complements"] == [{"complementId": 2}]
+    assert vehicle.supplier_data["included_complements"] == [{"complementId": 3}]
+    assert vehicle.supplier_data["product_data"]["type"] == "RG_20_B"
 
 
 async def test_create_booking_returns_structured_provider_failure(monkeypatch):

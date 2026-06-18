@@ -53,6 +53,10 @@ class CreateBookingRequest(BaseModel):
         default=None,
         description="Server-verified vehicle snapshot used only if the gateway cache has expired",
     )
+    package: str | None = Field(
+        default=None,
+        description="Selected supplier product/package code from checkout, e.g. BAS/PLU/PRE/PMP",
+    )
     driver: DriverInfo
     extras: list[BookingExtra] = Field(default_factory=list)
     insurance_id: str | None = None

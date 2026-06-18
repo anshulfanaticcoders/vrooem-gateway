@@ -571,6 +571,7 @@ class GreenMotionAdapter(BaseAdapter):
     async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
         settings = get_settings()
         sd = vehicle.supplier_data
+        quote_id = sd.get("quote_id") or sd.get("quoteid") or ""
 
         extras_xml = ""
         for extra in request.extras:
@@ -595,7 +596,7 @@ class GreenMotionAdapter(BaseAdapter):
         <vehicle_total>{vehicle.pricing.total_price}</vehicle_total>
         <currency>{vehicle.pricing.currency}</currency>
         <grand_total>{vehicle.pricing.total_price}</grand_total>
-        <quoteid>{sd['quote_id']}</quoteid>
+        <quoteid>{quote_id}</quoteid>
         <payment_type>POA</payment_type>
         <options>{extras_xml}</options>
         <cust_info>
@@ -633,7 +634,7 @@ class GreenMotionAdapter(BaseAdapter):
             vehicle_name=vehicle.name,
             total_price=vehicle.pricing.total_price,
             currency=vehicle.pricing.currency,
-            supplier_data={"booking_ref": booking_ref, "quote_id": sd.get("quote_id")},
+            supplier_data={"booking_ref": booking_ref, "quote_id": quote_id or None},
         )
 
     async def cancel_booking(

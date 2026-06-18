@@ -64,6 +64,7 @@ async def create_booking(
             )
 
         vehicle = Vehicle(**vehicle_data)
+        apply_selected_package(vehicle, request.package)
         if restore_vehicle_cache:
             logger.warning(
                 "Using Laravel vehicle_context fallback for cache miss: vehicle=%s search=%s",
@@ -138,6 +139,127 @@ def vehicle_context_fallback(request: CreateBookingRequest) -> dict | None:
     vehicle_data["search_id"] = request.search_id
 
     return vehicle_data
+
+
+def apply_selected_package(vehicle: Vehicle, package: str | None) -> None:
+    """Apply the checkout-selected supplier product before provider reservation."""
+
+    package_code = str(package or "").strip().upper()
+    if not package_code:
+        return
+
+    products = vehicle.supplier_data.get("products")
+    if not isinstance(products, list) or not products:
+        return
+
+    selected_product = None
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+        if str(product.get("type") or "").strip().upper() == package_code:
+            selected_product = product
+            break
+
+    if selected_product is None:
+        logger.warning(
+            "Selected package %s was not found in cached supplier products for vehicle=%s",
+            package_code,
+            vehicle.id,
+        )
+        return
+
+    total_price = _optional_float(selected_product.get("total"))
+    if total_price is None:
+        logger.warning(
+            "Selected package %s has no total in cached supplier products for vehicle=%s",
+            package_code,
+            vehicle.id,
+        )
+        return
+
+    vehicle.pricing.total_price = total_price
+
+    daily_rate = _optional_float(
+        selected_product.get("price_per_day") or selected_product.get("daily_rate")
+    )
+    if daily_rate is not None:
+        vehicle.pricing.daily_rate = daily_rate
+
+    currency = str(selected_product.get("currency") or "").strip()
+    if currency:
+        vehicle.pricing.currency = currency
+
+    deposit = _optional_float(selected_product.get("deposit"))
+    if deposit is not None:
+        vehicle.pricing.deposit_amount = deposit
+        vehicle.pricing.deposit_currency = (
+            str(selected_product.get("deposit_currency") or currency or "").strip() or None
+        )
+
+    min_age = _optional_int(selected_product.get("minage"))
+    if min_age is not None:
+        vehicle.min_driver_age = min_age
+
+    fuel_policy = str(selected_product.get("fuelpolicy") or "").strip()
+    if fuel_policy:
+        vehicle.supplier_data["fuel_policy"] = fuel_policy
+
+    cost_per_extra_km = selected_product.get("costperextradistance")
+    if cost_per_extra_km not in (None, ""):
+        vehicle.supplier_data["cost_per_extra_km"] = cost_per_extra_km
+
+    for key in (
+        "product_id",
+        "product_ver",
+        "rate_prod_ver",
+        "package_id",
+        "package_name",
+        "payment_type",
+        "oneway_rental_id",
+    ):
+        if selected_product.get(key) not in (None, ""):
+            vehicle.supplier_data[key] = selected_product[key]
+
+    if selected_product.get("name") not in (None, ""):
+        vehicle.supplier_data["product_name"] = selected_product["name"]
+
+    vehicle.supplier_data["booking_total"] = total_price
+
+    automatic_complements = selected_product.get(
+        "complements_automatic",
+        selected_product.get("complements_autom"),
+    )
+    if automatic_complements is not None:
+        vehicle.supplier_data["automatic_complements"] = automatic_complements
+
+    included_complements = selected_product.get(
+        "complements_included",
+        selected_product.get("included_complements"),
+    )
+    if included_complements is not None:
+        vehicle.supplier_data["included_complements"] = included_complements
+
+    vehicle.supplier_data["product_data"] = dict(selected_product)
+    vehicle.supplier_data["selected_package"] = package_code
+    vehicle.supplier_data["selected_product"] = dict(selected_product)
+
+
+def _optional_float(value) -> float | None:
+    if value in (None, ""):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _optional_int(value) -> int | None:
+    if value in (None, ""):
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def vehicle_context_expired(value: str) -> bool:
