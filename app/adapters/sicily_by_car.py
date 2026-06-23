@@ -44,6 +44,7 @@ logger = logging.getLogger(__name__)
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _safe_float(value, default: float = 0.0) -> float:
     if value is None:
         return default
@@ -127,6 +128,7 @@ def _parse_make_model(description: str) -> tuple[str, str]:
 # Adapter
 # ---------------------------------------------------------------------------
 
+
 @register_adapter
 class SicilyByCarAdapter(BaseAdapter):
     supplier_id = "sicily_by_car"
@@ -154,7 +156,8 @@ class SicilyByCarAdapter(BaseAdapter):
 
     def _url(self, endpoint: str) -> str:
         """Build full URL: {base}/v2/{account_code}/{endpoint}."""
-        return f"{self._base_url()}/v2/{quote(self._account_code(), safe='')}/{endpoint.lstrip('/')}"
+        account_code = quote(self._account_code(), safe="")
+        return f"{self._base_url()}/v2/{account_code}/{endpoint.lstrip('/')}"
 
     async def _post(self, endpoint: str, payload: dict) -> dict:
         """POST to SBC API, return parsed JSON response.
@@ -183,7 +186,9 @@ class SicilyByCarAdapter(BaseAdapter):
 
         # SBC uses ISO 8601 without timezone: YYYY-MM-DDTHH:MM:SS
         pickup_dt = f"{request.pickup_date.isoformat()}T{request.pickup_time.strftime('%H:%M:%S')}"
-        dropoff_dt = f"{request.dropoff_date.isoformat()}T{request.dropoff_time.strftime('%H:%M:%S')}"
+        dropoff_dt = (
+            f"{request.dropoff_date.isoformat()}T{request.dropoff_time.strftime('%H:%M:%S')}"
+        )
 
         dropoff_different = dropoff_code != pickup_code
 
@@ -278,9 +283,7 @@ class SicilyByCarAdapter(BaseAdapter):
         mileage_policy = None
         if "unlimited" in distance:
             mileage_policy = (
-                MileagePolicy.UNLIMITED
-                if distance.get("unlimited")
-                else MileagePolicy.LIMITED
+                MileagePolicy.UNLIMITED if distance.get("unlimited") else MileagePolicy.LIMITED
             )
 
         # Transmission — prefer explicit field, then infer from SIPP only when deterministic
@@ -362,6 +365,7 @@ class SicilyByCarAdapter(BaseAdapter):
             "supplier_data": {
                 "availability_id": availability_id,
                 "request_id": request_id,
+                "vehicle_id": veh.get("id"),
                 "vehicle_category_id": veh.get("id"),
                 "rate_id": rate_id,
                 "rate_payment": rate.get("payment"),
@@ -371,7 +375,9 @@ class SicilyByCarAdapter(BaseAdapter):
                 "total_prices": total_prices,
                 "services_raw": offer.get("services") or [],
                 "pickup_location_id": pickup_entry.pickup_id,
-                "dropoff_location_id": (dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id),
+                "dropoff_location_id": (
+                    dropoff_entry.pickup_id if dropoff_entry else pickup_entry.pickup_id
+                ),
             },
         }
 
@@ -444,7 +450,9 @@ class SicilyByCarAdapter(BaseAdapter):
 
     # ── create_booking ──
 
-    async def create_booking(self, request: CreateBookingRequest, vehicle: Vehicle) -> BookingResponse:
+    async def create_booking(
+        self, request: CreateBookingRequest, vehicle: Vehicle
+    ) -> BookingResponse:
         """Two-phase booking: createReservation then commitReservation."""
         sd = vehicle.supplier_data
 
@@ -458,35 +466,52 @@ class SicilyByCarAdapter(BaseAdapter):
             dropoff_dt = f"{request.dropoff_date.isoformat()}T{dropoff_time}:00"
 
         # Phase 1: Create reservation (hold inventory)
+        vehicle_id = (
+            sd.get("vehicle_id") or sd.get("vehicle_category_id") or vehicle.supplier_vehicle_id
+        )
         create_payload = {
             "availabilityId": sd.get("availability_id", ""),
-            "vehicleCategoryId": sd.get("vehicle_category_id", ""),
-            "rateId": sd.get("rate_id", ""),
-            "pickupDatetime": pickup_dt,
-            "dropoffDatetime": dropoff_dt,
             "pickupLocationId": sd.get("pickup_location_id", ""),
+            "pickupDateTime": pickup_dt,
             "dropoffLocationId": sd.get("dropoff_location_id", sd.get("pickup_location_id", "")),
-            "customer": {
+            "dropoffDateTime": dropoff_dt,
+            "vehicleId": vehicle_id,
+            "rateId": sd.get("rate_id", ""),
+            "voucher": {
+                "number": request.laravel_booking_number
+                or f"VROOEM-{request.laravel_booking_id or uuid.uuid4().hex[:8]}",
+                "amount": vehicle.pricing.total_price,
+            },
+            "driver": {
                 "firstName": request.driver.first_name,
                 "lastName": request.driver.last_name,
-                "email": request.driver.email,
+                "age": request.driver.age,
+                "email": str(request.driver.email),
                 "phone": request.driver.phone or "",
-                "address": request.driver.address or "",
-                "city": request.driver.city or "",
-                "country": request.driver.country or "",
-                "postalCode": request.driver.postal_code or "",
             },
-            "flightNumber": request.flight_number or "",
-            "specialRequests": request.special_requests or "",
         }
 
-        # Attach selected extras (strip gateway prefix)
+        country = (request.driver.country or "").strip().upper()
+        if len(country) == 2:
+            create_payload["posCountry"] = country
+
+        if request.flight_number:
+            create_payload["flights"] = {"pickupFlightNumber": request.flight_number}
+
+        if request.special_requests:
+            create_payload["notes"] = request.special_requests
+
+        # Attach selected services (strip gateway prefix). SBC expects an array
+        # of service codes in `include`, not `services` objects.
         if request.extras:
             prefix = f"ext_{self.supplier_id}_"
-            create_payload["services"] = [
-                {"serviceId": e.extra_id.replace(prefix, ""), "quantity": e.quantity}
-                for e in request.extras
-            ]
+            include = []
+            for extra in request.extras:
+                code = extra.extra_id.replace(prefix, "")
+                quantity = max(extra.quantity, 1)
+                include.extend([code] * quantity)
+            if include:
+                create_payload["include"] = include
 
         create_resp = await self._post("reservations/create", create_payload)
 
@@ -505,8 +530,15 @@ class SicilyByCarAdapter(BaseAdapter):
             )
 
         # Unwrap envelope if present
-        create_data = create_resp.get("data") if isinstance(create_resp.get("data"), dict) else create_resp
-        reservation_id = str(create_data.get("reservationId", ""))
+        create_data = (
+            create_resp.get("data") if isinstance(create_resp.get("data"), dict) else create_resp
+        )
+        reservation = create_data.get("reservation")
+        reservation_id = str(
+            create_data.get("reservationId")
+            or (reservation.get("id") if isinstance(reservation, dict) else "")
+            or ""
+        )
 
         if not reservation_id:
             logger.error("[sicily_by_car] createReservation returned no reservationId")
@@ -529,7 +561,10 @@ class SicilyByCarAdapter(BaseAdapter):
             try:
                 await self._post("reservations/ignore", {"reservationId": reservation_id})
             except Exception:
-                logger.warning("[sicily_by_car] Failed to ignore held reservation %s", reservation_id)
+                logger.warning(
+                    "[sicily_by_car] Failed to ignore held reservation %s",
+                    reservation_id,
+                )
 
             errors = commit_resp.get("errors") or []
             logger.error("[sicily_by_car] commitReservation failed: %s", errors)
@@ -544,7 +579,9 @@ class SicilyByCarAdapter(BaseAdapter):
                 supplier_data={"create": create_data, "commit_error": commit_resp},
             )
 
-        commit_data = commit_resp.get("data") if isinstance(commit_resp.get("data"), dict) else commit_resp
+        commit_data = (
+            commit_resp.get("data") if isinstance(commit_resp.get("data"), dict) else commit_resp
+        )
 
         return BookingResponse(
             id=f"bk_{uuid.uuid4().hex[:16]}",
@@ -609,19 +646,21 @@ class SicilyByCarAdapter(BaseAdapter):
             lat = _safe_float(coords.get("latitude"))
             lng = _safe_float(coords.get("longitude"))
 
-            locations.append({
-                "provider": self.supplier_id,
-                "provider_location_id": loc_id,
-                "name": loc.get("name", ""),
-                "country_code": address.get("country", ""),
-                "city": address.get("city", ""),
-                "location_type": _map_location_type(loc.get("type")),
-                "airport_code": loc.get("airportCode"),
-                "latitude": lat if lat != 0 else None,
-                "longitude": lng if lng != 0 else None,
-                "address": address.get("addressLineOne", ""),
-                "phone": loc.get("phone", ""),
-                "email": loc.get("email", ""),
-            })
+            locations.append(
+                {
+                    "provider": self.supplier_id,
+                    "provider_location_id": loc_id,
+                    "name": loc.get("name", ""),
+                    "country_code": address.get("country", ""),
+                    "city": address.get("city", ""),
+                    "location_type": _map_location_type(loc.get("type")),
+                    "airport_code": loc.get("airportCode"),
+                    "latitude": lat if lat != 0 else None,
+                    "longitude": lng if lng != 0 else None,
+                    "address": address.get("addressLineOne", ""),
+                    "phone": loc.get("phone", ""),
+                    "email": loc.get("email", ""),
+                }
+            )
 
         return locations
