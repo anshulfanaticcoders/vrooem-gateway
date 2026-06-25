@@ -49,6 +49,16 @@ _ELECTRIC_NAME_RE = re.compile(
     r"\b(electric|ev|500e|leaf|e-?tron|zoe|ioniq|taycan|eqa|eqb|eqc|eqe|eqs)\b",
     re.IGNORECASE,
 )
+_SURPRICE_ADDITIONAL_DRIVER_PURPOSES = {12}
+_SURPRICE_ADDITIONAL_DRIVER_CODES = {"ADS"}
+_SURPRICE_EQUIPMENT_OTA_CODES = {
+    "BBS": 15,  # baby stroller
+    "CBS": 57,  # child booster seat
+    "CSB": 8,  # child seat for baby
+    "CST": 9,  # child seat for toddler
+    "NAV": 46,  # navigation system
+    "SNO": 14,  # snow chains
+}
 
 
 def _safe_float(value, default: float = 0.0) -> float:
@@ -575,24 +585,26 @@ class SurpriceAdapter(BaseAdapter):
         """Parse Surprice extras into canonical Extra objects."""
         extras = []
         for ext in raw_extras:
-            ext_description = ext.get("description") or ""
-            detailed = ext.get("detailedDescription") or ext_description
+            ext_description = str(ext.get("description") or "").strip()
+            detailed = str(ext.get("detailedDescription") or ext_description).strip()
             if not ext_description:
                 continue
 
             calc_info = ext.get("calculationInfo") or {}
             amount = _safe_float(ext.get("amount"))
             unit_charge = _safe_float(calc_info.get("unitCharge"))
-            is_per_day = (calc_info.get("unitName") or "") == "Day"
+            is_per_day = (calc_info.get("unitName") or "").lower() in {"day", "per-day"}
+            purpose = _safe_int(ext.get("purpose") or ext.get("ota_code"), 0) or None
+            allow_quantity = bool(ext.get("allowQuantity"))
 
             extras.append(
                 Extra(
                     id=f"ext_{self.supplier_id}_{ext_description}",
-                    name=detailed,
+                    name=detailed or ext_description,
                     daily_rate=unit_charge if is_per_day else amount,
                     total_price=amount,
                     currency=ext.get("currencyCode") or currency,
-                    max_quantity=_safe_int(ext.get("allowQuantity"), 1) if ext.get("allowQuantity") else 1,
+                    max_quantity=1,
                     type=ExtraType.EQUIPMENT,
                     mandatory=False,
                     description=detailed if detailed != ext_description else None,
@@ -600,8 +612,8 @@ class SurpriceAdapter(BaseAdapter):
                         "code": ext_description,
                         "per_day": is_per_day,
                         "unit_charge": unit_charge,
-                        "allow_quantity": _safe_int(ext.get("allowQuantity"), 1) if ext.get("allowQuantity") else 1,
-                        "purpose": ext.get("purpose") or None,
+                        "allow_quantity": allow_quantity,
+                        "purpose": purpose,
                     },
                 )
             )
@@ -699,13 +711,10 @@ class SurpriceAdapter(BaseAdapter):
                 },
             )
 
-        # Build extras list for reservation payload
-        extras_payload = []
-        for extra in request.extras:
-            extras_payload.append({
-                "description": extra.extra_id.replace(f"ext_{self.supplier_id}_", ""),
-                "quantity": extra.quantity,
-            })
+        special_equipment_preferences, additional_unknown_drivers = self._build_extra_preferences(
+            request,
+            vehicle,
+        )
 
         # Build pickup/dropoff datetimes
         pickup_dt = ""
@@ -736,11 +745,17 @@ class SurpriceAdapter(BaseAdapter):
             },
         }
 
-        if extras_payload:
-            payload["extras"] = extras_payload
+        if request.flight_number:
+            payload["flightNo"] = request.flight_number
 
         if request.special_requests:
-            payload["customerInfo"]["customer"]["specialRequests"] = request.special_requests
+            payload["notes"] = request.special_requests
+
+        if special_equipment_preferences:
+            payload["specialEquipmentPreferences"] = special_equipment_preferences
+
+        if additional_unknown_drivers:
+            payload["customerInfo"]["additionalUnknownDriversNum"] = additional_unknown_drivers
 
         response = await self._request(
             "POST",
@@ -791,6 +806,51 @@ class SurpriceAdapter(BaseAdapter):
             currency=vehicle.pricing.currency,
             supplier_data=supplier_data,
         )
+
+    def _build_extra_preferences(
+        self,
+        request: CreateBookingRequest,
+        vehicle: Vehicle,
+    ) -> tuple[list[dict], int]:
+        extras_by_id = {extra.id: extra for extra in vehicle.extras}
+        equipment_by_type: dict[int, int] = {}
+        additional_unknown_drivers = 0
+
+        for selected in request.extras:
+            quantity = max(_safe_int(selected.quantity, 1), 1)
+            extra = extras_by_id.get(selected.extra_id)
+            supplier_data = extra.supplier_data if extra else {}
+            fallback_code = selected.extra_id.replace(f"ext_{self.supplier_id}_", "", 1)
+            code = str(supplier_data.get("code") or fallback_code).strip().upper()
+            purpose = _safe_int(
+                supplier_data.get("purpose")
+                or supplier_data.get("ota_code")
+                or supplier_data.get("equip_type"),
+                0,
+            )
+
+            if (
+                purpose in _SURPRICE_ADDITIONAL_DRIVER_PURPOSES
+                or code in _SURPRICE_ADDITIONAL_DRIVER_CODES
+            ):
+                additional_unknown_drivers += quantity
+                continue
+
+            equip_type = purpose or _SURPRICE_EQUIPMENT_OTA_CODES.get(code)
+            if not equip_type:
+                logger.warning(
+                    "[surprice] Skipping selected extra without equipment code: %s",
+                    selected.extra_id,
+                )
+                continue
+
+            equipment_by_type[equip_type] = equipment_by_type.get(equip_type, 0) + quantity
+
+        equipment_preferences = [
+            {"equipType": equip_type, "quantity": quantity}
+            for equip_type, quantity in sorted(equipment_by_type.items())
+        ]
+        return equipment_preferences, additional_unknown_drivers
 
     # ─── Cancel ───────────────────────────────────────────────────────────
 

@@ -64,7 +64,9 @@ class _FailingAdapter:
 
 
 class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
-    async def test_preserves_surprice_extended_location_code_when_laravel_passes_provider_locations(self) -> None:
+    async def test_preserves_surprice_extended_location_code_when_laravel_passes_provider_locations(
+        self,
+    ) -> None:
         adapter = _FakeAdapter()
         request = SearchRequest(
             unified_location_id=2929145933,
@@ -100,9 +102,14 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
 
         self.assertIsNotNone(adapter.last_pickup_entry)
         self.assertEqual(adapter.last_pickup_entry.pickup_id, "MLO")
-        self.assertEqual(getattr(adapter.last_pickup_entry, "extended_location_code", None), "MLOA01")
+        self.assertEqual(
+            getattr(adapter.last_pickup_entry, "extended_location_code", None),
+            "MLOA01",
+        )
 
-    async def test_resolves_provider_specific_dropoff_entry_from_dropoff_unified_location(self) -> None:
+    async def test_resolves_provider_specific_dropoff_entry_from_dropoff_unified_location(
+        self,
+    ) -> None:
         adapter = _FakeAdapter()
         request = SearchRequest(
             unified_location_id=111,
@@ -144,8 +151,14 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         dropoff_repository = MagicMock()
         dropoff_repository.get_location_by_unified_id.return_value = dropoff_location
 
-        with patch("app.services.search_service.get_adapter", return_value=adapter), \
-             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+        with (
+            patch("app.services.search_service.get_adapter", return_value=adapter),
+            patch(
+                "app.services.search_service._json_location_repository",
+                new=dropoff_repository,
+                create=True,
+            ),
+        ):
             await search_vehicles(
                 request=request,
                 provider_entries=provider_entries,
@@ -191,8 +204,14 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
             ],
         }
 
-        with patch("app.services.search_service.get_adapter", return_value=adapter), \
-             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+        with (
+            patch("app.services.search_service.get_adapter", return_value=adapter),
+            patch(
+                "app.services.search_service._json_location_repository",
+                new=dropoff_repository,
+                create=True,
+            ),
+        ):
             response = await search_vehicles(
                 request=request,
                 provider_entries=provider_entries,
@@ -238,8 +257,14 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
             ],
         }
 
-        with patch("app.services.search_service.get_adapter", return_value=adapter), \
-             patch("app.services.search_service._json_location_repository", new=dropoff_repository, create=True):
+        with (
+            patch("app.services.search_service.get_adapter", return_value=adapter),
+            patch(
+                "app.services.search_service._json_location_repository",
+                new=dropoff_repository,
+                create=True,
+            ),
+        ):
             response = await search_vehicles(
                 request=request,
                 provider_entries=provider_entries,
@@ -263,11 +288,23 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         )
         cache = _RecordingCache()
         locauto_only_entries = [
-            {"provider": "locauto_rent", "pickup_id": "FCO", "original_name": "Rome Fiumicino Airport"},
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FCO",
+                "original_name": "Rome Fiumicino Airport",
+            },
         ]
         mixed_entries = [
-            {"provider": "greenmotion", "pickup_id": "157", "original_name": "Rome Fiumicino International Airport"},
-            {"provider": "locauto_rent", "pickup_id": "FCO", "original_name": "Rome Fiumicino Airport"},
+            {
+                "provider": "greenmotion",
+                "pickup_id": "157",
+                "original_name": "Rome Fiumicino International Airport",
+            },
+            {
+                "provider": "locauto_rent",
+                "pickup_id": "FCO",
+                "original_name": "Rome Fiumicino Airport",
+            },
         ]
 
         with patch("app.services.search_service.get_adapter", return_value=_FakeAdapter()):
@@ -326,6 +363,48 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(response.search_id, "search_cached_123")
         self.assertTrue(response.from_cache)
 
+    async def test_bypass_cache_skips_cached_search_read_and_write(self) -> None:
+        request = SearchRequest(
+            unified_location_id=1191543869,
+            pickup_date=date(2026, 5, 21),
+            pickup_time=time(9, 0),
+            dropoff_date=date(2026, 5, 24),
+            dropoff_time=time(9, 0),
+            currency="EUR",
+            driver_age=35,
+            bypass_cache=True,
+        )
+        cached_search = {
+            "search_id": "search_stale_123",
+            "vehicles": [],
+            "total_vehicles": 0,
+            "suppliers_queried": 1,
+            "suppliers_responded": 1,
+            "supplier_results": [],
+            "provider_status": [],
+            "response_time_ms": 25,
+        }
+        cache = _RecordingCache(cached_search=cached_search)
+
+        with patch("app.services.search_service.get_adapter", return_value=_FakeAdapter()):
+            response = await search_vehicles(
+                request=request,
+                provider_entries=[
+                    {
+                        "provider": "surprice",
+                        "pickup_id": "ATH:ATHA01",
+                        "original_name": "Athens Airport",
+                    },
+                ],
+                cache=cache,
+                cb_registry=_FakeCircuitBreakerRegistry(),
+            )
+
+        self.assertEqual(cache.get_search_calls, [])
+        self.assertEqual(cache.set_search_calls, [])
+        self.assertFalse(response.from_cache)
+        self.assertNotEqual(response.search_id, "search_stale_123")
+
     async def test_returns_structured_provider_failure_when_supplier_raises(self) -> None:
         request = SearchRequest(
             unified_location_id=111,
@@ -362,4 +441,7 @@ class SearchServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(failure.message, "One way rentals not allowed to this location")
         self.assertEqual(failure.stage, "vehicle_search")
         self.assertFalse(failure.retryable)
-        self.assertEqual(response.supplier_results[0].error, "One way rentals not allowed to this location")
+        self.assertEqual(
+            response.supplier_results[0].error,
+            "One way rentals not allowed to this location",
+        )

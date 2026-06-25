@@ -28,6 +28,9 @@ class SearchRequest(BaseModel):
     providers: list[str] | None = Field(
         default=None, description="Filter to specific providers, or None for all"
     )
+    bypass_cache: bool = Field(
+        default=False, description="Force supplier lookup instead of cached search"
+    )
 
 
 class SupplierResult(BaseModel):

@@ -181,7 +181,7 @@ async def search_vehicles(
         "prov": ",".join(sorted(request.providers)) if request.providers else None,
         "ploc": _provider_entries_signature(provider_entries),
     }
-    cached = await cache.get_search(**cache_key_params)
+    cached = None if request.bypass_cache else await cache.get_search(**cache_key_params)
     if cached:
         cached = dict(cached)
         cached["search_id"] = cached.get("search_id") or search_id
@@ -276,12 +276,19 @@ async def search_vehicles(
     for i, result in enumerate(raw_results):
         if isinstance(result, Exception):
             # An adapter raised an exception despite _search_single_supplier's try/except
-            logger.error("Search %s: Adapter task %d raised exception: %s", search_id, i, str(result))
-            supplier_results.append(SupplierResult(
-                supplier_id="unknown",
-                error=str(result),
-                response_time_ms=0,
-            ))
+            logger.error(
+                "Search %s: Adapter task %d raised exception: %s",
+                search_id,
+                i,
+                str(result),
+            )
+            supplier_results.append(
+                SupplierResult(
+                    supplier_id="unknown",
+                    error=str(result),
+                    response_time_ms=0,
+                )
+            )
         elif isinstance(result, SupplierResult):
             supplier_results.append(result)
 
@@ -319,8 +326,9 @@ async def search_vehicles(
     )
 
     # Cache the response (without individual vehicles to save memory)
-    cache_data = response.model_dump(mode="json", exclude={"from_cache"})
-    await cache.set_search(cache_data, **cache_key_params)
+    if not request.bypass_cache:
+        cache_data = response.model_dump(mode="json", exclude={"from_cache"})
+        await cache.set_search(cache_data, **cache_key_params)
 
     logger.info(
         "Search %s: %d vehicles from %d/%d suppliers in %dms",

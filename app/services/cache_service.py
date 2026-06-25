@@ -43,12 +43,13 @@ class CacheService:
     # Default TTLs in seconds
     SEARCH_TTL = 60  # 1 minute for search results
     LOCATION_TTL = 21600  # 6 hours for location data
-    VEHICLE_TTL = 7200  # 2 hours, aligned with Laravel checkout price verification
+    VEHICLE_TTL = 900  # 15 minutes, aligned with Laravel checkout price verification
 
     def __init__(self, redis_client: redis.Redis):
         self.redis = redis_client
         settings = get_settings()
         self.search_ttl = max(0, int(getattr(settings, "search_cache_ttl", self.SEARCH_TTL)))
+        self.vehicle_ttl = max(0, int(getattr(settings, "vehicle_cache_ttl", self.VEHICLE_TTL)))
 
     async def get(self, key: str) -> Any | None:
         """Get a cached value, returns None if not found."""
@@ -110,4 +111,4 @@ class CacheService:
 
     async def set_vehicle(self, vehicle_id: str, data: dict) -> None:
         """Cache a vehicle for booking retrieval."""
-        await self.set(f"vehicle:{vehicle_id}", data, self.VEHICLE_TTL)
+        await self.set(f"vehicle:{vehicle_id}", data, self.vehicle_ttl)

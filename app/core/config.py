@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     # ─── Redis ───
     redis_url: str = "redis://localhost:6379/0"
     search_cache_ttl: int = 60
+    vehicle_cache_ttl: int = 900
     location_refresh_provider_timeout_seconds: float = 180.0
 
     # ─── Laravel ───
@@ -128,7 +129,11 @@ class Settings(BaseSettings):
     @property
     def internal_cors_origins(self) -> list[str]:
         if self.cors_allowed_origins.strip():
-            return [origin.strip() for origin in self.cors_allowed_origins.split(",") if origin.strip()]
+            return [
+                origin.strip()
+                for origin in self.cors_allowed_origins.split(",")
+                if origin.strip()
+            ]
         if self.gateway_debug or self.is_local_env:
             return ["*"]
         return [self.laravel_base_url]
@@ -136,7 +141,11 @@ class Settings(BaseSettings):
     @property
     def provider_cors_origins(self) -> list[str]:
         if self.provider_cors_allowed_origins.strip():
-            return [origin.strip() for origin in self.provider_cors_allowed_origins.split(",") if origin.strip()]
+            return [
+                origin.strip()
+                for origin in self.provider_cors_allowed_origins.split(",")
+                if origin.strip()
+            ]
         if self.gateway_debug or self.is_local_env:
             return ["*"]
         return [self.laravel_base_url]
@@ -159,8 +168,12 @@ def validate_runtime_settings(settings: Settings | None = None) -> None:
         return
 
     if not settings.api_keys_list or "dev_key_change_me" in settings.api_keys_list:
-        raise RuntimeError("GATEWAY_API_KEYS must be configured with non-default values outside local/dev.")
+        raise RuntimeError(
+            "GATEWAY_API_KEYS must be configured with non-default values outside local/dev."
+        )
     if settings.gateway_secret == "hmac_secret_change_me":
-        raise RuntimeError("GATEWAY_SECRET must be configured with a non-default value outside local/dev.")
+        raise RuntimeError(
+            "GATEWAY_SECRET must be configured with a non-default value outside local/dev."
+        )
     if not settings.laravel_api_token:
         raise RuntimeError("LARAVEL_API_TOKEN must be configured outside local/dev.")

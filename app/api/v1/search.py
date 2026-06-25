@@ -5,6 +5,7 @@ from datetime import date, time
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
+
 from app.core.auth import verify_api_key
 from app.schemas.search import SearchRequest, SearchResponse
 from app.schemas.search_vehicle_payload import SearchVehicleResponsePayload
@@ -63,6 +64,7 @@ class VehicleSearchBody(BaseModel):
     providers: str | None = None
     provider_locations: list[ProviderLocationEntry] | None = None
     country_code: str | None = None
+    bypass_cache: bool = False
 
 
 async def _do_search(body: VehicleSearchBody) -> SearchResponse:
@@ -109,6 +111,7 @@ async def _do_search(body: VehicleSearchBody) -> SearchResponse:
         dropoff_unified_location_id=body.dropoff_unified_location_id,
         providers=body.providers.split(",") if body.providers else None,
         country_code=country_code,
+        bypass_cache=body.bypass_cache,
     )
 
     redis = await get_redis()
@@ -140,8 +143,15 @@ async def vehicle_search(
     dropoff_time: time = Query(time(9, 0), description="Dropoff time (HH:MM)"),
     currency: str = Query("EUR", description="Currency code"),
     driver_age: int = Query(30, ge=18, le=99, description="Driver age"),
-    dropoff_unified_location_id: int | None = Query(None, description="Dropoff location (if one-way)"),
-    providers: str | None = Query(None, description="Comma-separated provider IDs, or omit for all"),
+    dropoff_unified_location_id: int | None = Query(
+        None,
+        description="Dropoff location (if one-way)",
+    ),
+    providers: str | None = Query(
+        None,
+        description="Comma-separated provider IDs, or omit for all",
+    ),
+    bypass_cache: bool = Query(False, description="Force supplier lookup instead of cached search"),
     _api_key: str = Depends(verify_api_key),
 ) -> SearchVehicleResponsePayload:
     """Search vehicles (GET — backward compatible, uses JSON lookup)."""
@@ -155,5 +165,6 @@ async def vehicle_search(
         driver_age=driver_age,
         dropoff_unified_location_id=dropoff_unified_location_id,
         providers=providers,
+        bypass_cache=bypass_cache,
     )
     return build_search_vehicle_response(await _do_search(body))
