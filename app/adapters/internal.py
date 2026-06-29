@@ -114,7 +114,9 @@ def _extract_image_url(raw: dict) -> str:
         return ""
     # Prefer primary image, fall back to first
     for img in images:
-        if isinstance(img, dict) and (img.get("type") == "primary" or img.get("image_type") == "primary"):
+        if isinstance(img, dict) and (
+            img.get("type") == "primary" or img.get("image_type") == "primary"
+        ):
             return img.get("url") or img.get("image_url") or img.get("path", "")
     # No primary found — use first image
     first = images[0]
@@ -299,7 +301,9 @@ class InternalAdapter(BaseAdapter):
             "image_url": _extract_image_url(raw),
             "seats": _safe_int(raw.get("seating_capacity")),
             "doors": _safe_int(raw.get("doors")),
-            "air_conditioning": (True if ("Air Conditioning" in features or "AC" in features) else None) if features else None,
+            "air_conditioning": (
+                True if ("Air Conditioning" in features or "AC" in features) else None
+            ) if features else None,
             "mileage_policy": mileage_policy,
             "mileage_limit_km": mileage_limit_km,
             "pickup_location": pickup_loc,
@@ -327,8 +331,12 @@ class InternalAdapter(BaseAdapter):
                 "price_per_extra_km": _safe_float(benefits.get("price_per_extra_km")),
                 "location": location_str,
                 "vendor": raw.get("vendor") or {},
-                "vendorProfileData": raw.get("vendorProfileData") or raw.get("vendor_profile_data") or {},
-                "vendor_profile_data": raw.get("vendor_profile_data") or raw.get("vendorProfileData") or {},
+                "vendorProfileData": (
+                    raw.get("vendorProfileData") or raw.get("vendor_profile_data") or {}
+                ),
+                "vendor_profile_data": (
+                    raw.get("vendor_profile_data") or raw.get("vendorProfileData") or {}
+                ),
                 "images": raw.get("images") or [],
             },
             "min_driver_age": min_driver_age,
@@ -460,7 +468,9 @@ class InternalAdapter(BaseAdapter):
             try:
                 data = response.json()
                 result = data.get("data", data) if isinstance(data, dict) else {}
-                refund_amount = _safe_float(result.get("refund_amount")) if isinstance(result, dict) else 0.0
+                refund_amount = (
+                    _safe_float(result.get("refund_amount")) if isinstance(result, dict) else 0.0
+                )
             except Exception:
                 pass
 
@@ -483,19 +493,26 @@ class InternalAdapter(BaseAdapter):
             )
         except (httpx.ConnectError, httpx.TimeoutException, OSError) as exc:
             logger.warning("[internal] Laravel API unreachable for locations: %s", exc)
-            return []
+            raise RuntimeError("Laravel API unreachable for internal locations") from exc
 
         if response.status_code != 200:
             logger.warning(
                 "[internal] Locations fetch failed with status %d",
                 response.status_code,
             )
-            return []
+            raise RuntimeError(
+                f"Laravel internal locations returned status {response.status_code}"
+            )
 
-        data = response.json()
+        try:
+            data = response.json()
+        except ValueError as exc:
+            logger.warning("[internal] Locations response was not valid JSON")
+            raise RuntimeError("Laravel internal locations returned invalid JSON") from exc
+
         locations_list = data.get("data") if isinstance(data, dict) else data
         if not isinstance(locations_list, list):
-            return []
+            raise RuntimeError("Laravel internal locations returned an unexpected payload")
 
         locations = []
         for loc in locations_list:

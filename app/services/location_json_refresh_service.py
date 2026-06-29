@@ -33,6 +33,7 @@ class LocationJsonRefreshService:
             "internal_provider_succeeded": False,
             "internal_provider_failed": False,
             "internal_locations_received": 0,
+            "internal_locations_preserved": 0,
             "locations_filtered_by_country_scope": 0,
             "providers_country_filtered_ids": [],
         }
@@ -80,6 +81,16 @@ class LocationJsonRefreshService:
                 if public_provider == "internal":
                     summary["internal_provider_failed"] = True
 
+        if summary["internal_provider_failed"]:
+            preserved_internal_locations = self._existing_provider_locations_as_raw("internal")
+            if preserved_internal_locations:
+                raw_locations.extend(preserved_internal_locations)
+                summary["internal_locations_preserved"] = len(preserved_internal_locations)
+                logger.warning(
+                    "[internal] Preserved %d previous internal location(s) after refresh failure",
+                    len(preserved_internal_locations),
+                )
+
         unified_locations = self.unification_service.build_unified_locations(raw_locations)
         self._export_unified_json(unified_locations)
         summary["unified_locations"] = len(unified_locations)
@@ -87,6 +98,68 @@ class LocationJsonRefreshService:
             "completed_with_failures" if summary["providers_failed"] else "completed"
         )
         return summary
+
+    def _existing_provider_locations_as_raw(self, provider_id: str) -> list[dict]:
+        json_path = self.output_path or (
+            Path(__file__).resolve().parent.parent.parent / "data" / "unified_locations.json"
+        )
+        if not json_path.exists():
+            return []
+
+        try:
+            existing = json.loads(json_path.read_text(encoding="utf-8"))
+        except Exception:
+            logger.warning(
+                "Could not read existing unified locations for provider preservation",
+                exc_info=True,
+            )
+            return []
+
+        if not isinstance(existing, list):
+            return []
+
+        provider_id = provider_id.strip().lower()
+        preserved: list[dict] = []
+        for location in existing:
+            if not isinstance(location, dict):
+                continue
+
+            for provider in location.get("providers") or []:
+                if not isinstance(provider, dict):
+                    continue
+                if str(provider.get("provider") or "").strip().lower() != provider_id:
+                    continue
+
+                pickup_id = str(provider.get("pickup_id") or "").strip()
+                if not pickup_id:
+                    continue
+
+                preserved.append(
+                    {
+                        "provider": provider_id,
+                        "provider_location_id": pickup_id,
+                        "name": provider.get("original_name") or location.get("name") or "",
+                        "city": location.get("city") or "",
+                        "country": location.get("country") or "",
+                        "country_code": (
+                            provider.get("country_code")
+                            or location.get("country_code")
+                            or ""
+                        ),
+                        "latitude": provider.get("latitude", location.get("latitude")),
+                        "longitude": provider.get("longitude", location.get("longitude")),
+                        "location_type": location.get("location_type") or "other",
+                        "iata": provider.get("iata") or location.get("iata"),
+                        "dropoffs": provider.get("dropoffs") or [],
+                        "supports_one_way": bool(provider.get("supports_one_way")),
+                        "extended_location_code": provider.get("extended_location_code"),
+                        "extended_dropoff_code": provider.get("extended_dropoff_code"),
+                        "provider_code": provider.get("provider_code"),
+                        "our_location_id": location.get("our_location_id"),
+                    }
+                )
+
+        return preserved
 
     def _export_unified_json(self, unified_locations: list[dict]) -> Path:
         json_path = self.output_path or (

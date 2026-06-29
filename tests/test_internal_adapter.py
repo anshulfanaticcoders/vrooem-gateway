@@ -1,5 +1,8 @@
 from datetime import date, time
 
+import httpx
+import pytest
+
 from app.adapters.internal import InternalAdapter, _extract_image_url
 from app.schemas.location import ProviderLocationEntry
 from app.schemas.search import SearchRequest
@@ -79,6 +82,54 @@ async def test_get_locations_preserves_laravel_internal_iata_code(monkeypatch):
     assert locations[0]["provider"] == "internal"
     assert locations[0]["provider_location_id"] == "1"
     assert locations[0]["iata"] == "DXB"
+
+
+async def test_get_locations_raises_when_laravel_internal_api_is_unreachable(monkeypatch):
+    adapter = InternalAdapter()
+
+    async def fake_request(method, url, headers):
+        raise httpx.ConnectError("connection refused")
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+
+    with pytest.raises(RuntimeError, match="unreachable"):
+        await adapter.get_locations()
+
+
+async def test_get_locations_raises_when_laravel_internal_api_returns_bad_status(monkeypatch):
+    adapter = InternalAdapter()
+
+    class Response:
+        status_code = 503
+
+        def json(self):
+            return {"error": "maintenance"}
+
+    async def fake_request(method, url, headers):
+        return Response()
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+
+    with pytest.raises(RuntimeError, match="status 503"):
+        await adapter.get_locations()
+
+
+async def test_get_locations_raises_when_laravel_internal_payload_is_unexpected(monkeypatch):
+    adapter = InternalAdapter()
+
+    class Response:
+        status_code = 200
+
+        def json(self):
+            return {"data": {"not": "a-list"}}
+
+    async def fake_request(method, url, headers):
+        return Response()
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+
+    with pytest.raises(RuntimeError, match="unexpected payload"):
+        await adapter.get_locations()
 
 
 def test_parse_vehicle_preserves_gallery_images_and_vendor_payload():

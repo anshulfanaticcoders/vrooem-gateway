@@ -378,6 +378,121 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(summary["internal_provider_succeeded"])
         self.assertEqual(summary["internal_locations_received"], 0)
 
+    async def test_refresh_preserves_existing_internal_locations_when_internal_fetch_fails(
+        self,
+    ) -> None:
+        existing_export = [
+            {
+                "unified_location_id": 123456,
+                "name": "Casablanca Downtown",
+                "aliases": ["Casablanca"],
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "latitude": 33.57311,
+                "longitude": -7.589843,
+                "location_type": "downtown",
+                "iata": None,
+                "providers": [
+                    {
+                        "provider": "internal",
+                        "pickup_id": "6",
+                        "original_name": "Casablanca",
+                        "dropoffs": [],
+                        "latitude": 33.57311,
+                        "longitude": -7.589843,
+                        "country_code": "MA",
+                        "iata": None,
+                    }
+                ],
+                "our_location_id": "internal_casablanca",
+            }
+        ]
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / "unified_locations.json"
+            output_path.write_text(json.dumps(existing_export), encoding="utf-8")
+            service = LocationJsonRefreshService(
+                adapters=[
+                    FailingAdapter("internal", RuntimeError("laravel unavailable")),
+                    FakeAdapter(
+                        "surprice",
+                        [
+                            {
+                                "provider": "surprice",
+                                "provider_location_id": "DXB:DXBA01",
+                                "name": "Dubai Airport",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "country_code": "AE",
+                                "location_type": "airport",
+                                "latitude": 25.248081,
+                                "longitude": 55.345093,
+                                "iata": "DXB",
+                            }
+                        ],
+                    ),
+                ],
+                output_path=output_path,
+            )
+
+            summary = await service.refresh()
+            exported = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(summary["internal_provider_failed"])
+        self.assertEqual(summary["internal_locations_preserved"], 1)
+        internal_pickups = {
+            provider["pickup_id"]
+            for location in exported
+            for provider in location.get("providers", [])
+            if provider.get("provider") == "internal"
+        }
+        self.assertEqual(internal_pickups, {"6"})
+
+    async def test_refresh_removes_existing_internal_locations_when_internal_fetch_succeeds_empty(
+        self,
+    ) -> None:
+        existing_export = [
+            {
+                "unified_location_id": 123456,
+                "name": "Casablanca Downtown",
+                "aliases": ["Casablanca"],
+                "city": "Casablanca",
+                "country": "Morocco",
+                "country_code": "MA",
+                "latitude": 33.57311,
+                "longitude": -7.589843,
+                "location_type": "downtown",
+                "iata": None,
+                "providers": [
+                    {
+                        "provider": "internal",
+                        "pickup_id": "6",
+                        "original_name": "Casablanca",
+                        "dropoffs": [],
+                        "latitude": 33.57311,
+                        "longitude": -7.589843,
+                    }
+                ],
+                "our_location_id": "internal_casablanca",
+            }
+        ]
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / "unified_locations.json"
+            output_path.write_text(json.dumps(existing_export), encoding="utf-8")
+            service = LocationJsonRefreshService(
+                adapters=[FakeAdapter("internal", [])],
+                output_path=output_path,
+            )
+
+            summary = await service.refresh()
+            exported = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertFalse(summary["internal_provider_failed"])
+        self.assertEqual(summary["internal_locations_preserved"], 0)
+        self.assertEqual(exported, [])
+
     async def test_refresh_discards_stale_existing_rows_when_provider_returns_new_rows(
         self,
     ) -> None:
