@@ -5,10 +5,11 @@ from __future__ import annotations
 import asyncio
 import json
 
-from app.adapters.registry import load_supplier_configs
-
 # Import adapters so they register before get_all_adapters() is called.
 import app.adapters.adobe_car  # noqa: F401
+import app.adapters.click2rent  # noqa: F401
+import app.adapters.easirent  # noqa: F401
+import app.adapters.emr  # noqa: F401
 import app.adapters.favrica  # noqa: F401
 import app.adapters.green_motion  # noqa: F401
 import app.adapters.internal  # noqa: F401
@@ -21,9 +22,8 @@ import app.adapters.surprice  # noqa: F401
 import app.adapters.usave  # noqa: F401
 import app.adapters.wheelsys  # noqa: F401
 import app.adapters.xdrive  # noqa: F401
-import app.adapters.emr  # noqa: F401
-import app.adapters.click2rent  # noqa: F401
-import app.adapters.easirent  # noqa: F401
+import app.adapters.yesaway  # noqa: F401
+from app.adapters.registry import load_supplier_configs
 from app.services.location_json_refresh_service import LocationJsonRefreshService
 
 

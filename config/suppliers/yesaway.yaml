@@ -1,0 +1,10 @@
+id: yesaway
+name: Yesaway
+enabled: true
+protocol: ota_xml
+auth_type: basic_auth
+supports_one_way: true
+default_currency: EUR
+timeout: 45
+countries: ["US", "NZ", "AU", "TH", "MY", "JP", "KR", "CA", "AE", "ID"]
+notes: "Javelin OTA XML API. Partial Pay on Arrival. Excludes China source market."

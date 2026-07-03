@@ -21,6 +21,7 @@ import app.adapters.ok_mobility  # noqa: F401
 import app.adapters.locauto_rent  # noqa: F401
 import app.adapters.wheelsys  # noqa: F401
 import app.adapters.surprice  # noqa: F401
+import app.adapters.yesaway  # noqa: F401
 import app.adapters.sicily_by_car  # noqa: F401
 import app.adapters.recordgo  # noqa: F401
 import app.adapters.internal  # noqa: F401

@@ -97,6 +97,16 @@ class Settings(BaseSettings):
     surprice_rate_code: str = ""
     surprice_fdw_rate_code: str = ""
 
+    # Yesaway
+    yesaway_api_url: str = ""
+    yesaway_username: str = ""
+    yesaway_password: str = ""
+    yesaway_company_code: str = "vrooem"
+    yesaway_company_name: str = "Vrooem"
+    yesaway_vendor_code: str = "YESAWAY"
+    yesaway_source_country: str = "NL"
+    yesaway_iata_number: str = "00000000"
+
     # ─── Sicily By Car ───
     sicilybycar_api_url: str = ""
     sicilybycar_account_code: str = ""
