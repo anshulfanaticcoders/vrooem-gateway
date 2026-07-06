@@ -745,6 +745,9 @@ class SurpriceAdapter(BaseAdapter):
             },
         }
 
+        if request.laravel_booking_number:
+            payload["brokerOrderId"] = request.laravel_booking_number
+
         if request.flight_number:
             payload["flightNo"] = request.flight_number
 

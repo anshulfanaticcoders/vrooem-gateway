@@ -378,6 +378,7 @@ class SurpriceBookingPayloadTest(unittest.IsolatedAsyncioTestCase):
             pickup_time="09:00",
             dropoff_date=date(2026, 8, 28),
             dropoff_time="09:00",
+            laravel_booking_number="BK2026060626",
         )
 
         response = await adapter.create_booking(request, vehicle)
@@ -392,6 +393,7 @@ class SurpriceBookingPayloadTest(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(captured_payload["customerInfo"]["additionalUnknownDriversNum"], 1)
         self.assertEqual(captured_payload["notes"], "Supplier-requested live test")
+        self.assertEqual(captured_payload["brokerOrderId"], "BK2026060626")
         self.assertNotIn("specialRequests", captured_payload["customerInfo"]["customer"])
 
 
