@@ -102,16 +102,17 @@ class BaseAdapter(ABC):
         try:
             response = await self.http_client.request(method, url, **kwargs)
             elapsed_ms = int((time.time() - start) * 1000)
-            body_preview = response.text[:500] if response.text else "(empty)"
-            logger.info(
-                "[%s] %s %s → %d (%dms) body=%s",
-                self.supplier_id,
-                method.upper(),
-                url,
-                response.status_code,
-                elapsed_ms,
-                body_preview,
-            )
+            if logger.isEnabledFor(logging.DEBUG):
+                body_preview = response.text[:500] if response.text else "(empty)"
+                logger.debug(
+                    "[%s] %s %s → %d (%dms) body=%s",
+                    self.supplier_id,
+                    method.upper(),
+                    url,
+                    response.status_code,
+                    elapsed_ms,
+                    body_preview,
+                )
             return response
         except httpx.TimeoutException:
             elapsed_ms = int((time.time() - start) * 1000)

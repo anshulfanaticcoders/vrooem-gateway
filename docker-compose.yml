@@ -7,7 +7,7 @@ services:
       - "carrental.test:host-gateway"
     environment:
       - GATEWAY_ENV=production
-      - GATEWAY_DEBUG=true
+      - GATEWAY_DEBUG=false
       - GATEWAY_API_KEYS=${GATEWAY_API_KEYS}
       - GATEWAY_SECRET=${GATEWAY_SECRET}
       - MYSQL_URL=${MYSQL_URL}
@@ -72,6 +72,11 @@ services:
       redis:
         condition: service_healthy
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   redis:
     image: redis:7-alpine
@@ -84,6 +89,11 @@ services:
       timeout: 3s
       retries: 5
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # Location sync cron — refreshes unified_locations.json every 6 hours
   location-sync:
@@ -155,6 +165,11 @@ services:
       redis:
         condition: service_healthy
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   redis_data:

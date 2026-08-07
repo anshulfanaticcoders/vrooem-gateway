@@ -20,7 +20,7 @@ def get_mysql_engine():
         settings = get_settings()
         _mysql_engine = create_async_engine(
             settings.mysql_url,
-            echo=settings.gateway_debug,
+            echo=False,
             pool_size=5,
             max_overflow=10,
         )
