@@ -440,7 +440,18 @@ class FavricaAdapter(BaseAdapter):
             "Rez_ID": supplier_booking_id,
         }
 
-        await self._request("GET", f"{base_url}/JsonCancel.aspx", params=params)
+        response = await self._request("GET", f"{base_url}/JsonCancel.aspx", params=params)
+        if not response.is_success:
+            logger.error(
+                "[favrica] cancellation not confirmed for %s: HTTP %s",
+                supplier_booking_id,
+                response.status_code,
+            )
+            return CancelBookingResponse(
+                id=supplier_booking_id,
+                status=BookingStatus.FAILED,
+                supplier_cancellation_id="",
+            )
 
         return CancelBookingResponse(
             id=supplier_booking_id,

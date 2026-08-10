@@ -506,11 +506,22 @@ class RenteonAdapter(BaseAdapter):
         settings = get_settings()
         base_url = settings.renteon_api_url.rstrip("/")
 
-        await self._request(
+        response = await self._request(
             "DELETE",
             f"{base_url}/api/bookings/{supplier_booking_id}",
             headers=self._auth_headers(),
         )
+        if not response.is_success:
+            logger.error(
+                "[renteon] cancellation not confirmed for %s: HTTP %s",
+                supplier_booking_id,
+                response.status_code,
+            )
+            return CancelBookingResponse(
+                id=supplier_booking_id,
+                status=BookingStatus.FAILED,
+                supplier_cancellation_id="",
+            )
 
         return CancelBookingResponse(
             id=supplier_booking_id,

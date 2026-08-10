@@ -526,12 +526,17 @@ class WheelsysAdapter(BaseAdapter):
 
         # Check for cancellation errors
         errors = (data.get("Errors") or []) if isinstance(data, dict) else []
-        if errors:
-            error_msgs = [e.get("Value", "") for e in errors]
-            logger.warning(
-                "[wheelsys] Cancellation errors for %s: %s",
+        if errors or not response.is_success:
+            error_msgs = [e.get("Value", "") for e in errors] or [f"HTTP {response.status_code}"]
+            logger.error(
+                "[wheelsys] Cancellation not confirmed for %s: %s",
                 supplier_booking_id,
                 error_msgs,
+            )
+            return CancelBookingResponse(
+                id=supplier_booking_id,
+                status=BookingStatus.FAILED,
+                supplier_cancellation_id="",
             )
 
         return CancelBookingResponse(

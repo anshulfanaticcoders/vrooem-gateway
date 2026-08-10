@@ -869,6 +869,19 @@ class RecordGoAdapter(BaseAdapter):
                 supplier_cancellation_id="",
             )
 
+        errors = (data.get("errors") or data.get("Errors") or []) if isinstance(data, dict) else []
+        if not response.is_success or errors:
+            logger.error(
+                "[recordgo] cancellation not confirmed for %s: %s",
+                supplier_booking_id,
+                errors or f"HTTP {response.status_code}",
+            )
+            return CancelBookingResponse(
+                id=supplier_booking_id,
+                status=BookingStatus.FAILED,
+                supplier_cancellation_id="",
+            )
+
         return CancelBookingResponse(
             id=supplier_booking_id,
             status=BookingStatus.CANCELLED,

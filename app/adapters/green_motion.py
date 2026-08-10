@@ -645,6 +645,8 @@ class GreenMotionAdapter(BaseAdapter):
         reason = _xml_escape(request.reason or "Cancelled by customer")
 
         # Try CancelReservation first, then CancelBooking as fallback
+        cancelled = False
+        last_reason = "supplier did not confirm cancellation"
         for req_type in ("CancelReservation", "CancelBooking"):
             body = f"""
             <booking_ref>{supplier_booking_id}</booking_ref>
@@ -659,6 +661,9 @@ class GreenMotionAdapter(BaseAdapter):
                     content=xml_payload,
                     headers={"Content-Type": "application/xml"},
                 )
+                if not response.is_success:
+                    last_reason = f"HTTP {response.status_code}"
+                    continue
                 # Check if response indicates success
                 try:
                     root = ET.fromstring(response.text)
@@ -666,17 +671,29 @@ class GreenMotionAdapter(BaseAdapter):
                     if resp is not None:
                         status = _xml_text(resp, "status")
                         if status.lower() in ("success", "cancelled", "ok", ""):
+                            cancelled = True
                             break  # success
+                        last_reason = status or "unrecognized cancellation status"
+                    else:
+                        last_reason = "no <response> element in cancellation reply"
                 except ET.ParseError:
-                    pass
+                    last_reason = "unparseable cancellation response"
             except Exception as exc:
+                last_reason = str(exc)
                 logger.warning("[green_motion] %s failed: %s, trying next", req_type, exc)
                 continue
 
+        if not cancelled:
+            logger.error(
+                "[green_motion] cancellation not confirmed for %s: %s",
+                supplier_booking_id,
+                last_reason,
+            )
+
         return CancelBookingResponse(
             id=supplier_booking_id,
-            status=BookingStatus.CANCELLED,
-            supplier_cancellation_id=supplier_booking_id,
+            status=BookingStatus.CANCELLED if cancelled else BookingStatus.FAILED,
+            supplier_cancellation_id=supplier_booking_id if cancelled else "",
         )
 
     async def get_locations(self) -> list[dict]:

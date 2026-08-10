@@ -4,6 +4,8 @@ import asyncio
 import logging
 from datetime import datetime, timezone
 
+import httpx
+
 from app.adapters.registry import get_adapter
 from app.schemas.booking import (
     BookingResponse,
@@ -92,7 +94,13 @@ async def create_booking(
                 vehicle.supplier_id,
             )
 
-            return provider_failure_response(request, vehicle, exc)
+            # A timeout means the supplier was contacted but did not reply in time:
+            # the reservation MAY already exist upstream, so the outcome is unknown
+            # and Laravel must not blindly retry (that would double-book).
+            outcome_unknown = isinstance(exc, httpx.TimeoutException)
+            return provider_failure_response(
+                request, vehicle, exc, outcome_unknown=outcome_unknown
+            )
 
         return normalize_booking_response(response)
     finally:
@@ -298,8 +306,15 @@ def provider_failure_response(
     request: CreateBookingRequest,
     vehicle: Vehicle,
     exc: Exception,
+    outcome_unknown: bool = False,
 ) -> BookingResponse:
-    """Return a structured provider failure instead of losing context behind a 502."""
+    """Return a structured provider failure instead of losing context behind a 502.
+
+    When ``outcome_unknown`` is True the supplier was contacted but did not confirm
+    (e.g. a timeout), so the reservation may or may not exist upstream. This is
+    signalled via ``provider_status='timeout_unknown'`` so Laravel routes the
+    booking to manual review instead of automatically retrying and double-booking.
+    """
 
     reason = safe_failure_reason(exc)
 
@@ -311,11 +326,12 @@ def provider_failure_response(
         vehicle_name=vehicle.name,
         total_price=vehicle.pricing.total_price,
         currency=vehicle.pricing.currency,
-        provider_status="failed",
+        provider_status="timeout_unknown" if outcome_unknown else "failed",
         failure_reason=reason,
         supplier_data={
             "error": reason,
             "exception_type": type(exc).__name__,
+            "outcome_unknown": outcome_unknown,
             "vehicle_id": request.vehicle_id,
             "search_id": request.search_id,
         },
