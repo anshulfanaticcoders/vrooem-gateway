@@ -34,6 +34,8 @@ class LocationJsonRefreshService:
             "internal_provider_failed": False,
             "internal_locations_received": 0,
             "internal_locations_preserved": 0,
+            "providers_preserved_ids": [],
+            "locations_preserved": 0,
             "locations_filtered_by_country_scope": 0,
             "providers_country_filtered_ids": [],
         }
@@ -81,15 +83,26 @@ class LocationJsonRefreshService:
                 if public_provider == "internal":
                     summary["internal_provider_failed"] = True
 
-        if summary["internal_provider_failed"]:
-            preserved_internal_locations = self._existing_provider_locations_as_raw("internal")
-            if preserved_internal_locations:
-                raw_locations.extend(preserved_internal_locations)
-                summary["internal_locations_preserved"] = len(preserved_internal_locations)
-                logger.warning(
-                    "[internal] Preserved %d previous internal location(s) after refresh failure",
-                    len(preserved_internal_locations),
-                )
+        # A provider whose fetch FAILED (e.g. a transient API timeout) must not
+        # have its locations wiped from the file — that would remove every car
+        # for that provider site-wide until the next successful sync. Preserve
+        # its last-known-good locations for ANY failed provider (not just
+        # internal). An empty SUCCESS is left as-is: that is a real "no
+        # locations" signal, so those are intentionally not preserved.
+        for public_provider in summary["providers_failed_ids"]:
+            preserved_locations = self._existing_provider_locations_as_raw(public_provider)
+            if not preserved_locations:
+                continue
+            raw_locations.extend(preserved_locations)
+            summary["providers_preserved_ids"].append(public_provider)
+            summary["locations_preserved"] += len(preserved_locations)
+            if public_provider == "internal":
+                summary["internal_locations_preserved"] = len(preserved_locations)
+            logger.warning(
+                "[%s] Preserved %d previous location(s) after refresh failure",
+                public_provider,
+                len(preserved_locations),
+            )
 
         unified_locations = self.unification_service.build_unified_locations(raw_locations)
         self._export_unified_json(unified_locations)

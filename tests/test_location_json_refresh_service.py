@@ -276,7 +276,7 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(provider["iata"], "CMN")
         self.assertEqual(provider["provider_code"], "surprice")
 
-    async def test_refresh_rebuilds_only_from_fresh_provider_rows_when_a_provider_fails(
+    async def test_refresh_preserves_existing_provider_rows_when_a_provider_fails(
         self,
     ) -> None:
         existing_export = [
@@ -339,9 +339,13 @@ class LocationJsonRefreshServiceTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(summary["providers_failed"], 1)
         self.assertEqual(summary["providers_failed_ids"], ["greenmotion"])
         self.assertFalse(summary["internal_provider_failed"])
+        # GreenMotion's fetch failed (timeout) — its previous location must be
+        # PRESERVED, not wiped, so its cars don't vanish site-wide.
+        self.assertEqual(summary["providers_preserved_ids"], ["greenmotion"])
+        self.assertEqual(summary["locations_preserved"], 1)
         cmn = next(item for item in exported if item.get("iata") == "CMN")
         providers = {item["provider"]: item["pickup_id"] for item in cmn["providers"]}
-        self.assertEqual(providers, {"surprice": "CMN:CMNA01"})
+        self.assertEqual(providers, {"surprice": "CMN:CMNA01", "greenmotion": "354"})
 
     async def test_refresh_reports_internal_adapter_failure_explicitly(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
