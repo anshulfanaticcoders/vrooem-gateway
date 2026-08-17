@@ -26,6 +26,17 @@ async def create_booking(
 ) -> BookingResponse:
     """Create a booking by looking up the cached vehicle and calling the correct adapter."""
 
+    result_key = None
+    if request.laravel_booking_id:
+        result_key = f"gateway_booking_result:{request.laravel_booking_id}"
+        cached_result = await cache.get(result_key)
+        if isinstance(cached_result, dict):
+            logger.info(
+                "Returning persisted gateway booking result for Laravel booking %s",
+                request.laravel_booking_id,
+            )
+            return BookingResponse(**cached_result)
+
     lock_key = None
     lock_acquired = False
     if request.laravel_booking_id:
@@ -102,7 +113,15 @@ async def create_booking(
                 request, vehicle, exc, outcome_unknown=outcome_unknown
             )
 
-        return normalize_booking_response(response)
+        normalized = normalize_booking_response(response)
+        if result_key and normalized.status == BookingStatus.CONFIRMED:
+            # A transient mutex only prevents simultaneous calls. Persist the
+            # successful response so a Laravel retry after a response/network
+            # loss returns the same supplier reservation instead of creating a
+            # second one. Redis persistence is part of gateway production state.
+            await cache.set(result_key, normalized.model_dump(mode="json"), ttl=60 * 60 * 24 * 30)
+
+        return normalized
     finally:
         if lock_key and lock_acquired:
             try:

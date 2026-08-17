@@ -26,6 +26,15 @@ class FakeCache:
         self.redis = FakeRedis()
         self.vehicle_data = vehicle_data
         self.restored_vehicle = None
+        self.values = {}
+        self.value_ttls = {}
+
+    async def get(self, key: str):
+        return self.values.get(key)
+
+    async def set(self, key: str, value, ttl=None) -> None:
+        self.values[key] = value
+        self.value_ttls[key] = ttl
 
     async def get_vehicle(self, vehicle_id: str):
         if not self.vehicle_data:
@@ -99,6 +108,11 @@ async def test_create_booking_uses_cached_vehicle_and_laravel_lock(monkeypatch):
     assert len(adapter.calls) == 1
     assert cache.redis.set_calls == [("gateway_booking_lock:104", "1", 90, True)]
     assert cache.redis.deleted_keys == ["gateway_booking_lock:104"]
+    assert cache.values["gateway_booking_result:104"]["supplier_booking_id"] == "LC123"
+
+    replay = await booking_service.create_booking(request, cache)
+    assert replay.supplier_booking_id == "LC123"
+    assert len(adapter.calls) == 1
 
 
 async def test_create_booking_applies_selected_supplier_package_before_adapter(monkeypatch):
