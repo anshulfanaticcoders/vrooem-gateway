@@ -25,9 +25,12 @@ provider_api_key_header = APIKeyHeader(
 class ProviderAuthContext:
     """Holds the authenticated consumer and key for the current request."""
 
-    def __init__(self, consumer: ApiConsumer, api_key: ApiKey):
+    def __init__(self, consumer: ApiConsumer, api_key: ApiKey, raw_key: str = ""):
         self.consumer = consumer
         self.api_key = api_key
+        # Forwarded to Laravel so it can verify the partner independently
+        # instead of trusting a consumer id asserted over the shared token.
+        self.raw_key = raw_key
 
     @property
     def is_sandbox(self) -> bool:
@@ -69,7 +72,7 @@ async def verify_provider_api_key(
         api_key.last_used_at = datetime.utcnow()
         await db.commit()
 
-    return ProviderAuthContext(consumer=consumer, api_key=api_key)
+    return ProviderAuthContext(consumer=consumer, api_key=api_key, raw_key=api_key_value)
 
 
 async def _enforce_rate_limit(

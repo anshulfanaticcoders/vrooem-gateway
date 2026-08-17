@@ -149,7 +149,7 @@ async def search_vehicles(
     }
 
     try:
-        result = await service.search_vehicles(params)
+        result = await service.search_vehicles(params, partner_key=auth.raw_key)
         await _log_request(db, auth, request, 200, start, params)
         return result
     except httpx.HTTPStatusError as e:
@@ -177,7 +177,7 @@ async def get_vehicle_extras(
     service = get_provider_api_service()
 
     try:
-        result = await service.get_vehicle_extras(vehicle_id)
+        result = await service.get_vehicle_extras(vehicle_id, partner_key=auth.raw_key)
         await _log_request(db, auth, request, 200, start)
         return result
     except httpx.HTTPStatusError as e:
@@ -221,7 +221,7 @@ async def create_booking(
     }
 
     try:
-        result = await service.create_booking(payload)
+        result = await service.create_booking(payload, partner_key=auth.raw_key)
         await _log_request(db, auth, request, 201, start, {"vehicle_id": body.vehicle_id})
         data = result.get("data", result)
         return data
@@ -250,7 +250,7 @@ async def get_booking(
     service = get_provider_api_service()
 
     try:
-        result = await service.get_booking(booking_id, auth.consumer.id)
+        result = await service.get_booking(booking_id, auth.consumer.id, partner_key=auth.raw_key)
         await _log_request(db, auth, request, 200, start)
         data = result.get("data", result)
         return data
@@ -280,7 +280,7 @@ async def cancel_booking(
     service = get_provider_api_service()
 
     try:
-        result = await service.cancel_booking(booking_id, auth.consumer.id, body.reason)
+        result = await service.cancel_booking(booking_id, auth.consumer.id, body.reason, partner_key=auth.raw_key)
         await _log_request(db, auth, request, 200, start)
         data = result.get("data", result)
         return data

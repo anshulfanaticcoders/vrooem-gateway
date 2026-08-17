@@ -20,29 +20,30 @@ class ProviderApiService:
         self.token = settings.laravel_api_token
         self.client = httpx.AsyncClient(timeout=30.0)
 
-    def _headers(self) -> dict:
+    def _headers(self, partner_key: str | None = None) -> dict:
         return {
             "Authorization": f"Bearer {self.token}",
             "X-Gateway-Token": self.token,
+            **({"X-Api-Key": partner_key} if partner_key else {}),
             "Accept": "application/json",
             "Content-Type": "application/json",
         }
 
-    async def search_vehicles(self, params: dict) -> dict:
+    async def search_vehicles(self, params: dict, partner_key: str | None = None) -> dict:
         """POST /api/internal/provider/vehicles/search"""
         response = await self.client.post(
             f"{self.base_url}/api/internal/provider/vehicles/search",
             json=params,
-            headers=self._headers(),
+            headers=self._headers(partner_key),
         )
         response.raise_for_status()
         return response.json()
 
-    async def get_vehicle_extras(self, vehicle_id: int) -> dict:
+    async def get_vehicle_extras(self, vehicle_id: int, partner_key: str | None = None) -> dict:
         """GET /api/internal/provider/vehicles/{id}/extras"""
         response = await self.client.get(
             f"{self.base_url}/api/internal/provider/vehicles/{vehicle_id}/extras",
-            headers=self._headers(),
+            headers=self._headers(partner_key),
         )
         response.raise_for_status()
         return response.json()
@@ -56,34 +57,34 @@ class ProviderApiService:
         response.raise_for_status()
         return response.json()
 
-    async def create_booking(self, payload: dict) -> dict:
+    async def create_booking(self, payload: dict, partner_key: str | None = None) -> dict:
         """POST /api/internal/provider/bookings"""
         response = await self.client.post(
             f"{self.base_url}/api/internal/provider/bookings",
             json=payload,
-            headers=self._headers(),
+            headers=self._headers(partner_key),
             timeout=self.BOOKING_TIMEOUT_SECONDS,
         )
         response.raise_for_status()
         return response.json()
 
-    async def get_booking(self, booking_number: str, consumer_id: int) -> dict:
+    async def get_booking(self, booking_number: str, consumer_id: int, partner_key: str | None = None) -> dict:
         """GET /api/internal/provider/bookings/{number}"""
         response = await self.client.get(
             f"{self.base_url}/api/internal/provider/bookings/{booking_number}",
             params={"api_consumer_id": consumer_id},
-            headers=self._headers(),
+            headers=self._headers(partner_key),
         )
         response.raise_for_status()
         return response.json()
 
-    async def cancel_booking(self, booking_number: str, consumer_id: int, reason: str = "") -> dict:
+    async def cancel_booking(self, booking_number: str, consumer_id: int, reason: str = "", partner_key: str | None = None) -> dict:
         """POST /api/internal/provider/bookings/{number}/cancel"""
         response = await self.client.post(
             f"{self.base_url}/api/internal/provider/bookings/{booking_number}/cancel",
             params={"api_consumer_id": consumer_id},
             json={"reason": reason},
-            headers=self._headers(),
+            headers=self._headers(partner_key),
             timeout=self.BOOKING_TIMEOUT_SECONDS,
         )
         response.raise_for_status()
